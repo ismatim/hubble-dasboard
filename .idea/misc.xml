@@ -4,7 +4,11 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/eureka/pom.xml" />
+        <option value="$PROJECT_DIR$/zuul/pom.xml" />
+        <option value="$PROJECT_DIR$/teststring/pom.xml" />
+        <option value="$PROJECT_DIR$/hpbsmextractor/pom.xml" />
       </list>
     </option>
   </component>
+  <component name="WebServicesPlugin" addRequiredLibraries="true" />
 </project>
