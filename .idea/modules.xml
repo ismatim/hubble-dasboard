@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/Tsoft-Analytics-Bridge.iml" filepath="$PROJECT_DIR$/.idea/Tsoft-Analytics-Bridge.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka/eureka.iml" filepath="$PROJECT_DIR$/eureka/eureka.iml" />
       <module fileurl="file://$PROJECT_DIR$/hpbsmextractor/hpbsmextractor.iml" filepath="$PROJECT_DIR$/hpbsmextractor/hpbsmextractor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/taskmanagement/taskmanagement.iml" filepath="$PROJECT_DIR$/taskmanagement/taskmanagement.iml" />
       <module fileurl="file://$PROJECT_DIR$/teststring/teststring.iml" filepath="$PROJECT_DIR$/teststring/teststring.iml" />
       <module fileurl="file://$PROJECT_DIR$/zuul/zuul.iml" filepath="$PROJECT_DIR$/zuul/zuul.iml" />
     </modules>
