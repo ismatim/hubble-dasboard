@@ -26,4 +26,8 @@ public class LmsService {
     public void deleteBook(long id){
         lmsTblRepository.delete(id);
     }
+
+    public Book findBookById(long id){
+        return lmsTblRepository.findOne(id);
+    }
 }

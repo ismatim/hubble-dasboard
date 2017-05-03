@@ -13,14 +13,17 @@ import java.util.Collection;
 @RestController
 public class MainRestController {
 
+    //La anotación @Autowired permite la inyección de dependencias, no es necesario implementar la interfaz
     @Autowired
     private LmsService lmsService;
 
+    //Simple prueba de retorno de un string
     @GetMapping(value = "/")
     public String hello(){
         return "Hello World!";
     }
 
+    //Llamada al método findAllBooks del servicio
     @GetMapping(value = "/findAllBooks")
     public Collection<Book> getAllBooks(){
 
@@ -28,6 +31,7 @@ public class MainRestController {
 
     }
 
+    //Eliminación de un registro a partir de su ID
     @GetMapping(value = "/deleteBook")
     public void deleteBook(@RequestParam long id){
 
