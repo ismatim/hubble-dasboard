@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eureka" />
         <module name="hpbsmextractor" />
+        <module name="tabview" />
         <module name="taskmanagement" />
         <module name="teststring" />
         <module name="zuul" />
@@ -17,6 +18,7 @@
       <module name="dashboard" target="1.8" />
       <module name="eureka" target="1.8" />
       <module name="hpbsmextractor" target="1.8" />
+      <module name="tabview" target="1.8" />
       <module name="taskbus" target="1.8" />
       <module name="taskmanagement" target="1.8" />
       <module name="teststring" target="1.8" />
