@@ -58,7 +58,6 @@ public class GdeWsOpenAPISoapBindingStub extends org.apache.axis.client.Stub imp
             super.service = new org.apache.axis.client.Service();
         } else {
             super.service = service;
-
         }
         ((org.apache.axis.client.Service)super.service).setTypeMappingVersion("1.1");
     }
@@ -105,7 +104,7 @@ public class GdeWsOpenAPISoapBindingStub extends org.apache.axis.client.Stub imp
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
-        _call.setOperationName(new javax.xml.namespace.QName("http://monitoreo.tsoftlatam.com/topaz/gdeopenapi/services/GdeWsOpenAPI", "getDataWebService"));
+        _call.setOperationName(new javax.xml.namespace.QName("http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI", "getDataWebService"));
 
         setRequestHeaders(_call);
         setAttachments(_call);

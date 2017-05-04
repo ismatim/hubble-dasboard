@@ -22,7 +22,7 @@ public class GetDataLocalServiceLocator extends org.apache.axis.client.Service i
     }
 
     // Use to get a proxy class for GdeWsOpenAPI
-    private java.lang.String GdeWsOpenAPI_address = "http://monitoreo.tsoftlatam.com/topaz/gdeopenapi/services/GdeWsOpenAPI";
+    private java.lang.String GdeWsOpenAPI_address = "http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI";
 
     public java.lang.String getGdeWsOpenAPIAddress() {
         return GdeWsOpenAPI_address;
@@ -105,7 +105,7 @@ public class GetDataLocalServiceLocator extends org.apache.axis.client.Service i
     }
 
     public javax.xml.namespace.QName getServiceName() {
-        return new javax.xml.namespace.QName("http://monitoreo.tsoftlatam.com/topaz/gdeopenapi/services/GdeWsOpenAPI", "GetDataLocalService");
+        return new javax.xml.namespace.QName("http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI", "GetDataLocalService");
     }
 
     private java.util.HashSet ports = null;
@@ -113,7 +113,7 @@ public class GetDataLocalServiceLocator extends org.apache.axis.client.Service i
     public java.util.Iterator getPorts() {
         if (ports == null) {
             ports = new java.util.HashSet();
-            ports.add(new javax.xml.namespace.QName("http://monitoreo.tsoftlatam.com/topaz/gdeopenapi/services/GdeWsOpenAPI", "GdeWsOpenAPI"));
+            ports.add(new javax.xml.namespace.QName("http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI", "GdeWsOpenAPI"));
         }
         return ports.iterator();
     }
