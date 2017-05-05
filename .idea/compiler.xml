@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eureka" />
         <module name="hpbsmextractor" />
+        <module name="tabreaderfile" />
         <module name="tabview" />
         <module name="taskmanagement" />
         <module name="teststring" />
@@ -16,8 +17,10 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="dashboard" target="1.8" />
+      <module name="demo" target="1.8" />
       <module name="eureka" target="1.8" />
       <module name="hpbsmextractor" target="1.8" />
+      <module name="tabreaderfile" target="1.8" />
       <module name="tabview" target="1.8" />
       <module name="taskbus" target="1.8" />
       <module name="taskmanagement" target="1.8" />
