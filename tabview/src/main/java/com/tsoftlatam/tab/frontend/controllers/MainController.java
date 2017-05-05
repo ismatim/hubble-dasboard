@@ -5,7 +5,6 @@ import com.tsoftlatam.tab.frontend.models.Book;
 import com.tsoftlatam.tab.frontend.models.restClients.BacClient;
 import com.tsoftlatam.tab.frontend.models.restClients.BookClient;
 import com.tsoftlatam.tab.frontend.services.LmsService;
-import com.tsoftlatam.tab.readers.models.BacData;
 import feign.Feign;
 import feign.gson.GsonDecoder;
 import org.springframework.beans.factory.annotation.Autowired;

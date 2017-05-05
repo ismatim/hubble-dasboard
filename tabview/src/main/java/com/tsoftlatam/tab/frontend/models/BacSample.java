@@ -2,47 +2,34 @@ package com.tsoftlatam.tab.frontend.models;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class BacSample {
 
+    //Nota, en este modelo la construcción se hace en la misma declaración de atributos
+    //El constructor no es invocado, por lo tanto, no se declara constructor
+    //Adicionalmente, para campos que deban ser calculados y mostrados en la vista será necesario
+    //hacer los cambios en los getters, ya que no hay otra forma de hacer modificaciones en los datos de
+    //este modelo
+    //Los campos del tipo Date arrojan error de zona horaria, por eso hemos usado todos String, aunque habría
+    //que verificar el correcto funcionamiento con campos del tipo numérico (float, Double, int, Long)
     private String applicationName;
     private String transactionName;
     private String locationName;
     private String availabilityStatus; //fail, success, etc
-    //private int errorCount;
     private String errorCount;
-    //private float transactionStatus;//u_iStatus en V9
     private String transactionStatus;//u_iStatus en V9
-    //private double responseTime;
     private String responseTime;
-    //private double timestamp;
     private String timestamp;
     private String fecha;
 
-    public BacSample(String appName, String tranName, String locName, String avStatus, String error,  String tranStatus, String respTime, String timestamp){
-        this.applicationName = appName;
-        this.transactionName = tranName;
-        this.locationName = locName;
-        this.errorCount = error;
-        this.availabilityStatus = avStatus;
-        this.transactionStatus = tranStatus;
-        this.responseTime = respTime;
-        this.timestamp = timestamp;
-        setFecha(timestamp);
-    }
-
-
-
-    public void setFecha(String timestamp){
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        this.fecha = dateFormat.format(new Date(Double.valueOf(timestamp).longValue()*1000));
-        //this.fecha = new Date(Double.valueOf(timestamp).longValue()*1000);
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
     public String getFecha() {
-        return fecha;
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return dateFormat.format(new Date(Double.valueOf(this.timestamp).longValue()*1000));
     }
 
     public String getApplicationName() {
@@ -94,7 +81,8 @@ public class BacSample {
     }
 
     public String getResponseTime() {
-        return responseTime;
+
+        return String.valueOf(Float.valueOf(responseTime)/1000);
     }
 
     public void setResponseTime(String responseTime) {
@@ -108,6 +96,5 @@ public class BacSample {
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
-
 
 }
