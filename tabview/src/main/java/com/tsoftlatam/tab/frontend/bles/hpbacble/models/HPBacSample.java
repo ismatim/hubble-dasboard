@@ -1,10 +1,10 @@
-package com.tsoftlatam.tab.frontend.models;
+package com.tsoftlatam.tab.frontend.bles.hpbacble.models;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class BacSample {
+public class HPBacSample {
 
     //Nota, en este modelo la construcción se hace en la misma declaración de atributos
     //El constructor no es invocado, por lo tanto, no se declara constructor

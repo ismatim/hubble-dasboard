@@ -1,4 +1,4 @@
-package com.tsoftlatam.tab.frontend.controllers.rest;
+package com.tsoftlatam.tab.frontend.controllers;
 
 import com.tsoftlatam.tab.frontend.models.Book;
 import com.tsoftlatam.tab.frontend.models.restClients.BookClient;
@@ -24,11 +24,6 @@ public class MainRestController {
     @Autowired
     private LmsService lmsService;
 
-    //Simple prueba de retorno de un string
-    @GetMapping(value = "/")
-    public String hello(){
-        return "Hello World!";
-    }
 
     //Llamada al método findAllBooks del servicio
     @GetMapping(value = "/findAllBooks")
