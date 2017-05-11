@@ -5,6 +5,7 @@
       <list>
         <option value="$PROJECT_DIR$/hpbsmextractor/pom.xml" />
         <option value="$PROJECT_DIR$/tabview/pom.xml" />
+        <option value="$PROJECT_DIR$/tabreaderfile/pom.xml" />
       </list>
     </option>
   </component>
