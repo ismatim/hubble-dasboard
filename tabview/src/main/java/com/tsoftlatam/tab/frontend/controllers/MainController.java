@@ -1,8 +1,8 @@
 package com.tsoftlatam.tab.frontend.controllers;
 
-import com.tsoftlatam.tab.frontend.models.BacSample;
+import com.tsoftlatam.tab.frontend.bles.hpbacble.models.HPBacSample;
 import com.tsoftlatam.tab.frontend.models.Book;
-import com.tsoftlatam.tab.frontend.models.restClients.BacClient;
+import com.tsoftlatam.tab.frontend.readers.HPBacRestClient;
 import com.tsoftlatam.tab.frontend.models.restClients.BookClient;
 import com.tsoftlatam.tab.frontend.services.LmsService;
 import feign.Feign;
@@ -23,7 +23,7 @@ public class MainController {
     private LmsService lmsService;
 
     private BookClient bookClient;
-    private BacClient bacClient;
+    private HPBacRestClient bacClient;
     private String bookClientUrl = "http://localhost:8080/findAllBooks";
     private String bacClientUrl = "http://localhost:9080/getBacData";
 
@@ -66,8 +66,8 @@ public class MainController {
     public String bacTable(HttpServletRequest req){
         bacClient = Feign.builder()
                 .decoder(new GsonDecoder())
-                .target(BacClient.class, bacClientUrl);
-        List<BacSample> bacSamples = bacClient.findAll();
+                .target(HPBacRestClient.class, bacClientUrl);
+        List<HPBacSample> bacSamples = bacClient.findAll();
         req.setAttribute("bacSamples",bacSamples);
         return "bacTable";
     }
