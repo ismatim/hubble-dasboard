@@ -2,15 +2,14 @@ package com.tsoftlatam.tab.controllers;
 
 import com.tsoftlatam.tab.entities.SampleV8;
 import junit.framework.AssertionFailedError;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -22,23 +21,42 @@ import java.util.Objects;
 @RestController
 public class ExtractorController {
 
+    @Value("${user}")
+    private String user;
+
+    @Value("${password}")
+    private String password;
+
     @RequestMapping("/res")
-    public String[] strings() throws IOException {
+    public String[] getMetricas() throws IOException {
         wsdlpackage.GdeWsOpenAPISoapBindingStub binding;
+
+
         try{
             binding = (wsdlpackage.GdeWsOpenAPISoapBindingStub) new wsdlpackage.GetDataLocalServiceLocator().getGdeWsOpenAPI();
 
             // Time out
-            binding.setTimeout(600000);
+            binding.setTimeout(60000);
 
             //Query para BSM Version 9
             //String query = "select application_name as ApplicationName, szTransactionName as TransactionName ,szLocationName, ErrorCount, availability_status, u_iStatus, dResponseTime, time_stamp from trans_t where time_stamp>=" + currentTimestamp.getTime()/1000 ;
-            String query = "select profile_name, szTransactionName ,szLocationName, iComponentErrorCount , szStatusName , u_iStatus, dResponseTime, time_stamp from trans_t where time_stamp>=" + getTimestamp60Minutes();
+            String query = "select profile_name, " +
+                    "szTransactionName, " +
+                    "szLocationName, " +
+                    "iComponentErrorCount, " +
+                    "szStatusName, " +
+                    "u_iStatus, " +
+                    "dResponseTime, " +
+                    "time_stamp " +
+                    "from trans_t " +
+                    "where time_stamp>=" + getTimestamp60Minutes();
 
-            String res = binding.getDataWebService("dmalagueno", "123456", query, new javax.xml.rpc.holders.IntHolder(), new javax.xml.rpc.holders.IntHolder());
+            String res = binding.getDataWebService(user, password, query, new javax.xml.rpc.holders.IntHolder(), new javax.xml.rpc.holders.IntHolder());
 
+            //Separo cada linea
             String[] resArray = res.split("\n");
 
+            //Creo una lista de Samples
             List<SampleV8> muestras = CreateSamples(resArray);
             WriteFileSamples(muestras);
 
@@ -65,7 +83,7 @@ public class ExtractorController {
     }
 
     private void WriteFileSamples(List<SampleV8> muestras)throws IOException {
-        List<String> lista = new ArrayList();
+        /*List<String> lista = new ArrayList();
         for (SampleV8 list:muestras) {
             lista.add(list.getApplicationName() + ","
                     + list.getTransactionName() + ","
@@ -74,11 +92,29 @@ public class ExtractorController {
                     + list.getErrorCount() + ","
                     + list.getTransactionStatus() + ","
                     + list.getResponseTime()  + ","
-                    + list.getTimestamp()  + ","
-                    + list.getFecha());
-        }
-        Path file = Paths.get("..\\metricas.txt");
-        Files.write(file, lista, Charset.forName("UTF-8"));
+                    + list.getTimestamp());
+        }*/
+        //Path file = Paths.get("..\\metricas.txt");
+        //Files.write(file, lista, Charset.forName("UTF-8"));
+
+        BufferedWriter bw = null;
+        try{
+            bw = new BufferedWriter(new FileWriter("..\\metricas.txt", true));
+
+            for (SampleV8 list:muestras) {
+                bw.write(list.toString());
+                bw.newLine();
+            }
+            bw.flush();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } finally {                       // always close the file
+            if (bw != null) try {
+                bw.close();
+            } catch (IOException ioe2) {
+                // just ignore it
+            }
+        } // end try/catch/finally
 
     }
 

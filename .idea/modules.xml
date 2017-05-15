@@ -7,15 +7,10 @@
       <module fileurl="file://$PROJECT_DIR$/hpbsmextractor/hpbsmextractor.iml" filepath="$PROJECT_DIR$/hpbsmextractor/hpbsmextractor.iml" />
       <module fileurl="file://$PROJECT_DIR$/scheduler/scheduler.iml" filepath="$PROJECT_DIR$/scheduler/scheduler.iml" />
       <module fileurl="file://$PROJECT_DIR$/tabreaderfile/tabreaderfile.iml" filepath="$PROJECT_DIR$/tabreaderfile/tabreaderfile.iml" />
-      <module fileurl="file://C:\Users\david.malagueno\Documents\TSOFT I+D\Tsoft-Analytics-Bridge\tabreaderfile\tabreaderfile.iml" filepath="C:\Users\david.malagueno\Documents\TSOFT I+D\Tsoft-Analytics-Bridge\tabreaderfile\tabreaderfile.iml" />
       <module fileurl="file://$PROJECT_DIR$/tabview/tabview.iml" filepath="$PROJECT_DIR$/tabview/tabview.iml" />
-      <module fileurl="file://C:\Users\david.malagueno\Documents\TSOFT I+D\Tsoft-Analytics-Bridge\tabview\tabview.iml" filepath="C:\Users\david.malagueno\Documents\TSOFT I+D\Tsoft-Analytics-Bridge\tabview\tabview.iml" />
       <module fileurl="file://$PROJECT_DIR$/taskmanagement/taskmanagement.iml" filepath="$PROJECT_DIR$/taskmanagement/taskmanagement.iml" />
-      <module fileurl="file://C:\Users\david.malagueno\Documents\TSOFT I+D\Tsoft-Analytics-Bridge\taskmanagement\taskmanagement.iml" filepath="C:\Users\david.malagueno\Documents\TSOFT I+D\Tsoft-Analytics-Bridge\taskmanagement\taskmanagement.iml" />
       <module fileurl="file://$PROJECT_DIR$/teststring/teststring.iml" filepath="$PROJECT_DIR$/teststring/teststring.iml" />
-      <module fileurl="file://C:\Users\david.malagueno\Documents\TSOFT I+D\Tsoft-Analytics-Bridge\teststring\teststring.iml" filepath="C:\Users\david.malagueno\Documents\TSOFT I+D\Tsoft-Analytics-Bridge\teststring\teststring.iml" />
       <module fileurl="file://$PROJECT_DIR$/zuul/zuul.iml" filepath="$PROJECT_DIR$/zuul/zuul.iml" />
-      <module fileurl="file://C:\Users\david.malagueno\Documents\TSOFT I+D\Tsoft-Analytics-Bridge\zuul\zuul.iml" filepath="C:\Users\david.malagueno\Documents\TSOFT I+D\Tsoft-Analytics-Bridge\zuul\zuul.iml" />
     </modules>
   </component>
 </project>

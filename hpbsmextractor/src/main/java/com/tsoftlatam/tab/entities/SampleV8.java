@@ -14,7 +14,7 @@ public class SampleV8 {
     private float transactionStatus;//u_iStatus en V9
     private double responseTime;
     private double timestamp;
-    private Date fecha;
+    //private Date fecha;
 
     //Constructor
     public SampleV8(String appName, String tranName, String locName, int error, String avStatus, Float tranStatus, double respTime, Long timestamp){
@@ -26,14 +26,14 @@ public class SampleV8 {
         this.transactionStatus = tranStatus;
         this.responseTime = respTime;
         this.timestamp = timestamp;
-        this.fecha = setFecha(timestamp);
+        //this.fecha = setFecha(timestamp);
     }
 
     public Date setFecha(Long timestamp){
         return new Date(Double.valueOf(timestamp).longValue()*1000);
     }
 
-    public Date getFecha() {return fecha;}
+    //public Date getFecha() {return fecha;}
 
     public String getApplicationName() {
         return applicationName;
@@ -68,4 +68,16 @@ public class SampleV8 {
     }
 
 
+    @Override
+    public String toString() {
+        return applicationName
+                + ", " +transactionName
+                + ", " +locationName
+                + ", " +errorCount
+                + ", " +availabilityStatus
+                + ", " +transactionStatus
+                + ", " +responseTime
+                + ", " +timestamp;
+                //+ ", " +fecha;
+    }
 }
