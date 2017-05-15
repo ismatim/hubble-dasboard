@@ -8,7 +8,6 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eureka" />
         <module name="hpbsmextractor" />
-        <module name="scheduler" />
         <module name="tabreaderfile" />
         <module name="tabview" />
         <module name="taskmanagement" />
