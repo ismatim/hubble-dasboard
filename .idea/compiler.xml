@@ -7,9 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="eureka" />
+        <module name="frontend" />
         <module name="hpbsmextractor" />
         <module name="tabreaderfile" />
-        <module name="tabview" />
         <module name="taskmanagement" />
         <module name="teststring" />
         <module name="zuul" />
@@ -19,6 +19,7 @@
       <module name="dashboard" target="1.8" />
       <module name="demo" target="1.8" />
       <module name="eureka" target="1.8" />
+      <module name="frontend" target="1.8" />
       <module name="hpbsmextractor" target="1.8" />
       <module name="scheduler" target="1.5" />
       <module name="tabreaderfile" target="1.8" />
