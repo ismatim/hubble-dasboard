@@ -17,6 +17,14 @@ public class HPBacApplication {
     @Column(name = "application_display_name")
     private String applicationDisplayName;
 
+    public HPBacApplication(String applicationName, String applicationDisplayName) {
+        this.applicationName = applicationName;
+        this.applicationDisplayName = applicationDisplayName;
+    }
+
+    public HPBacApplication() {
+    }
+
     public int getId() {
         return id;
     }

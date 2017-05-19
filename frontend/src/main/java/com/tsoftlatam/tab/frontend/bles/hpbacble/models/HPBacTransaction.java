@@ -1,6 +1,7 @@
 package com.tsoftlatam.tab.frontend.bles.hpbacble.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity(name = "hpbac_transactions")
 public class HPBacTransaction {
@@ -9,15 +10,23 @@ public class HPBacTransaction {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotNull
     @Column(name = "transaction_name")
     private String transactionName;
 
+    @NotNull
     @Column(name = "transaction_display_name")
     private String transactionDisplayName;
 
-    //@ManyToOne(targetEntity = HPBacApplication.class)
+    @NotNull
     @Column(name = "application_id")
     private int applicationId;
+
+    public HPBacTransaction(String transactionName, String transactionDisplayName, int applicationId) {
+        this.transactionName = transactionName;
+        this.transactionDisplayName = transactionDisplayName;
+        this.applicationId = applicationId;
+    }
 
     public int getId() {
         return id;
@@ -47,8 +56,8 @@ public class HPBacTransaction {
         return applicationId;
     }
 
-    @ManyToOne(targetEntity = HPBacApplication.class)
-    @JoinColumn(name = "application_id")
+    //@ManyToOne(targetEntity = HPBacApplication.class)
+    //@JoinColumn(name = "application_id")
     public void setApplicationId(int applicationId) {
         this.applicationId = applicationId;
     }

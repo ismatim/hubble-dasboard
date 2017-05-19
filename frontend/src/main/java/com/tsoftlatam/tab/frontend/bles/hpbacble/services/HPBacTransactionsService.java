@@ -34,4 +34,9 @@ public class HPBacTransactionsService {
     public HPBacTransaction findTransactionById(int id){
         return hpBacTransactionsRepository.findOne(id);
     }
+
+    public void createTransaction(HPBacTransaction hpBacTransaction){
+        hpBacTransactionsRepository.save(hpBacTransaction);
+
+    }
 }

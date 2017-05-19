@@ -39,6 +39,8 @@ public class HPBacThreshold {
         return applicationId;
     }
 
+    @ManyToOne(targetEntity = HPBacApplication.class)
+    @JoinColumn(name = "application_id")
     public void setApplicationId(int applicationId) {
         this.applicationId = applicationId;
     }
@@ -47,6 +49,8 @@ public class HPBacThreshold {
         return transactionId;
     }
 
+    @ManyToOne(targetEntity = HPBacTransaction.class)
+    @JoinColumn(name = "transaction_id")
     public void setTransactionId(int transactionId) {
         this.transactionId = transactionId;
     }
@@ -55,6 +59,8 @@ public class HPBacThreshold {
         return locationId;
     }
 
+    @ManyToOne(targetEntity = HPBacLocation.class)
+    @JoinColumn(name = "location_id")
     public void setLocationId(int locationId) {
         this.locationId = locationId;
     }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 
 @RestController
-public class HPBacRestCrudController {
+public class HPBacRestTransactionsCrudController {
 
     @Autowired
     private HPBacTransactionsService hpBacTransactionsService;
@@ -28,5 +28,15 @@ public class HPBacRestCrudController {
     @GetMapping(value = "hpbac/transactions/delete")
     public void deleteTransaction(@RequestParam int id){
         hpBacTransactionsService.deleteTransaction(id);
+    }
+
+
+    //creación de un registro
+    @GetMapping(value = "hpbac/transactions/create")
+    public void createTransaction(){
+      /*  HPBacTransaction transaction = new HPBacTransaction("Test","Test",
+                1);
+
+        hpBacTransactionsService.createTransaction(transaction);*/
     }
 }

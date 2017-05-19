@@ -25,7 +25,7 @@ public class MainController {
     private BookClient bookClient;
     private HPBacRestClient bacClient;
     private String bookClientUrl = "http://localhost:8080/findAllBooks";
-    private String bacClientUrl = "http://localhost:9080/getBacData";
+
 
 
     @GetMapping("/helloJsp")
@@ -47,7 +47,7 @@ public class MainController {
     @GetMapping("/modelAndView")
     public String modelAndView(HttpServletRequest req){
         req.setAttribute("books",lmsService.findAllBooks());
-        return "main";
+        return "books";
     }
 
     //Cliente de servicio REST con feign
@@ -61,16 +61,7 @@ public class MainController {
             return "booksTable";
     }
 
-    //Cliente de servicio REST con feign
-    @GetMapping("/bacTable")
-    public String bacTable(HttpServletRequest req){
-        bacClient = Feign.builder()
-                .decoder(new GsonDecoder())
-                .target(HPBacRestClient.class, bacClientUrl);
-        List<HPBacSample> bacSamples = bacClient.findAll();
-        req.setAttribute("bacSamples",bacSamples);
-        return "bacTable";
-    }
+
 
 
 

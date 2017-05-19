@@ -1,26 +1,15 @@
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head> <!--th:fragment="common_header(title)-->
-    <meta charset="UTF-8"/>
-    <title> <!--th:replace="${title}"-->Tsoft Analytics Bridge</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css"></link>
-    <script src="/js/bootstrap.min.js"></script>
-<script src="/js/jquery-3.2.1.min.js"></script>
-</head>
+<html>
+    <div th:replace="mainTemplates/header"></div>
 <body>
-    <p>Please select an option</p>
-    <ol>
-        <li><a href="product/list.html" th:href="@{/product/list}">Product List</a></li>
-        <li><a href="order/list.html" th:href="@{/order/list}">Order List</a></li>
-        <li><a href="subscribe.html" th:href="@{/subscribe}">Subscribe to our Newsletter</a></li>
-        <li><a href="userprofile.html" th:href="@{/userprofile}">See User Profile</a></li>
-    </ol>
 
-    <p th:text="'La fecha es: ' + ${fecha}" />
+    <div th:replace="mainTemplates/navbar"></div>
 
-    <div th:include="dao/books/listBooks"></div>
+    <div th:replace="dao/hpbac/bacTable"></div>
 
-    <div th:include="mainTemplates/footer"></div>
 
+    <div th:replace="mainTemplates/footer"></div>
 </body>
 </html>
+

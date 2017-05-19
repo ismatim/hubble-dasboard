@@ -33,4 +33,13 @@ public class HPBacApplicationsService {
     public HPBacApplication findApplicationById(int id){
         return hpBacApplicationsRepository.findOne(id);
     }
+
+    public void createApplication(HPBacApplication hpBacApplication){
+        hpBacApplicationsRepository.save(hpBacApplication);
+    }
+
+    public void createApplication(){
+        HPBacApplication hpBacApplication = new HPBacApplication("Ntest","nTest");
+        hpBacApplicationsRepository.save(hpBacApplication);
+    }
 }
