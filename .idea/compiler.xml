@@ -6,13 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="eureka" />
-        <module name="frontend" />
-        <module name="hpbsmextractor" />
-        <module name="tabreaderfile" />
-        <module name="taskmanagement" />
-        <module name="teststring" />
-        <module name="zuul" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
