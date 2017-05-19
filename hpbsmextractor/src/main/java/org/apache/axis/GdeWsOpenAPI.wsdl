@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI" xmlns:intf="http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+
+   <wsdl:message name="getDataWebServiceResponse">
+
+      <wsdl:part name="retval" type="soapenc:string"/>
+
+      <wsdl:part name="errorCode" type="xsd:int"/>
+
+      <wsdl:part name="origRowCount" type="xsd:int"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDataWebServiceRequest">
+
+      <wsdl:part name="user" type="soapenc:string"/>
+
+      <wsdl:part name="password" type="soapenc:string"/>
+
+      <wsdl:part name="query" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="GetDataLocal">
+
+      <wsdl:operation name="getDataWebService" parameterOrder="user password query errorCode origRowCount">
+
+         <wsdl:input message="impl:getDataWebServiceRequest" name="getDataWebServiceRequest"/>
+
+         <wsdl:output message="impl:getDataWebServiceResponse" name="getDataWebServiceResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="GdeWsOpenAPISoapBinding" type="impl:GetDataLocal">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="getDataWebService">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDataWebServiceRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDataWebServiceResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="GetDataLocalService">
+
+      <wsdl:port binding="impl:GdeWsOpenAPISoapBinding" name="GdeWsOpenAPI">
+
+         <wsdlsoap:address location="http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
