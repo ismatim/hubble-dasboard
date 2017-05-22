@@ -14,10 +14,11 @@ public class SampleV8 {
     private float transactionStatus;//u_iStatus en V9
     private double responseTime;
     private double timestamp;
+    private int id;
     //private Date fecha;
 
     //Constructor
-    public SampleV8(String appName, String tranName, String locName, int error, String avStatus, Float tranStatus, double respTime, Long timestamp){
+    public SampleV8(String appName, String tranName, String locName, int error, String avStatus, Float tranStatus, double respTime, Long timestamp, int id){
         this.applicationName = appName;
         this.transactionName = tranName;
         this.locationName = locName;
@@ -26,6 +27,7 @@ public class SampleV8 {
         this.transactionStatus = tranStatus;
         this.responseTime = respTime;
         this.timestamp = timestamp;
+        this.id= id;
         //this.fecha = setFecha(timestamp);
     }
 
@@ -34,6 +36,10 @@ public class SampleV8 {
     }
 
     //public Date getFecha() {return fecha;}
+
+    public int getId() {
+        return id;
+    }
 
     public String getApplicationName() {
         return applicationName;
@@ -77,7 +83,8 @@ public class SampleV8 {
                 + ", " +availabilityStatus
                 + ", " +transactionStatus
                 + ", " +responseTime
-                + ", " +timestamp;
-                //+ ", " +fecha;
+                + ", " +timestamp
+                + ", " +id;
+        //+ ", " +fecha;
     }
 }

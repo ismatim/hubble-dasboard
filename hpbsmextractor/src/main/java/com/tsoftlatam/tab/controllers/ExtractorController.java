@@ -1,5 +1,6 @@
 package com.tsoftlatam.tab.controllers;
 
+import com.google.gson.Gson;
 import com.tsoftlatam.tab.entities.SampleV8;
 import junit.framework.AssertionFailedError;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,7 +48,8 @@ public class ExtractorController {
                     "szStatusName, " +
                     "u_iStatus, " +
                     "dResponseTime, " +
-                    "time_stamp " +
+                    "time_stamp, " +
+                    "trans_instance_id " +
                     "from trans_t " +
                     "where time_stamp>=" + getTimestamp60Minutes();
 
@@ -58,6 +60,9 @@ public class ExtractorController {
 
             //Creo una lista de Samples
             List<SampleV8> muestras = CreateSamples(resArray);
+
+            //dejo listo un Json para una etapa posterior
+            String json = CrearJson(muestras);
             WriteFileSamples(muestras);
 
             return resArray;
@@ -67,7 +72,6 @@ public class ExtractorController {
                 jre.getLinkedCause().printStackTrace();
             throw new AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
-
 
     }
 
@@ -83,19 +87,6 @@ public class ExtractorController {
     }
 
     private void WriteFileSamples(List<SampleV8> muestras)throws IOException {
-        /*List<String> lista = new ArrayList();
-        for (SampleV8 list:muestras) {
-            lista.add(list.getApplicationName() + ","
-                    + list.getTransactionName() + ","
-                    + list.getLocationName() + ","
-                    + list.getAvailabilityStatus() + ","
-                    + list.getErrorCount() + ","
-                    + list.getTransactionStatus() + ","
-                    + list.getResponseTime()  + ","
-                    + list.getTimestamp());
-        }*/
-        //Path file = Paths.get("..\\metricas.txt");
-        //Files.write(file, lista, Charset.forName("UTF-8"));
 
         BufferedWriter bw = null;
         try{
@@ -118,12 +109,14 @@ public class ExtractorController {
 
     }
 
+    //Crea a partir de un array de samples, un array de SampleV8
     private List<SampleV8> CreateSamples(String[] resArray) {
 
         List<SampleV8> sampleV8s = new ArrayList<>();
         for (String item:resArray) {
             String[] elements = item.split(",");
 
+            //En BSM, a veces aparece el <Empty Variant> y hay que sacarlo
             if(Objects.equals(elements[3], "<empty Variant>"))
                 elements[3] = "0";
 
@@ -135,9 +128,15 @@ public class ExtractorController {
                         elements[4],
                         Float.parseFloat(elements[5]),
                         Double.parseDouble(elements[6]),
-                        Double.valueOf(elements[7]).longValue()));
+                        Double.valueOf(elements[7]).longValue(),
+                        Integer.parseInt(elements[8])));
         }
+
         return sampleV8s;
     }
-
+    private String CrearJson(List<SampleV8> samples){
+        Gson gson = new Gson();
+        String json = gson.toJson(samples);
+        return json;
+    }
 }

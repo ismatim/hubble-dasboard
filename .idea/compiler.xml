@@ -9,6 +9,7 @@
         <module name="eureka" />
         <module name="frontend" />
         <module name="hpbsmextractor" />
+        <module name="scheduler" />
         <module name="tabreaderfile" />
         <module name="taskmanagement" />
         <module name="teststring" />
