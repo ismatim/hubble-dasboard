@@ -9,6 +9,7 @@ import feign.gson.GsonDecoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -18,13 +19,28 @@ public class HPBacApplicationsMainController {
 
     @Autowired
     private HPBacApplicationsService hpBacApplicationsService;
-
-
     //Atención, sin el autowired del servicio devuelve nullpointerexception
-    @GetMapping("/hpbac/applications/admin")
-    public String admin(HttpServletRequest req){
+
+
+    @GetMapping("/hpbac/applications/list")
+    public String list(HttpServletRequest req){
         req.setAttribute("hpBacApplications",hpBacApplicationsService.findAllApplications());
-        return "/dao/hpbac/applications/admin";
+        return "/dao/hpbac/applications/list";
+    }
+
+    @GetMapping("/hpbac/applications/view/{id}")
+    public String view(HttpServletRequest req,@PathVariable int id){
+        HPBacApplication hpBacApplication = hpBacApplicationsService.findApplicationById(id);
+        System.out.println(hpBacApplication.toString());
+        req.setAttribute("hpBacApplication",hpBacApplication);
+        return "/dao/hpbac/applications/view";
+    }
+
+    @GetMapping("/hpbac/applications/update/{id}")
+    public String update(HttpServletRequest req,@PathVariable int id){
+        HPBacApplication hpBacApplication = hpBacApplicationsService.findApplicationById(id);
+        req.setAttribute("hpBacApplication",hpBacApplication);
+        return "/dao/hpbac/applications/update";
     }
 
 

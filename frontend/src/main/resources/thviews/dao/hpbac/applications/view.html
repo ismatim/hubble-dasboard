@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+    <html>
+        <div th:replace="mainTemplates/header"></div>
+
+        <body>
+
+            <div th:include="mainTemplates/navbar"></div>
+
+                <div th:class="container">
+                    <!--<h2 th:text="HP BAC Aplicación: ${hpBacApplication}"></h2>-->
+
+                    <form role="form">
+                        <div class="form-group">
+                            <label for="field1">Nombre de Aplicaci&oacute;n</label>
+                            <input type="text" class="form-control" id="field1" th:text="${hpBacApplication.applicationName}">
+                            </input>
+                        </div>
+                        <div class="form-group">
+                            <label for="field2">Nombre de Visualizaci&oacute;n</label>
+                            <input type="text" class="form-control" id="field2" th:text="${hpBacApplication.applicationDisplayName}">
+                            </input>
+                        </div>
+                    </form>
+                </div>
+
+            <div th:include="mainTemplates/footer"></div>
+
+        </body>
+    </html>

@@ -48,4 +48,10 @@ public class HPBacApplication {
     public void setApplicationDisplayName(String applicationDisplayName) {
         this.applicationDisplayName = applicationDisplayName;
     }
+
+    @Override
+    public String toString(){
+        return String.format("Application - Id: [%d]  Name: [%s]  Display Name: [%s]",this.id,this.applicationName
+        ,this.applicationDisplayName);
+    }
 }

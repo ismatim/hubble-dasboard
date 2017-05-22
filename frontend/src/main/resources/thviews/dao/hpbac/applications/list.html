@@ -20,7 +20,7 @@
             <td th:text="${hpBacApplication.applicationName}"></td>
             <td th:text="${hpBacApplication.applicationDisplayName}"></td>
             <td>
-                <button type="button" class="btn btn-info">
+                <button th:href="'/hpbac/applications/view/'+${hpBacApplication.id}" type="button" class="btn btn-info">
                     <span class="glyphicon glyphicon-info-sign"></span>
                 </button>
 
