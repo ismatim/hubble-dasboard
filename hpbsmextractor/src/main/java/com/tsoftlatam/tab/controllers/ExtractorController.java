@@ -4,17 +4,17 @@ import com.google.gson.Gson;
 import com.tsoftlatam.tab.entities.SampleV8;
 import junit.framework.AssertionFailedError;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Objects;
+import java.rmi.RemoteException;
+import java.util.*;
 
 /**
  * Created by david.malagueno on 25/4/2017.
@@ -72,6 +72,56 @@ public class ExtractorController {
                 jre.getLinkedCause().printStackTrace();
             throw new AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
         }
+
+    }
+
+    @RequestMapping(value="/fechaInicial/{date1}/fechaFinal/{date2}", method = RequestMethod.GET)
+    public String[] getMetricasEntreFechas(@PathVariable String date1,@PathVariable String date2) throws IOException {
+        wsdlpackage.GdeWsOpenAPISoapBindingStub binding;
+
+        try {
+            binding = (wsdlpackage.GdeWsOpenAPISoapBindingStub) new wsdlpackage.GetDataLocalServiceLocator().getGdeWsOpenAPI();
+
+            // Time out
+            binding.setTimeout(60000);
+
+            String query = "select profile_name, " +
+                    "szTransactionName, " +
+                    "szLocationName, " +
+                    "iComponentErrorCount, " +
+                    "szStatusName, " +
+                    "u_iStatus, " +
+                    "dResponseTime, " +
+                    "time_stamp, " +
+                    "trans_instance_id " +
+                    "from trans_t " +
+                    "where time_stamp>=" + date1 +
+                    " and time_stamp<=" + date2 ;
+
+            String res = binding.getDataWebService(user, password, query, new javax.xml.rpc.holders.IntHolder(), new javax.xml.rpc.holders.IntHolder());
+
+            //Separo cada linea
+            String[] resArray = res.split("\n");
+
+            //Creo una lista de Samples
+            List<SampleV8> muestras = CreateSamples(resArray);
+
+            //dejo listo un Json para una etapa posterior
+            //TODO: acoplar este Json con el de Jhon
+            String json = CrearJson(muestras);
+
+            //Escribe el resultado en un .txt
+            //TODO: Cambiar la escritura de archivo por base de datos
+            WriteFileSamples(muestras);
+
+            return resArray;
+
+        }catch (javax.xml.rpc.ServiceException jre) {
+            if(jre.getLinkedCause()!=null)
+                jre.getLinkedCause().printStackTrace();
+            throw new AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
+        }
+
 
     }
 
@@ -134,6 +184,7 @@ public class ExtractorController {
 
         return sampleV8s;
     }
+
     private String CrearJson(List<SampleV8> samples){
         Gson gson = new Gson();
         String json = gson.toJson(samples);
