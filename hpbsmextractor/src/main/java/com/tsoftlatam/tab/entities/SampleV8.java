@@ -73,18 +73,18 @@ public class SampleV8 {
         return timestamp;
     }
 
-
     @Override
     public String toString() {
-        return applicationName
-                + ", " +transactionName
-                + ", " +locationName
-                + ", " +errorCount
-                + ", " +availabilityStatus
-                + ", " +transactionStatus
-                + ", " +responseTime
-                + ", " +timestamp
-                + ", " +id;
-        //+ ", " +fecha;
+        return "SampleV8{" +
+                "applicationName='" + applicationName + '\'' +
+                ", transactionName='" + transactionName + '\'' +
+                ", locationName='" + locationName + '\'' +
+                ", errorCount=" + errorCount +
+                ", availabilityStatus='" + availabilityStatus + '\'' +
+                ", transactionStatus=" + transactionStatus +
+                ", responseTime=" + responseTime +
+                ", timestamp=" + timestamp +
+                ", id=" + id +
+                '}';
     }
 }

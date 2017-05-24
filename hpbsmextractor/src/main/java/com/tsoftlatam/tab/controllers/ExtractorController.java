@@ -29,7 +29,7 @@ public class ExtractorController {
     private String password;
 
     @RequestMapping("/res")
-    public String[] getMetricas() throws IOException {
+    public String getMetricas() throws IOException {
         wsdlpackage.GdeWsOpenAPISoapBindingStub binding;
 
 
@@ -63,9 +63,8 @@ public class ExtractorController {
 
             //dejo listo un Json para una etapa posterior
             String json = CrearJson(muestras);
-            WriteFileSamples(muestras);
 
-            return resArray;
+            return json;
         }
         catch (javax.xml.rpc.ServiceException jre) {
             if(jre.getLinkedCause()!=null)
@@ -76,7 +75,7 @@ public class ExtractorController {
     }
 
     @RequestMapping(value="/fechaInicial/{date1}/fechaFinal/{date2}", method = RequestMethod.GET)
-    public String[] getMetricasEntreFechas(@PathVariable String date1,@PathVariable String date2) throws IOException {
+    public String getMetricasEntreFechas(@PathVariable String date1,@PathVariable String date2) throws IOException {
         wsdlpackage.GdeWsOpenAPISoapBindingStub binding;
 
         try {
@@ -110,11 +109,7 @@ public class ExtractorController {
             //TODO: acoplar este Json con el de Jhon
             String json = CrearJson(muestras);
 
-            //Escribe el resultado en un .txt
-            //TODO: Cambiar la escritura de archivo por base de datos
-            WriteFileSamples(muestras);
-
-            return resArray;
+            return json;
 
         }catch (javax.xml.rpc.ServiceException jre) {
             if(jre.getLinkedCause()!=null)
