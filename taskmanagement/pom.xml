@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>taskmanagement</name>
+	<applicationName>taskmanagement</applicationName>
 	<description>Task Management</description>
 
 	<parent>
