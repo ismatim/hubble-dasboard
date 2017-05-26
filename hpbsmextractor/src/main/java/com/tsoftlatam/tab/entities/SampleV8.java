@@ -11,14 +11,14 @@ public class SampleV8 {
     private String locationName;
     private int errorCount;
     private String availabilityStatus; //fail, success, etc
-    private float transactionStatus;//u_iStatus en V9
+    private double transactionStatus;//u_iStatus en V9
     private double responseTime;
     private double timestamp;
     private int id;
     //private Date fecha;
 
     //Constructor
-    public SampleV8(String appName, String tranName, String locName, int error, String avStatus, Float tranStatus, double respTime, Long timestamp, int id){
+    public SampleV8(String appName, String tranName, String locName, int error, String avStatus, double tranStatus, double respTime, double timestamp, int id){
         this.applicationName = appName;
         this.transactionName = tranName;
         this.locationName = locName;
@@ -61,7 +61,7 @@ public class SampleV8 {
         return availabilityStatus;
     }
 
-    public float getTransactionStatus() {
+    public double getTransactionStatus() {
         return transactionStatus;
     }
 
@@ -75,7 +75,7 @@ public class SampleV8 {
 
     @Override
     public String toString() {
-        return "SampleV8{" +
+        return "{" +
                 "applicationName='" + applicationName + '\'' +
                 ", transactionName='" + transactionName + '\'' +
                 ", locationName='" + locationName + '\'' +

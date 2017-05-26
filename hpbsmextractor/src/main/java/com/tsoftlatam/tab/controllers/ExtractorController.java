@@ -109,6 +109,7 @@ public class ExtractorController {
             //TODO: acoplar este Json con el de Jhon
             String json = CrearJson(muestras);
 
+
             return json;
 
         }catch (javax.xml.rpc.ServiceException jre) {
