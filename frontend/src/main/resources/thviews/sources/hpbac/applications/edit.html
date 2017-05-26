@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org">
+        <div th:replace="mainTemplates/header"></div>
+
+        <body>
+
+            <div th:include="mainTemplates/navbar"></div>
+
+                <div th:class="container">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" th:text="'Aplicación HP BAC '+${appDetails.applicationName}">
+
+                        </div>
+                        <div class="panel-body">
+                            <!--<form role="form" action="#" th:action="@{/hpbac/applications/update}">-->
+                            <form role="form" method="post" th:action="'/sources/hpbac/applications/update/'+${appDetails.id}">
+                                <div class="form-group">
+                                    <label for="applicationName">Nombre de Aplicación</label>
+                                    <input id="applicationName" name="applicationName" type="text" class="form-control" th:value="${appDetails.applicationName}" th:readonly="true">
+                                    </input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="displayName">Nombre de Visualizaci&oacute;n</label>
+                                    <input id="displayName" name="displayName" type="text" class="form-control" th:value="${appDetails.displayName}">
+                                    </input>
+                                </div>
+                                <button th:type="submit" class="btn btn-success">Guardar</button>
+                                <button th:type="reset" class="btn btn-danger">Cancelar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            <div th:include="mainTemplates/footer"></div>
+
+        </body>
+    </html>
