@@ -1,5 +1,7 @@
 package com.tsoftlatam.tab.frontend.sources.hpbac.models;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 
 @Entity(name = "hpbac_applications")
@@ -11,9 +13,11 @@ public class Application {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @NotBlank( message = "{NotEmpy.sources.hpbacapplication.name}" )
     @Column(name = "name")
     private String applicationName;
 
+    @NotBlank( message = "{NotEmpy.sources.hpbacapplication.display.name}" )
     @Column(name = "display_name")
     private String displayName;
 
@@ -62,8 +66,12 @@ public class Application {
     }
 
     @Override
-    public String toString(){
-        return String.format("Application - Id: [%d]  Name: [%s]  Display Name: [%s]",this.id,this.applicationName
-        ,this.displayName);
+    public String toString() {
+        return "Application{" +
+                "id=" + id +
+                ", applicationName='" + applicationName + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", sourceId=" + sourceId +
+                '}';
     }
 }

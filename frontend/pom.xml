@@ -62,6 +62,12 @@
 			<artifactId>feign-gson</artifactId>
 			<version>8.18.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.4.1.Final</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

@@ -49,8 +49,6 @@ public class ApplicationsRestController {
                 .distinct()                                     //Se filtran por distinct
                 .collect(toList());                             //Se envían a la lista
 
-
-
         //Se cargan las aplicaciones en la base de datos
         for (int x=0;x<applications.size();x++) {
             applicationsService.createApplication(new Application(applications.get(x),applications.get(x)));

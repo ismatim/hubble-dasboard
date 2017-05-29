@@ -4,12 +4,16 @@ import com.tsoftlatam.tab.frontend.sources.hpbac.models.Application;
 import com.tsoftlatam.tab.frontend.sources.hpbac.services.ApplicationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
@@ -21,33 +25,42 @@ public class ApplicationsController {
 
     //Devuelve la lista de aplicaciones
     @GetMapping("/sources/hpbac/applications")
-    public String list(HttpServletRequest req){
-        req.setAttribute("applications", applicationsService.findAllApplications());
-        return "/sources/hpbac/applications/list";
+    public ModelAndView list(HttpServletRequest request){
+        ModelAndView modelAndView = new ModelAndView();
+        request.setAttribute("applications", applicationsService.findAllApplications());
+        modelAndView.setViewName("/sources/hpbac/applications/list");
+        return modelAndView;
     }
+
 
     //Devuelve una aplicación específica
     @GetMapping("/sources/hpbac/applications/{id}")
-    public String edit(HttpServletRequest req,@PathVariable int id){
+    public ModelAndView edit(HttpServletRequest request, @PathVariable int id){
+        ModelAndView modelAndView = new ModelAndView();
         Application application = applicationsService.findApplicationById(id);
-        System.out.println(application.toString());
-        req.setAttribute("appDetails", application);
-        return "/sources/hpbac/applications/edit";
+        request.setAttribute("appDetails", application);
+        modelAndView.setViewName("/sources/hpbac/applications/edit");
+        return modelAndView;
     }
 
     //Actuaización de un registro
-    @PostMapping("/sources/hpbac/applications/update/{id}")
-    public void updateApplication(HttpServletRequest request, HttpServletResponse response, @PathVariable int id){
-
-        Application application = applicationsService.updateApplication(id
+    @PostMapping("/sources/hpbac/applications/update")
+    public ModelAndView updateApplication(@Valid Application application,
+                                          BindingResult result
+                                          //HttpServletRequest request,
+                                          //HttpServletResponse response,
+                                          //@PathVariable int id
+                                            ){
+        ModelAndView modelAndView = new ModelAndView();
+        /*Application application = applicationsService.updateApplication(id
                                                         ,request.getParameter("applicationName")
                                                         ,request.getParameter("displayName"));
-
-        try {
-            response.sendRedirect("/sources/hpbac/applications/"+id);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        */
+        modelAndView.addObject("appDetails", application);
+        modelAndView.setViewName(result.hasErrors() ? "/sources/hpbac/applications/edit" : "userReady");
+        //request.setAttribute("appDetails", app);
+        modelAndView.setViewName("/sources/hpbac/applications/edit");
+        return modelAndView;
 
     }
 
