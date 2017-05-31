@@ -27,8 +27,10 @@ public class SchedulerController {
             //Abro un Stream de la URL, siendo esto similar a ejecutarla en un navegador
             iurl.openStream();
 
+
             Calendar calendar = Calendar.getInstance();
             System.out.println("Ejecuto el extractor:" + calendar.getTime());
+            System.out.println(iurl.getContent());
         }catch(Exception e){
             e.printStackTrace();
         }

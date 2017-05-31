@@ -9,6 +9,7 @@
         <module name="eureka" />
         <module name="frontend" />
         <module name="hpbsmextractor" />
+        <module name="mongo" />
         <module name="scheduler" />
         <module name="tabreaderfile" />
         <module name="taskmanagement" />
@@ -22,6 +23,7 @@
       <module name="eureka" target="1.8" />
       <module name="frontend" target="1.8" />
       <module name="hpbsmextractor" target="1.8" />
+      <module name="mongo" target="1.8" />
       <module name="scheduler" target="1.8" />
       <module name="tabreaderfile" target="1.8" />
       <module name="tabview" target="1.8" />
