@@ -3,53 +3,53 @@
 <!--WSDL created by Apache Axis version: 1.4
 Built on Apr 22, 2006 (06:55:48 PDT)-->
 
-   <wsdl:message applicationName="getDataWebServiceResponse">
+   <wsdl:message profileName="getDataWebServiceResponse">
 
-      <wsdl:part applicationName="retval" type="soapenc:string"/>
+      <wsdl:part profileName="retval" type="soapenc:string"/>
 
-      <wsdl:part applicationName="errorCode" type="xsd:int"/>
+      <wsdl:part profileName="errorCode" type="xsd:int"/>
 
-      <wsdl:part applicationName="origRowCount" type="xsd:int"/>
-
-   </wsdl:message>
-
-   <wsdl:message applicationName="getDataWebServiceRequest">
-
-      <wsdl:part applicationName="user" type="soapenc:string"/>
-
-      <wsdl:part applicationName="password" type="soapenc:string"/>
-
-      <wsdl:part applicationName="query" type="soapenc:string"/>
+      <wsdl:part profileName="origRowCount" type="xsd:int"/>
 
    </wsdl:message>
 
-   <wsdl:portType applicationName="GetDataLocal">
+   <wsdl:message profileName="getDataWebServiceRequest">
 
-      <wsdl:operation applicationName="getDataWebService" parameterOrder="user password query errorCode origRowCount">
+      <wsdl:part profileName="user" type="soapenc:string"/>
 
-         <wsdl:input message="impl:getDataWebServiceRequest" applicationName="getDataWebServiceRequest"/>
+      <wsdl:part profileName="password" type="soapenc:string"/>
 
-         <wsdl:output message="impl:getDataWebServiceResponse" applicationName="getDataWebServiceResponse"/>
+      <wsdl:part profileName="query" type="soapenc:string"/>
+
+   </wsdl:message>
+
+   <wsdl:portType profileName="GetDataLocal">
+
+      <wsdl:operation profileName="getDataWebService" parameterOrder="user password query errorCode origRowCount">
+
+         <wsdl:input message="impl:getDataWebServiceRequest" profileName="getDataWebServiceRequest"/>
+
+         <wsdl:output message="impl:getDataWebServiceResponse" profileName="getDataWebServiceResponse"/>
 
       </wsdl:operation>
 
    </wsdl:portType>
 
-   <wsdl:binding applicationName="GdeWsOpenAPISoapBinding" type="impl:GetDataLocal">
+   <wsdl:binding profileName="GdeWsOpenAPISoapBinding" type="impl:GetDataLocal">
 
       <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
 
-      <wsdl:operation applicationName="getDataWebService">
+      <wsdl:operation profileName="getDataWebService">
 
          <wsdlsoap:operation soapAction=""/>
 
-         <wsdl:input applicationName="getDataWebServiceRequest">
+         <wsdl:input profileName="getDataWebServiceRequest">
 
             <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI" use="encoded"/>
 
          </wsdl:input>
 
-         <wsdl:output applicationName="getDataWebServiceResponse">
+         <wsdl:output profileName="getDataWebServiceResponse">
 
             <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI" use="encoded"/>
 
@@ -59,9 +59,9 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
    </wsdl:binding>
 
-   <wsdl:service applicationName="GetDataLocalService">
+   <wsdl:service profileName="GetDataLocalService">
 
-      <wsdl:port binding="impl:GdeWsOpenAPISoapBinding" applicationName="GdeWsOpenAPI">
+      <wsdl:port binding="impl:GdeWsOpenAPISoapBinding" profileName="GdeWsOpenAPI">
 
          <wsdlsoap:address location="http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI"/>
 

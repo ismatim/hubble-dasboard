@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/frontend/frontend.iml" filepath="$PROJECT_DIR$/frontend/frontend.iml" />
       <module fileurl="file://$PROJECT_DIR$/hpbsmextractor/hpbsmextractor.iml" filepath="$PROJECT_DIR$/hpbsmextractor/hpbsmextractor.iml" />
       <module fileurl="file://$PROJECT_DIR$/mongo/mongo.iml" filepath="$PROJECT_DIR$/mongo/mongo.iml" />
+      <module fileurl="file://C:\Users\matias.lapalma\IdeaProjects\Tsoft-Hubble\mongo\mongo.iml" filepath="C:\Users\matias.lapalma\IdeaProjects\Tsoft-Hubble\mongo\mongo.iml" />
       <module fileurl="file://$PROJECT_DIR$/scheduler/scheduler.iml" filepath="$PROJECT_DIR$/scheduler/scheduler.iml" />
       <module fileurl="file://$PROJECT_DIR$/tabreaderfile/tabreaderfile.iml" filepath="$PROJECT_DIR$/tabreaderfile/tabreaderfile.iml" />
       <module fileurl="file://$PROJECT_DIR$/taskmanagement/taskmanagement.iml" filepath="$PROJECT_DIR$/taskmanagement/taskmanagement.iml" />

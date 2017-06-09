@@ -1,4 +1,4 @@
-package com.tsoftlatam.tab.entities;
+package com.tsoftlatam.tab.model;
 
 import java.util.Date;
 

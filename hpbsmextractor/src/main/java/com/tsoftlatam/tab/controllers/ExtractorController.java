@@ -1,7 +1,11 @@
 package com.tsoftlatam.tab.controllers;
 
 import com.google.gson.Gson;
-import com.tsoftlatam.tab.entities.SampleV8;
+import com.tsoftlatam.tab.model.Location;
+import com.tsoftlatam.tab.model.Profile;
+import com.tsoftlatam.tab.model.SampleV8;
+import com.tsoftlatam.tab.model.Transaction;
+import com.tsoftlatam.tab.utils.Parser;
 import junit.framework.AssertionFailedError;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,9 +20,6 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.*;
 
-/**
- * Created by david.malagueno on 25/4/2017.
- */
 @RestController
 public class ExtractorController {
 
@@ -27,6 +28,147 @@ public class ExtractorController {
 
     @Value("${password}")
     private String password;
+
+    @RequestMapping("/extractor/hpbac/getProfiles")
+    public List<Profile> getProfiles(){
+        wsdlpackage.GdeWsOpenAPISoapBindingStub binding;
+
+        try{
+            binding = (wsdlpackage.GdeWsOpenAPISoapBindingStub) new wsdlpackage.GetDataLocalServiceLocator().getGdeWsOpenAPI();
+
+            // Time out
+            binding.setTimeout(60000);
+
+            //Query para BSM Version 8
+            //Query que trae las diferentes aplicaciones
+            //String query = "select distinct(application_name) as ApplicationName, szTransactionName as TransactionName ,szLocationName, ErrorCount, availability_status, u_iStatus, dResponseTime, time_stamp from trans_t where time_stamp>=" + currentTimestamp.getTime()/1000 ;
+            String query = "select distinct(profile_name) " +
+                    "from trans_t " +
+                    "where time_stamp>=" + getTimestamp60Minutes();
+
+            String result = binding.getDataWebService(user, password, query, new javax.xml.rpc.holders.IntHolder(), new javax.xml.rpc.holders.IntHolder());
+
+            //Separo cada linea
+            String[] resArray = result.split("\n");
+
+            //Convierto el array en lista de strings
+            List<String> resultadoLista = new ArrayList<String>(Arrays.asList(resArray));
+
+            //Creo una lista del modelo requerido para el resultado
+            List<Profile> muestras = Parser.parseProfiles(resultadoLista);
+
+            //dejo listo un Json para una etapa posterior
+            //String json = CrearJson(muestras);
+
+            return muestras;
+        }
+        catch (javax.xml.rpc.ServiceException jre) {
+            if(jre.getLinkedCause()!=null)
+                jre.getLinkedCause().printStackTrace();
+            throw new AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+    //Método que trae todas las transacciones disponibles para un determinado perfil
+    @RequestMapping("/extractor/hpbac/{profileId}/getTransactions")
+    public List<Transaction> getTransactions(@PathVariable String profileId){
+
+        wsdlpackage.GdeWsOpenAPISoapBindingStub binding;
+
+        try{
+            binding = (wsdlpackage.GdeWsOpenAPISoapBindingStub) new wsdlpackage.GetDataLocalServiceLocator().getGdeWsOpenAPI();
+
+            // Time out
+            binding.setTimeout(60000);
+
+            //Query para BSM Version 8
+            //Query que trae las diferentes transacciones por cada aplicación
+            //String query = "select distinct(application_name) as ApplicationName, szTransactionName as TransactionName ,szLocationName, ErrorCount, availability_status, u_iStatus, dResponseTime, time_stamp from trans_t where time_stamp>=" + currentTimestamp.getTime()/1000 ;
+            String query = "select distinct(szTransactionName) " +
+                    "from trans_t " +
+                    "where time_stamp>=" + getTimestamp60Minutes()+
+                    "and profile_name='"+ profileId+"'";
+
+            String result = binding.getDataWebService(user, password, query, new javax.xml.rpc.holders.IntHolder(), new javax.xml.rpc.holders.IntHolder());
+
+            //Separo cada linea
+            String[] resArray = result.split("\n");
+
+            //Convierto el array en lista de strings
+            List<String> resultadoLista = new ArrayList<String>(Arrays.asList(resArray));
+
+            //Creo una lista del modelo requerido para el resultado
+            List<Transaction> muestras = Parser.parseTransactions(resultadoLista);
+
+            //dejo listo un Json para una etapa posterior
+            //String json = CrearJson(muestras);
+
+            return muestras;
+        }
+        catch (javax.xml.rpc.ServiceException jre) {
+            if(jre.getLinkedCause()!=null)
+                jre.getLinkedCause().printStackTrace();
+            throw new AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
+
+    //Método que trae todas las locaciones disponibles para un determinado perfil
+    @RequestMapping("/extractor/hpbac/{profileName}/getLocations")
+    public List<Location> getLocations(@PathVariable String profileName){
+
+        wsdlpackage.GdeWsOpenAPISoapBindingStub binding;
+
+        try{
+            binding = (wsdlpackage.GdeWsOpenAPISoapBindingStub) new wsdlpackage.GetDataLocalServiceLocator().getGdeWsOpenAPI();
+
+            // Time out
+            binding.setTimeout(60000);
+
+            //Query para BSM Version 8
+            //Query que trae las diferentes transacciones por cada aplicación
+            //String query = "select distinct(application_name) as ApplicationName, szTransactionName as TransactionName ,szLocationName, ErrorCount, availability_status, u_iStatus, dResponseTime, time_stamp from trans_t where time_stamp>=" + currentTimestamp.getTime()/1000 ;
+            String query = "select distinct(szLocationName) " +
+                    "from trans_t " +
+                    "where time_stamp>=" + getTimestamp60Minutes()+
+                    "and profile_name='"+ profileName+"'";
+
+            String result = binding.getDataWebService(user, password, query, new javax.xml.rpc.holders.IntHolder(), new javax.xml.rpc.holders.IntHolder());
+
+            //Separo cada linea
+            String[] resArray = result.split("\n");
+
+            //Convierto el array en lista de strings
+            List<String> resultadoLista = new ArrayList<String>(Arrays.asList(resArray));
+
+            //Creo una lista del modelo requerido para el resultado
+            List<Location> muestras = Parser.parseLocations(resultadoLista);
+
+            //dejo listo un Json para una etapa posterior
+            //String json = CrearJson(muestras);
+
+            return muestras;
+        }
+        catch (javax.xml.rpc.ServiceException jre) {
+            if(jre.getLinkedCause()!=null)
+                jre.getLinkedCause().printStackTrace();
+            throw new AssertionFailedError("JAX-RPC ServiceException caught: " + jre);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+
+    }
 
     @RequestMapping("/res")
     public String getMetricas() throws IOException {

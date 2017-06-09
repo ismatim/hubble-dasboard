@@ -1,7 +1,7 @@
 package com.tsoftlatam.tab.sources;
 
 import com.tsoftlatam.tab.controllers.ExtractorController;
-import com.tsoftlatam.tab.entities.SampleV8;
+import com.tsoftlatam.tab.model.SampleV8;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import java.io.IOException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(value = ExtractorController.class, secure = false)

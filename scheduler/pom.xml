@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<applicationName>scheduler</applicationName>
+	<profileName>scheduler</profileName>
 	<description>Scheduler del extractor</description>
 
 	<parent>
