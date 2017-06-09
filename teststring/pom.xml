@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<applicationName>teststring</applicationName>
+	<profileName>teststring</profileName>
 	<description>Microservicio que imprime un texto</description>
 
 	<parent>

@@ -15,17 +15,21 @@ public class Transaction {
     private String transactionName;
 
     @NotNull
-    @Column(name = "transaction_display_name")
-    private String transactionDisplayName;
+    @Column(name = "display_name")
+    private String displayName;
 
     @NotNull
-    @Column(name = "application_id")
-    private int applicationId;
+    @Column(name = "profile_id")
+    private int profileId;
 
-    public Transaction(String transactionName, String transactionDisplayName, int applicationId) {
+    public Transaction(String transactionName, String displayName, int profileId) {
         this.transactionName = transactionName;
-        this.transactionDisplayName = transactionDisplayName;
-        this.applicationId = applicationId;
+        this.displayName = displayName;
+        this.profileId = profileId;
+    }
+
+    public  Transaction(){
+
     }
 
     public int getId() {
@@ -44,21 +48,22 @@ public class Transaction {
         this.transactionName = transactionName;
     }
 
-    public String getTransactionDisplayName() {
-        return transactionDisplayName;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setTransactionDisplayName(String transactionDisplayName) {
-        this.transactionDisplayName = transactionDisplayName;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
-    public int getApplicationId() {
-        return applicationId;
+    public int getProfileId() {
+        return profileId;
     }
 
-    //@ManyToOne(targetEntity = Application.class)
+    //@ManyToOne(targetEntity = Profile.class)
     //@JoinColumn(name = "application_id")
-    public void setApplicationId(int applicationId) {
-        this.applicationId = applicationId;
+    public void setProfileId(int profileId) {
+        this.profileId = profileId;
     }
+
 }

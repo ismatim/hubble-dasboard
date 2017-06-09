@@ -39,4 +39,44 @@ public class TransactionsService {
         transactionsRepository.save(transaction);
 
     }
+
+    public int findTransactionIdByName(String name){
+
+        Collection<Transaction> allTransactions = findAllTransactions();
+        Transaction transaction;
+
+        transaction = allTransactions.parallelStream()
+                .filter(x -> name.equals(x.getTransactionName()))   // Buscamos por nombre
+                .findAny()                                      // Si encuentra uno devuelve el objeto encontrado
+                .orElse(null);                          //Si no encuentra nada devuelve null
+
+        if(transaction!=null)
+            return transaction.getId();
+        else
+            return -1;
+    }
+
+    public Transaction updateTransaction(int id, String transactionName, String displayName){
+        Transaction transaction = findTransactionById(id);
+        transaction.setTransactionName(transactionName);
+        transaction.setDisplayName(displayName);
+        transactionsRepository.save(transaction);
+        return transaction;
+    }
+
+    public String findTransactionDisplayName(String name){
+        Collection<Transaction> allTransactions = findAllTransactions();
+        Transaction transaction;
+
+        transaction = allTransactions.parallelStream()
+                .filter(x -> name.equals(x.getTransactionName()))        // Buscamos por nombre
+                .findAny()                                      // Si encuentra uno devuelve el objeto encontrado
+                .orElse(null);                          //Si no encuentra nada devuelve null
+
+        if(transaction!=null)
+            return transaction.getDisplayName();
+        else
+            return null;
+
+    }
 }

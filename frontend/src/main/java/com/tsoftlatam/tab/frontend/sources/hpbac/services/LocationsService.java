@@ -33,4 +33,49 @@ public class LocationsService {
     public Location findLocationById(int id){
         return locationsRepository.findOne(id);
     }
+
+    public void createLocation(Location location){
+        locationsRepository.save(location);
+    }
+
+    public Location updateLocation(int id, String locationName, String displayName, Boolean isInternal){
+        Location location = findLocationById(id);
+        location.setIsInternal(isInternal);
+        location.setLocationName(locationName);
+        location.setDisplayName(displayName);
+        locationsRepository.save(location);
+        return location;
+    }
+
+    public String findLocationDisplayName(String name){
+        Collection<Location> allLocations = findAllLocations();
+        Location location;
+
+        location = allLocations.parallelStream()
+                .filter(x -> name.equals(x.getLocationName()))        // Buscamos por nombre
+                .findAny()                                      // Si encuentra uno devuelve el objeto encontrado
+                .orElse(null);                          //Si no encuentra nada devuelve null
+
+        if(location!=null)
+            return location.getDisplayName();
+        else
+            return null;
+
+    }
+
+    public int findLocationIdByName(String name){
+
+        Collection<Location> allLocations = findAllLocations();
+        Location location;
+
+        location = allLocations.parallelStream()
+                .filter(x -> name.equals(x.getLocationName()))   // Buscamos por nombre
+                .findAny()                                      // Si encuentra uno devuelve el objeto encontrado
+                .orElse(null);                          //Si no encuentra nada devuelve null
+
+        if(location!=null)
+            return location.getId();
+        else
+            return -1;
+    }
 }

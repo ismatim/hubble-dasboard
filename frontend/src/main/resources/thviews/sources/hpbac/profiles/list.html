@@ -10,23 +10,23 @@
     <table class="table table-bordered table-hover">
         <thead class="thead-inverse">
         <tr>
-            <th>Nombre de Aplicaci&oacute;n en HP BAC</th>
+            <!--TODO: Reemplazar los siguientes textos por mensajes en los archivos de configuración-->
+            <th>Nombre de Aplicación en HP BAC</th>
             <th>Nombre de Visualizaci&oacute;n</th>
             <th>Acciones</th>
         </tr>
         </thead>
         <tbody>
-            <tr th:each="application : ${applications}">
-                <!--<td th:text="${#dates.createToday()}"></td>-->
-                <td th:text="${application.applicationName}"></td>
-                <td th:text="${application.displayName}"></td>
+            <tr th:each="profile : ${profiles}">
+                <td th:text="${profile.profileName}"></td>
+                <td th:text="${profile.displayName}"></td>
                 <td>
-                    <a th:href="'/sources/hpbac/applications/'+${application.id}" type="button" class="btn btn-primary">
+                    <a th:href="'/sources/hpbac/profiles/'+${profile.id}" type="button" class="btn btn-primary">
                         <span class="glyphicon glyphicon-pencil"></span>
                     </a>
-                    <!-- #TODO: Estos registros de configuración no se deberían poder eliminar
-                         #TODO: Ya que así es como vienen automáticamente de la fuente de datos
-                    <a th:href="'applications/delete/'+${application.id}" type="button" class="btn btn-danger">
+                    <!-- #Estos registros de configuración no se deberían poder eliminar
+                         #Ya que así es como vienen automáticamente de la fuente de datos
+                    <a th:hrebacApplicationsions/delete/bacApplicationtion.id}" type="button" class="btn btn-danger">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>
                     -->

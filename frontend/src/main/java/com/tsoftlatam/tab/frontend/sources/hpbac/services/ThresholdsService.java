@@ -33,4 +33,18 @@ public class ThresholdsService {
     public Threshold findThresholdById(int id){
         return thresholdsRepository.findOne(id);
     }
+
+    public Threshold updateThreshold(int id, float okThreshold, float criticalThreshold, float outlierThreshold){
+        Threshold threshold = findThresholdById(id);
+        threshold.setOkThreshold(okThreshold);
+        threshold.setCriticalThreshold(criticalThreshold);
+        threshold.setOutlierThreshold(outlierThreshold);
+
+        thresholdsRepository.save(threshold);
+        return threshold;
+    }
+
+    public void createThreshold(Threshold threshold){
+        thresholdsRepository.save(threshold);
+    }
 }

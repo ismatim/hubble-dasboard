@@ -15,12 +15,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="bacSample : ${bacSamples}">
+                <tr th:each="bacSample,iterator : ${bacSamples}">
                     <!--<td th:text="${#dates.createToday()}"></td>-->
                     <td th:text="${bacSample.fecha}"></td>
-                    <td th:text="${bacSample.applicationName}"></td>
-                    <td th:text="${bacSample.transactionName}"></td>
-                    <td th:text="${bacSample.locationName}"></td>
+                    <td th:text="${profileDisplayName[iterator.index]}"></td>
+                    <td th:text="${transactionDisplayName[iterator.index]}"></td>
+                    <td th:text="${locationDisplayName[iterator.index]}"></td>
                     <td th:text="${bacSample.availabilityStatus}"></td>
                     <td th:text="${bacSample.errorCount}"></td>
                     <td th:text="${bacSample.transactionStatus}"></td>

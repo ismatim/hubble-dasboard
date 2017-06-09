@@ -4,20 +4,20 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 
-@Entity(name = "hpbac_applications")
+@Entity(name = "hpbac_profiles")
 @Table
-public class Application {
+public class Profile {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @NotBlank( message = "{NotEmpy.sources.hpbacapplication.name}" )
+    @NotBlank( message = "{NotEmpy.sources.hpbac.profile.name}" )
     @Column(name = "name")
-    private String applicationName;
+    private String profileName;
 
-    @NotBlank( message = "{NotEmpy.sources.hpbacapplication.display.name}" )
+    @NotBlank( message = "Debe colocar un nombre de visualización" )
     @Column(name = "display_name")
     private String displayName;
 
@@ -25,12 +25,12 @@ public class Application {
     @Column(name = "source_id")
     private int sourceId;
 
-    public Application(String applicationName, String displayName) {
-        this.applicationName = applicationName;
+    public Profile(String profileName, String displayName) {
+        this.profileName = profileName;
         this.displayName = displayName;
     }
 
-    public Application() {
+    public Profile() {
     }
 
     public int getId() {
@@ -41,12 +41,12 @@ public class Application {
         this.id = id;
     }
 
-    public String getApplicationName() {
-        return applicationName;
+    public String getProfileName() {
+        return profileName;
     }
 
-    public void setApplicationName(String applicationName) {
-        this.applicationName = applicationName;
+    public void setProfileName(String profileName) {
+        this.profileName = profileName;
     }
 
     public String getDisplayName() {
@@ -67,9 +67,9 @@ public class Application {
 
     @Override
     public String toString() {
-        return "Application{" +
+        return "Profile{" +
                 "id=" + id +
-                ", applicationName='" + applicationName + '\'' +
+                ", profileName='" + profileName + '\'' +
                 ", displayName='" + displayName + '\'' +
                 ", sourceId=" + sourceId +
                 '}';

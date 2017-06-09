@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class BacData {
 
-    private String applicationName;
+    private String profileName;
     private String transactionName;
     private String locationName;
     private String availabilityStatus; //fail, success, etc
@@ -19,7 +19,7 @@ public class BacData {
     private Date fecha;
 
     public BacData(String appName, String tranName, String locName, String avStatus, String error,  String tranStatus, String respTime, String timestamp){
-        this.applicationName = appName;
+        this.profileName = appName;
         this.transactionName = tranName;
         this.locationName = locName;
         this.errorCount = error;
@@ -38,12 +38,12 @@ public class BacData {
         return fecha;
     }
 
-    public String getApplicationName() {
-        return applicationName;
+    public String getProfileName() {
+        return profileName;
     }
 
-    public void setApplicationName(String applicationName) {
-        this.applicationName = applicationName;
+    public void setProfileName(String profileName) {
+        this.profileName = profileName;
     }
 
     public String getTransactionName() {

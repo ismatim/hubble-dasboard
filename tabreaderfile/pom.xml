@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<applicationName>tabreaderfile</applicationName>
+	<profileName>tabreaderfile</profileName>
 	<description>File CSV Objects Reader</description>
 
 	<parent>

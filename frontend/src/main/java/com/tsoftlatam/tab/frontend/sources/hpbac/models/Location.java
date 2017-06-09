@@ -12,15 +12,30 @@ public class Location {
     @Column(name = "location_name")
     private String locationName;
 
-    @Column(name = "location_display_name")
-    private String locationDisplayName;
+    @Column(name = "display_name")
+    private String displayName;
 
     @Column(name = "is_internal")
     private Boolean isInternal;
 
 
-    @Column(name = "application_id")
-    private int applicationId;
+    @Column(name = "profile_id")
+    private int profileId;
+
+    @Column(name = "transaction_id")
+    private int transactionId;
+
+    public Location(String locationName, String displayName, Boolean isInternal, int profileId, int transactionId) {
+        this.locationName = locationName;
+        this.displayName = displayName;
+        this.isInternal = isInternal;
+        this.profileId = profileId;
+        this.transactionId = transactionId;
+    }
+
+    public Location(){
+
+    }
 
     public int getId() {
         return id;
@@ -38,30 +53,38 @@ public class Location {
         this.locationName = locationName;
     }
 
-    public String getLocationDisplayName() {
-        return locationDisplayName;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setLocationDisplayName(String locationDisplayName) {
-        this.locationDisplayName = locationDisplayName;
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
-    public Boolean getInternal() {
+    public Boolean getIsInternal() {
         return isInternal;
     }
 
-    public void setInternal(Boolean internal) {
+    public void setIsInternal(Boolean internal) {
         isInternal = internal;
     }
 
-    public int getApplicationId() {
-        return applicationId;
+    public int getProfileId() {
+        return profileId;
     }
 
-    @ManyToOne(targetEntity = Application.class)
+    public int getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(int transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    @ManyToOne(targetEntity = Profile.class)
     @JoinColumn(name = "application_id")
-    public void setApplicationId(int applicationId) {
-        this.applicationId = applicationId;
+    public void setProfileId(int profileId) {
+        this.profileId = profileId;
     }
 
 

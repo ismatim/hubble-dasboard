@@ -1,4 +1,4 @@
-package com.tsoftlatam.tab.readers;
+package com.tsoftlatam.tab.frontend;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class TabreaderfileApplicationTests {
+public class FrontendProfileTests {
 
 	@Test
 	public void contextLoads() {

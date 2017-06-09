@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="mainTemplates/header"></div>
+<body>
+
+<div th:include="mainTemplates/navbar"></div>
+
+<div th:class="container">
+    <h2>HP BAC Umbrales</h2>
+    <table class="table table-bordered table-hover">
+        <thead class="thead-inverse">
+        <tr>
+            <!--TODO: Reemplazar los siguientes textos por mensajes en los archivos de configuración-->
+            <th>Nombre de Aplicación</th>
+            <th>Nombre de Transacción</th>
+            <th>Nombre de Locación</th>
+            <th>Umbral Ok</th>
+            <th>Umbral Crítico</th>
+            <th>Umbral Error</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="threshold, iterator : ${thresholds}">
+                <td th:text="${profileName[iterator.index]}"></td>
+                <td th:text="${transactionName[iterator.index]}"></td>
+                <td th:text="${locationName[iterator.index]}"></td>
+                <td th:text="${threshold.okThreshold}"></td>
+                <td th:text="${threshold.criticalThreshold}"></td>
+                <td th:text="${threshold.outlierThreshold}"></td>
+                <td>
+                    <a th:href="'/sources/hpbac/thresholds/'+${threshold.id}" type="button" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <!-- #Estos registros de configuración no se deberían poder eliminar
+                         #Ya que así es como vienen automáticamente de la fuente de datos
+                    <a th:hrebacApplicationsions/delete/bacApplicationtion.id}" type="button" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+                    -->
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+</div>
+
+<div th:include="mainTemplates/footer"></div>
+</body>
+</html>

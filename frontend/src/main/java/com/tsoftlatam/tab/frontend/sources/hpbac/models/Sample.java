@@ -13,12 +13,16 @@ public class Sample {
     //este modelo
     //Los campos del tipo Date arrojan error de zona horaria, por eso hemos usado todos String, aunque habría
     //que verificar el correcto funcionamiento con campos del tipo numérico (float, Double, int, Long)
-    private String applicationName;
+    private String profileName;
     private String transactionName;
+    private String transactionDisplayName;
     private String locationName;
+    private String locationDisplayName;
     private String availabilityStatus; //fail, success, etc
+    private String availabilityDisplayStatus;
     private String errorCount;
     private String transactionStatus;//u_iStatus en V9
+    private String transactionDisplayStatus;
     private String responseTime;
     private String timestamp;
     private String fecha;
@@ -32,12 +36,12 @@ public class Sample {
         return dateFormat.format(new Date(Double.valueOf(this.timestamp).longValue()*1000));
     }
 
-    public String getApplicationName() {
-        return applicationName;
+    public String getProfileName() {
+        return profileName;
     }
 
-    public void setApplicationName(String applicationName) {
-        this.applicationName = applicationName;
+    public void setProfileName(String profileName) {
+        this.profileName = profileName;
     }
 
     public String getTransactionName() {
@@ -97,4 +101,11 @@ public class Sample {
         this.timestamp = timestamp;
     }
 
+    public String getProfileAndLocation(){
+        return this.profileName+" - "+this.locationName;
+    }
+
+    public String getProfileAndTransaction(){
+        return this.profileName+" - "+this.transactionName;
+    }
 }

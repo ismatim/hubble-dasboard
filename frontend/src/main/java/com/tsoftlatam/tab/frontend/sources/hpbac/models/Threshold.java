@@ -9,8 +9,8 @@ public class Threshold {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "application_id")
-    private int applicationId;
+    @Column(name = "profile_id")
+    private int profileId;
 
     @Column(name = "transaction_id")
     private int transactionId;
@@ -35,14 +35,14 @@ public class Threshold {
         this.id = id;
     }
 
-    public int getApplicationId() {
-        return applicationId;
+    public int getProfileId() {
+        return profileId;
     }
 
-    @ManyToOne(targetEntity = Application.class)
-    @JoinColumn(name = "application_id")
-    public void setApplicationId(int applicationId) {
-        this.applicationId = applicationId;
+    @ManyToOne(targetEntity = Profile.class)
+    @JoinColumn(name = "profile_id")
+    public void setProfileId(int profileId) {
+        this.profileId = profileId;
     }
 
     public int getTransactionId() {
@@ -87,5 +87,17 @@ public class Threshold {
 
     public void setOutlierThreshold(float outlierThreshold) {
         this.outlierThreshold = outlierThreshold;
+    }
+
+    public Threshold(int profileId, int transactionId, int locationId, float okThreshold, float criticalThreshold, float outlierThreshold) {
+        this.profileId = profileId;
+        this.transactionId = transactionId;
+        this.locationId = locationId;
+        this.okThreshold = okThreshold;
+        this.criticalThreshold = criticalThreshold;
+        this.outlierThreshold = outlierThreshold;
+    }
+
+    public Threshold() {
     }
 }
