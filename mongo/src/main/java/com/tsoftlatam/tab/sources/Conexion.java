@@ -2,10 +2,16 @@ package com.tsoftlatam.tab.sources;
 
 import com.mongodb.*;
 import com.mongodb.util.JSON;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Created by david.malagueno on 30/5/2017.
@@ -13,20 +19,44 @@ import java.net.URL;
 public class Conexion {
     public static void main(String[] args) {
 
+
         try {
             Conexion con = new Conexion();
             String resultado = con.sendGet();
 
             MongoClient mongo = new MongoClient( "10.10.20.176" , 27017 );
-
-            DB db = mongo.getDB("testdb1");
-
+            DB db = mongo.getDB("HPBACSOURCE");
             DBCollection table = db.getCollection("Metricas");
 
-            DBObject dbObject = (DBObject) JSON.parse(resultado);
+          //********************************************************************************
+
+            //JSONParser parser = new JSONParser();
+            //Object obj = parser.parse(resultado);
+            JSONArray array = new JSONArray(resultado);
+            JSONObject jsonObj = new JSONObject();
+
+            List<JSONObject> list = new ArrayList<JSONObject>();
+
+            for(int i=0; i<array.length(); i++){
+               // jsonObj  = array.getJSONObject(i);
+                list.add(array.getJSONObject(i));
+                String c;
+                c= array.getString(i).toString();
+                //System.out.println(c);
+                DBObject dbObject1 = (DBObject) JSON.parse(c);
+                table.insert(dbObject1);
+                //System.out.println(jsonObj.getString("id"));
+                //System.out.println(jsonObj.getString("transactionStatus"));
+            }
+
+//***************************************************************************************
 
             //TODO: modificar para que se inserte un array de DBObjetcs, sino no anda
             //table.insert(dbObject);
+
+            //System.out.println("CONSULTA DE LOS DATOS");
+            //System.out.println(resultado);
+
 
             DBCursor cursorDoc = table.find();
             while (cursorDoc.hasNext()) {
@@ -38,28 +68,6 @@ public class Conexion {
         }catch(Exception e){
             e.printStackTrace();
         }
-
-
-
-
-
-        /*
-        BasicDBObject document = new BasicDBObject();
-        document.put("name", "mkyong");
-        document.put("age", 30);
-        document.put("createdDate", new Date());
-        table.insert(document);
-        BasicDBObject searchQuery = new BasicDBObject();
-        searchQuery.put("name", "mkyong");
-
-        DBCursor cursor = table.find(searchQuery);
-
-        while (cursor.hasNext()) {
-            System.out.println(cursor.next());
-        }
-
-        System.out.println(db.getCollectionNames());
-        */
     }
 
     private String sendGet() throws Exception  {
@@ -80,6 +88,4 @@ public class Conexion {
 
         return response.toString();
     }
-
-
 }
