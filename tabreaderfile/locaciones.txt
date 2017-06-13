@@ -1,7 +1,0 @@
-Galicia Mobile,Galicia Mobile - Carga Portal,Tsoft Agente Interno
-Santander Personas,Santander - Carga Portal,Tsoft Agente Interno
-Santander Personas,Santander - Carga Login,Tsoft Agente Interno
-Santander Personas,Santander - Carga Portal,Tsoft Agente Externo
-ICBC,ICBC - Carga Portal,Tsoft Agente Interno
-Galicia Personas,Galicia - Carga Portal,Tsoft Agente Interno
-Santander Mobile,Santander Mobile - Carga Portal,Tsoft Agente Externo

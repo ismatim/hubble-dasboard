@@ -1,6 +1,0 @@
-Galicia Mobile,Galicia Mobile - Carga Portal
-Santander Personas,Santander - Carga Portal
-Santander Personas,Santander - Carga Login
-ICBC,ICBC - Carga Portal
-Galicia Personas,Galicia - Carga Portal
-Santander Mobile,Santander Mobile - Carga Portal
