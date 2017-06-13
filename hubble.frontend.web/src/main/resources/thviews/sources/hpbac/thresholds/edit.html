@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org">
+        <div th:replace="mainTemplates/header"></div>
+
+        <body>
+
+            <div th:include="mainTemplates/navbar"></div>
+            <div class="container">
+                <a href="/sources/hpbac/thresholds" type="button" class="btn btn-info">
+                    <span class="glyphicon glyphicon-chevron-left" th:text="#{general.button.returntolist}"></span>
+                </a>
+            </div>
+            <br></br>
+            <div th:class="container">
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading" th:text="#{sources.hpbac.threshold.title}+' '+${transactionName}+' '+${locationName}">
+
+                    </div>
+
+                    <div class="panel-body">
+                        <!--<form role="form" action="#" th:action="@{/hpbacApplicationsions/update}">-->
+                        <form role="form" method="post" th:action="'/sources/hpbac/thresholds/update/'+${threshold.id}" th:object="${threshold}"><!--+${appDetails.id}"-->
+                            <div class="form-group">
+                                <label for="profileName" th:text="#{sources.hpbac.profile.name.label}"></label>
+                                <input id="profileName" name="profileName" type="text" class="form-control" th:value="${profileName}" th:readonly="true">
+                                </input>
+                            </div>
+                            <div class="form-group">
+                                <label for="transactionName" th:text="#{sources.hpbac.profile.name.label}"></label>
+                                <input id="transactionName" name="transactionName" type="text" class="form-control" th:value="${transactionName}" th:readonly="true">
+                                </input>
+                            </div>
+                            <div class="form-group">
+                                <label for="locationName" th:text="#{sources.hpbac.location.name.label}"></label>
+                                <input id="locationName" name="locationName" type="text" class="form-control" th:value="${locationName}" th:readonly="true">
+                                </input>
+                            </div>
+                            <div class="form-group">
+                                <label for="okThreshold" th:text="#{sources.hpbac.threshold.okthreshold.label}"></label>
+                                <input id="okThreshold" name="okThreshold" type="number" class="form-control" th:value="${threshold.okThreshold}">
+                                </input>
+                            </div>
+                            <div class="form-group">
+                                <label for="criticalThreshold" th:text="#{sources.hpbac.threshold.criticalthreshold.label}"></label>
+                                <input id="criticalThreshold" name="criticalThreshold" type="number" class="form-control" th:value="${threshold.criticalThreshold}">
+                                </input>
+                            </div>
+                            <div class="form-group">
+                                <label for="outlierThreshold" th:text="#{sources.hpbac.threshold.outlierthreshold.label}"></label>
+                                <input id="outlierThreshold" name="outlierThreshold" type="number" class="form-control" th:value="${threshold.outlierThreshold}">
+                                </input>
+                            </div>
+                            <button th:type="submit" class="btn btn-success" th:text="#{general.button.save}"></button>
+                            <button th:type="reset" class="btn btn-danger" th:text="#{general.button.cancel}"></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div th:include="mainTemplates/footer"></div>
+
+        </body>
+    </html>
