@@ -1,0 +1,25 @@
+
+     <div th:class="container">
+        <h2>HP BAC Muestras última Hora</h2>
+        <table class="table table-bordered">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>Fecha y Hora</th>
+                    <th>Nombre de Aplicaci&oacute;n</th>
+                    <th>Nombre de Transacci&oacute;n</th>
+                    <th>Nombre de Locaci&oacute;n</th>
+                    <th>Estado</th>
+                    <th>Cantidad de Errores</th>
+                    <th>C&oacute;digo de Disponibilidad</th>
+                    <th>Tiempo de Respuesta (s)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="bacSample : ${bacSamples}">
+                    <!--<td th:text="${#dates.createToday()}"></td>-->
+                    <td th:text="${bacSample.profileName}"></td>
+                    <td th:text="${bacSample.applicationDisplayName}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
