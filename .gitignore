@@ -9,7 +9,9 @@
 
 # User-specific stuff:
 .idea/*
+.DS_Store
 target/
+
 
 # CMake
 cmake-build-debug/
@@ -71,6 +73,10 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/git,maven,windows,intellij+iml
+
+/hubble.frontend.models/target/
+/hubble.frontend.repositories/target/
+/hubble.frontend.services/target/
 /hubble/backend/hubble.backend.providers/nbproject/
 /hubble/backend/hubble.backend.providers/target/
 /hubble.backend.providers/nbproject/
@@ -79,3 +85,4 @@ $RECYCLE.BIN/
 /hubble.frontend.models/target/
 /hubble.frontend.repositories/target/
 /hubble.frontend.services/target/
+
