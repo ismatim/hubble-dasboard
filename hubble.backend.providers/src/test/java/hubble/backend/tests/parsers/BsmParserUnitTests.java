@@ -15,7 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=BaseConfiguration.class)
-public class BsmParserUnitTests {
+public class BsmParserUnitTests{
     @Autowired
     private BsmParser bsmParser;
     
@@ -40,8 +40,6 @@ public class BsmParserUnitTests {
     }
 
     // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
     @Test
     public void BsmParserImpl_when_data_is_corrupted_fails() {
         assertNotNull(bsmParser);

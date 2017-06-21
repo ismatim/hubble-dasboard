@@ -1,12 +1,12 @@
 {
-  "lastRetrievedSequenceId": "string",
+  "lastRetrievedSequenceId": "12345",
   "hasMoreDataToFetch": false,
   "data": [
     {
       "applicationName": "fake-app-example",
-      "applicationId": "12345",
+      "applicationId": "1",
       "transactionName": "fake-transaction",
-      "transactionId": "12345",
+      "transactionId": "1",
       "locationName": "La Pampa",
       "locationId": "1",
       "timeStamp": 1301090400,
