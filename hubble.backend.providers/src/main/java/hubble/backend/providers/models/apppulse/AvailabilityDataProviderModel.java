@@ -1,8 +1,6 @@
 package hubble.backend.providers.models.apppulse;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
-import org.joda.time.DateTime;
 
 public class AvailabilityDataProviderModel implements AvailabilityData {
 

@@ -1,11 +1,10 @@
-package hubble.backend.tests.configurations;
+package hubble.backend.providers.tests;
 
 import hubble.backend.providers.models.apppulse.AvailabilityDataProviderModel;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
 import hubble.backend.providers.models.apppulse.ErrorProviderModel;
 import java.io.InputStream;
 import java.util.ArrayList;
-import org.joda.time.DateTime;
 
 public class AppPulseBaseUnitTests {
 

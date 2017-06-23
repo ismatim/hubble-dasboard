@@ -1,29 +1,41 @@
 package hubble.backend.storage.models;
 
+import java.util.Date;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.List;
 
+@Document
 public class AvailabilityStorage {
 
+    private String id;
     private String applicationName;
     private String applicationId;
     private String transactionName;
     private String transactionId;
     private String locationName;
     private String locationId;
-    private long timeStamp;
     private long responseTime;
+    private Date timeStamp;
     private String serverName;
     private String scriptName;
     private String performanceStatus;
     private String availabilityStatus;
-    private int poorThreshold;
-    private int criticalThreshold;
     private int availabilityFailIfAbove;
     private int numberOfErrors;
     private List<ErrorStorage> errors;
+    private String providerOrigin;
 
-    public AvailabilityStorage(){
+    public AvailabilityStorage() {
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getApplicationName() {
@@ -74,11 +86,11 @@ public class AvailabilityStorage {
         this.locationId = locationId;
     }
 
-    public long getTimeStamp() {
+    public Date getTimeStamp() {
         return timeStamp;
     }
 
-    public void setTimeStamp(long timeStamp) {
+    public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
     }
 
@@ -89,7 +101,6 @@ public class AvailabilityStorage {
     public void setResponseTime(long responseTime) {
         this.responseTime = responseTime;
     }
-
 
     public String getServerName() {
         return serverName;
@@ -115,88 +126,43 @@ public class AvailabilityStorage {
         this.performanceStatus = performanceStatus;
     }
 
-    /**
-     * @return the availabilityStatus
-     */
     public String getAvailabilityStatus() {
         return availabilityStatus;
     }
 
-    /**
-     * @param availabilityStatus the availabilityStatus to set
-     */
     public void setAvailabilityStatus(String availabilityStatus) {
         this.availabilityStatus = availabilityStatus;
     }
 
-    /**
-     * @return the poorThreshold
-     */
-    public int getPoorThreshold() {
-        return poorThreshold;
-    }
-
-    /**
-     * @param poorThreshold the poorThreshold to set
-     */
-    public void setPoorThreshold(int poorThreshold) {
-        this.poorThreshold = poorThreshold;
-    }
-
-    /**
-     * @return the criticalThreshold
-     */
-    public int getCriticalThreshold() {
-        return criticalThreshold;
-    }
-
-    /**
-     * @param criticalThreshold the criticalThreshold to set
-     */
-    public void setCriticalThreshold(int criticalThreshold) {
-        this.criticalThreshold = criticalThreshold;
-    }
-
-    /**
-     * @return the availabilityFailIfAbove
-     */
     public int getAvailabilityFailIfAbove() {
         return availabilityFailIfAbove;
     }
 
-    /**
-     * @param availabilityFailIfAbove the availabilityFailIfAbove to set
-     */
     public void setAvailabilityFailIfAbove(int availabilityFailIfAbove) {
         this.availabilityFailIfAbove = availabilityFailIfAbove;
     }
 
-    /**
-     * @return the numberOfErrors
-     */
     public int getNumberOfErrors() {
         return numberOfErrors;
     }
 
-    /**
-     * @param numberOfErrors the numberOfErrors to set
-     */
     public void setNumberOfErrors(int numberOfErrors) {
         this.numberOfErrors = numberOfErrors;
     }
 
-    /**
-     * @return the errors
-     */
     public List<ErrorStorage> getErrors() {
         return errors;
     }
 
-    /**
-     * @param errors the errors to set
-     */
     public void setErrors(List<ErrorStorage> errors) {
         this.errors = errors;
     }
 
+    public String getProviderOrigin() {
+        return providerOrigin;
+    }
+
+    public void setProviderOrigin(String providerOrigin) {
+        this.providerOrigin = providerOrigin;
+    }
 }
