@@ -1,5 +1,4 @@
 package hubble.backend.providers.transports.interfaces;
 
-public interface BsmTransport {
-    public String Get();
+public interface BsmTransport extends Transport {
 }

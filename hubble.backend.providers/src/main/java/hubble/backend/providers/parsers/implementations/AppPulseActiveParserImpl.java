@@ -4,27 +4,45 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
 import hubble.backend.providers.parsers.interfaces.AppPulseActiveParser;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
+import hubble.backend.providers.transports.interfaces.AppPulseActiveTransport;
 import hubble.backend.storage.models.AvailabilityStorage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import static org.apache.commons.lang.StringUtils.EMPTY;
+import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Component
 public class AppPulseActiveParserImpl implements AppPulseActiveParser {
 
+    private MapperConfiguration mapperConfifuration;
+    private AppPulseActiveTransport appPulseActiveTransport;
+    private List<AvailabilityStorage> availabilitiesStorage;
+
     @Autowired
-    MapperConfiguration mapperConfifuration;
+    public AppPulseActiveParserImpl(AppPulseActiveTransport appPulseActiveTransport,
+            MapperConfiguration mapperConfifuration) {
+        this.appPulseActiveTransport = appPulseActiveTransport;
+        this.mapperConfifuration = mapperConfifuration;
+    }
 
     @Override
-    public AvailabilityProviderModel parse(InputStream data) {
+    public AvailabilityProviderModel parse(JSONObject data) {
 
-        //Extraer datos desde json stream al modelo POJO local.
-        AvailabilityProviderModel appPulseActivities = this.extract(data);
+        if (data == null) {
+            return null;
+        }
+
+        byte[] dataBytes = data.toString().getBytes();
+        InputStream dataStream = new ByteArrayInputStream(dataBytes);
+
+        AvailabilityProviderModel appPulseActivities = this.extract(dataStream);
+
         return appPulseActivities;
-
     }
 
     public AvailabilityProviderModel extract(InputStream appPulseTransactions) {
@@ -35,6 +53,7 @@ public class AppPulseActiveParserImpl implements AppPulseActiveParser {
             records = objMapper.readValue(appPulseTransactions, AvailabilityProviderModel.class);
         } catch (IOException ex) {
             //TODO: Debe loguearse información.
+            return null;
         }
 
         return records;
@@ -42,11 +61,15 @@ public class AppPulseActiveParserImpl implements AppPulseActiveParser {
 
     public List<AvailabilityStorage> convert(AvailabilityProviderModel appPulseProv) {
 
+        if (appPulseProv == null) {
+            return null;
+        }
+
         List<AvailabilityStorage> availabilitiesRecordsToBeSaved = new ArrayList<>();
         appPulseProv.getData().forEach(item -> {
             AvailabilityStorage newAppPulseRecord = new AvailabilityStorage();
 
-            this.mapperConfifuration.mapper.map(item, newAppPulseRecord);
+            this.mapperConfifuration.getMapper().map(item, newAppPulseRecord);
             availabilitiesRecordsToBeSaved.add(newAppPulseRecord);
         });
 
@@ -59,10 +82,34 @@ public class AppPulseActiveParserImpl implements AppPulseActiveParser {
 
     @Override
     public void run() {
-        //TODO: Conectase y traer la información.
 
-        //TODO: Parsear datos. Convertir a AvailabilityStorage
+        //healthy check.
+        if (appPulseActiveTransport.getToken().equals(EMPTY)) {
+            return;
+        }
 
-        //TODO: Guardar.
+        boolean hasMoreData = true;
+        while (hasMoreData) {
+
+            JSONObject data = appPulseActiveTransport.getData();
+
+            if (data == null) {
+                break;
+            }
+
+            hasMoreData = appPulseActiveTransport.hasMoreData();
+
+            //Parsear datos. Convertir a AvailabilityStorage
+            AvailabilityProviderModel dataProviderModel = parse(data);
+            this.availabilitiesStorage = convert(dataProviderModel); //TODO: Debería moverse a MapperConfiguration.
+
+            //TODO: Guardar.
+        }
+
+    }
+
+    @Override
+    public List<AvailabilityStorage> getAvailabilitiesStorage() {
+        return availabilitiesStorage;
     }
 }

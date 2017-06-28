@@ -1,16 +1,11 @@
 package hubble.backend.providers.transports.interfaces;
 
+import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
-public class AppPulseActiveTransport implements Transport{
+@Component
+public interface AppPulseActiveTransport extends Transport<JSONObject>{
 
-    @Override
-    public void connect() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void get() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
+    public String getToken();
+    public boolean hasMoreData();
 }

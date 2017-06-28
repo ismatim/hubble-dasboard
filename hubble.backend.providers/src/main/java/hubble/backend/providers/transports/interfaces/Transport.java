@@ -1,6 +1,5 @@
 package hubble.backend.providers.transports.interfaces;
 
-public interface Transport {
-    void connect();
-    void get();
+public interface Transport<T> {
+    T getData();
 }

@@ -1,23 +1,29 @@
 package hubble.backend.providers.tests.parsers;
 
+import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
 import hubble.backend.providers.parsers.implementations.AppPulseActiveParserImpl;
 import hubble.backend.providers.tests.configurations.BaseConfiguration;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
+import hubble.backend.providers.transports.implementations.AppPulseActiveTransportImpl;
 import java.io.InputStream;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.Spy;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes = BaseConfiguration.class)
 public class AppPulseActiveParserExtractUnitTests extends AppPulseBaseUnitTests {
 
-    @Autowired
-    private AppPulseActiveParserImpl appPulseActiveParser;
+    @Spy
+    AppPulseActiveTransportImpl appPulseActiveTransport = new AppPulseActiveTransportImpl();
+    @Spy
+    MapperConfiguration mapperConfifuration = new MapperConfiguration();
+
+    private AppPulseActiveParserImpl appPulseActiveParser = new AppPulseActiveParserImpl(appPulseActiveTransport, mapperConfifuration);
 
     @Test
     public void AppPulseActiveParserImpl_should_be_instantiated() {
@@ -173,7 +179,6 @@ public class AppPulseActiveParserExtractUnitTests extends AppPulseBaseUnitTests 
     public void extract_get_json_should_return_ServerName() {
 
         InputStream appPulseDataRaw = LoadAvailabilityFakeDataUnique();
-
         //Act
         AvailabilityProviderModel appPulseActivities = appPulseActiveParser.extract(appPulseDataRaw);
 
