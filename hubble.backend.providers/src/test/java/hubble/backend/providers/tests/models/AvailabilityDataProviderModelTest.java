@@ -1,4 +1,4 @@
-package hubble.backend.tests.models;
+package hubble.backend.providers.tests.models;
 
 import hubble.backend.providers.models.apppulse.AvailabilityDataProviderModel;
 

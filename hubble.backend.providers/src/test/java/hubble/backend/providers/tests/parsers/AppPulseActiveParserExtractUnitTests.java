@@ -1,9 +1,9 @@
-package hubble.backend.tests.parsers;
+package hubble.backend.providers.tests.parsers;
 
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
 import hubble.backend.providers.parsers.implementations.AppPulseActiveParserImpl;
-import hubble.backend.tests.configurations.BaseConfiguration;
-import hubble.backend.tests.configurations.AppPulseBaseUnitTests;
+import hubble.backend.providers.tests.configurations.BaseConfiguration;
+import hubble.backend.providers.tests.AppPulseBaseUnitTests;
 import java.io.InputStream;
 import org.junit.Test;
 import static org.junit.Assert.*;

@@ -1,7 +1,7 @@
 package hubble.backend.providers.parsers.implementations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hubble.backend.providers.configurations.MapperConfiguration;
+import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
 import hubble.backend.providers.parsers.interfaces.AppPulseActiveParser;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
 import hubble.backend.storage.models.AvailabilityStorage;

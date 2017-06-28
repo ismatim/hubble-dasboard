@@ -1,7 +1,7 @@
-package hubble.backend.tests.configurations;
+package hubble.backend.providers.tests.configurations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hubble.backend.providers.configurations.MapperConfiguration;
+import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
 import hubble.backend.providers.models.apppulse.AvailabilityDataProviderModel;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
 import hubble.backend.providers.models.apppulse.ErrorProviderModel;
@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class MapperConfigurationUnitTest {
         assertNotNull(appPulseActivity);
     }
 
-        @Test
+    @Test
     public void MapperConfiguration_should_parse_json_data_list_to_apppulse_model_provider() throws IOException {
         //Assign
         String fakeFileName = "/apppulse/fake-data-list.json";
@@ -61,11 +62,10 @@ public class MapperConfigurationUnitTest {
     }
 
     @Test
-    public void MapperConfiguration_convert_apppulse_model_provider_to_storage() {
+    public void MapperConfiguration_convert_apppulse_model_provider_to_storage_should_get_timestamp_in_date_format() {
 
         //Assign
         AvailabilityStorage availabilityStorage = new AvailabilityStorage();
-
         String appName = "fake-applicationName";
         String errorMessage = "fake-error-message";
 
@@ -80,6 +80,7 @@ public class MapperConfigurationUnitTest {
         errors.add(error);
         transaction.setErrors(errors);
         transaction.setApplicationName(appName);
+        transaction.setTimeStamp(1498511311798L);
         data.add(transaction);
         appPulseActivity.setData(data);
 
@@ -88,5 +89,7 @@ public class MapperConfigurationUnitTest {
 
         //Assert
         assertNotNull(availabilityStorage);
+        assertTrue("Mon Jun 26 18:08:31 ART 2017".equals(availabilityStorage.getTimeStamp().toString()));
+        assertNotNull(availabilityStorage.getTimeStamp());
     }
 }

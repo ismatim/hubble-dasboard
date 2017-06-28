@@ -1,7 +1,7 @@
-package hubble.backend.tests.parsers;
+package hubble.backend.providers.tests.parsers;
 
 import hubble.backend.providers.parsers.interfaces.BsmParser;
-import hubble.backend.tests.configurations.BaseConfiguration;
+import hubble.backend.providers.tests.configurations.BaseConfiguration;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
