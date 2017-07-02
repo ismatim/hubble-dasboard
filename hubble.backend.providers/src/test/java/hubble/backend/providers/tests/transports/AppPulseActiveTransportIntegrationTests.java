@@ -46,4 +46,17 @@ public class AppPulseActiveTransportIntegrationTests {
         assertNotNull(data);
         assertTrue( data.length() > 0);
     }
+    @Test
+    public void AppPulseActiveTransport_should_get_same_json_stucture()  {
+         //Act
+        JSONObject data = appPulseActiveTransport.getData();
+
+        //Assert
+        assertNotNull(data);
+        assertTrue( data.length() > 0);
+        assertTrue(data.has("lastRetrievedSequenceId"));
+        assertTrue(data.has("hasMoreDataToFetch"));
+        assertTrue(data.has("data"));
+    }
+
 }

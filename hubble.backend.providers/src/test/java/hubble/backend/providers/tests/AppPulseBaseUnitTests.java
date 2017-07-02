@@ -5,6 +5,8 @@ import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
 import hubble.backend.providers.models.apppulse.ErrorProviderModel;
 import java.io.InputStream;
 import java.util.ArrayList;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class AppPulseBaseUnitTests {
 
@@ -15,14 +17,21 @@ public class AppPulseBaseUnitTests {
         return appPulseDataRaw;
     }
 
-    public InputStream LoadAvailabilityFakeDataList() {
+    public InputStream LoadAvailabilityFakeDataList1() {
 
-        String fakeFileName = "/apppulse/fake-data-list.json";
+        String fakeFileName = "/apppulse/fake-data-list-1.json";
         InputStream appPulseDataRaw = getClass().getResourceAsStream(fakeFileName);
         return appPulseDataRaw;
     }
 
-    public AvailabilityProviderModel getFakeAppPulseProviderModel() {
+    public InputStream LoadAvailabilityFakeDataList2() {
+
+        String fakeFileName = "/apppulse/fake-data-list-2.json";
+        InputStream appPulseDataRaw = getClass().getResourceAsStream(fakeFileName);
+        return appPulseDataRaw;
+    }
+
+    public static AvailabilityProviderModel getFakeAppPulseProviderModel() {
 
         //Error
         ErrorProviderModel error = new ErrorProviderModel();
@@ -57,5 +66,25 @@ public class AppPulseBaseUnitTests {
         model.setData(appPulseDataList);
 
         return model;
+    }
+
+    public static JSONObject getFakeAppPulseJson(){
+
+        JSONObject appPulseJson = new JSONObject();
+
+        JSONArray availabilitiesData = new JSONArray();
+        //TODO: mover a un archivo para levantar y pasarlo a string.
+        availabilitiesData.put(new JSONObject("{\"poorThreshold\":8000,\"locationName\":\"Washington, DC AT&T\","
+                + "\"responseTime\":36684,\"criticalThreshold\":12000,\"serverName\":null,"
+                + "\"transactionName\":\"Despliegue Pagina Publica\",\"availabilityFailIfAbove\":25000,"
+                + "\"transactionId\":\"f702ea77d5dabdb0aa984f9c3c865229\",\"numberOfErrors\":0,\"timeStamp\":1499026016,"
+                + "\"locationId\":\"16ec0037849cd0b4c4d538fe3d643621\",\"performanceStatus\":\"No Status\",\"scriptName\":\"Ingreso Clientes_HB\","
+                + "\"availabilityStatus\":\"Timeout\",\"applicationId\":\"e071193b8376e06554eb2344173cb66d\","
+                + "\"applicationName\":\"BancoRipley - HomeBanking\",\"errors\":null}"));
+        appPulseJson.put("lastRetrievedSequenceId", "1");
+        appPulseJson.put("hasMoreDataToFetch", false);
+        appPulseJson.put("data", availabilitiesData);
+
+        return appPulseJson;
     }
 }

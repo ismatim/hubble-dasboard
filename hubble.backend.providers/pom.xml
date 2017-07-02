@@ -37,14 +37,12 @@
             <version>1.7.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>1.7.25</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-core</artifactId>
@@ -105,7 +103,6 @@
             <artifactId>hubble.backend.core.utils</artifactId>
             <version>${project.version}</version>
         </dependency>
-
     </dependencies>
     <properties>
         <powermock.version>1.7.0</powermock.version>

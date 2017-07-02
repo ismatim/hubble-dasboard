@@ -6,10 +6,10 @@ import hubble.backend.providers.parsers.interfaces.AppPulseActiveParser;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
 import hubble.backend.providers.transports.interfaces.AppPulseActiveTransport;
 import hubble.backend.storage.models.AvailabilityStorage;
+import hubble.backend.storage.repositories.AvailabilityRepository;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import org.json.JSONObject;
@@ -22,12 +22,16 @@ public class AppPulseActiveParserImpl implements AppPulseActiveParser {
     private MapperConfiguration mapperConfifuration;
     private AppPulseActiveTransport appPulseActiveTransport;
     private List<AvailabilityStorage> availabilitiesStorage;
+    private AvailabilityRepository availabilityRepository;
 
     @Autowired
-    public AppPulseActiveParserImpl(AppPulseActiveTransport appPulseActiveTransport,
-            MapperConfiguration mapperConfifuration) {
+    public AppPulseActiveParserImpl(
+            AppPulseActiveTransport appPulseActiveTransport,
+            MapperConfiguration mapperConfifuration,
+            AvailabilityRepository availabilityRepository) {
         this.appPulseActiveTransport = appPulseActiveTransport;
         this.mapperConfifuration = mapperConfifuration;
+        this.availabilityRepository = availabilityRepository;
     }
 
     @Override
@@ -61,23 +65,14 @@ public class AppPulseActiveParserImpl implements AppPulseActiveParser {
 
     public List<AvailabilityStorage> convert(AvailabilityProviderModel appPulseProv) {
 
-        if (appPulseProv == null) {
-            return null;
-        }
-
-        List<AvailabilityStorage> availabilitiesRecordsToBeSaved = new ArrayList<>();
-        appPulseProv.getData().forEach(item -> {
-            AvailabilityStorage newAppPulseRecord = new AvailabilityStorage();
-
-            this.mapperConfifuration.getMapper().map(item, newAppPulseRecord);
-            availabilitiesRecordsToBeSaved.add(newAppPulseRecord);
-        });
-
-        return availabilitiesRecordsToBeSaved;
+        return this.mapperConfifuration.mapToAvailabilitiesStorage(appPulseProv);
     }
 
     public void save(List<AvailabilityStorage> appPulseRecords) {
-        //TODO: Save to mongodb.
+        appPulseRecords.stream().forEach((availabilityRecordToSave) -> {
+            if(!availabilityRepository.exist(availabilityRecordToSave))
+                availabilityRepository.save(availabilityRecordToSave);
+        });
     }
 
     @Override
@@ -93,7 +88,7 @@ public class AppPulseActiveParserImpl implements AppPulseActiveParser {
 
             JSONObject data = appPulseActiveTransport.getData();
 
-            if (data == null) {
+            if (data == null || data.length() == 0) {
                 break;
             }
 
@@ -101,9 +96,10 @@ public class AppPulseActiveParserImpl implements AppPulseActiveParser {
 
             //Parsear datos. Convertir a AvailabilityStorage
             AvailabilityProviderModel dataProviderModel = parse(data);
-            this.availabilitiesStorage = convert(dataProviderModel); //TODO: Debería moverse a MapperConfiguration.
+            this.availabilitiesStorage = convert(dataProviderModel);
 
-            //TODO: Guardar.
+            //Guardar.
+            availabilityRepository.save(availabilitiesStorage);
         }
 
     }

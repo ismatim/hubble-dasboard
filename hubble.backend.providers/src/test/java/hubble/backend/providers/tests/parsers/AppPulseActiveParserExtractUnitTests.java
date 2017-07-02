@@ -6,10 +6,12 @@ import hubble.backend.providers.parsers.implementations.AppPulseActiveParserImpl
 import hubble.backend.providers.tests.configurations.BaseConfiguration;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
 import hubble.backend.providers.transports.implementations.AppPulseActiveTransportImpl;
+import hubble.backend.storage.repositories.AvailabilityRepository;
 import java.io.InputStream;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.context.ContextConfiguration;
@@ -22,8 +24,13 @@ public class AppPulseActiveParserExtractUnitTests extends AppPulseBaseUnitTests 
     AppPulseActiveTransportImpl appPulseActiveTransport = new AppPulseActiveTransportImpl();
     @Spy
     MapperConfiguration mapperConfifuration = new MapperConfiguration();
+    @Mock
+    private AvailabilityRepository availabilityRepository;
 
-    private AppPulseActiveParserImpl appPulseActiveParser = new AppPulseActiveParserImpl(appPulseActiveTransport, mapperConfifuration);
+    //TODO: Mover a cada prueba unitaria.
+    private AppPulseActiveParserImpl appPulseActiveParser
+            = new AppPulseActiveParserImpl(appPulseActiveTransport, mapperConfifuration, availabilityRepository);
+
 
     @Test
     public void AppPulseActiveParserImpl_should_be_instantiated() {
@@ -35,6 +42,7 @@ public class AppPulseActiveParserExtractUnitTests extends AppPulseBaseUnitTests 
     @Test
     public void extract_get_json_should_return_applicationName() {
 
+        //Assign
         InputStream appPulseDataRaw = LoadAvailabilityFakeDataUnique();
 
         //Act
@@ -310,7 +318,7 @@ public class AppPulseActiveParserExtractUnitTests extends AppPulseBaseUnitTests 
     public void extract_when_data_has_corrects_record_extract_should_return_a_list_of_records() {
 
         //Assign
-        InputStream appPulseDataRaw = LoadAvailabilityFakeDataList();
+        InputStream appPulseDataRaw = LoadAvailabilityFakeDataList1();
 
         //Act
         AvailabilityProviderModel appPulseActivities = appPulseActiveParser.extract(appPulseDataRaw);

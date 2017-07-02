@@ -1,4 +1,4 @@
-package hubble.backend.core.utils;
+package hubble.backend.core.enums;
 
 public class Providers {
 

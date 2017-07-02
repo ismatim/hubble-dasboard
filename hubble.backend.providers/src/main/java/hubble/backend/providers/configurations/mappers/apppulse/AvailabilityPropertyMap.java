@@ -1,6 +1,6 @@
 package hubble.backend.providers.configurations.mappers.apppulse;
 
-import hubble.backend.core.utils.Providers;
+import hubble.backend.core.enums.Providers;
 import hubble.backend.providers.models.apppulse.AvailabilityDataProviderModel;
 import hubble.backend.storage.models.AvailabilityStorage;
 import java.util.Date;

@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 @ComponentScan(basePackages = {"hubble.backend.storage"})
 @PropertySource("classpath:config.properties")
 @EnableMongoRepositories(basePackages = "hubble.backend.storage")
-public class BaseConfiguration {
+public class StorageBaseConfiguration {
 
     @Autowired
     private Environment env;

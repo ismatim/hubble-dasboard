@@ -5,12 +5,10 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
 import hubble.backend.providers.transports.implementations.AppPulseActiveTransportImpl;
 import org.json.JSONObject;
-import org.junit.After;
 import static org.junit.Assert.assertNull;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.mockito.Mockito.*;
+import static org.mockito.Matchers.anyString;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -20,15 +18,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 public class AppPulseActiveTransportUnitTest extends AppPulseBaseUnitTests {
 
     private AppPulseActiveTransportImpl appPulseActiveTransport;
-
-    @Before
-    public void initMocks() {
-    }
-
-    @After
-    public void validate() {
-        validateMockitoUsage();
-    }
 
     @Test
     public void AppPulseActiveParser_when_it_runs_and_not_get_connection_should_not_be_parsed() {
