@@ -1,4 +1,4 @@
-package hubble.backend.providers.tests.configurations;
+package hubble.backend.providers.tests.configurations.mappers;
 
 import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
@@ -9,7 +9,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 public class MapperConfigurationUnitTests extends AppPulseBaseUnitTests {
 

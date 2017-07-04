@@ -10,23 +10,25 @@ import org.json.JSONObject;
 
 public class AppPulseBaseUnitTests {
 
+    String pathLocation = "/fakes/apppulse/";
+
     public InputStream LoadAvailabilityFakeDataUnique() {
 
-        String fakeFileName = "/apppulse/fake-data.json";
+        String fakeFileName = pathLocation + "fake-data.json";
         InputStream appPulseDataRaw = getClass().getResourceAsStream(fakeFileName);
         return appPulseDataRaw;
     }
 
     public InputStream LoadAvailabilityFakeDataList1() {
 
-        String fakeFileName = "/apppulse/fake-data-list-1.json";
+        String fakeFileName = pathLocation + "fake-data-list-1.json";
         InputStream appPulseDataRaw = getClass().getResourceAsStream(fakeFileName);
         return appPulseDataRaw;
     }
 
     public InputStream LoadAvailabilityFakeDataList2() {
 
-        String fakeFileName = "/apppulse/fake-data-list-2.json";
+        String fakeFileName = pathLocation + "fake-data-list-2.json";
         InputStream appPulseDataRaw = getClass().getResourceAsStream(fakeFileName);
         return appPulseDataRaw;
     }
@@ -68,7 +70,7 @@ public class AppPulseBaseUnitTests {
         return model;
     }
 
-    public static JSONObject getFakeAppPulseJson(){
+    public static JSONObject getFakeAppPulseJson() {
 
         JSONObject appPulseJson = new JSONObject();
 

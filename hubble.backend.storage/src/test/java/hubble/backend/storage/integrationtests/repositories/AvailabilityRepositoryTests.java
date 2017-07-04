@@ -3,7 +3,7 @@ package hubble.backend.storage.integrationtests.repositories;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.core.enums.Providers;
 import hubble.backend.storage.models.AvailabilityStorage;
-import hubble.backend.storage.configurations.StorageBaseConfiguration;
+import hubble.backend.storage.configurations.StorageComponentConfiguration;
 import hubble.backend.storage.repositories.AvailabilityRepository;
 import hubble.backend.storage.tests.AvailabilityHelper;
 import java.util.Calendar;
@@ -21,7 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = StorageBaseConfiguration.class)
+@ContextConfiguration(classes = StorageComponentConfiguration.class)
 public class AvailabilityRepositoryTests {
 
     @Autowired
