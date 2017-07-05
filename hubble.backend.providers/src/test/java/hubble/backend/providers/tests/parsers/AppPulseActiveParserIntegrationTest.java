@@ -11,11 +11,13 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = BaseConfiguration.class)
+@ActiveProfiles("test")
 public class AppPulseActiveParserIntegrationTest extends AppPulseBaseUnitTests {
 
     @Autowired
@@ -43,7 +45,7 @@ public class AppPulseActiveParserIntegrationTest extends AppPulseBaseUnitTests {
         assertTrue(availabilities.stream().allMatch((availabilityFromAppPulse) -> {
             return availabilityRepository.exist(availabilityFromAppPulse);
         }));
-        
+
         availabilities.stream().forEach((availabilityFromAppPulse) -> {
             availabilityRepository.delete(availabilityFromAppPulse);
         });

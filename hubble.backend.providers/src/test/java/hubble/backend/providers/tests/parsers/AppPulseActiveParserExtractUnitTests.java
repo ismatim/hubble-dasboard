@@ -1,5 +1,7 @@
 package hubble.backend.providers.tests.parsers;
 
+import hubble.backend.providers.configurations.environments.AppPulseTestEnvironment;
+import hubble.backend.providers.configurations.environments.ProviderEnvironment;
 import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
 import hubble.backend.providers.parsers.implementations.AppPulseActiveParserImpl;
@@ -14,14 +16,18 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 
+@ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes = BaseConfiguration.class)
 public class AppPulseActiveParserExtractUnitTests extends AppPulseBaseUnitTests {
 
     @Spy
-    AppPulseActiveTransportImpl appPulseActiveTransport = new AppPulseActiveTransportImpl();
+    ProviderEnvironment environment = new AppPulseTestEnvironment();
+    @Spy
+    AppPulseActiveTransportImpl appPulseActiveTransport = new AppPulseActiveTransportImpl(environment);
     @Spy
     MapperConfiguration mapperConfifuration = new MapperConfiguration();
     @Mock

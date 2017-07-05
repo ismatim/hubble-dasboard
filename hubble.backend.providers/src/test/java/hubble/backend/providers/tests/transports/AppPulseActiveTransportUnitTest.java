@@ -2,6 +2,7 @@ package hubble.backend.providers.tests.transports;
 
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import hubble.backend.providers.configurations.environments.ProviderEnvironment;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
 import hubble.backend.providers.transports.implementations.AppPulseActiveTransportImpl;
 import org.json.JSONObject;
@@ -12,18 +13,26 @@ import static org.mockito.Matchers.anyString;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.springframework.context.annotation.Profile;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("test")
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(Unirest.class)
 public class AppPulseActiveTransportUnitTest extends AppPulseBaseUnitTests {
 
+
+    private ProviderEnvironment environment;
     private AppPulseActiveTransportImpl appPulseActiveTransport;
 
+    @Profile("test")
     @Test
     public void AppPulseActiveParser_when_it_runs_and_not_get_connection_should_not_be_parsed() {
 
         //Assign
-        appPulseActiveTransport = new AppPulseActiveTransportImpl();
+        environment = PowerMockito.mock(ProviderEnvironment.class);
+        PowerMockito.doReturn("fake-url").when(environment).getUrl();
+        appPulseActiveTransport = new AppPulseActiveTransportImpl(environment);
         appPulseActiveTransport.setTokenValue("fake-token");
         PowerMockito.mockStatic(Unirest.class);
         PowerMockito.when(Unirest.post(anyString())).thenCallRealMethod();

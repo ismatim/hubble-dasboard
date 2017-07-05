@@ -1,5 +1,6 @@
 package hubble.backend.providers.tests.parsers;
 
+import hubble.backend.providers.configurations.environments.AppPulseTestEnvironment;
 import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
 import hubble.backend.providers.parsers.implementations.AppPulseActiveParserImpl;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
@@ -20,14 +21,18 @@ import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 public class AppPulseActiveParserUnitTest extends AppPulseBaseUnitTests {
 
     @Spy
+    private AppPulseTestEnvironment environment = new AppPulseTestEnvironment();
+    @Spy
     private MapperConfiguration mapperConfifuration;
     @Spy
-    private AppPulseActiveTransportImpl appPulseActiveTransport;
+    private AppPulseActiveTransportImpl appPulseActiveTransport = new AppPulseActiveTransportImpl(environment);
     @Mock
     private AvailabilityRepository appPulseActiveRepository;
 

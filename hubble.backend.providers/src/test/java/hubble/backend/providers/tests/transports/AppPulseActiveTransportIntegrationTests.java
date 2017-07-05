@@ -12,7 +12,9 @@ import static org.apache.commons.lang.StringUtils.EMPTY;
 import org.json.JSONObject;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import org.springframework.test.context.ActiveProfiles;
 
+@ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = BaseConfiguration.class)
 public class AppPulseActiveTransportIntegrationTests {
@@ -46,6 +48,7 @@ public class AppPulseActiveTransportIntegrationTests {
         assertNotNull(data);
         assertTrue( data.length() > 0);
     }
+
     @Test
     public void AppPulseActiveTransport_should_get_same_json_stucture()  {
          //Act

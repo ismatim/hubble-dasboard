@@ -4,23 +4,34 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import hubble.backend.providers.configurations.environments.ProviderEnvironment;
 import hubble.backend.providers.transports.interfaces.AppPulseActiveTransport;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
 
-    private static final String APP_PULSE_ACTIVE_URL="https://apppulse-active.saas.hpe.com/openapi/rest/v1/949143007/";
+    @Autowired
+    private ProviderEnvironment environment;
+
+    private String APP_PULSE_ACTIVE_URL;
     private String clientId;
     private String clientSecret;
     private String tokenValue = EMPTY;
+    private String lastRetrievedSequenceId = "0";
     private boolean hasMoreData = false;
+
+    public AppPulseActiveTransportImpl(ProviderEnvironment environment){
+        this.environment = environment;
+        this.APP_PULSE_ACTIVE_URL = environment.getUrl();
+    }
 
     @Override
     public String getToken() {
-        JSONObject authenticationJson = new JSONObject("{ 'clientSecret': 'd3e5ad40-4eca-48d0-9db0-a410f76b45e7', 'clientId': '949143007#C1' }");
+        JSONObject authenticationJson = new JSONObject("{ 'clientSecret': '"+ environment.getSecret()+"', 'clientId': '"+environment.getClient()+"' }");
 
         HttpResponse<JsonNode> jsonResponse = null;
 
@@ -60,6 +71,7 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
             appPulseActiveHttpResponse = Unirest.get(APP_PULSE_ACTIVE_URL + "getData")
                     .header("Content-Type", "application/json")
                     .header("Authorization", "Bearer " + this.getTokenValue())
+                    .queryString("lastRetrievedSequenceId", this.lastRetrievedSequenceId)
                     .asJson();
 
         } catch (UnirestException ex) {
@@ -73,6 +85,7 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
         JSONObject appPulseActiveJson = appPulseActiveHttpResponse.getBody().getObject();
 
         this.hasMoreData = appPulseActiveJson.getBoolean("hasMoreDataToFetch");
+        this.lastRetrievedSequenceId = appPulseActiveJson.getString("lastRetrievedSequenceId");
 
         return appPulseActiveJson ;
     }

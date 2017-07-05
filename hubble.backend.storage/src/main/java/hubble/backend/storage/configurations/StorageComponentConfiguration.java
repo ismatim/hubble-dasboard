@@ -5,36 +5,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.data.mongodb.core.MongoFactoryBean;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import hubble.backend.storage.configurations.environment.StorageEnvironment;
 
-//TODO: Agregar credenciales.
-
+//TODO: Agregar credenciales para Mongo.
 @Configuration
 @ComponentScan(basePackages = {"hubble.backend.storage"})
-@PropertySource("classpath:config.properties")
 @EnableMongoRepositories(basePackages = "hubble.backend.storage")
-public class StorageBaseConfiguration {
+public class StorageComponentConfiguration {
 
     @Autowired
-    private Environment env;
-
-    private String host = "localhost";
-    private String dbName = "hubble-test";
+    StorageEnvironment storageConf;
 
     @Bean
     public MongoFactoryBean mongo() {
         MongoFactoryBean mongo = new MongoFactoryBean();
-        mongo.setHost(this.host);
+         String host = storageConf.getHost();
+        mongo.setHost(host);
         return mongo;
     }
 
     @Bean
     public MongoOperations mongoTemplate(Mongo mongo) {
-        return new MongoTemplate(mongo, this.dbName);
+        String dbName = storageConf.getDbname();
+        return new MongoTemplate(mongo, dbName);
     }
 }
