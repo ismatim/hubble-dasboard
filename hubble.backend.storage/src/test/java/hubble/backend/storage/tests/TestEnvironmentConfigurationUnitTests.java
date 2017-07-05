@@ -5,8 +5,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.core.env.Environment;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -17,10 +15,6 @@ import hubble.backend.storage.configurations.environment.StorageEnvironment;
 @ContextConfiguration(classes = StorageComponentConfiguration.class)
 public class TestEnvironmentConfigurationUnitTests {
 
-    @Autowired
-    public Environment env;
-    @Autowired
-    public ConfigurableEnvironment confEnv;
     @Autowired
     public StorageEnvironment storageConfiguration;
 
