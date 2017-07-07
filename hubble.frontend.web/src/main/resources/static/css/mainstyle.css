@@ -1,46 +1,84 @@
+* {
+margin:0;
+padding:0;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    font-size: 1em;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	padding-top: 50px;
+	position: relative;
 }
 
-caption {
-    font-size: 18px;
+main {
+	flex: 1 0 auto;
 }
 
-/**
- * Table style from Top 10 CSS Table Designs
- * http://coding.smashingmagazine.com/2008/08/13/top-10-css-table-designs/
- */
+/* Footer */
 
-.box-table-a {
-    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
-    font-size: 12px;
-    margin: 45px;
-    width: 700px;
-    text-align: left;
-    border-collapse: collapse;
+footer{
+	background-color: #424558;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 35px;
+	text-align: center;
+	color: #CCC;
 }
 
-.box-table-a th {
-    font-size: 13px;
-    font-weight: normal;
-    text-align: left;
-    padding: 8px;
-    background: #b9c9fe;
-    border-top: 4px solid #aabcfe;
-    border-bottom: 1px solid #fff;
-    color: #039;
+footer p {
+	padding: 10.5px;
+	margin: 0px;
+	line-height: 100%;
 }
 
-.box-table-a td {
-    padding: 8px;
-    background: #e8edff;
-    border-bottom: 1px solid #fff;
-    color: #669;
-    border-top: 1px solid transparent;
+pre {
+	tab-size: 8;
 }
 
-.box-table-a tr:hover td {
-    background: #d0dafd;
-    color: #339;
+@media screen and (max-width: 768px) {
+	.side-collapse-container{
+		width:100%;
+		position:relative;
+		left:0;
+		transition:left .4s;
+	}
+	.side-collapse-container.out{
+		left:200px;
+	}
+	.side-collapse {
+		top:50px;
+		bottom:0;
+		left:0;
+		width:200px;
+		position:fixed;
+		overflow:hidden;
+		transition:width .4s;
+	}
+	.side-collapse.in {
+		width:0;
+	}
 }
+
+.col-centered{
+	float: none;
+	margin: 0 auto;
+}
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 15px;
+  width: auto;
+}
+.icon-bar .navbar-brand {
+  background: url(http://www.tsoftlatam.com/site/img/logo_home.png) 
+  center / contain no-repeat;
+  width: 200px;
+
+}
+
