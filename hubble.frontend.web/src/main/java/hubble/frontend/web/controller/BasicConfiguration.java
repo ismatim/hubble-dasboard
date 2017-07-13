@@ -5,13 +5,13 @@
  */
 package hubble.frontend.web.controller;
 
-import hubble.frontend.managers.fake_implementations.AppPulseApplicationManagerFakeImpl;
-import hubble.frontend.managers.fake_implementations.AppPulseAvailabilityManagerFakeImpl;
-import hubble.frontend.managers.interfaces.AppPulseApplicationManager;
-import hubble.frontend.managers.interfaces.AppPulseAvailabilityManager;
+import hubble.frontend.managers.fake_implementations.ApplicationManagerFakeImpl;
+import hubble.frontend.managers.fake_implementations.AvailabilityManagerFakeImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import hubble.frontend.managers.interfaces.ApplicationManager;
+import hubble.frontend.managers.interfaces.AvailabilityManager;
 
 /**
  *
@@ -22,12 +22,12 @@ import org.springframework.context.annotation.Configuration;
 public class BasicConfiguration {
  
     @Bean
-    public AppPulseApplicationManager appPulseApplicationManager() {
-        return new AppPulseApplicationManagerFakeImpl();
+    public ApplicationManager appPulseApplicationManager() {
+        return new ApplicationManagerFakeImpl();
     }
     @Bean
-    public AppPulseAvailabilityManager appPulseAvailabilityManager() {
-        return new AppPulseAvailabilityManagerFakeImpl();
+    public AvailabilityManager appPulseAvailabilityManager() {
+        return new AvailabilityManagerFakeImpl();
     }
     
 }
