@@ -1,7 +1,6 @@
 package hubble.backend.storage.integrationtests.repositories;
 
 import hubble.backend.core.utils.CalendarHelper;
-import hubble.backend.core.enums.Providers;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.configurations.StorageComponentConfiguration;
 import hubble.backend.storage.repositories.AvailabilityRepository;
@@ -10,9 +9,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import static org.apache.commons.lang.StringUtils.EMPTY;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,8 +20,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = StorageComponentConfiguration.class)
 @ActiveProfiles("test")
+@ContextConfiguration(classes = StorageComponentConfiguration.class)
 public class AvailabilityRepositoryTests {
 
     @Autowired
@@ -38,6 +36,17 @@ public class AvailabilityRepositoryTests {
     public void AvailabilityRepository_should_be_instantiated() {
 
         assertNotNull(availabilityRepository);
+    }
+
+    @Test
+    public void availability_repository_should_return_all_samples_by_its_id(){
+        List<AvailabilityStorage> samples = availabilityRepository.findAll();
+
+        for (AvailabilityStorage sample : samples){
+
+            assertNotNull(availabilityRepository.findOne(sample.getId()));
+        }
+
     }
 
     @Test
@@ -72,7 +81,7 @@ public class AvailabilityRepositoryTests {
         availabilityRepository.save(availabilityStorages);
 
         //Act
-        availabilityStorages = availabilityRepository.findAvailabilitiesByDurationMinutes(duration, Providers.PROVIDERS_NAME.APP_PULSE);
+        availabilityStorages = availabilityRepository.findAvailabilitiesByDurationMinutes(duration);
 
         //Assert
         assertNotNull(availabilityStorages.size() > 0);
@@ -161,4 +170,38 @@ public class AvailabilityRepositoryTests {
         assertFalse(result);
     }
 
+    @Test
+    public void availability_repository_should_return_samples_by_application_id(){
+        List<AvailabilityStorage> samples = availabilityRepository.findAvailabilitiesByApplicationId("1");
+
+        System.out.println(samples.size());
+        for (AvailabilityStorage sample : samples){
+
+            assertEquals("1",sample.getApplicationId());
+        }
+
+    }
+
+    @Test
+    public void availability_repository_should_return_last_10minutes_samples_by_application_id(){
+        List<AvailabilityStorage> samples = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10,"1");
+
+        System.out.println(samples.size());
+        for (AvailabilityStorage sample : samples){
+
+            assertEquals("1",sample.getApplicationId());
+        }
+
+    }
+
+    @Test
+    public void availability_repository_should_return_last_hour_samples_by_application_id(){
+        List<AvailabilityStorage> samples = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(60,"1");
+
+        System.out.println(samples.size());
+        for (AvailabilityStorage sample : samples){
+
+            assertEquals("1",sample.getApplicationId());
+        }
+    }
 }

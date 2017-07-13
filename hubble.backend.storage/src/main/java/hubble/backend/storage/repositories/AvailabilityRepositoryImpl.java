@@ -1,7 +1,6 @@
 package hubble.backend.storage.repositories;
 
 import hubble.backend.core.utils.CalendarHelper;
-import hubble.backend.core.enums.Providers;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.operations.AvailabilityOperations;
 import java.util.Calendar;
@@ -17,17 +16,17 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
     MongoOperations mongo;
 
     @Override
-    public List<AvailabilityStorage> findAvailabilitiesByDurationMinutes(int duration, Providers.PROVIDERS_NAME providerName) {
+    public List<AvailabilityStorage> findAvailabilitiesByDurationMinutes(int duration) {
 
         Calendar from = CalendarHelper.getNow();
         from.add(Calendar.MINUTE, -duration);
 
         Criteria tenMinutesMinusCriteria = Criteria.where("timeStamp").gte(from.getTime());
-        Criteria providerNameCritera = Criteria.where("providerOrigin").is(providerName.toString());
+//        Criteria providerNameCritera = Criteria.where("providerOrigin").is(providerName.toString());
 
         List<AvailabilityStorage> availabilities = mongo
                 .find(Query
-                        .query(tenMinutesMinusCriteria.andOperator(providerNameCritera)),
+                        .query(tenMinutesMinusCriteria),
                         AvailabilityStorage.class);
 
         return availabilities;
@@ -45,5 +44,34 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
                         AvailabilityStorage.class);
 
         return !availabilities.isEmpty();
+
+    }
+
+    @Override
+    public List<AvailabilityStorage> findAvailabilitiesByApplicationId(String applicationId) {
+        Criteria isApplicationId = Criteria.where("applicationId").is(applicationId);
+
+        List<AvailabilityStorage> availabilities = mongo
+                .find(Query
+                                .query(isApplicationId),
+                        AvailabilityStorage.class);
+
+        return availabilities;
+    }
+
+    @Override
+    public List<AvailabilityStorage> findAvailabilitiesByApplicationIdAndDurationMinutes(int duration, String applicationId) {
+        Calendar from = CalendarHelper.getNow();
+        from.add(Calendar.MINUTE, -duration);
+
+        Criteria isApplicationId = Criteria.where("applicationId").is(applicationId);
+        Criteria durationCriteria = Criteria.where("timeStamp").gte(from.getTime());
+
+        List<AvailabilityStorage> availabilities = mongo
+                .find(Query
+                       .query(durationCriteria.andOperator(isApplicationId)),
+                        AvailabilityStorage.class);
+
+        return availabilities;
     }
 }

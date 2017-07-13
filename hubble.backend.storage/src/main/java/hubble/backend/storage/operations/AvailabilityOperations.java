@@ -1,10 +1,13 @@
 package hubble.backend.storage.operations;
 
-import hubble.backend.core.enums.Providers;
 import hubble.backend.storage.models.AvailabilityStorage;
 import java.util.List;
 
 public interface AvailabilityOperations {
-  List<AvailabilityStorage> findAvailabilitiesByDurationMinutes(int duration, Providers.PROVIDERS_NAME providerName );
+  List<AvailabilityStorage> findAvailabilitiesByDurationMinutes(int duration);
   boolean exist(AvailabilityStorage availability);
+
+  List<AvailabilityStorage> findAvailabilitiesByApplicationId(String applicationId);
+
+  List<AvailabilityStorage> findAvailabilitiesByApplicationIdAndDurationMinutes(int duration, String applicationId);
 }

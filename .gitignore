@@ -10,6 +10,8 @@
 # User-specific stuff:
 .idea/*
 .DS_Store/
+target/
+*.iml
 
 #Netbeans
 target/
