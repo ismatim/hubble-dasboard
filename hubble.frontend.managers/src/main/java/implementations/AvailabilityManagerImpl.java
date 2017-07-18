@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package implementations;
 
 import com.google.gson.JsonObject;
@@ -11,12 +6,7 @@ import java.util.Date;
 import java.util.List;
 import hubble.frontend.managers.interfaces.AvailabilityManager;
 
-/**
- *
- * @author alexander.jimenez
- */
 public class AvailabilityManagerImpl implements AvailabilityManager {
-
 
     @Override
     public AvailabilityBusiness findSampleById(int id) {
@@ -57,5 +47,4 @@ public class AvailabilityManagerImpl implements AvailabilityManager {
     public List<AvailabilityBusiness> findLastHourSamplesByApplicationId(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

@@ -81,7 +81,7 @@ figure.snip1174.green {
   background-color: #1e8449;
 }
 figure.snip1174.navy {
-  background-color: #222f3d;
+  background: linear-gradient(90deg, #1e8449 50%, #962d22 50%);
 }
 figure.snip1174.red {
   background-color: #962d22;

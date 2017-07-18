@@ -82,3 +82,42 @@ pre {
 
 }
 
+.card .block-red{
+	background-color: #E60404 !important;
+}
+
+.card .block-green{
+	background-color: #3E9C1A !important;
+}
+.card .block-yellow{
+	background-color: #FFB800 !important;
+}
+.card .block-grey{
+	background-color: #BDBDBD !important;
+}
+.icon-center{
+	text-align: center;
+}
+
+.card-item-block{
+	border-color: black;
+	border-style: solid;
+	border-width: 3px;
+    border-radius: 3px;
+
+}
+
+.top-buffer { margin-top:20px; }
+
+.nopadding-right {
+   padding-right: 0 !important;
+}
+.nopadding-left {
+   padding-left: 0 !important;
+}
+
+.block-padding{   
+	padding-top: 20px;
+	padding-bottom: 20px;
+
+}
