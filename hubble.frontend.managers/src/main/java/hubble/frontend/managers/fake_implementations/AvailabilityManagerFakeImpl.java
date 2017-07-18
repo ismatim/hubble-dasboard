@@ -16,7 +16,6 @@ public class AvailabilityManagerFakeImpl implements AvailabilityManager {
 
     private List<AvailabilityBusiness> fakeSamples;
 
-
     @Override
     public AvailabilityBusiness findSampleById(int id) {
         fillFakeData();
@@ -40,13 +39,13 @@ public class AvailabilityManagerFakeImpl implements AvailabilityManager {
 
     @Override
     public List<AvailabilityBusiness> findLast10MinutesSamples() {
-        return findSamplesLimitedByTime(null,null
+        return findSamplesLimitedByTime(null, null
         );
     }
 
     @Override
     public List<AvailabilityBusiness> findLastHourSamples() {
-        return findSamplesLimitedByTime(null,null
+        return findSamplesLimitedByTime(null, null
         );
     }
 
@@ -59,7 +58,7 @@ public class AvailabilityManagerFakeImpl implements AvailabilityManager {
     @Override
     public List<AvailabilityBusiness> findLast10MinutesSamplesByApplicationId(int id) {
         fillFakeData();
-        fakeSamples = findSamplesLimitedByTime(null,null
+        fakeSamples = findSamplesLimitedByTime(null, null
         );
 
         fakeSamples = fakeSamples.stream()
@@ -72,7 +71,7 @@ public class AvailabilityManagerFakeImpl implements AvailabilityManager {
     @Override
     public List<AvailabilityBusiness> findLastHourSamplesByApplicationId(int id) {
         fillFakeData();
-        fakeSamples = findSamplesLimitedByTime(null,null
+        fakeSamples = findSamplesLimitedByTime(null, null
         );
 
         fakeSamples = fakeSamples.stream()

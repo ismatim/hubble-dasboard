@@ -1,22 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hubble.frontend.managers.models;
 
-/**
- *
- * @author alexander.jimenez
- */
 public class BusinessApplication {
-    
+
     private int id;
     private String businessApplicationName;
     private String businessApplicationDisplayName;
 
     public BusinessApplication() {
-        
+
     }
 
     public int getId() {
@@ -42,9 +33,4 @@ public class BusinessApplication {
     public void setBusinessApplicationDisplayName(String businessApplicationDisplayName) {
         this.businessApplicationDisplayName = businessApplicationDisplayName;
     }
-    
-    
-    
-       
 }
-

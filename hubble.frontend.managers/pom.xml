@@ -16,7 +16,7 @@
         <version>1.5.4.RELEASE</version>
         <relativePath/>
     </parent>
-    
+
     <dependencies>
         <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -70,11 +70,6 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>hubble.frontend.domain</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-    </dependencies>
+   </dependencies>
     <name>hubble.frontend.managers</name>
 </project>

@@ -9,8 +9,8 @@ import hubble.frontend.managers.interfaces.AvailabilityManager;
 @SpringBootApplication
 @ComponentScan(basePackages = {"hubble.frontend"})
 public class FrontendApplication {
-    
-	public static void main(String[] args) {
-		SpringApplication.run(FrontendApplication.class, args);
-	}
+
+    public static void main(String[] args) {
+        SpringApplication.run(FrontendApplication.class, args);
+    }
 }
