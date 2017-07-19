@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Profile("stage")
 @PropertySource("classpath:config/application.stage.properties")
-public class StoragStageEnvironment implements StorageEnvironment {
+public class StorageStageEnvironment implements StorageEnvironment {
 
      @Value("${app.host}")
     private String host;

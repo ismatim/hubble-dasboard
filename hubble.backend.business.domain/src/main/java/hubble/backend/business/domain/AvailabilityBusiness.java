@@ -18,11 +18,11 @@ public class AvailabilityBusiness {
     private int locationId;
     private String locationName;
     private String availabilityStatus;
+    private int availabilityThreshold;
     private List<ErrorBusiness> errors;
 
     public AvailabilityBusiness() {
     }
-
 
     public int getSampleId() {
         return sampleId;
@@ -145,6 +145,14 @@ public class AvailabilityBusiness {
         this.availabilityStatus = availabilityStatus;
     }
 
+    public int getAvailabilityThreshold() {
+        return availabilityThreshold;
+    }
+
+    public void setAvailabilityThreshold(int availabilityThreshold) {
+        this.availabilityThreshold = availabilityThreshold;
+    }
+    
     public List<ErrorBusiness> getErrors() {
         return errors;
     }
