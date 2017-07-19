@@ -2,8 +2,10 @@ package hubble.backend.business.services.tests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.models.ErrorStorage;
+import hubble.backend.storage.models.TransactionStorage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -110,7 +112,7 @@ public class AvailabilityHelper {
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
-        availabilityStorage.setAvailabilityStatus("Success");
+        availabilityStorage.setAvailabilityStatus("Error");
         availabilityStorage.setErrors(null);
         availabilityStorage.setId("h3y44h5sk58f8sdf48h");
         availabilityStorage.setLocationId("sdfksd637373ft");
@@ -173,5 +175,52 @@ public class AvailabilityHelper {
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis()-Calendar.MINUTE*7));
         
         return availabilityStorage;
+    }
+    
+    public ApplicationStorage mockApplicationStorage(){
+        ApplicationStorage applicationStorage = new ApplicationStorage();
+        
+        applicationStorage.setApplicationId("b566958ec4ff28028672780d15edcf56");
+        applicationStorage.setApplicationName("BancoRipley - HomeBanking");
+        applicationStorage.setAvailabilityThreshold(90);
+        applicationStorage.setCriticalThreshold(12000);
+        applicationStorage.setActive(true);
+        applicationStorage.setLocations(null);
+        applicationStorage.setOkThreshold(8000);
+        applicationStorage.setOutlierThreshold(45000);
+        applicationStorage.setTimeZoneId("1");
+        applicationStorage.setTransactions(mockTransactionStorage());
+        
+        return applicationStorage;
+    }
+    
+    public List<TransactionStorage> mockTransactionStorage(){
+        List<TransactionStorage> transactionStorageList = new ArrayList(); 
+        TransactionStorage transactionStorage1 = new TransactionStorage();
+        TransactionStorage transactionStorage2 = new TransactionStorage();
+        
+        transactionStorage1.setTransactionId("2eae220e082697be3a0646400e5b54fa");
+        transactionStorage1.setApplicationId("b566958ec4ff28028672780d15edcf56");
+        transactionStorage1.setTransactionName("Auntenticacion Biometrica");
+        transactionStorage1.setCriticalThreshold(12000);
+        transactionStorage1.setAssigned(true);
+        transactionStorage1.setTransactionType("script");
+        transactionStorage1.setScriptName("Auntenticacion_Biometrica_VBIO3301");
+        transactionStorage1.setOkThreshold(8000);
+        transactionStorage1.setCriticalThreshold(12000);
+        
+        transactionStorage2.setTransactionId("8f0e0ec4adb5f063b1afe794e03a0ab4");
+        transactionStorage2.setApplicationId("b566958ec4ff28028672780d15edcf56");
+        transactionStorage2.setTransactionName("Firma Biometrica");
+        transactionStorage2.setCriticalThreshold(12);
+        transactionStorage2.setAssigned(true);
+        transactionStorage2.setTransactionType("script");
+        transactionStorage2.setScriptName("Firma_Biometrica_VBIO3101");
+        transactionStorage2.setOkThreshold(8000);
+        transactionStorage2.setCriticalThreshold(12000);
+        
+        transactionStorageList.add(transactionStorage1);
+        transactionStorageList.add(transactionStorage2);
+        return transactionStorageList;
     }
 }

@@ -17,6 +17,7 @@ public class AvailabilityDto{
     private String scriptName;
     private String availabilityStatus;
     private int numberOfErrors;
+    private int availabilityThreshold;
     private List<ErrorDto> errors;
     private String providerOrigin;
 
@@ -117,6 +118,14 @@ public class AvailabilityDto{
 
     public void setNumberOfErrors(int numberOfErrors) {
         this.numberOfErrors = numberOfErrors;
+    }
+
+    public int getAvailabilityThreshold() {
+        return availabilityThreshold;
+    }
+
+    public void setAvailabilityThreshold(int availabilityThreshold) {
+        this.availabilityThreshold = availabilityThreshold;
     }
 
     public List<ErrorDto> getErrors() {

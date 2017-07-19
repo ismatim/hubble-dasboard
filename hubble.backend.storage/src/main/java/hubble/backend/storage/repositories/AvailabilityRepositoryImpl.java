@@ -53,7 +53,7 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
 
         List<AvailabilityStorage> availabilities = mongo
                 .find(Query
-                                .query(isApplicationId),
+                        .query(isApplicationId),
                         AvailabilityStorage.class);
 
         return availabilities;
@@ -74,4 +74,32 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
 
         return availabilities;
     }
+
+    @Override
+    public List<AvailabilityStorage> findAvailabilitiesByTransactionId(String transactionId) {
+        Criteria isTransactionId = Criteria.where("transactionId").is(transactionId);
+        
+        List<AvailabilityStorage> availabilities = mongo
+                .find(Query
+                        .query(isTransactionId),
+                        AvailabilityStorage.class);
+
+        return availabilities;
+    }
+
+    @Override
+    public List<AvailabilityStorage> findAvailabilitiesByTransactionIdAndDurationMinutes(int duration, String transactionId) {
+        Calendar from = CalendarHelper.getNow();
+        from.add(Calendar.MINUTE, -duration);
+
+        Criteria isTransactionId = Criteria.where("transactionId").is(transactionId);
+        Criteria durationCriteria = Criteria.where("timeStamp").gte(from.getTime());
+
+        List<AvailabilityStorage> availabilities = mongo
+                .find(Query
+                       .query(durationCriteria.andOperator(isTransactionId)),
+                        AvailabilityStorage.class);
+
+        return availabilities;
+    }  
 }
