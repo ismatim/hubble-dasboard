@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Profile("test")
 @PropertySource("classpath:config/apppulse.test.properties")
-public class AppPulseTestEnvironment implements ProviderEnvironment {
+public class AppPulseTestProviderEnvironmentImpl implements ProviderEnvironment {
 
     @Value("${app.url}")
     private String url;

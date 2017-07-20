@@ -10,6 +10,7 @@ public class AvailabilityPropertyMap extends PropertyMap<AvailabilityDataProvide
 
     @Override
     protected void configure() {
+
         Date timeStamp = new Date(source.getTimeStamp());
         String providerName = Providers.PROVIDERS_NAME.APP_PULSE.toString();
 

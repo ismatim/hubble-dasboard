@@ -1,6 +1,6 @@
 package hubble.backend.providers.tests.parsers;
 
-import hubble.backend.providers.configurations.environments.AppPulseTestEnvironment;
+import hubble.backend.providers.configurations.environments.AppPulseTestProviderEnvironmentImpl;
 import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
 import hubble.backend.providers.parsers.implementations.AppPulseActiveParserImpl;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
@@ -28,7 +28,7 @@ import org.springframework.test.context.ActiveProfiles;
 public class AppPulseActiveParserUnitTest extends AppPulseBaseUnitTests {
 
     @Spy
-    private AppPulseTestEnvironment environment = new AppPulseTestEnvironment();
+    private AppPulseTestProviderEnvironmentImpl environment = new AppPulseTestProviderEnvironmentImpl();
     @Spy
     private MapperConfiguration mapperConfifuration;
     @Spy

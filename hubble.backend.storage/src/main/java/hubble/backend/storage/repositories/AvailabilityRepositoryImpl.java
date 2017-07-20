@@ -22,7 +22,6 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
         from.add(Calendar.MINUTE, -duration);
 
         Criteria tenMinutesMinusCriteria = Criteria.where("timeStamp").gte(from.getTime());
-//        Criteria providerNameCritera = Criteria.where("providerOrigin").is(providerName.toString());
 
         List<AvailabilityStorage> availabilities = mongo
                 .find(Query

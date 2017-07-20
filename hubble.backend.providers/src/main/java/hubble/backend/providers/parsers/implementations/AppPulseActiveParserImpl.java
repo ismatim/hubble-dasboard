@@ -70,8 +70,9 @@ public class AppPulseActiveParserImpl implements AppPulseActiveParser {
 
     public void save(List<AvailabilityStorage> appPulseRecords) {
         appPulseRecords.stream().forEach((availabilityRecordToSave) -> {
-            if(!availabilityRepository.exist(availabilityRecordToSave))
+            if (!availabilityRepository.exist(availabilityRecordToSave)) {
                 availabilityRepository.save(availabilityRecordToSave);
+            }
         });
     }
 
@@ -83,6 +84,7 @@ public class AppPulseActiveParserImpl implements AppPulseActiveParser {
             return;
         }
 
+        appPulseActiveTransport.setLastRetrievedSequenceId(EMPTY); //Always from the beginning.
         boolean hasMoreData = true;
         while (hasMoreData) {
 
@@ -99,9 +101,13 @@ public class AppPulseActiveParserImpl implements AppPulseActiveParser {
             this.availabilitiesStorage = convert(dataProviderModel);
 
             //Guardar.
-            availabilityRepository.save(availabilitiesStorage);
-        }
+            availabilitiesStorage.stream().forEach(availabilityStorage ->{
 
+                if (!availabilityRepository.exist(availabilityStorage))
+                    availabilityRepository.save(availabilityStorage);
+            });
+
+        }
     }
 
     @Override
