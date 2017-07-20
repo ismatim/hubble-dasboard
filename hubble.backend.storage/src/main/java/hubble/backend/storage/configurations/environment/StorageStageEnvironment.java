@@ -1,11 +1,8 @@
 package hubble.backend.storage.configurations.environment;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.ConfigurableEnvironment;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,7 +10,7 @@ import org.springframework.stereotype.Component;
 @PropertySource("classpath:config/application.stage.properties")
 public class StorageStageEnvironment implements StorageEnvironment {
 
-     @Value("${app.host}")
+    @Value("${app.host}")
     private String host;
 
     @Value("${app.dbname}")
@@ -22,13 +19,7 @@ public class StorageStageEnvironment implements StorageEnvironment {
     @Value("${app.serverName}")
     private String serverName;
 
-    @Autowired
-    private ConfigurableEnvironment configurableEnvironment;
-
-    @Autowired
-    private Environment environment;
-
-
+    @Override
     public String getHost() {
         return host;
     }
@@ -37,6 +28,7 @@ public class StorageStageEnvironment implements StorageEnvironment {
         this.host = host;
     }
 
+    @Override
     public String getDbname() {
         return dbname;
     }
@@ -45,6 +37,7 @@ public class StorageStageEnvironment implements StorageEnvironment {
         this.dbname = dbname;
     }
 
+    @Override
     public String getServerName() {
         return serverName;
     }

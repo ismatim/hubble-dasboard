@@ -67,13 +67,11 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
 
         HttpResponse<JsonNode> appPulseActiveHttpResponse = null;
         try {
-
             appPulseActiveHttpResponse = Unirest.get(APP_PULSE_ACTIVE_URL + "getData")
                     .header("Content-Type", "application/json")
                     .header("Authorization", "Bearer " + this.getTokenValue())
                     .queryString("lastRetrievedSequenceId", this.lastRetrievedSequenceId)
                     .asJson();
-
         } catch (UnirestException ex) {
             //TODO: Log here.
         }
@@ -119,4 +117,8 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
         return hasMoreData;
     }
 
+    @Override
+    public void setLastRetrievedSequenceId(String lastRetrievedSequenceId) {
+        this.lastRetrievedSequenceId = lastRetrievedSequenceId;
+    }
 }

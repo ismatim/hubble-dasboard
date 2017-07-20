@@ -45,9 +45,9 @@ public class AppPulseActiveParserIntegrationTest extends AppPulseBaseUnitTests {
         assertTrue(availabilities.stream().allMatch((availabilityFromAppPulse) -> {
             return availabilityRepository.exist(availabilityFromAppPulse);
         }));
-
-        availabilities.stream().forEach((availabilityFromAppPulse) -> {
-            availabilityRepository.delete(availabilityFromAppPulse);
-        });
+//
+//        availabilities.stream().forEach((availabilityFromAppPulse) -> {
+//            availabilityRepository.delete(availabilityFromAppPulse);
+//        });
     }
 }

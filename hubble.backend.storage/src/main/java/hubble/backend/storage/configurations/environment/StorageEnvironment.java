@@ -7,5 +7,4 @@ public interface StorageEnvironment {
     public String getDbname();
 
     public String getServerName();
-
 }

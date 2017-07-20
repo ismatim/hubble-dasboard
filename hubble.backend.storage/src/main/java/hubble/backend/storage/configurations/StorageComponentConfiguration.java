@@ -10,8 +10,10 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import hubble.backend.storage.configurations.environment.StorageEnvironment;
+import org.springframework.context.annotation.Profile;
 
 //TODO: Agregar credenciales para Mongo.
+@Profile("test")
 @Configuration
 @ComponentScan(basePackages = {"hubble.backend.storage"})
 @EnableMongoRepositories(basePackages = "hubble.backend.storage")

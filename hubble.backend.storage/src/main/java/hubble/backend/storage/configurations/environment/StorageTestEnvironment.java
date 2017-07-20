@@ -28,7 +28,7 @@ public class StorageTestEnvironment implements StorageEnvironment {
     @Autowired
     private Environment environment;
 
-
+    @Override
     public String getHost() {
         return host;
     }
@@ -37,6 +37,7 @@ public class StorageTestEnvironment implements StorageEnvironment {
         this.host = host;
     }
 
+    @Override
     public String getDbname() {
         return dbname;
     }
@@ -45,6 +46,7 @@ public class StorageTestEnvironment implements StorageEnvironment {
         this.dbname = dbname;
     }
 
+    @Override
     public String getServerName() {
         return serverName;
     }
@@ -52,7 +54,4 @@ public class StorageTestEnvironment implements StorageEnvironment {
     public void setServerName(String serverName) {
         this.serverName = serverName;
     }
-
-
-
 }

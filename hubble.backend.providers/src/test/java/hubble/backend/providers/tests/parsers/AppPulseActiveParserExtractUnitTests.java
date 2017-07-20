@@ -1,6 +1,6 @@
 package hubble.backend.providers.tests.parsers;
 
-import hubble.backend.providers.configurations.environments.AppPulseTestEnvironment;
+import hubble.backend.providers.configurations.environments.AppPulseTestProviderEnvironmentImpl;
 import hubble.backend.providers.configurations.environments.ProviderEnvironment;
 import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
@@ -25,7 +25,7 @@ import org.springframework.test.context.ContextConfiguration;
 public class AppPulseActiveParserExtractUnitTests extends AppPulseBaseUnitTests {
 
     @Spy
-    ProviderEnvironment environment = new AppPulseTestEnvironment();
+    ProviderEnvironment environment = new AppPulseTestProviderEnvironmentImpl();
     @Spy
     AppPulseActiveTransportImpl appPulseActiveTransport = new AppPulseActiveTransportImpl(environment);
     @Spy
