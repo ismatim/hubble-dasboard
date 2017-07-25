@@ -1,8 +1,8 @@
 package hubble.backend.providers.tests.parsers;
 
 import hubble.backend.providers.parsers.interfaces.AppPulseActiveParser;
-import hubble.backend.providers.tests.configurations.BaseConfiguration;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
+import hubble.backend.providers.tests.configurations.BaseConfiguration;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.repositories.AvailabilityRepository;
 import java.util.List;
@@ -45,9 +45,9 @@ public class AppPulseActiveParserIntegrationTest extends AppPulseBaseUnitTests {
         assertTrue(availabilities.stream().allMatch((availabilityFromAppPulse) -> {
             return availabilityRepository.exist(availabilityFromAppPulse);
         }));
-//
-//        availabilities.stream().forEach((availabilityFromAppPulse) -> {
-//            availabilityRepository.delete(availabilityFromAppPulse);
-//        });
+
+        availabilities.stream().forEach((availabilityFromAppPulse) -> {
+            availabilityRepository.delete(availabilityFromAppPulse);
+        });
     }
 }

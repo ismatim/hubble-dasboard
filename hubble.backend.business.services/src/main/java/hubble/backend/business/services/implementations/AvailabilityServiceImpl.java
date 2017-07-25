@@ -1,25 +1,25 @@
 package hubble.backend.business.services.implementations;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
-import hubble.backend.business.services.models.AvailabilityDto;
-import hubble.backend.storage.models.AvailabilityStorage;
-import hubble.backend.storage.repositories.AvailabilityRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import java.util.List;
 import hubble.backend.business.services.interfaces.AvailabilityService;
 import hubble.backend.business.services.models.ApplicationAvailabilityAvgDto;
 import hubble.backend.business.services.models.ApplicationDto;
+import hubble.backend.business.services.models.AvailabilityDto;
 import hubble.backend.business.services.models.TransactionAvailabilityAvgDto;
 import hubble.backend.business.services.models.TransactionDto;
 import hubble.backend.core.enums.MonitoringFields;
 import hubble.backend.storage.models.ApplicationStorage;
+import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.models.TransactionStorage;
 import hubble.backend.storage.repositories.ApplicationRepository;
+import hubble.backend.storage.repositories.AvailabilityRepository;
 import hubble.backend.storage.repositories.TransactionRepository;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
-public class AvailabilityServiceImpl implements AvailabilityService{
+public class AvailabilityServiceImpl implements AvailabilityService {
 
     @Autowired
     AvailabilityRepository availabilityRepository;
@@ -29,10 +29,10 @@ public class AvailabilityServiceImpl implements AvailabilityService{
     TransactionRepository transactionRepository;
     @Autowired
     MapperConfiguration mapper;
-    
+
     @Override
     public TransactionDto findTransactionById(String transactionId) {
-        TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId); 
+        TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
         return mapper.mapToTransactionDto(transactionStorage);
     }
 
@@ -55,16 +55,16 @@ public class AvailabilityServiceImpl implements AvailabilityService{
 
     @Override
     public List<AvailabilityDto> findLast10MinutesAvailabilitiesByTransactionId(String transactionId) {
-         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(10, transactionId);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(10, transactionId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
     public List<AvailabilityDto> findLastHourAvailabilitiesByTransactionId(String transactionId) {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(60,transactionId);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(60, transactionId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
-    
+
     @Override
     public ApplicationDto findApplicationById(String applicationId) {
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
@@ -76,7 +76,7 @@ public class AvailabilityServiceImpl implements AvailabilityService{
         List<ApplicationStorage> applicationStorageList = applicationRepository.findAllApplications();
         return mapper.mapToApplicationDtoList(applicationStorageList);
     }
-    
+
     @Override
     public List<AvailabilityDto> findAllAvailabilities() {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAll();
@@ -123,12 +123,11 @@ public class AvailabilityServiceImpl implements AvailabilityService{
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10, applicationId);
         ApplicationAvailabilityAvgDto applicationAvailabilityAvg = mapper.mapToApplicationAvailabilityAvg(applicationStorage);
-        
-        if(availabilityStorageList.isEmpty()){//No data for last 10 minutes
+
+        if (availabilityStorageList.isEmpty()) {//No data for last 10 minutes
             applicationAvailabilityAvg.setAverage(-1);
             applicationAvailabilityAvg.setStatus(MonitoringFields.STATUS.NO_DATA);
-        }
-        else{
+        } else {
             applicationAvailabilityAvg.setAverage(calculateAverageAvailability(availabilityStorageList));
             applicationAvailabilityAvg.setStatus(calculateAvailabilityStatus(applicationAvailabilityAvg.getAvailabilityThreshold(), applicationAvailabilityAvg.getAverage()));
         }
@@ -136,16 +135,15 @@ public class AvailabilityServiceImpl implements AvailabilityService{
     }
 
     @Override
-    public ApplicationAvailabilityAvgDto calculateLastHourAverageApplicationAvailability(String applicationId){
+    public ApplicationAvailabilityAvgDto calculateLastHourAverageApplicationAvailability(String applicationId) {
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(60, applicationId);
         ApplicationAvailabilityAvgDto applicationAvailabilityAvg = mapper.mapToApplicationAvailabilityAvg(applicationStorage);
-        
-        if(availabilityStorageList.isEmpty()){//No data for last hour
+
+        if (availabilityStorageList.isEmpty()) {//No data for last hour
             applicationAvailabilityAvg.setAverage(-1);
             applicationAvailabilityAvg.setStatus(MonitoringFields.STATUS.NO_DATA);
-        }
-        else{
+        } else {
             applicationAvailabilityAvg.setAverage(calculateAverageAvailability(availabilityStorageList));
             applicationAvailabilityAvg.setStatus(calculateAvailabilityStatus(applicationAvailabilityAvg.getAvailabilityThreshold(), applicationAvailabilityAvg.getAverage()));
         }
@@ -159,12 +157,11 @@ public class AvailabilityServiceImpl implements AvailabilityService{
         TransactionAvailabilityAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(10, transactionId);
         ApplicationDto parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
-                
-        if(availabilityStorageList.isEmpty()){//No data for last 10 minutes
+
+        if (availabilityStorageList.isEmpty()) {//No data for last 10 minutes
             transactionAvailabilityAvg.setAverage(-1);
             transactionAvailabilityAvg.setStatus(MonitoringFields.STATUS.NO_DATA);
-        }
-        else{
+        } else {
             transactionAvailabilityAvg.setAverage(calculateAverageAvailability(availabilityStorageList));
             transactionAvailabilityAvg.setStatus(calculateAvailabilityStatus(parentApplicationDto.getAvailabilityThreshold(), transactionAvailabilityAvg.getAverage()));
         }
@@ -178,36 +175,38 @@ public class AvailabilityServiceImpl implements AvailabilityService{
         TransactionAvailabilityAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(60, transactionId);
         ApplicationDto parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
-                
-        if(availabilityStorageList.isEmpty()){//No data for last hour
+
+        if (availabilityStorageList.isEmpty()) {//No data for last hour
             transactionAvailabilityAvg.setAverage(-1);
             transactionAvailabilityAvg.setStatus(MonitoringFields.STATUS.NO_DATA);
-        }
-        else{
+        } else {
             transactionAvailabilityAvg.setAverage(calculateAverageAvailability(availabilityStorageList));
             transactionAvailabilityAvg.setStatus(calculateAvailabilityStatus(parentApplicationDto.getAvailabilityThreshold(), transactionAvailabilityAvg.getAverage()));
         }
         return transactionAvailabilityAvg;
     }
-    
-    private int calculateAverageAvailability(List<AvailabilityStorage> availabilityStorageList){
+
+    private int calculateAverageAvailability(List<AvailabilityStorage> availabilityStorageList) {
         int totalAvailabilities = availabilityStorageList.size();
-        if(totalAvailabilities==0)
+        if (totalAvailabilities == 0) {
             return -1;
-        int okAvailabilites = 0;
-        for(AvailabilityStorage availability : availabilityStorageList){
-            if(availability.getAvailabilityStatus().equals(MonitoringFields.STATUS.SUCCESS.toString()))
-                okAvailabilites++;    
         }
-        return 100*okAvailabilites/totalAvailabilities;
+        int okAvailabilites = 0;
+        for (AvailabilityStorage availability : availabilityStorageList) {
+            if (availability.getAvailabilityStatus().equals(MonitoringFields.STATUS.SUCCESS.toString())) {
+                okAvailabilites++;
+            }
+        }
+        return 100 * okAvailabilites / totalAvailabilities;
     }
 
-    private MonitoringFields.STATUS calculateAvailabilityStatus(int availabilityThreshold, int avgAvailability){
-        if(avgAvailability>=availabilityThreshold)
+    private MonitoringFields.STATUS calculateAvailabilityStatus(int availabilityThreshold, int avgAvailability) {
+        if (avgAvailability >= availabilityThreshold) {
             return MonitoringFields.STATUS.SUCCESS;
-        else if(avgAvailability>=0)
+        } else if (avgAvailability >= 0) {
             return MonitoringFields.STATUS.CRITICAL;
-        else 
+        } else {
             return MonitoringFields.STATUS.NO_DATA;
+        }
     }
 }

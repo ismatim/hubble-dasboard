@@ -1,6 +1,6 @@
 #!/bin/bash
 # Assure that pom.xml has the plugin already set up.
-# This line execute the main method from TassksRunnerApplication class.
+# This line execute the main method from TasksRunnerApplication class.
 
 printf "\nPackaging Tasks Runner Application\n"
 mvn package

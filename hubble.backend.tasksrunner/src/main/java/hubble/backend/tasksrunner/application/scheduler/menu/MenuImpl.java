@@ -38,7 +38,14 @@ public class MenuImpl implements Menu {
                 + "  4) Exit\n "
         );
 
-        int selection = input.nextInt();
+        String userdata = input.next();
+        int selection;
+        try {
+            selection = Integer.parseInt(userdata);
+        } catch (NumberFormatException nfe) {
+            selection = Integer.MIN_VALUE;
+        }
+
         input.nextLine();
 
         switch (selection) {
@@ -75,7 +82,6 @@ public class MenuImpl implements Menu {
     }
 
     public void run() {
-        // and start it off
         scheduler.start();
     }
 }
