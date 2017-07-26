@@ -2,10 +2,11 @@ package hubble.backend.tasksrunner.application.scheduler;
 
 import hubble.backend.tasksrunner.application.scheduler.menu.Menu;
 import hubble.backend.tasksrunner.application.scheduler.menu.MenuImpl;
-import hubble.backend.tasksrunner.interfaces.Task;
+import hubble.backend.tasksrunner.tasks.Task;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static org.apache.commons.lang.StringUtils.EMPTY;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.impl.StdSchedulerFactory;
@@ -14,7 +15,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class SchedulerMediator implements SchedulerUserCommands, SchedulerTasksActions {
 
     Menu menu;
-    Scheduler scheduler;
+    public Scheduler scheduler;
     ConfigurableApplicationContext context;
 
     public SchedulerMediator(ConfigurableApplicationContext context, Scheduler scheduler, Menu menu) {
@@ -84,7 +85,19 @@ public class SchedulerMediator implements SchedulerUserCommands, SchedulerTasksA
     }
 
     @Override
-    public void addTask(Task taskRunner) {
+    public void addTask(Task taskRunner) throws Exception {
+
+        if ((taskRunner.getIndentityGroupName() == null || taskRunner.getIndentityGroupName().equals(EMPTY))
+                || (taskRunner.getIndentityGroupName() == null || taskRunner.getIndentityGroupName().equals(EMPTY))) {
+            int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();
+            throw new Exception("Identity and Group Name are empty. SchedulerMediator.addTask. Line Number:" + lineNumber);
+        }
+
+        if (taskRunner.getIntervalSeconds() == 0) {
+            int lineNumber = Thread.currentThread().getStackTrace()[2].getLineNumber();
+            throw new Exception("Interval time in seconds is 0. SchedulerMediator.addTask. Line Number:" + lineNumber);
+        }
+
         try {
             this.scheduler.scheduleJob(taskRunner.getJobDetail(), taskRunner.getTrigger());
         } catch (SchedulerException ex) {

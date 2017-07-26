@@ -1,7 +1,11 @@
-package hubble.backend.tasksrunner.tests.providerjob;
+package hubble.backend.tasksrunner.tests.scheduler;
 
+import hubble.backend.providers.parsers.interfaces.AppPulseActiveParser;
 import hubble.backend.tasksrunner.application.scheduler.SchedulerMediator;
-import hubble.backend.tasksrunner.implementations.AppPulseTaskImpl;
+import hubble.backend.tasksrunner.jobs.AppPulseParserJob;
+import hubble.backend.tasksrunner.jobs.ParserJob;
+import hubble.backend.tasksrunner.tasks.AppPulseTaskImpl;
+import hubble.backend.tasksrunner.tasks.Task;
 import hubble.backend.tasksrunner.tests.configurations.TasksRunnerTestConfiguration;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,10 +15,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
+@TestExecutionListeners(listeners = {DependencyInjectionTestExecutionListener.class})
 @ContextConfiguration(classes = TasksRunnerTestConfiguration.class)
 public class AppPulseTaskIntegrationTests {
 
@@ -25,13 +32,18 @@ public class AppPulseTaskIntegrationTests {
     }
 
     @Test
-    public void AppPulseTask_schedule_apppulse_provider_job() throws SchedulerException, Exception {
+    public void SchedulerMediator_should_schedule_apppulse_job() throws SchedulerException, Exception {
 
         //Assign
+        AppPulseActiveParser appPulseParser = appContext.getBean(AppPulseActiveParser.class);
         SchedulerMediator schedule = new SchedulerMediator((ConfigurableApplicationContext) appContext);
-        AppPulseTaskImpl task = new AppPulseTaskImpl();
 
-        schedule.addTask(task);
+        ParserJob appPulseJob = new AppPulseParserJob(appPulseParser);
+        Task appPulseTask = new AppPulseTaskImpl(appPulseJob);
+        appPulseTask.setIndentityGroupName("AppPulse Active Provider Job");
+        appPulseTask.setIndentityName("AppPulse");
+        appPulseTask.setIntervalSeconds(1);
+        schedule.addTask(appPulseTask);
         //Act
         schedule.start();
         Thread.sleep(4000);
@@ -39,4 +51,5 @@ public class AppPulseTaskIntegrationTests {
         //Assert
         schedule.shutdown();
     }
+
 }
