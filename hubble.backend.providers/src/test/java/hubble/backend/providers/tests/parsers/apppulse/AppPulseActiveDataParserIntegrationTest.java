@@ -1,6 +1,6 @@
-package hubble.backend.providers.tests.parsers;
+package hubble.backend.providers.tests.parsers.apppulse;
 
-import hubble.backend.providers.parsers.interfaces.AppPulseActiveParser;
+import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveDataParser;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
 import hubble.backend.providers.tests.configurations.BaseConfiguration;
 import hubble.backend.storage.models.AvailabilityStorage;
@@ -18,10 +18,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = BaseConfiguration.class)
 @ActiveProfiles("test")
-public class AppPulseActiveParserIntegrationTest extends AppPulseBaseUnitTests {
+public class AppPulseActiveDataParserIntegrationTest extends AppPulseBaseUnitTests {
 
     @Autowired
-    private AppPulseActiveParser appPulseActiveParser;
+    private AppPulseActiveDataParser appPulseActiveParser;
     @Autowired
     private AvailabilityRepository availabilityRepository;
 
@@ -50,4 +50,5 @@ public class AppPulseActiveParserIntegrationTest extends AppPulseBaseUnitTests {
             availabilityRepository.delete(availabilityFromAppPulse);
         });
     }
+
 }

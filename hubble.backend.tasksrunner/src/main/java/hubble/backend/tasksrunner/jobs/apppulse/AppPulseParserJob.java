@@ -1,7 +1,8 @@
-package hubble.backend.tasksrunner.jobs;
+package hubble.backend.tasksrunner.jobs.apppulse;
 
-import hubble.backend.providers.parsers.interfaces.AppPulseActiveParser;
 import hubble.backend.providers.parsers.interfaces.Parser;
+import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveDataParser;
+import hubble.backend.tasksrunner.jobs.ParserJob;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.quartz.JobExecutionContext;
@@ -34,7 +35,7 @@ public class AppPulseParserJob implements ParserJob {
         }
 
         ConfigurableApplicationContext taskRunneAppContext = (ConfigurableApplicationContext) schedulerContext.get("context");
-        appPulseActiveParser = taskRunneAppContext.getBean(AppPulseActiveParser.class);
+        appPulseActiveParser = taskRunneAppContext.getBean(AppPulseActiveDataParser.class);
 
         try {
             appPulseActiveParser.run();

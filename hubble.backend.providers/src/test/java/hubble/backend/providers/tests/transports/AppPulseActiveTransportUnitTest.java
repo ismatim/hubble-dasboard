@@ -4,7 +4,7 @@ import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import hubble.backend.providers.configurations.environments.ProviderEnvironment;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
-import hubble.backend.providers.transports.implementations.AppPulseActiveTransportImpl;
+import hubble.backend.providers.transports.implementations.apppulse.AppPulseActiveTransportImpl;
 import org.json.JSONObject;
 import static org.junit.Assert.assertNull;
 import org.junit.Test;

@@ -14,13 +14,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ActiveProfiles("test")
 @ContextConfiguration(classes = StorageComponentConfiguration.class)
 public class ApplicationRepositoryTests {
-    
+
     @Autowired
     ApplicationRepository applicationRepository;
-    
-    @Test
-    public void application_repository_should_be_instantiated(){
-        Assert.assertNotNull(applicationRepository);
-    }    
-}
 
+    @Test
+    public void applicationRepository_should_be_instantiated() {
+        Assert.assertNotNull(applicationRepository);
+    }
+}

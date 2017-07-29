@@ -4,7 +4,10 @@ import hubble.backend.storage.models.ApplicationStorage;
 import java.util.List;
 
 public interface ApplicationOperations {
-        
+
     public List<ApplicationStorage> findAllApplications();
-    public ApplicationStorage findApplicationById(String applicationId); 
+
+    public ApplicationStorage findApplicationById(String applicationId);
+
+    boolean exist(ApplicationStorage application);
 }

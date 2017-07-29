@@ -1,6 +1,6 @@
-package hubble.backend.providers.parsers.implementations;
+package hubble.backend.providers.parsers.implementations.bsm;
 
-import hubble.backend.providers.parsers.interfaces.BsmParser;
+import hubble.backend.providers.parsers.interfaces.bsm.BsmParser;
 import org.springframework.stereotype.Component;
 
 @Component

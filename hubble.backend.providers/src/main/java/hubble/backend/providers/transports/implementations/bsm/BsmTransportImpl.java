@@ -1,4 +1,4 @@
-package hubble.backend.providers.transports.implementations;
+package hubble.backend.providers.transports.implementations.bsm;
 import hubble.backend.providers.transports.interfaces.BsmTransport;
 
 public class BsmTransportImpl<String> implements BsmTransport {

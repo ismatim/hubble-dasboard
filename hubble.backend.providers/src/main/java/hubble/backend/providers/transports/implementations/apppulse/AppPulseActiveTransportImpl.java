@@ -1,4 +1,4 @@
-package hubble.backend.providers.transports.implementations;
+package hubble.backend.providers.transports.implementations.apppulse;
 
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
@@ -24,14 +24,14 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
     private String lastRetrievedSequenceId = "0";
     private boolean hasMoreData = false;
 
-    public AppPulseActiveTransportImpl(ProviderEnvironment environment){
+    public AppPulseActiveTransportImpl(ProviderEnvironment environment) {
         this.environment = environment;
         this.APP_PULSE_ACTIVE_URL = environment.getUrl();
     }
 
     @Override
     public String getToken() {
-        JSONObject authenticationJson = new JSONObject("{ 'clientSecret': '"+ environment.getSecret()+"', 'clientId': '"+environment.getClient()+"' }");
+        JSONObject authenticationJson = new JSONObject("{ 'clientSecret': '" + environment.getSecret() + "', 'clientId': '" + environment.getClient() + "' }");
 
         HttpResponse<JsonNode> jsonResponse = null;
 
@@ -44,13 +44,15 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
             //TODO: Log here
         }
 
-        if (jsonResponse == null || jsonResponse.getBody() == null)
+        if (jsonResponse == null || jsonResponse.getBody() == null) {
             return null;
+        }
 
-        JSONObject response =  jsonResponse.getBody().getObject();
+        JSONObject response = jsonResponse.getBody().getObject();
 
-        if (!response.has("token"))
+        if (!response.has("token")) {
             return this.tokenValue = EMPTY;
+        }
 
         this.tokenValue = jsonResponse.getBody().getObject().get("token").toString();
 
@@ -61,7 +63,7 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
     @Override
     public JSONObject getData() {
 
-        if (getTokenValue().equals(EMPTY)){
+        if (getTokenValue().equals(EMPTY)) {
             return null;
         }
 
@@ -85,7 +87,7 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
         this.hasMoreData = appPulseActiveJson.getBoolean("hasMoreDataToFetch");
         this.lastRetrievedSequenceId = appPulseActiveJson.getString("lastRetrievedSequenceId");
 
-        return appPulseActiveJson ;
+        return appPulseActiveJson;
     }
 
     public String getClientId() {
@@ -120,5 +122,31 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
     @Override
     public void setLastRetrievedSequenceId(String lastRetrievedSequenceId) {
         this.lastRetrievedSequenceId = lastRetrievedSequenceId;
+    }
+
+    @Override
+    public JSONObject getApplications() {
+
+        if (getTokenValue().equals(EMPTY)) {
+            return null;
+        }
+
+        HttpResponse<JsonNode> appPulseActiveHttpResponse = null;
+        try {
+            appPulseActiveHttpResponse = Unirest.get(APP_PULSE_ACTIVE_URL + "getConfiguration")
+                    .header("Content-Type", "application/json")
+                    .header("Authorization", "Bearer " + this.getTokenValue())
+                    .asJson();
+        } catch (UnirestException ex) {
+            //TODO: Log here.
+        }
+
+        if (appPulseActiveHttpResponse == null || appPulseActiveHttpResponse.getBody() == null) {
+            return null;
+        }
+
+        JSONObject appPulseActiveJson = appPulseActiveHttpResponse.getBody().getObject();
+
+        return appPulseActiveJson;
     }
 }

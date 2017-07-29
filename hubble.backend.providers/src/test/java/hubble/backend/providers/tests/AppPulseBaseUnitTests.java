@@ -89,4 +89,12 @@ public class AppPulseBaseUnitTests {
 
         return appPulseJson;
     }
+
+    //Get Configuration
+    public InputStream LoadConfigurationFakeUnique() {
+
+        String fakeFileName = pathLocation + "fake-configuration-list.json";
+        InputStream appPulseConfigurationRaw = getClass().getResourceAsStream(fakeFileName);
+        return appPulseConfigurationRaw;
+    }
 }

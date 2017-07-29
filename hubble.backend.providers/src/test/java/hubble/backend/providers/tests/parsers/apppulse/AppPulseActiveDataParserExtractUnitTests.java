@@ -1,13 +1,13 @@
-package hubble.backend.providers.tests.parsers;
+package hubble.backend.providers.tests.parsers.apppulse;
 
 import hubble.backend.providers.configurations.environments.AppPulseTestProviderEnvironmentImpl;
 import hubble.backend.providers.configurations.environments.ProviderEnvironment;
 import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
-import hubble.backend.providers.parsers.implementations.AppPulseActiveParserImpl;
+import hubble.backend.providers.parsers.implementations.apppulse.AppPulseActiveDataParserImpl;
 import hubble.backend.providers.tests.configurations.BaseConfiguration;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
-import hubble.backend.providers.transports.implementations.AppPulseActiveTransportImpl;
+import hubble.backend.providers.transports.implementations.apppulse.AppPulseActiveTransportImpl;
 import hubble.backend.storage.repositories.AvailabilityRepository;
 import java.io.InputStream;
 import org.junit.Test;
@@ -22,7 +22,7 @@ import org.springframework.test.context.ContextConfiguration;
 @ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes = BaseConfiguration.class)
-public class AppPulseActiveParserExtractUnitTests extends AppPulseBaseUnitTests {
+public class AppPulseActiveDataParserExtractUnitTests extends AppPulseBaseUnitTests {
 
     @Spy
     ProviderEnvironment environment = new AppPulseTestProviderEnvironmentImpl();
@@ -34,8 +34,8 @@ public class AppPulseActiveParserExtractUnitTests extends AppPulseBaseUnitTests 
     private AvailabilityRepository availabilityRepository;
 
     //TODO: Mover a cada prueba unitaria.
-    private AppPulseActiveParserImpl appPulseActiveParser
-            = new AppPulseActiveParserImpl(appPulseActiveTransport, mapperConfifuration, availabilityRepository);
+    private AppPulseActiveDataParserImpl appPulseActiveParser
+            = new AppPulseActiveDataParserImpl(appPulseActiveTransport, mapperConfifuration, availabilityRepository);
 
 
     @Test
