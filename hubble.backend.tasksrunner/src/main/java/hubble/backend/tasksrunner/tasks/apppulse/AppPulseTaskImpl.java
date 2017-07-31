@@ -1,6 +1,7 @@
-package hubble.backend.tasksrunner.tasks;
+package hubble.backend.tasksrunner.tasks.apppulse;
 
 import hubble.backend.tasksrunner.jobs.ParserJob;
+import hubble.backend.tasksrunner.tasks.ParserTask;
 import static org.quartz.JobBuilder.newJob;
 import org.quartz.JobDetail;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;

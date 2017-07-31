@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = BaseConfiguration.class)
-public class AppPulseActivePropertiesEnvironmentUnitTests {
+public class ProviderEnvironmentTest {
 
     @Autowired
     private ProviderEnvironment environment;

@@ -1,11 +1,11 @@
 package hubble.backend.tasksrunner.application;
 
-import hubble.backend.providers.parsers.interfaces.AppPulseActiveParser;
+import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveDataParser;
 import hubble.backend.tasksrunner.application.scheduler.SchedulerMediator;
 import hubble.backend.tasksrunner.configurations.TasksRunnerConfiguration;
-import hubble.backend.tasksrunner.jobs.AppPulseParserJob;
+import hubble.backend.tasksrunner.jobs.apppulse.AppPulseParserJob;
 import hubble.backend.tasksrunner.jobs.ParserJob;
-import hubble.backend.tasksrunner.tasks.AppPulseTaskImpl;
+import hubble.backend.tasksrunner.tasks.apppulse.AppPulseTaskImpl;
 import hubble.backend.tasksrunner.tasks.ParserTask;
 import org.quartz.SchedulerException;
 import org.springframework.boot.Banner;
@@ -27,7 +27,7 @@ public class TasksRunnerApplication {
 
         scheduler = new SchedulerMediator(context);
 
-        AppPulseActiveParser appPulseparser = context.getBean(AppPulseActiveParser.class);
+        AppPulseActiveDataParser appPulseparser = context.getBean(AppPulseActiveDataParser.class);
         ParserJob appPulseJob = new AppPulseParserJob(appPulseparser);
         ParserTask appPulseTask = new AppPulseTaskImpl(appPulseJob);
         appPulseTask.setIndentityGroupName("AppPulse Active Provider Job");

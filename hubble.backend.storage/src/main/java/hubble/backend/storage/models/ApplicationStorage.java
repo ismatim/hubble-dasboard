@@ -5,7 +5,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class ApplicationStorage {
-    
+
+    private String id;
     private String applicationId;
     private String applicationName;
     private boolean active;
@@ -16,9 +17,12 @@ public class ApplicationStorage {
     private int availabilityThreshold;
     private List<TransactionStorage> transactions;
     private List<LocationStorage> locations;
+    private String providerOrigin;
+    private int applicationConfigurationVersion;
 
-    public ApplicationStorage() {        
+    public ApplicationStorage() {
     }
+
     public String getApplicationId() {
         return applicationId;
     }
@@ -98,5 +102,28 @@ public class ApplicationStorage {
     public void setLocations(List<LocationStorage> locations) {
         this.locations = locations;
     }
-    
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getProviderOrigin() {
+        return providerOrigin;
+    }
+
+    public void setProviderOrigin(String providerOrigin) {
+        this.providerOrigin = providerOrigin;
+    }
+
+    public int getApplicationConfigurationVersion() {
+        return applicationConfigurationVersion;
+    }
+
+    public void setApplicationConfigurationVersion(int applicationConfigurationVersion) {
+        this.applicationConfigurationVersion = applicationConfigurationVersion;
+    }
 }

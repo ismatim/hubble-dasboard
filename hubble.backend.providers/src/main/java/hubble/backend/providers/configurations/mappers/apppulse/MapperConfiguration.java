@@ -1,6 +1,8 @@
 package hubble.backend.providers.configurations.mappers.apppulse;
 
+import hubble.backend.providers.models.apppulse.ApplicationProviderModel;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
+import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.AvailabilityStorage;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,8 +16,9 @@ public class MapperConfiguration {
     private ModelMapper mapper;
 
     public MapperConfiguration() {
-            mapper = new ModelMapper();
-            this.mapper.addMappings(new AvailabilityPropertyMap());
+        mapper = new ModelMapper();
+        this.mapper.addMappings(new AvailabilityPropertyMap());
+        this.mapper.addMappings(new ApplicationPropertyMap());
     }
 
     public ModelMapper getMapper() {
@@ -26,9 +29,9 @@ public class MapperConfiguration {
         this.mapper = mapper;
     }
 
-    public List<AvailabilityStorage> mapToAvailabilitiesStorage(AvailabilityProviderModel appPulseProv){
+    public List<AvailabilityStorage> mapToAvailabilitiesStorage(AvailabilityProviderModel appPulseProv) {
 
-          if (appPulseProv == null) {
+        if (appPulseProv == null) {
             return null;
         }
 
@@ -37,11 +40,27 @@ public class MapperConfiguration {
             AvailabilityStorage newAppPulseRecord = new AvailabilityStorage();
 
             this.mapper.map(item, newAppPulseRecord);
-            newAppPulseRecord.setTimeStamp(new Date(item.getTimeStamp()*1000));
+            newAppPulseRecord.setTimeStamp(new Date(item.getTimeStamp() * 1000));
             availabilitiesRecordsToBeSaved.add(newAppPulseRecord);
         });
 
         return availabilitiesRecordsToBeSaved;
     }
 
+    public List<ApplicationStorage> mapToApplicationsStorage(ApplicationProviderModel appPulseProv) {
+
+        if (appPulseProv == null) {
+            return null;
+        }
+
+        List<ApplicationStorage> applicationsRecordsToBeSaved = new ArrayList<>();
+        appPulseProv.getApplications().forEach(item -> {
+            ApplicationStorage newAppPulseRecord = new ApplicationStorage();
+
+            this.mapper.map(item, newAppPulseRecord);
+            applicationsRecordsToBeSaved.add(newAppPulseRecord);
+        });
+
+        return applicationsRecordsToBeSaved;
+    }
 }

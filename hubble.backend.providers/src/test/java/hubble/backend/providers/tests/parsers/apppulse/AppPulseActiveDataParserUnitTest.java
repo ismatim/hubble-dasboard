@@ -1,10 +1,10 @@
-package hubble.backend.providers.tests.parsers;
+package hubble.backend.providers.tests.parsers.apppulse;
 
 import hubble.backend.providers.configurations.environments.AppPulseTestProviderEnvironmentImpl;
 import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
-import hubble.backend.providers.parsers.implementations.AppPulseActiveParserImpl;
+import hubble.backend.providers.parsers.implementations.apppulse.AppPulseActiveDataParserImpl;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
-import hubble.backend.providers.transports.implementations.AppPulseActiveTransportImpl;
+import hubble.backend.providers.transports.implementations.apppulse.AppPulseActiveTransportImpl;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.repositories.AvailabilityRepository;
 import java.util.List;
@@ -25,7 +25,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 @ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
-public class AppPulseActiveParserUnitTest extends AppPulseBaseUnitTests {
+public class AppPulseActiveDataParserUnitTest extends AppPulseBaseUnitTests {
 
     @Spy
     private AppPulseTestProviderEnvironmentImpl environment = new AppPulseTestProviderEnvironmentImpl();
@@ -37,7 +37,7 @@ public class AppPulseActiveParserUnitTest extends AppPulseBaseUnitTests {
     private AvailabilityRepository appPulseActiveRepository;
 
     @InjectMocks
-    private AppPulseActiveParserImpl appPulseActiveParser;
+    private AppPulseActiveDataParserImpl appPulseActiveParser;
 
     @Before
     public void initMocks() {

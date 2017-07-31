@@ -1,11 +1,11 @@
 package hubble.backend.tasksrunner.tests.scheduler;
 
-import hubble.backend.providers.parsers.interfaces.AppPulseActiveParser;
 import hubble.backend.providers.parsers.interfaces.Parser;
+import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveDataParser;
 import hubble.backend.tasksrunner.application.scheduler.SchedulerMediator;
-import hubble.backend.tasksrunner.jobs.AppPulseParserJob;
+import hubble.backend.tasksrunner.jobs.apppulse.AppPulseParserJob;
 import hubble.backend.tasksrunner.jobs.ParserJob;
-import hubble.backend.tasksrunner.tasks.AppPulseTaskImpl;
+import hubble.backend.tasksrunner.tasks.apppulse.AppPulseTaskImpl;
 import hubble.backend.tasksrunner.tasks.ParserTask;
 import hubble.backend.tasksrunner.tasks.Task;
 import hubble.backend.tasksrunner.tests.configurations.TasksRunnerTestConfiguration;
@@ -43,7 +43,7 @@ public class SchedulerMediatorUnitTests {
     public void SchedulerMediator_should_save_task_of_apppulseactive_for_later_execution() throws Exception {
 
         //Assign
-        Parser appPulseParser = spy(AppPulseActiveParser.class);
+        Parser appPulseParser = spy(AppPulseActiveDataParser.class);
         ConfigurableApplicationContext ctx = mock(ConfigurableApplicationContext.class);
         ParserJob job = spy(new AppPulseParserJob(appPulseParser));
         Task task = spy(new AppPulseTaskImpl(job));
@@ -83,13 +83,13 @@ public class SchedulerMediatorUnitTests {
 
         //Assign
         isCalledAppPulseParser = false;
-        Parser appPulseParserFake = spy(AppPulseActiveParser.class);
+        Parser appPulseParserFake = spy(AppPulseActiveDataParser.class);
         ConfigurableApplicationContext ctx = mock(ConfigurableApplicationContext.class);
         SchedulerMediator schedule = new SchedulerMediator(ctx);
 
         doAnswer((Answer) (InvocationOnMock invocation) -> {
             return appPulseParserFake;
-        }).when(ctx).getBean(AppPulseActiveParser.class);
+        }).when(ctx).getBean(AppPulseActiveDataParser.class);
 
         doAnswer((Answer) (InvocationOnMock invocation) -> {
             isCalledAppPulseParser = true;
@@ -124,7 +124,7 @@ public class SchedulerMediatorUnitTests {
         //Assign
         ConfigurableApplicationContext ctx = mock(ConfigurableApplicationContext.class);
         SchedulerMediator schedule = new SchedulerMediator(ctx);
-        Parser appPulseParserFake = spy(AppPulseActiveParser.class);
+        Parser appPulseParserFake = spy(AppPulseActiveDataParser.class);
         ParserJob appPulseJob = new AppPulseParserJob(appPulseParserFake);
         ParserTask appPulseTaskFake = new AppPulseTaskImpl(appPulseJob);
         appPulseTaskFake.setIntervalSeconds(1);
@@ -140,7 +140,7 @@ public class SchedulerMediatorUnitTests {
         //Assign
         ConfigurableApplicationContext ctx = mock(ConfigurableApplicationContext.class);
         SchedulerMediator schedule = new SchedulerMediator(ctx);
-        Parser appPulseParserFake = spy(AppPulseActiveParser.class);
+        Parser appPulseParserFake = spy(AppPulseActiveDataParser.class);
         ParserJob appPulseJob = new AppPulseParserJob(appPulseParserFake);
         ParserTask appPulseTaskFake = new AppPulseTaskImpl(appPulseJob);
         appPulseTaskFake.setIndentityGroupName("AppPulse Active Provider Job");
@@ -156,14 +156,14 @@ public class SchedulerMediatorUnitTests {
 
         //Assign
         isCalledAppPulseParser = false;
-        Parser appPulseParserFake = spy(AppPulseActiveParser.class);
+        Parser appPulseParserFake = spy(AppPulseActiveDataParser.class);
         ConfigurableApplicationContext ctx = mock(ConfigurableApplicationContext.class);
         SchedulerMediator schedule = new SchedulerMediator(ctx);
 
         doAnswer((Answer) (InvocationOnMock invocation) -> {
             totalExectutedAppPulseParser++;
             return appPulseParserFake;
-        }).when(ctx).getBean(AppPulseActiveParser.class);
+        }).when(ctx).getBean(AppPulseActiveDataParser.class);
 
         doThrow(Exception.class).when(appPulseParserFake).run();
 

@@ -1,9 +1,9 @@
-package hubble.backend.providers.parsers.implementations;
+package hubble.backend.providers.parsers.implementations.apppulse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
-import hubble.backend.providers.parsers.interfaces.AppPulseActiveParser;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
+import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveDataParser;
 import hubble.backend.providers.transports.interfaces.AppPulseActiveTransport;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.repositories.AvailabilityRepository;
@@ -13,11 +13,11 @@ import java.io.InputStream;
 import java.util.List;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import org.json.JSONObject;
-import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
-public class AppPulseActiveParserImpl implements AppPulseActiveParser {
+public class AppPulseActiveDataParserImpl implements AppPulseActiveDataParser {
 
     private MapperConfiguration mapperConfifuration;
     private AppPulseActiveTransport appPulseActiveTransport;
@@ -25,7 +25,7 @@ public class AppPulseActiveParserImpl implements AppPulseActiveParser {
     private AvailabilityRepository availabilityRepository;
 
     @Autowired
-    public AppPulseActiveParserImpl(
+    public AppPulseActiveDataParserImpl(
             AppPulseActiveTransport appPulseActiveTransport,
             MapperConfiguration mapperConfifuration,
             AvailabilityRepository availabilityRepository) {
@@ -96,17 +96,16 @@ public class AppPulseActiveParserImpl implements AppPulseActiveParser {
 
             hasMoreData = appPulseActiveTransport.hasMoreData();
 
-            //Parsear datos. Convertir a AvailabilityStorage
             AvailabilityProviderModel dataProviderModel = parse(data);
             this.availabilitiesStorage = convert(dataProviderModel);
 
             //Guardar.
-            availabilitiesStorage.stream().forEach(availabilityStorage ->{
+            availabilitiesStorage.stream().forEach(availabilityStorage -> {
 
-                if (!availabilityRepository.exist(availabilityStorage))
+                if (!availabilityRepository.exist(availabilityStorage)) {
                     availabilityRepository.save(availabilityStorage);
+                }
             });
-
         }
     }
 
