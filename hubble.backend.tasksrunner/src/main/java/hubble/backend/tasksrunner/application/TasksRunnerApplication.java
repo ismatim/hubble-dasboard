@@ -1,12 +1,15 @@
 package hubble.backend.tasksrunner.application;
 
+import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveApplicationsParser;
 import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveDataParser;
 import hubble.backend.tasksrunner.application.scheduler.SchedulerMediator;
 import hubble.backend.tasksrunner.configurations.TasksRunnerConfiguration;
-import hubble.backend.tasksrunner.jobs.apppulse.AppPulseParserJob;
 import hubble.backend.tasksrunner.jobs.ParserJob;
-import hubble.backend.tasksrunner.tasks.apppulse.AppPulseTaskImpl;
+import hubble.backend.tasksrunner.jobs.apppulse.AppPulseApplicationParserJob;
+import hubble.backend.tasksrunner.jobs.apppulse.AppPulseDataParserJob;
 import hubble.backend.tasksrunner.tasks.ParserTask;
+import hubble.backend.tasksrunner.tasks.apppulse.AppPulseApplicationTaskImpl;
+import hubble.backend.tasksrunner.tasks.apppulse.AppPulseDataTaskImpl;
 import org.quartz.SchedulerException;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -28,13 +31,21 @@ public class TasksRunnerApplication {
         scheduler = new SchedulerMediator(context);
 
         AppPulseActiveDataParser appPulseparser = context.getBean(AppPulseActiveDataParser.class);
-        ParserJob appPulseJob = new AppPulseParserJob(appPulseparser);
-        ParserTask appPulseTask = new AppPulseTaskImpl(appPulseJob);
-        appPulseTask.setIndentityGroupName("AppPulse Active Provider Job");
-        appPulseTask.setIndentityName("AppPulse");
-        appPulseTask.setIntervalSeconds(40);
+        ParserJob appPulseJob = new AppPulseDataParserJob(appPulseparser);
+        ParserTask appPulseDataTask = new AppPulseDataTaskImpl(appPulseJob);
+        appPulseDataTask.setIndentityGroupName("AppPulse Active Provider Job");
+        appPulseDataTask.setIndentityName("AppPulse Data");
+        appPulseDataTask.setIntervalSeconds(40);
 
-        scheduler.addTask(appPulseTask);
+        AppPulseActiveApplicationsParser appPulseApplicationParser = context.getBean(AppPulseActiveApplicationsParser.class);
+        ParserJob appPulseAppJob = new AppPulseApplicationParserJob(appPulseApplicationParser);
+        ParserTask appPulseApplicationTask = new AppPulseApplicationTaskImpl(appPulseAppJob);
+        appPulseApplicationTask.setIndentityGroupName("AppPulse Active Provider Job");
+        appPulseApplicationTask.setIndentityName("AppPulse Applications");
+        appPulseApplicationTask.setIntervalSeconds(100);
+
+        scheduler.addTask(appPulseApplicationTask);
+        scheduler.addTask(appPulseDataTask);
         scheduler.showMenu();
     }
 

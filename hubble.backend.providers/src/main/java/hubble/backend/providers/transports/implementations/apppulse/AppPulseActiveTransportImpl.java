@@ -54,7 +54,7 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
             return this.tokenValue = EMPTY;
         }
 
-        this.tokenValue = jsonResponse.getBody().getObject().get("token").toString();
+        this.tokenValue = response.get("token").toString();
 
         return this.tokenValue;
 
@@ -84,8 +84,13 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
 
         JSONObject appPulseActiveJson = appPulseActiveHttpResponse.getBody().getObject();
 
-        this.hasMoreData = appPulseActiveJson.getBoolean("hasMoreDataToFetch");
-        this.lastRetrievedSequenceId = appPulseActiveJson.getString("lastRetrievedSequenceId");
+        if (appPulseActiveJson.has("hasMoreDataToFetch")) {
+            this.hasMoreData = appPulseActiveJson.getBoolean("hasMoreDataToFetch");
+        }
+
+        if (appPulseActiveJson.has("lastRetrievedSequenceId")) {
+            this.lastRetrievedSequenceId = appPulseActiveJson.getString("lastRetrievedSequenceId");
+        }
 
         return appPulseActiveJson;
     }

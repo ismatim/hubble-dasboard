@@ -46,6 +46,12 @@ public class AppPulseActiveApplicationParserIntegrationTest extends AppPulseBase
         }));
 
         applications.stream().forEach((applicationsFromAppPulse) -> {
+
+            ApplicationStorage a = applicationRepository.findOne(applicationsFromAppPulse.getId());
+
+        });
+
+        applications.stream().forEach((applicationsFromAppPulse) -> {
             applicationRepository.delete(applicationsFromAppPulse);
         });
     }
