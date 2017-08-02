@@ -66,14 +66,14 @@ public class AvailabilityServiceUnitTests {
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
-        
+
         //Act
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
         availabilityService.findAllAvailabilities();
         availabilityService.calculateLast10MinutesAverageApplicationAvailability(applicationId);
         availabilityService.findTransactionById(transactionId);
-        
+
         //Assert
         verify(availabilityRepository).findAll();
         verify(applicationRepository).findApplicationById(applicationId);
@@ -84,10 +84,10 @@ public class AvailabilityServiceUnitTests {
     public void availability_service_should_return_all_availabilities() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        
+
         //Act
         when(availabilityRepository.findAll()).thenReturn(availabilityStorageList);
-        
+
         //Assert
         assertEquals(4,availabilityService.findAllAvailabilities().size());
     }
@@ -97,12 +97,12 @@ public class AvailabilityServiceUnitTests {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
         AvailabilityDto availabilityDto;
-        
+
         //Act
         AvailabilityStorage availabilityStorage = availabilityStorageList.get(0);
         when(availabilityRepository.findOne("1")).thenReturn(availabilityStorage);
         availabilityDto = availabilityService.findAvailabilityById("1");
-        
+
         //Assert
         assertEquals("h3y44h5sk58f8sdf48f", availabilityDto.getId());
     }
@@ -112,11 +112,11 @@ public class AvailabilityServiceUnitTests {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
         List<AvailabilityDto> availabilityDtoList;
-        
+
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationId("1")).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findAvailabilitiesByApplicationId("1");
-        
+
         //Assert
         assertEquals(4, availabilityDtoList.size());
     }
@@ -126,11 +126,11 @@ public class AvailabilityServiceUnitTests {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
         List<AvailabilityDto> availabilityDtoList;
-        
+
         //Act
         when(availabilityRepository.findAvailabilitiesByDurationMinutes(10)).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findLast10MinutesAvailabilities();
-        
+
         //Assert
         assertEquals(4, availabilityDtoList.size());
     }
@@ -140,11 +140,11 @@ public class AvailabilityServiceUnitTests {
          //Assign
         availabilityStorageList = availabilityHelper.mockData();
         List<AvailabilityDto> availabilityDtoList;
-        
+
         //Act
         when(availabilityRepository.findAvailabilitiesByDurationMinutes(60)).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findLastHourAvailabilities();
-        
+
         //Assert
         assertEquals(4, availabilityDtoList.size());
     }
@@ -154,11 +154,11 @@ public class AvailabilityServiceUnitTests {
          //Assign
         availabilityStorageList = availabilityHelper.mockData();
         List<AvailabilityDto> availabilityDtoList;
-        
+
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10, "1")).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findLast10MinutesAvailabilitiesByApplicationId("1");
-        
+
         //Assert
         assertEquals(4, availabilityDtoList.size());
     }
@@ -168,15 +168,15 @@ public class AvailabilityServiceUnitTests {
          //Assign
         availabilityStorageList = availabilityHelper.mockData();
         List<AvailabilityDto> availabilityDtoList;
-        
+
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(60, "1")).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findLastHourAvailabilitiesByApplicationId("1");
-        
+
         //Assert
         assertEquals(4, availabilityDtoList.size());
     }
-        
+
     @Test
     public void availability_service_should_calculate_last_10minutes_application_availability_average(){
         //Assign
@@ -184,32 +184,32 @@ public class AvailabilityServiceUnitTests {
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
-        
+
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10, applicationId)).thenReturn(availabilityStorageList);
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         average = availabilityService.calculateLast10MinutesAverageApplicationAvailability(applicationId).getAverage();
-        
+
         //Assert
         assertEquals(75, average);
     }
-    
+
     @Test
     public void availability_service_should_return_negative1_when_average_calculation_encounters_no_data(){
         //Assign
         int average;
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
-        
+
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10, applicationId)).thenReturn(null);
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         average = availabilityService.calculateLastHourAverageApplicationAvailability(applicationId).getAverage();
-        
+
         //Assert
         assertEquals(-1, average);
     }
-    
+
     @Test
     public void availability_service_should_calculate_last_hour_application_availability_average(){
         //Assign
@@ -217,128 +217,114 @@ public class AvailabilityServiceUnitTests {
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
-        
+
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(60, applicationId)).thenReturn(availabilityStorageList);
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         average = availabilityService.calculateLastHourAverageApplicationAvailability(applicationId).getAverage();
-        
+
         //Assert
         assertEquals(75, average);
     }
-    
+
     @Test
     public void service_should_return_application_by_id(){
         //Assign
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
-        
+
         //Act
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
-        
+
         //Assert
         assertEquals("BancoRipley - HomeBanking", availabilityService.findApplicationById(applicationId).getApplicationName());
     }
-    
+
     @Test
     public void service_should_return_transaction_by_id(){
         //Assign
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
-        
+
         //Act
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
-        
+
         //Assert
         assertEquals("Auntenticacion Biometrica", availabilityService.findTransactionById(transactionId).getTransactionName());
     }
-    
+
     @Test
     public void service_should_retrieve_all_transactions_by_an_application_id(){
         //Assign
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         List<TransactionDto> transactionDtoList = new ArrayList();
-        
+
         //Act
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         transactionDtoList = availabilityService.findTransactionsByApplicationId(applicationId);
-        
+
         //Assert
         assertEquals(2, transactionDtoList.size());
     }
-    
-    @Test
-    public void service_should_return_all_transactions(){
-        //Assign
-        List<TransactionStorage> transactionStorageList = new AvailabilityHelper().mockTransactionStorage();
-        List<TransactionDto> transactionDtoList = new ArrayList();
-                
-        //Act
-        when(transactionRepository.findAllTransactions()).thenReturn(transactionStorageList);
-        transactionDtoList = availabilityService.findAllTransactions();
-        
-        //Assert
-        assertEquals(2, transactionDtoList.size());
-    }
-    
+
     @Test
     public void service_should_return_all_applications(){
         //Assign
         List<ApplicationStorage> applicationStorageList = new ArrayList();
         List<ApplicationDto> applicationDtoList = new ArrayList();
-                
+
         //Act
         applicationStorageList.add(new AvailabilityHelper().mockApplicationStorage());
         when(applicationRepository.findAllApplications()).thenReturn(applicationStorageList);
         applicationDtoList = availabilityService.findAllApplications();
-        
+
         //Assert
         assertEquals(1, applicationDtoList.size());
     }
-    
+
     @Test
     public void availability_service_should_return_availability_by_transaction_id_with_correct_model(){
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
         List<AvailabilityDto> availabilityDtoList;
-        
+
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionId("1")).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findAvailabilitiesByTransactionId("1");
-        
+
         //Assert
         assertEquals(4, availabilityDtoList.size());
     }
-    
+
     @Test
     public void availability_service_should_return_last_10minutes_availabilities_by_transactionid_with_correct_model(){
          //Assign
         availabilityStorageList = availabilityHelper.mockData();
         List<AvailabilityDto> availabilityDtoList;
-        
+
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(10, "1")).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findLast10MinutesAvailabilitiesByTransactionId("1");
-        
+
         //Assert
         assertEquals(4, availabilityDtoList.size());
     }
-    
+
     @Test
     public void availability_service_should_return_last_hour_availabilities_by_transactionid_with_correct_model(){
          //Assign
         availabilityStorageList = availabilityHelper.mockData();
         List<AvailabilityDto> availabilityDtoList;
-        
+
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(60, "1")).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findLastHourAvailabilitiesByTransactionId("1");
-        
+
         //Assert
         assertEquals(4, availabilityDtoList.size());
     }
-    
+
     @Test
     public void availability_service_should_calculate_last_10minutes_transaction_availability_average(){
         //Assign
@@ -347,17 +333,17 @@ public class AvailabilityServiceUnitTests {
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
         ApplicationStorage parentApplicationStorage = new AvailabilityHelper().mockApplicationStorage();
-        
+
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(10, transactionId)).thenReturn(availabilityStorageList);
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
-        when(applicationRepository.findApplicationById(transactionStorage.getApplicationId())).thenReturn(parentApplicationStorage);
+        when(applicationRepository.findApplicationByTransactionId(transactionStorage.getId())).thenReturn(parentApplicationStorage);
         average = availabilityService.calculateLast10MinutesAverageTransactionAvailability(transactionId).getAverage();
-        
+
         //Assert
         assertEquals(75, average);
     }
-    
+
     @Test
     public void availability_service_should_calculate_last_hour_transaction_availability_average(){
         //Assign
@@ -366,13 +352,13 @@ public class AvailabilityServiceUnitTests {
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
         ApplicationStorage parentApplicationStorage = new AvailabilityHelper().mockApplicationStorage();
-        
+
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(60, transactionId)).thenReturn(availabilityStorageList);
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
-        when(applicationRepository.findApplicationById(transactionStorage.getApplicationId())).thenReturn(parentApplicationStorage);
+        when(applicationRepository.findApplicationByTransactionId(transactionStorage.getId())).thenReturn(parentApplicationStorage);
         average = availabilityService.calculateLastHourAverageTransactionAvailability(transactionId).getAverage();
-        
+
         //Assert
         assertEquals(75, average);
     }

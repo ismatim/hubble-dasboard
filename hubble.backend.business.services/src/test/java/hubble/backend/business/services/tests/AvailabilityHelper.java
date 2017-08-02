@@ -198,9 +198,8 @@ public class AvailabilityHelper {
         List<TransactionStorage> transactionStorageList = new ArrayList(); 
         TransactionStorage transactionStorage1 = new TransactionStorage();
         TransactionStorage transactionStorage2 = new TransactionStorage();
-        
+
         transactionStorage1.setTransactionId("2eae220e082697be3a0646400e5b54fa");
-        transactionStorage1.setApplicationId("b566958ec4ff28028672780d15edcf56");
         transactionStorage1.setTransactionName("Auntenticacion Biometrica");
         transactionStorage1.setCriticalThreshold(12000);
         transactionStorage1.setAssigned(true);
@@ -208,9 +207,8 @@ public class AvailabilityHelper {
         transactionStorage1.setScriptName("Auntenticacion_Biometrica_VBIO3301");
         transactionStorage1.setOkThreshold(8000);
         transactionStorage1.setCriticalThreshold(12000);
-        
+
         transactionStorage2.setTransactionId("8f0e0ec4adb5f063b1afe794e03a0ab4");
-        transactionStorage2.setApplicationId("b566958ec4ff28028672780d15edcf56");
         transactionStorage2.setTransactionName("Firma Biometrica");
         transactionStorage2.setCriticalThreshold(12);
         transactionStorage2.setAssigned(true);

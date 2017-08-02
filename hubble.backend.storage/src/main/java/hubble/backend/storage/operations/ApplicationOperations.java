@@ -9,5 +9,7 @@ public interface ApplicationOperations {
 
     public ApplicationStorage findApplicationById(String applicationId);
 
+    public ApplicationStorage findApplicationByTransactionId(String transactionId);
+
     boolean exist(ApplicationStorage application);
 }

@@ -1,9 +1,9 @@
 package hubble.backend.business.services.configurations.mappers;
 
-import hubble.backend.business.services.models.ApplicationAvailabilityAvgDto;
+import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
 import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.models.AvailabilityDto;
-import hubble.backend.business.services.models.TransactionAvailabilityAvgDto;
+import hubble.backend.business.services.models.AvailabilityTransactionAvgDto;
 import hubble.backend.business.services.models.TransactionDto;
 import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.AvailabilityStorage;
@@ -44,12 +44,12 @@ public class MapperConfiguration {
         return mapper.map(applicationStorage, ApplicationDto.class);
     }
     
-    public ApplicationAvailabilityAvgDto mapToApplicationAvailabilityAvg(ApplicationStorage applicationStorage){
-        return mapper.map(applicationStorage, ApplicationAvailabilityAvgDto.class);
+    public AvailabilityApplicationAvgDto mapToApplicationAvailabilityAvg(ApplicationStorage applicationStorage){
+        return mapper.map(applicationStorage, AvailabilityApplicationAvgDto.class);
     }
     
-    public List<ApplicationAvailabilityAvgDto> mapToApplicationAvailabilityAvgList(List<ApplicationStorage> applicationStorageList){
-        Type applicationAvailabilityAvgTypeList = new TypeToken<List<ApplicationAvailabilityAvgDto>>() {}.getType();
+    public List<AvailabilityApplicationAvgDto> mapToApplicationAvailabilityAvgList(List<ApplicationStorage> applicationStorageList){
+        Type applicationAvailabilityAvgTypeList = new TypeToken<List<AvailabilityApplicationAvgDto>>() {}.getType();
         return mapper.map(applicationStorageList, applicationAvailabilityAvgTypeList);
     }
     
@@ -67,12 +67,12 @@ public class MapperConfiguration {
         return mapper.map(transactionStorageList, transactionDtoTypeList);
     }
     
-    public TransactionAvailabilityAvgDto mapToTransactionAvailabilityAvg(TransactionStorage transactionStorage){
-        return mapper.map(transactionStorage, TransactionAvailabilityAvgDto.class);
+    public AvailabilityTransactionAvgDto mapToTransactionAvailabilityAvg(TransactionStorage transactionStorage){
+        return mapper.map(transactionStorage, AvailabilityTransactionAvgDto.class);
     }
     
-    public List<TransactionAvailabilityAvgDto> mapToTransactionAvailabilityAvgList(List<TransactionStorage> transactionStorageList){
-        Type transactionAvailabilityAvgTypeList = new TypeToken<List<TransactionAvailabilityAvgDto>>() {}.getType();
+    public List<AvailabilityTransactionAvgDto> mapToTransactionAvailabilityAvgList(List<TransactionStorage> transactionStorageList){
+        Type transactionAvailabilityAvgTypeList = new TypeToken<List<AvailabilityTransactionAvgDto>>() {}.getType();
         return mapper.map(transactionStorageList, transactionAvailabilityAvgTypeList);
     }
 }

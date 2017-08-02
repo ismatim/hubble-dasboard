@@ -1,110 +1,67 @@
-<!DOCTYPE html>
 <html>
-<div th:replace="mainTemplates/header"></div>
-<body>
-  <div th:replace="mainTemplates/navbar"></div>
-  <div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title">Titulo</h3>
+    <div th:replace="mainTemplates/header"></div>
+    <body>
+        <div th:replace="mainTemplates/navbar"></div>
+        <div th:replace="mainTemplates/detailsModal"></div>
+        <div class="container top-buffer">
+            <h4 >Aplicacion</h4>
+            <div class="row d-flex">
+                <div class="col-sm-6 col-md-4 col-lg-4 d-flex" th:each="reg : ${regs}">
+                    <div class="card top-buffer" style="border-color: #2E2E2E;border-style: solid;border-width: 1px;border-radius: 3px;" >
+                        <div class="card-block">
+                            <a href="#"><h4 class="card-title" th:text="${reg.name}"></h4></a>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Mes</th>
+                                        <th>Dia</th>
+                                        <th><i class="fa fa-cloud-download" style="font-size: 17px;" data-toggle="tooltip" data-placement="top" title="Medicion ultimos 60 minutos" ></i>
+                                        </th>
+                                        <th><i class="fa fa-cloud-download" style="font-size: 17px;" data-toggle="tooltip" data-placement="top" title="Medicion ultimos 10 minutos"></i></th>
+                                    </tr>
+                                <tbody>
+                                    <tr>
+                                        <td><i class="fa fa-calendar" title="Indica disponibilidad" data-toggle="tooltip" data-placement="top"></i>
+                                        </td>
+                                        <td th:text="${reg.disponibilidad1Month}+'%'"></td>
+                                        <td th:text="${reg.disponibilidad1Day}+'%'"></td>
+                                        <td th:id="${reg.id}+'_id_disponibilidad_60'" class="icon-center"></td>
+                                        <td th:id="${reg.id}+'_id_disponibilidad_10'" class="icon-center"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><i class="fa fa-clock-o" title="Indica Performance" data-toggle="tooltip" data-placement="top" ></i>
+                                        </td>
+                                        <td th:text="${reg.performance1Month}+'%'"></td>
+                                        <td th:text="${reg.performance1Day}+'%'"></td>
+                                        <td th:id="${reg.id}+'_id_performance_60'" class="icon-center"></td>
+                                        <td th:id="${reg.id}+'_id_performance_10'" class="icon-center"></td>
+                                    </tr>
+                                </tbody>
+                                </thead>
+                            </table>
+                            <h4 class="card-title icon-center" th:text="'Ultima Actualizacion: '+${reg.date}"></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <h5 class="text-center">Algun Texto</h5>
-          <table class="table table-striped" id="tblGrid">
-            <thead id="tblHead">
-              <tr>
-                <th>Transacción</th>
-                <th>Performance</th>
-                <th class="text-right">Tiempo de respuesta</th>
-                <th>Disponibilidad</th>
-                <th>Fecha</th>
 
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Consulta Saldo Cuenta Vista</td>
-                <td>OK</td>
-                <td>0.33</td>
-                <td>OK</td>
-                <td>DiaEscrito, Dia# de Mes de Año HH:mm:ss</td>
+        <script src="/js/block_color_transfer.js"></script>
+        <script src="/js/detailsModal.js"></script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var dataList = [[${regs}]];
+            for (i = 0; i < dataList.length; i++) {
+                var id_object = dataList[i]["id"];
+                setBlockColor(id_object + "_id_disponibilidad_60", dataList[i]["disponibilidad60Minute"], id_object + "_disponibilidad_60");
+                setBlockColor(id_object + "_id_disponibilidad_10", dataList[i]["disponibilidad10Minute"], id_object + "_disponibilidad_10");
+                setBlockColor(id_object + "_id_performance_60", dataList[i]["performance60Minute"], id_object + "_performance_60");
+                setBlockColor(id_object + "_id_performance_10", dataList[i]["performance10Minute"], id_object + "_performance_10");
+            }
+            /*]]>*/
 
-              </tr>
-              <tr><td>Consulta Saldo Cuenta Vista</td>
-                <td>OK</td>
-                <td>0.354</td>
-                <td>OK</td>
-                <td>DiaEscrito, Dia# de Mes de Año HH:mm:ss</td>
-              </tr>
-              <tr><td>Consulta Saldo Cuenta Vista</td>
-                <td>OK</td>
-                <td>4.395</td>
-                <td>OK</td>
-                <td>DiaEscrito, Dia# de Mes de Año HH:mm:ss</td>
-
-
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  <div class="container top-buffer">
-    <h4 >Aplicacion</h4>
-    <div class="row">
-      <div class="col-sm-6 col-md-4 col-lg-4">
-        <div class="card" style="border-color: #2E2E2E;border-style: solid;border-width: 1px;border-radius: 3px;" > 
-          <div class="card-block">
-            <a href="#"><h4 class="card-title">Nombre de la aplicacion</h4></a>
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Mes</th>
-                  <th>Dia</th>
-                  <th><i class="fa fa-cloud-download" style="font-size: 17px;" data-toggle="tooltip" data-placement="top" title="Medicion ultimos 60 minutos" ></i>
-                  </th>
-                  <th><i class="fa fa-cloud-download" style="font-size: 17px;" data-toggle="tooltip" data-placement="top" title="Medicion ultimos 10 minutos"></i></th>
-                </tr>
-                <tbody>
-                  <tr>
-                    <td><i class="fa fa-calendar" title="Indica disponibilidad" data-toggle="tooltip" data-placement="top"></i>
-                    </td>
-                    <td>69.85%</td>
-                    <td>99.58%</td>
-                    <td id="id_disponibilidad_60" class="icon-center"></td>
-                    <td id="id_disponibilidad_10" class="icon-center"></td>
-                  </tr>
-                  <tr>
-                    <td><i class="fa fa-clock-o" title="Indica Performance" data-toggle="tooltip" data-placement="top" ></i>
-                    </td>
-                    <td>93.31%</td>
-                    <td>93.31%</td>
-                    <td id="id_performance_60" class="icon-center"></td>
-                    <td id="id_performance_10" class="icon-center"></td>
-                  </tr>
-                </tbody>
-              </thead>
-            </table>
-            <h4 class="card-title icon-center">Ultima Actualizacion</h4>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="/js/block_color_transfer.js"></script>
-  <script >
-    setBlockColor("id_disponibilidad_60",79);
-    setBlockColor("id_disponibilidad_10",100);
-    setBlockColor("id_performance_60",85);
-    setBlockColor("id_performance_10",null);
-  </script>
-  <div th:replace="mainTemplates/footer"></div>
-</body>
+        </script>
+        <div th:replace="mainTemplates/footer"></div>
+    </body>
 </html>

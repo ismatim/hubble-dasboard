@@ -1,10 +1,10 @@
 package hubble.backend.business.services.tests.configurations.mappers;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
-import hubble.backend.business.services.models.ApplicationAvailabilityAvgDto;
+import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
 import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.models.AvailabilityDto;
-import hubble.backend.business.services.models.TransactionAvailabilityAvgDto;
+import hubble.backend.business.services.models.AvailabilityTransactionAvgDto;
 import hubble.backend.business.services.models.TransactionDto;
 import hubble.backend.business.services.tests.AvailabilityHelper;
 import hubble.backend.storage.models.ApplicationStorage;
@@ -25,7 +25,7 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 public class MapperConfigurationUnitTests {
-    
+
     MapperConfiguration mapperConfiguration = new MapperConfiguration();
     AvailabilityHelper availabilityHelper = new AvailabilityHelper();
 
@@ -94,11 +94,11 @@ public class MapperConfigurationUnitTests {
         assertEquals("BancoRipley - HomeBanking", availabilityDtoList.get(0).getApplicationName());
         assertEquals("Washington DC, AT&T", availabilityDtoList.get(0).getLocationName());
     }
-    
+
     @Test
     public void mapper_should_map_applicationStorage_to_applicationDto(){
         ApplicationStorage applicationStorage = mock(ApplicationStorage.class);
-        
+
         when(applicationStorage.getApplicationId()).thenReturn("1234");
         when(applicationStorage.getApplicationName()).thenReturn("BancoRipley - HomeBanking");
         when(applicationStorage.getAvailabilityThreshold()).thenReturn(90);
@@ -109,9 +109,9 @@ public class MapperConfigurationUnitTests {
         when(applicationStorage.getOutlierThreshold()).thenReturn(45000);
         when(applicationStorage.getTimeZoneId()).thenReturn("1");
         when(applicationStorage.getTransactions()).thenReturn(null);
-        
+
         ApplicationDto applicationDto = mapperConfiguration.mapToApplicationDto(applicationStorage);
-        
+
         assertEquals("1234", applicationDto.getApplicationId());
         assertEquals("BancoRipley - HomeBanking", applicationDto.getApplicationName());
         assertEquals(90, applicationDto.getAvailabilityThreshold());
@@ -121,13 +121,13 @@ public class MapperConfigurationUnitTests {
         assertEquals(8000, applicationDto.getOkThreshold());
         assertEquals(45000, applicationDto.getOutlierThreshold());
         assertEquals("1", applicationDto.getTimeZoneId());
-        assertEquals(null, applicationDto.getTransactions());        
+        assertEquals(null, applicationDto.getTransactions());
     }
-    
+
     @Test
     public void mapper_should_map_transactionStorage_to_transactionDto(){
         TransactionStorage transactionStorage = mock(TransactionStorage.class);
-        
+
         when(transactionStorage.getTransactionId()).thenReturn("1234");
         when(transactionStorage.getTransactionName()).thenReturn("Transaction Name");
         when(transactionStorage.getCriticalThreshold()).thenReturn(12000);
@@ -135,18 +135,18 @@ public class MapperConfigurationUnitTests {
         when(transactionStorage.getOkThreshold()).thenReturn(8000);
         when(transactionStorage.getTransactionType()).thenReturn("script");
         when(transactionStorage.getScriptName()).thenReturn("Script Name");
-        
+
         TransactionDto transactionDto = mapperConfiguration.mapToTransactionDto(transactionStorage);
-        
+
         assertEquals("1234", transactionDto.getTransactionId());
         assertEquals("Transaction Name", transactionDto.getTransactionName());
         assertEquals(12000, transactionDto.getCriticalThreshold());
         assertEquals(true, transactionDto.isAssigned());
         assertEquals(8000, transactionDto.getOkThreshold());
         assertEquals("script", transactionDto.getTransactionType());
-        assertEquals("Script Name", transactionDto.getScriptName());        
+        assertEquals("Script Name", transactionDto.getScriptName());
     }
-    
+
     @Test
     public void mapper_convert_applicationStorageList_to_applicationDtoList_model(){
         //Assign
@@ -161,7 +161,7 @@ public class MapperConfigurationUnitTests {
         assertEquals("b566958ec4ff28028672780d15edcf56", applicationDtoList.get(0).getApplicationId());
         assertEquals("BancoRipley - HomeBanking", applicationDtoList.get(0).getApplicationName());
     }
-    
+
     @Test
     public void mapper_convert_transactionStorageList_to_transactionDtoList_model(){
         //Assign
@@ -176,11 +176,11 @@ public class MapperConfigurationUnitTests {
         assertEquals("b566958ec4ff28028672780d15edcf56", transactionDtoList.get(0).getApplicationId());
         assertEquals("Auntenticacion Biometrica", transactionDtoList.get(0).getTransactionName());
     }
-    
+
     @Test
     public void mapper_should_map_transactionStorage_to_transactionAvailabilityAverage(){
         TransactionStorage transactionStorage = mock(TransactionStorage.class);
-        
+
         when(transactionStorage.getTransactionId()).thenReturn("1234");
         when(transactionStorage.getTransactionName()).thenReturn("Transaction Name");
         when(transactionStorage.getCriticalThreshold()).thenReturn(12000);
@@ -188,22 +188,22 @@ public class MapperConfigurationUnitTests {
         when(transactionStorage.getOkThreshold()).thenReturn(8000);
         when(transactionStorage.getTransactionType()).thenReturn("script");
         when(transactionStorage.getScriptName()).thenReturn("Script Name");
-        
-        TransactionAvailabilityAvgDto transactionAvailabilityAvg = mapperConfiguration.mapToTransactionAvailabilityAvg(transactionStorage);
-        
+
+        AvailabilityTransactionAvgDto transactionAvailabilityAvg = mapperConfiguration.mapToTransactionAvailabilityAvg(transactionStorage);
+
         assertEquals("1234", transactionAvailabilityAvg.getTransactionId());
         assertEquals("Transaction Name", transactionAvailabilityAvg.getTransactionName());
         assertEquals(12000, transactionAvailabilityAvg.getCriticalThreshold());
         assertEquals(true, transactionAvailabilityAvg.isAssigned());
         assertEquals(8000, transactionAvailabilityAvg.getOkThreshold());
         assertEquals("script", transactionAvailabilityAvg.getTransactionType());
-        assertEquals("Script Name", transactionAvailabilityAvg.getScriptName());        
+        assertEquals("Script Name", transactionAvailabilityAvg.getScriptName());
     }
-    
+
     @Test
     public void mapper_should_map_transactionStorage_to_applicationAvailabilityAverage(){
         ApplicationStorage applicationStorage = mock(ApplicationStorage.class);
-        
+
         when(applicationStorage.getApplicationId()).thenReturn("1234");
         when(applicationStorage.getApplicationName()).thenReturn("BancoRipley - HomeBanking");
         when(applicationStorage.getAvailabilityThreshold()).thenReturn(90);
@@ -214,9 +214,9 @@ public class MapperConfigurationUnitTests {
         when(applicationStorage.getOutlierThreshold()).thenReturn(45000);
         when(applicationStorage.getTimeZoneId()).thenReturn("1");
         when(applicationStorage.getTransactions()).thenReturn(null);
-        
-        ApplicationAvailabilityAvgDto applicationAvailabilityAvg = mapperConfiguration.mapToApplicationAvailabilityAvg(applicationStorage);
-        
+
+        AvailabilityApplicationAvgDto applicationAvailabilityAvg = mapperConfiguration.mapToApplicationAvailabilityAvg(applicationStorage);
+
         assertEquals("1234", applicationAvailabilityAvg.getApplicationId());
         assertEquals("BancoRipley - HomeBanking", applicationAvailabilityAvg.getApplicationName());
         assertEquals(90, applicationAvailabilityAvg.getAvailabilityThreshold());
@@ -226,16 +226,16 @@ public class MapperConfigurationUnitTests {
         assertEquals(8000, applicationAvailabilityAvg.getOkThreshold());
         assertEquals(45000, applicationAvailabilityAvg.getOutlierThreshold());
         assertEquals("1", applicationAvailabilityAvg.getTimeZoneId());
-        assertEquals(null, applicationAvailabilityAvg.getTransactions());          
+        assertEquals(null, applicationAvailabilityAvg.getTransactions());
     }
-    
+
     @Test
     public void mapper_convert_transactionStorageList_to_transactionAvailabilityAvgList_model(){
         //Assign
         List<TransactionStorage> transactionStorageList = availabilityHelper.mockTransactionStorage();
 
         //Act
-        List<TransactionAvailabilityAvgDto> transactionAvailabilityAvgList = mapperConfiguration.mapToTransactionAvailabilityAvgList(transactionStorageList);
+        List<AvailabilityTransactionAvgDto> transactionAvailabilityAvgList = mapperConfiguration.mapToTransactionAvailabilityAvgList(transactionStorageList);
 
         //Assert
         assertNotNull(transactionAvailabilityAvgList);
@@ -243,7 +243,7 @@ public class MapperConfigurationUnitTests {
         assertEquals("b566958ec4ff28028672780d15edcf56", transactionAvailabilityAvgList.get(0).getApplicationId());
         assertEquals("Auntenticacion Biometrica", transactionAvailabilityAvgList.get(0).getTransactionName());
     }
-    
+
     @Test
     public void mapper_convert_applicationStorageList_to_applicationAvailabilityAvgList_model(){
         //Assign
@@ -251,7 +251,7 @@ public class MapperConfigurationUnitTests {
         applicationStorageList.add(availabilityHelper.mockApplicationStorage());
 
         //Act
-        List<ApplicationAvailabilityAvgDto> applicationAvailabilityAvgList = mapperConfiguration.mapToApplicationAvailabilityAvgList(applicationStorageList);
+        List<AvailabilityApplicationAvgDto> applicationAvailabilityAvgList = mapperConfiguration.mapToApplicationAvailabilityAvgList(applicationStorageList);
 
         //Assert
         assertNotNull(applicationAvailabilityAvgList);
