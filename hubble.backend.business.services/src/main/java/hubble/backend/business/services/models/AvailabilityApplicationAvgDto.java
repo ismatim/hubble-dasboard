@@ -3,8 +3,8 @@ package hubble.backend.business.services.models;
 
 import hubble.backend.core.enums.MonitoringFields;
 
-public class ApplicationAvailabilityAvgDto extends ApplicationDto {
-    
+public class AvailabilityApplicationAvgDto extends ApplicationDto {
+
     private MonitoringFields.STATUS Status;
     private int average;
 

@@ -76,7 +76,7 @@ pre {
   width: auto;
 }
 .icon-bar .navbar-brand {
-  background: url(http://www.tsoftlatam.com/site/img/logo_home.png) 
+  background: url(http://www.tsoftlatam.com/site/img/logo_home.png)
   center / contain no-repeat;
   width: 200px;
 
@@ -93,7 +93,7 @@ pre {
 	background-color: #FFB800 !important;
 }
 .card .block-grey{
-	background-color: #BDBDBD !important;
+	background-color: #6E6E6E !important;
 }
 .icon-center{
 	text-align: center;
@@ -116,8 +116,14 @@ pre {
    padding-left: 0 !important;
 }
 
-.block-padding{   
+.block-padding{
 	padding-top: 20px;
 	padding-bottom: 20px;
+
+}
+
+.d-flex{
+	display:flex;
+	flex-wrap: wrap;
 
 }

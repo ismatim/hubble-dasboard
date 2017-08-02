@@ -12,7 +12,7 @@ function setBlockColor(id,number){
     el.innerHTML = '';
     el.classList.add('block-padding');
   }
-  if(number== null){
+  if(number== null || number<0){
     el.classList.add('block-grey');
     checkBlockNumber(id,'block-grey');
     return;

@@ -1,50 +1,147 @@
 package hubble.frontend.managers.implementations;
 
-import com.google.gson.JsonObject;
-import hubble.backend.business.domain.AvailabilityBusiness;
-import java.util.Date;
+import hubble.backend.business.services.interfaces.AvailabilityService;
+import hubble.backend.business.services.models.ApplicationDto;
+import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
+import hubble.backend.business.services.models.AvailabilityDto;
+import hubble.backend.business.services.models.AvailabilityTransactionAvgDto;
+import hubble.backend.business.services.models.TransactionDto;
+import hubble.frontend.managers.configurations.mappers.ApplicationMapperConfiguration;
+import hubble.frontend.managers.configurations.mappers.AvailabilityApplicationAvgMapperConfiguration;
+import hubble.frontend.managers.configurations.mappers.AvailabilityMapperConfiguration;
+import hubble.frontend.managers.configurations.mappers.AvailabilityTransactionAvgMapperConfiguration;
+import hubble.frontend.managers.configurations.mappers.TransactionMapperConfiguration;
 import java.util.List;
 import hubble.frontend.managers.interfaces.AvailabilityManager;
+import hubble.frontend.managers.models.collections.Availability;
+import hubble.frontend.managers.models.aggregations.AvailabilityBusinessApplicationAvg;
+import hubble.frontend.managers.models.aggregations.AvailabilityTransactionAvg;
+import hubble.frontend.managers.models.entities.BusinessApplication;
+import hubble.frontend.managers.models.entities.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class AvailabilityManagerImpl implements AvailabilityManager {
 
+    @Autowired
+    AvailabilityMapperConfiguration availabilityMapper;
+    @Autowired
+    ApplicationMapperConfiguration applicationMapper;
+    @Autowired
+    TransactionMapperConfiguration transactionMapper;
+    @Autowired
+    AvailabilityApplicationAvgMapperConfiguration applicationAvgMapper;
+    @Autowired
+    AvailabilityTransactionAvgMapperConfiguration transactionAvgMapper;
+    @Autowired
+    AvailabilityService availabilityService;
+
     @Override
-    public AvailabilityBusiness findSampleById(int Id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Availability findAvailabilityById(String id) {
+        AvailabilityDto availabilityDto = availabilityService.findAvailabilityById(id);
+        return availabilityMapper.mapToAvailability(availabilityDto);
     }
 
     @Override
-    public List<AvailabilityBusiness> findAllSamples() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Availability> findAllAvailabilities() {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findAllAvailabilities();
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
     }
 
     @Override
-    public List<AvailabilityBusiness> findLast10MinutesSamples() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Availability> findAvailabilitiesByApplicationId(String applicationId) {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findAvailabilitiesByApplicationId(applicationId);
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
     }
 
     @Override
-    public List<AvailabilityBusiness> findSamplesLimitedByTime(Date startDate, Date endDate) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Availability> findAvailabilitiesByTransactionId(String transactionId) {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findAvailabilitiesByTransactionId(transactionId);
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
     }
 
     @Override
-    public List<AvailabilityBusiness> findSamplesByApplicationId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Availability> findLast10MinutesAvailabilities() {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findLast10MinutesAvailabilities();
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
     }
 
     @Override
-    public List<AvailabilityBusiness> findLast10MinutesSamplesByApplicationId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Availability> findLastHourAvailabilities() {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findLastHourAvailabilities();
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
     }
 
     @Override
-    public List<AvailabilityBusiness> findLastHourSamples() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Availability> findLast10MinutesAvailabilitiesByApplicationId(String applicationId) {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findLast10MinutesAvailabilitiesByApplicationId(applicationId);
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
     }
 
     @Override
-    public List<AvailabilityBusiness> findLastHourSamplesByApplicationId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Availability> findLast10MinutesAvailabilitiesByTransactionId(String transactionId) {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findLast10MinutesAvailabilitiesByTransactionId(transactionId);
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
+    }
+
+    @Override
+    public List<Availability> findLastHourAvailabilitiesByApplicationId(String applicationId) {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findLastHourAvailabilitiesByApplicationId(applicationId);
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
+    }
+
+    @Override
+    public List<Availability> findLastHourAvailabilitiesByTransactionId(String transactionId) {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findLastHourAvailabilitiesByTransactionId(transactionId);
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
+    }
+
+    @Override
+    public AvailabilityBusinessApplicationAvg findLast10MinutesAverageByApplication(String applicationId) {
+        AvailabilityApplicationAvgDto availabilityAvgDto = availabilityService.calculateLast10MinutesAverageApplicationAvailability(applicationId);
+        return applicationAvgMapper.mapToAvailabilityApplicationAvg(availabilityAvgDto);
+    }
+
+    @Override
+    public AvailabilityBusinessApplicationAvg findLastHourAverageByApplication(String applicationId) {
+        AvailabilityApplicationAvgDto availabilityAvgDto = availabilityService.calculateLastHourAverageApplicationAvailability(applicationId);
+        return applicationAvgMapper.mapToAvailabilityApplicationAvg(availabilityAvgDto);
+    }
+
+    @Override
+    public AvailabilityTransactionAvg findLast10MinutesAverageByTransaction(String transactionId) {
+        AvailabilityTransactionAvgDto availabilityAvgDto = availabilityService.calculateLast10MinutesAverageTransactionAvailability(transactionId);
+        return transactionAvgMapper.mapToAvailabilityTransactionAvg(availabilityAvgDto);
+    }
+
+    @Override
+    public AvailabilityTransactionAvg findLastHourAverageByTransaction(String transactionId) {
+        AvailabilityTransactionAvgDto availabilityAvgDto = availabilityService.calculateLastHourAverageTransactionAvailability(transactionId);
+        return transactionAvgMapper.mapToAvailabilityTransactionAvg(availabilityAvgDto);
+    }
+
+    @Override
+    public BusinessApplication findBusinessApplicationById(String applicationId) {
+        ApplicationDto applicationDto = availabilityService.findApplicationById(applicationId);
+        return applicationMapper.mapToBusinessApplication(applicationDto);
+    }
+
+    @Override
+    public List<BusinessApplication> findAllApplications() {
+        List<ApplicationDto> applicationDtoList = availabilityService.findAllApplications();
+        return applicationMapper.mapToBusinessApplicationList(applicationDtoList);
+    }
+
+    @Override
+    public Transaction findBusinessTransactionById(String transactionId) {
+        TransactionDto transactionDto = availabilityService.findTransactionById(transactionId);
+        return transactionMapper.mapToTransaction(transactionDto);
+    }
+
+    @Override
+    public List<Transaction> findTransactionsByApplication(String applicationId) {
+        List<TransactionDto> transactionDtoList = availabilityService.findTransactionsByApplicationId(applicationId);
+        return transactionMapper.mapToTransactionList(transactionDtoList);
     }
 }

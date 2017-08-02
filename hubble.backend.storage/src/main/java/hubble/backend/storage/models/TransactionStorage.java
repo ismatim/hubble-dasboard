@@ -4,9 +4,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class TransactionStorage {
-    
+
+    private String id;
     private String transactionId;
-    private String applicationId;
     private String transactionName;
     private String transactionType;
     private String scriptName;
@@ -14,16 +14,27 @@ public class TransactionStorage {
     private int criticalThreshold;
     private boolean assigned;
 
-    public String getTransactionId() {
+    public TransactionStorage() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public boolean isAssigned() {
+        return assigned;
+    }
+
+    public void setAssigned(boolean assigned) {
+        this.assigned = assigned;
+    }
+
+     public String getTransactionId() {
         return transactionId;
-    }
-
-    public String getApplicationId() {
-        return applicationId;
-    }
-
-    public void setApplicationId(String applicationId) {
-        this.applicationId = applicationId;
     }
 
     public void setTransactionId(String transactionId) {
@@ -53,7 +64,7 @@ public class TransactionStorage {
     public void setScriptName(String scriptName) {
         this.scriptName = scriptName;
     }
-    
+
     public int getOkThreshold() {
         return okThreshold;
     }
@@ -69,12 +80,4 @@ public class TransactionStorage {
     public void setCriticalThreshold(int criticalThreshold) {
         this.criticalThreshold = criticalThreshold;
     }
-    
-    public boolean isAssigned() {
-        return assigned;
-    }
-
-    public void setAssigned(boolean assigned) {
-        this.assigned = assigned;
-    }   
 }

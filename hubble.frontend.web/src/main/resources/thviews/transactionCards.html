@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<div th:replace="mainTemplates/header"></div>
+<body>
+  <div th:replace="mainTemplates/navbar"></div>
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 class="modal-title" id="modal_title">Titulo</h3>
+        </div>
+        <div class="modal-body">
+          <h5 class="text-center" id="modal_button_pressed">Algun Texto</h5>
+          <table class="table table-striped" id="tblGrid">
+            <thead id="tblHead">
+              <tr>
+                <th>Transacción</th>
+                <th>Performance</th>
+                <th class="text-right">Tiempo de respuesta</th>
+                <th>Disponibilidad</th>
+                <th>Fecha</th>
+
+              </tr>
+            </thead>
+            <tbody id="myModalData">
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <div class="container top-buffer">
+    <h4 >Aplicacion</h4>
+    <div class="row d-flex">
+      <div class="col-sm-6 col-md-4 col-lg-4 d-flex" th:each="transaction, iter : ${transactions}">
+        <div class="card top-buffer" style="border-color: #2E2E2E;border-style: solid;border-width: 1px;border-radius: 3px;" >
+          <div class="card-block">
+            <a href="#"><h4 class="card-title" th:text="${transaction.displayName}"></h4></a>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Última Hora</th>
+                  <th>Últimos 10 Minutos</th>
+                  <th><i class="fa fa-cloud-download" style="font-size: 17px;" data-toggle="tooltip" data-placement="top" title="Medicion ultimos 60 minutos" ></i>
+                  </th>
+                  <th><i class="fa fa-cloud-download" style="font-size: 17px;" data-toggle="tooltip" data-placement="top" title="Medicion ultimos 10 minutos"></i></th>
+                </tr>
+                <tbody>
+                  <tr>
+                    <td><i class="fa fa-calendar" title="Indica disponibilidad" data-toggle="tooltip" data-placement="top"></i>
+                    </td>
+                    <td th:text="${availabilityLastHourAvgs[iter.index].average}+'%'"></td>
+                    <td th:text="${availabilityLast10MinutesAvgs[iter.index].average}+'%'"></td>
+                    <td th:id="${transaction.id}+'_id_disponibilidad_60'" class="icon-center"></td>
+                    <td th:id="${transaction.id}+'_id_disponibilidad_10'" class="icon-center"></td>
+                  </tr>
+                  <tr>
+                    <td><i class="fa fa-clock-o" title="Indica Performance" data-toggle="tooltip" data-placement="top" ></i>
+                    </td>
+                    <td th:text="${performanceLastHourAvgs[iter.index].average}+'s'"></td>
+                    <td th:text="${performanceLast10MinutesAvgs[iter.index].average}+'s'"></td>
+                    <td th:id="${transaction.id}+'_id_performance_60'" class="icon-center"></td>
+                    <td th:id="${transaction.id}+'_id_performance_10'" class="icon-center"></td>
+                  </tr>
+                </tbody>
+              </thead>
+            </table>
+            <h4 class="card-title icon-center" th:text="'Ultima Actualizacion: '+${now}"></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/block_color_transfer.js"></script>
+  <script th:inline="javascript">
+    /*<![CDATA[*/
+
+    var transactionAvailabilityAvgData = [[${availabilityLastHourAvgs}]];
+    var transactionPerformanceAvgData = [[${performanceLastHourAvgs}]];
+    var dataList = [[${transactions}]];
+
+
+    for (i = 0; i < transactionAvailabilityAvgData.length; i++) {
+      var id_object = transactionAvailabilityAvgData[i]["transaction"]["id"];
+      setBlockColor(id_object+"_id_disponibilidad_60",transactionAvailabilityAvgData[i]["average"]);
+      setBlockColor(id_object+"_id_disponibilidad_10",transactionAvailabilityAvgData[i]["average"]);
+    }
+
+    /*
+    for (i = 0; i < transactionPerformanceAvgData.length; i++) {
+      alert(Object.keys(transactionPerformanceAvgData[0]));
+      var id_object = transactionPerformanceAvgData[i]["id"];
+      setBlockColor(id_object+"_id_performance_60",transactionPerformanceAvgData[i]["average"]);
+      setBlockColor(id_object+"_id_performance_10",transactionPerformanceAvgData[i]["average"]);
+    }
+    */
+
+$('#myModal').on('show.bs.modal', function(e) {
+var getIdFromRow = $(e.relatedTarget);
+fillModal(getIdFromRow[0].id)
+});
+$("#myModal").on("hidden.bs.modal", function(){
+    $("#myModalData").html("");
+});
+  function fillModal(id){
+    var idList = id.split("_");
+    var obj= dataList[idList[0]]['disponibilidadPerformance'+idList[2]+'MinutosList'];
+    document.getElementById("modal_title").textContent=dataList[idList[0]]['name'];
+    document.getElementById("modal_button_pressed").textContent='informacion de los ultimos '+idList[2]+' Minutos';
+
+    if (obj == null || obj == undefined) {
+      return;
+    }
+    for (i = 0; i < obj.length; i++) {
+$('#myModalData').append('<tr><td>'+obj[i]['name']+'</td><td>'+obj[i]['performance']+'</td><td>'+obj[i]['tiempoDeRespuesta']+'</td><td>'+obj[i]['disponibilidad']+'</td><td>'+obj[i]['date']+'</td></tr>');
+
+    }
+
+  }
+    /*]]>*/
+
+  </script>
+  <div th:replace="mainTemplates/footer"></div>
+</body>
+</html>
