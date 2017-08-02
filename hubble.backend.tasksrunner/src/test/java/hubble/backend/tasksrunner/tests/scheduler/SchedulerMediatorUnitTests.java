@@ -3,9 +3,9 @@ package hubble.backend.tasksrunner.tests.scheduler;
 import hubble.backend.providers.parsers.interfaces.Parser;
 import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveDataParser;
 import hubble.backend.tasksrunner.application.scheduler.SchedulerMediator;
-import hubble.backend.tasksrunner.jobs.apppulse.AppPulseParserJob;
+import hubble.backend.tasksrunner.jobs.apppulse.AppPulseDataParserJob;
 import hubble.backend.tasksrunner.jobs.ParserJob;
-import hubble.backend.tasksrunner.tasks.apppulse.AppPulseTaskImpl;
+import hubble.backend.tasksrunner.tasks.apppulse.AppPulseDataTaskImpl;
 import hubble.backend.tasksrunner.tasks.ParserTask;
 import hubble.backend.tasksrunner.tasks.Task;
 import hubble.backend.tasksrunner.tests.configurations.TasksRunnerTestConfiguration;
@@ -45,8 +45,8 @@ public class SchedulerMediatorUnitTests {
         //Assign
         Parser appPulseParser = spy(AppPulseActiveDataParser.class);
         ConfigurableApplicationContext ctx = mock(ConfigurableApplicationContext.class);
-        ParserJob job = spy(new AppPulseParserJob(appPulseParser));
-        Task task = spy(new AppPulseTaskImpl(job));
+        ParserJob job = spy(new AppPulseDataParserJob(appPulseParser));
+        Task task = spy(new AppPulseDataTaskImpl(job));
         task.setIndentityGroupName("AppPulse Active Provider Job");
         task.setIndentityName("AppPulse");
         SchedulerMediator sm = new SchedulerMediator(ctx);
@@ -97,8 +97,8 @@ public class SchedulerMediatorUnitTests {
             return 0;
         }).when(appPulseParserFake).run();
 
-        ParserJob appPulseJob = new AppPulseParserJob(appPulseParserFake);
-        ParserTask appPulseTaskFake = new AppPulseTaskImpl(appPulseJob);
+        ParserJob appPulseJob = new AppPulseDataParserJob(appPulseParserFake);
+        ParserTask appPulseTaskFake = new AppPulseDataTaskImpl(appPulseJob);
         appPulseTaskFake.setIntervalSeconds(1);
 
         appPulseTaskFake.setIndentityGroupName("AppPulse Active Provider Job");
@@ -125,8 +125,8 @@ public class SchedulerMediatorUnitTests {
         ConfigurableApplicationContext ctx = mock(ConfigurableApplicationContext.class);
         SchedulerMediator schedule = new SchedulerMediator(ctx);
         Parser appPulseParserFake = spy(AppPulseActiveDataParser.class);
-        ParserJob appPulseJob = new AppPulseParserJob(appPulseParserFake);
-        ParserTask appPulseTaskFake = new AppPulseTaskImpl(appPulseJob);
+        ParserJob appPulseJob = new AppPulseDataParserJob(appPulseParserFake);
+        ParserTask appPulseTaskFake = new AppPulseDataTaskImpl(appPulseJob);
         appPulseTaskFake.setIntervalSeconds(1);
 
         //Act
@@ -141,8 +141,8 @@ public class SchedulerMediatorUnitTests {
         ConfigurableApplicationContext ctx = mock(ConfigurableApplicationContext.class);
         SchedulerMediator schedule = new SchedulerMediator(ctx);
         Parser appPulseParserFake = spy(AppPulseActiveDataParser.class);
-        ParserJob appPulseJob = new AppPulseParserJob(appPulseParserFake);
-        ParserTask appPulseTaskFake = new AppPulseTaskImpl(appPulseJob);
+        ParserJob appPulseJob = new AppPulseDataParserJob(appPulseParserFake);
+        ParserTask appPulseTaskFake = new AppPulseDataTaskImpl(appPulseJob);
         appPulseTaskFake.setIndentityGroupName("AppPulse Active Provider Job");
         appPulseTaskFake.setIndentityName("AppPulse");
 
@@ -167,8 +167,8 @@ public class SchedulerMediatorUnitTests {
 
         doThrow(Exception.class).when(appPulseParserFake).run();
 
-        ParserJob appPulseJob = new AppPulseParserJob(appPulseParserFake);
-        ParserTask appPulseTaskFake = new AppPulseTaskImpl(appPulseJob);
+        ParserJob appPulseJob = new AppPulseDataParserJob(appPulseParserFake);
+        ParserTask appPulseTaskFake = new AppPulseDataTaskImpl(appPulseJob);
 
         appPulseTaskFake.setIntervalSeconds(1);
 

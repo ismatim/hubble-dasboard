@@ -8,7 +8,7 @@ import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
 import org.quartz.Trigger;
 import static org.quartz.TriggerBuilder.newTrigger;
 
-public class AppPulseTaskImpl implements ParserTask {
+public class AppPulseDataTaskImpl implements ParserTask {
 
     String identityName;
     String identityGroupName;
@@ -17,11 +17,11 @@ public class AppPulseTaskImpl implements ParserTask {
     Trigger trigger;
     int interval = 0;
 
-    public AppPulseTaskImpl() {
+    public AppPulseDataTaskImpl() {
 
     }
 
-    public AppPulseTaskImpl(ParserJob providerJob) {
+    public AppPulseDataTaskImpl(ParserJob providerJob) {
         appPulseJob = providerJob;
     }
 

@@ -3,13 +3,17 @@ package hubble.backend.tasksrunner.application.scheduler;
 import hubble.backend.tasksrunner.application.scheduler.menu.Menu;
 import hubble.backend.tasksrunner.application.scheduler.menu.MenuImpl;
 import hubble.backend.tasksrunner.tasks.Task;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static org.apache.commons.lang.StringUtils.EMPTY;
+import org.quartz.JobKey;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
+import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.impl.matchers.GroupMatcher;
 import org.springframework.context.ConfigurableApplicationContext;
 
 public class SchedulerMediator implements SchedulerUserCommands, SchedulerTasksActions {
@@ -65,11 +69,21 @@ public class SchedulerMediator implements SchedulerUserCommands, SchedulerTasksA
     public void print() {
         try {
 
-            List<String> jobs = scheduler.getJobGroupNames();
-            for (String job : jobs) {
-                System.out.println(job);
-            }
+            for (String groupName : scheduler.getJobGroupNames()) {
 
+                for (JobKey jobKey : scheduler.getJobKeys(GroupMatcher.jobGroupEquals(groupName))) {
+
+                    String jobName = jobKey.getName();
+                    String jobGroup = jobKey.getGroup();
+
+                    //get job's trigger
+                    List<Trigger> triggers = (List<Trigger>) scheduler.getTriggersOfJob(jobKey);
+                    Date nextFireTime = triggers.get(0).getNextFireTime();
+
+                    System.out.println("[jobName] : " + jobName + " [groupName] : "
+                            + jobGroup + " - [nextExecution]" + nextFireTime);
+                }
+            }
         } catch (SchedulerException ex) {
             Logger.getLogger(SchedulerMediator.class.getName()).log(Level.SEVERE, null, ex);
         }

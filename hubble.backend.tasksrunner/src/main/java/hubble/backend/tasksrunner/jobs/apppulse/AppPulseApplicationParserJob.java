@@ -1,7 +1,7 @@
 package hubble.backend.tasksrunner.jobs.apppulse;
 
 import hubble.backend.providers.parsers.interfaces.Parser;
-import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveDataParser;
+import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveApplicationsParser;
 import hubble.backend.tasksrunner.jobs.ParserJob;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -11,16 +11,16 @@ import org.quartz.SchedulerContext;
 import org.quartz.SchedulerException;
 import org.springframework.context.ConfigurableApplicationContext;
 
-public class AppPulseParserJob implements ParserJob {
+public class AppPulseApplicationParserJob implements ParserJob {
 
     private Parser appPulseActiveParser;
-    private static final Logger logger = Logger.getLogger(AppPulseParserJob.class.getName());
+    private static final Logger logger = Logger.getLogger(AppPulseApplicationParserJob.class.getName());
 
-    public AppPulseParserJob() {
+    public AppPulseApplicationParserJob() {
         //This constructor is used by Quartz. DON'T DELETE. CANT SET DEFAULT CONSTRUCTOR.
     }
 
-    public AppPulseParserJob(Parser parser) {
+    public AppPulseApplicationParserJob(Parser parser) {
         appPulseActiveParser = parser;
     }
 
@@ -35,7 +35,7 @@ public class AppPulseParserJob implements ParserJob {
         }
 
         ConfigurableApplicationContext taskRunneAppContext = (ConfigurableApplicationContext) schedulerContext.get("context");
-        appPulseActiveParser = taskRunneAppContext.getBean(AppPulseActiveDataParser.class);
+        appPulseActiveParser = taskRunneAppContext.getBean(AppPulseActiveApplicationsParser.class);
 
         try {
             appPulseActiveParser.run();

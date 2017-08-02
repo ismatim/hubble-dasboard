@@ -45,12 +45,12 @@ public class AppPulseActiveApplicationsParserImpl implements AppPulseActiveAppli
         return appPulseActivities;
     }
 
-    public ApplicationProviderModel extract(InputStream appPulseTransactions) {
+    public ApplicationProviderModel extract(InputStream appPulseApplication) {
 
         ObjectMapper objMapper = new ObjectMapper();
         ApplicationProviderModel applicationProviderModel;
         try {
-            applicationProviderModel = objMapper.readValue(appPulseTransactions, ApplicationProviderModel.class);
+            applicationProviderModel = objMapper.readValue(appPulseApplication, ApplicationProviderModel.class);
         } catch (IOException ex) {
             //TODO: Debe loguearse información.
             return null;
@@ -64,10 +64,10 @@ public class AppPulseActiveApplicationsParserImpl implements AppPulseActiveAppli
         return this.mapperConfifuration.mapToApplicationsStorage(appPulseProv);
     }
 
-    public void save(List<ApplicationStorage> appPulseRecords) {
-        appPulseRecords.stream().forEach((availabilityRecordToSave) -> {
-            if (!applicationRepository.exist(availabilityRecordToSave)) {
-                applicationRepository.save(availabilityRecordToSave);
+    public void save(List<ApplicationStorage> appPulseApplicationRecords) {
+        appPulseApplicationRecords.stream().forEach((applicationToSave) -> {
+            if (!applicationRepository.exist(applicationToSave)) {
+                applicationRepository.save(applicationToSave);
             }
         });
     }
@@ -87,7 +87,6 @@ public class AppPulseActiveApplicationsParserImpl implements AppPulseActiveAppli
         ApplicationProviderModel records = parse(data);
         this.applicationsStorage = convert(records);
 
-        //Guardar.
         save(applicationsStorage);
 
     }
