@@ -5,23 +5,18 @@ import hubble.backend.providers.configurations.environments.ProviderEnvironment;
 import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
 import hubble.backend.providers.parsers.implementations.apppulse.AppPulseActiveDataParserImpl;
-import hubble.backend.providers.tests.configurations.BaseConfiguration;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
 import hubble.backend.providers.transports.implementations.apppulse.AppPulseActiveTransportImpl;
 import hubble.backend.storage.repositories.AvailabilityRepository;
 import java.io.InputStream;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 
-@ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
-@ContextConfiguration(classes = BaseConfiguration.class)
 public class AppPulseActiveDataParserExtractUnitTests extends AppPulseBaseUnitTests {
 
     @Spy
@@ -36,7 +31,6 @@ public class AppPulseActiveDataParserExtractUnitTests extends AppPulseBaseUnitTe
     //TODO: Mover a cada prueba unitaria.
     private AppPulseActiveDataParserImpl appPulseActiveParser
             = new AppPulseActiveDataParserImpl(appPulseActiveTransport, mapperConfifuration, availabilityRepository);
-
 
     @Test
     public void AppPulseActiveParserImpl_should_be_instantiated() {

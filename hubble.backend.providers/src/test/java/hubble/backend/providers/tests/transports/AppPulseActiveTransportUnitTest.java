@@ -13,19 +13,14 @@ import static org.mockito.Matchers.anyString;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import org.springframework.context.annotation.Profile;
-import org.springframework.test.context.ActiveProfiles;
 
-@ActiveProfiles("test")
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(Unirest.class)
 public class AppPulseActiveTransportUnitTest extends AppPulseBaseUnitTests {
 
-
     private ProviderEnvironment environment;
     private AppPulseActiveTransportImpl appPulseActiveTransport;
 
-    @Profile("test")
     @Test
     public void AppPulseActiveParser_when_it_runs_and_not_get_connection_should_not_be_parsed() {
 

@@ -1,18 +1,12 @@
 package hubble.frontend.managers.configurations.mappers;
 
-import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
 import hubble.backend.business.services.models.AvailabilityDto;
-import hubble.backend.business.services.models.AvailabilityTransactionAvgDto;
-import hubble.backend.business.services.models.TransactionDto;
 import hubble.backend.core.enums.MonitoringFields;
 import hubble.frontend.managers.models.aggregations.AvailabilityBusinessApplicationAvg;
-import hubble.frontend.managers.models.aggregations.AvailabilityTransactionAvg;
 import hubble.frontend.managers.models.collections.Availability;
-import hubble.frontend.managers.models.entities.BusinessApplication;
-import hubble.frontend.managers.models.entities.Transaction;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -28,9 +22,8 @@ public class MapperConfigurationUnitTests {
     TransactionMapperConfiguration mapperTransaction = new TransactionMapperConfiguration();
     AvailabilityApplicationAvgMapperConfiguration mapperAvailabilityApplicationAvg = new AvailabilityApplicationAvgMapperConfiguration();
 
-
     @Test
-    public void validate_availability_mapper_from_availabilitydto_to_availability(){
+    public void validate_availability_mapper_from_availabilitydto_to_availability() {
         mapperAvailability.getMapper().validate();
     }
 
@@ -147,5 +140,5 @@ public class MapperConfigurationUnitTests {
         assertEquals("Transaction Name", businessTransaction.getBusinessTransactionName());
         assertEquals("Transaction Name", businessTransaction.getBusinessTransactionDisplayName());
     }
-    */
+     */
 }

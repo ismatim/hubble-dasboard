@@ -15,11 +15,11 @@ import org.modelmapper.TypeToken;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MapperConfiguration {
+public class DtoMapperConfiguration {
 
     private ModelMapper mapper;
 
-    public MapperConfiguration() {
+    public DtoMapperConfiguration() {
             mapper = new ModelMapper();
     }
 

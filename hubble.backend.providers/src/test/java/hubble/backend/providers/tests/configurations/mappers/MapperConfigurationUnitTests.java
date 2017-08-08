@@ -2,16 +2,14 @@ package hubble.backend.providers.tests.configurations.mappers;
 
 import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
-import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
+import hubble.backend.storage.models.AvailabilityStorage;
 import java.util.List;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.test.context.ActiveProfiles;
 
-@ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 public class MapperConfigurationUnitTests extends AppPulseBaseUnitTests {
 
@@ -30,6 +28,6 @@ public class MapperConfigurationUnitTests extends AppPulseBaseUnitTests {
         assertNotNull(availabilityStorageList);
         assertTrue(availabilityStorageList.get(0).getApplicationId() == "1");
         assertTrue(availabilityStorageList.get(0).getApplicationName() == "fake-name");
-        assertTrue(availabilityStorageList.get(0).getAvailabilityStatus()== "fake-status");
+        assertTrue(availabilityStorageList.get(0).getAvailabilityStatus() == "fake-status");
     }
 }

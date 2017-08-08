@@ -1,26 +1,31 @@
 package hubble.frontend.managers.tests;
 
+import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveApplicationsParser;
+import hubble.backend.storage.models.ApplicationStorage;
+import hubble.backend.storage.repositories.ApplicationRepository;
 import hubble.frontend.managers.interfaces.AvailabilityManager;
-import hubble.frontend.managers.models.collections.Availability;
 import hubble.frontend.managers.models.aggregations.AvailabilityBusinessApplicationAvg;
+import hubble.frontend.managers.models.collections.Availability;
 import hubble.frontend.managers.models.entities.BusinessApplication;
 import hubble.frontend.managers.tests.configurations.BaseConfigurationTest;
 import java.util.List;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = BaseConfigurationTest.class)
 public class AvailabilityManagerIntegrationTests {
 
     @Autowired
     AvailabilityManager availabilityManager;
+    @Autowired
+    private AppPulseActiveApplicationsParser appPulseActiveParser;
+    @Autowired
+    private ApplicationRepository applicationRepository;
 
     @Test
     public void availability_manager_should_be_instantiated() {
@@ -29,7 +34,7 @@ public class AvailabilityManagerIntegrationTests {
     }
 
     @Test
-    public void availability_Manager_should_return_all_availabilities_from_db(){
+    public void availability_Manager_should_return_all_availabilities_from_db() {
         //Act
         List<Availability> availabilities = availabilityManager.findAllAvailabilities();
 
@@ -38,10 +43,12 @@ public class AvailabilityManagerIntegrationTests {
     }
 
     @Test
-    public void availability_Manager_should_retrieve_lastHour_average_by_an_application(){
+    public void availability_Manager_should_retrieve_lastHour_average_by_an_application() {
         //Assign
+        applicationRepository.deleteAll();
         String applicationId = "e071193b8376e06554eb2344173cb66d";
         //Act
+        appPulseActiveParser.run();
         AvailabilityBusinessApplicationAvg applicationAvg = availabilityManager.findLastHourAverageByApplication(applicationId);
 
         //Assert
@@ -49,11 +56,11 @@ public class AvailabilityManagerIntegrationTests {
         assertEquals("BancoRipley - HomeBanking", applicationAvg.getBusinessApplication().getName());
         assertEquals(90, applicationAvg.getBusinessApplication().getAvailabilityThreshold());
         assertTrue(applicationAvg.getStatus().toString().equals("Success")
-                    || applicationAvg.getStatus().toString().equals("Warning")
-                    || applicationAvg.getStatus().toString().equals("Critical")
-                    || applicationAvg.getStatus().toString().equals("Outlier")
-                    || applicationAvg.getStatus().toString().equals("Error")
-                    || applicationAvg.getStatus().toString().equals("No_Data")
+                || applicationAvg.getStatus().toString().equals("Warning")
+                || applicationAvg.getStatus().toString().equals("Critical")
+                || applicationAvg.getStatus().toString().equals("Outlier")
+                || applicationAvg.getStatus().toString().equals("Error")
+                || applicationAvg.getStatus().toString().equals("No_Data")
         );
         assertEquals("1", applicationAvg.getBusinessApplication().getTimeZoneId());
 
@@ -61,13 +68,22 @@ public class AvailabilityManagerIntegrationTests {
         assertTrue("Error, wrong average, it's value is less than 0%", applicationAvg.getAverage() >= -1);
         //assertEquals(22, applicationAvg.getAverage());
         //assertEquals(2, applicationAvg.getBusinessApplication().getTransactionIds().size());
+
+        //Clean
+        List<ApplicationStorage> applications = appPulseActiveParser.getApplicationStorage();
+        applications.stream().forEach((applicationsFromAppPulse) -> {
+            applicationRepository.delete(applicationsFromAppPulse);
+        });
+
     }
 
     @Test
-    public void availability_Manager_should_retrieve_lastHour_average_by_an_application_without_transactions(){
+    public void availability_Manager_should_retrieve_lastHour_average_by_an_application_without_transactions() {
         //Assign
+        applicationRepository.deleteAll();
         String applicationId = "e3ccaa4d89e4f05650c6a371923e8796";
         //Act
+        appPulseActiveParser.run();
         AvailabilityBusinessApplicationAvg applicationAvg = availabilityManager.findLastHourAverageByApplication(applicationId);
 
         //Assert
@@ -75,11 +91,11 @@ public class AvailabilityManagerIntegrationTests {
         assertEquals("BancoRipley - Plataforma Post Venta", applicationAvg.getBusinessApplication().getName());
         assertEquals(90, applicationAvg.getBusinessApplication().getAvailabilityThreshold());
         assertTrue(applicationAvg.getStatus().toString().equals("Success")
-                    || applicationAvg.getStatus().toString().equals("Warning")
-                    || applicationAvg.getStatus().toString().equals("Critical")
-                    || applicationAvg.getStatus().toString().equals("Outlier")
-                    || applicationAvg.getStatus().toString().equals("Error")
-                    || applicationAvg.getStatus().toString().equals("No_Data")
+                || applicationAvg.getStatus().toString().equals("Warning")
+                || applicationAvg.getStatus().toString().equals("Critical")
+                || applicationAvg.getStatus().toString().equals("Outlier")
+                || applicationAvg.getStatus().toString().equals("Error")
+                || applicationAvg.getStatus().toString().equals("No_Data")
         );
         assertEquals("1", applicationAvg.getBusinessApplication().getTimeZoneId());
 
@@ -87,16 +103,30 @@ public class AvailabilityManagerIntegrationTests {
         assertTrue("Error, wrong average, it's value is less than 0%", applicationAvg.getAverage() >= -1);
         //assertEquals(22, applicationAvg.getAverage());
         //assertEquals(2, applicationAvg.getBusinessApplication().getTransactionIds().size());
+
+        //Clean
+        List<ApplicationStorage> applications = appPulseActiveParser.getApplicationStorage();
+        applications.stream().forEach((applicationsFromAppPulse) -> {
+            applicationRepository.delete(applicationsFromAppPulse);
+        });
     }
 
     //e3ccaa4d89e4f05650c6a371923e8796
-
     @Test
-    public void availability_Manager_should_return_all_aapplications(){
+    public void availability_Manager_should_return_all_aapplications() {
+        //Assign
+        applicationRepository.deleteAll();
         //Act
-        List<BusinessApplication> applications = availabilityManager.findAllApplications();
+        appPulseActiveParser.run();
+        List<BusinessApplication> businessApplications = availabilityManager.findAllApplications();
 
         //Assert
-        assertEquals(3, applications.size());
+        assertEquals(3, businessApplications.size());
+
+        //Clean
+        List<ApplicationStorage> applications = appPulseActiveParser.getApplicationStorage();
+        applications.stream().forEach((applicationsFromAppPulse) -> {
+            applicationRepository.delete(applicationsFromAppPulse);
+        });
     }
 }

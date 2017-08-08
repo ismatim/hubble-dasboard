@@ -6,9 +6,9 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile("stage")
-@PropertySource("classpath:config/application.stage.properties")
-public class StorageStageEnvironment implements StorageEnvironment {
+@Profile("test")
+@PropertySource("classpath:config/application.test.properties")
+public class StorageEnvironmentTestImpl implements StorageEnvironment {
 
     @Value("${app.host}")
     private String host;
@@ -45,5 +45,4 @@ public class StorageStageEnvironment implements StorageEnvironment {
     public void setServerName(String serverName) {
         this.serverName = serverName;
     }
-
 }

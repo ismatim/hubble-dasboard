@@ -1,26 +1,17 @@
 package hubble.frontend.managers.tests;
 
-import hubble.backend.business.domain.AvailabilityBusiness;
+import hubble.frontend.managers.interfaces.AvailabilityManager;
 import hubble.frontend.managers.tests.configurations.BaseConfigurationTest;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import static java.util.stream.Collectors.toList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import hubble.frontend.managers.interfaces.AvailabilityManager;
 
-@ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = BaseConfigurationTest.class)
 public class AvailabilityManagerUnitTest {
@@ -47,13 +38,11 @@ public class AvailabilityManagerUnitTest {
     public void tearDown() {
     }
 
-
     @Test
-    public void availability_manager_should_return_one_sample_by_its_id(){
-
+    public void availability_manager_should_return_one_sample_by_its_id() {
 
     }
-/*
+    /*
     @Test
     public void availability_manager_should_return_a_list_of_samples(){
         //Assign
@@ -156,6 +145,6 @@ public class AvailabilityManagerUnitTest {
 
     }
 
-*/
+     */
 
 }
