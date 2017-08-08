@@ -21,9 +21,7 @@ import static org.mockito.Mockito.*;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.test.context.ActiveProfiles;
 
-@ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
 public class AppPulseActiveDataParserUnitTest extends AppPulseBaseUnitTests {
 

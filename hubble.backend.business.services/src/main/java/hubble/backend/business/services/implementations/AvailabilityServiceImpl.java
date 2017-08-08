@@ -1,6 +1,6 @@
 package hubble.backend.business.services.implementations;
 
-import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
+import hubble.backend.business.services.configurations.mappers.DtoMapperConfiguration;
 import hubble.backend.business.services.models.AvailabilityDto;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.repositories.AvailabilityRepository;
@@ -28,7 +28,7 @@ public class AvailabilityServiceImpl implements AvailabilityService{
     @Autowired
     TransactionRepository transactionRepository;
     @Autowired
-    MapperConfiguration mapper;
+    DtoMapperConfiguration mapper;
     
     @Override
     public TransactionDto findTransactionById(String transactionId) {

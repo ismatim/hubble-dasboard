@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>hubble</groupId>
+        <artifactId>hubble</artifactId>
+        <version>1.0</version>
+    </parent>
     <groupId>hubble</groupId>
     <artifactId>hubble.frontend.managers</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -10,12 +15,6 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.4.RELEASE</version>
-        <relativePath/>
-    </parent>
 
     <dependencies>
         <dependency>
@@ -47,11 +46,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>hubble.backend</groupId>
-            <artifactId>hubble.backend.business.domain</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
             <version>4.3.9.RELEASE</version>
@@ -70,6 +64,11 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
-   </dependencies>
+        <dependency>
+            <groupId>hubble.backend</groupId>
+            <artifactId>hubble.backend.providers</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
     <name>hubble.frontend.managers</name>
 </project>

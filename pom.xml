@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.6.RELEASE</version>
+    </parent>
+    <groupId>hubble</groupId>
+    <artifactId>hubble</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+    <name>hubble</name>
+    <modules>
+        <module>hubble.backend.core</module>
+        <module>hubble.backend.providers</module>
+        <module>hubble.backend.storage</module>
+        <module>hubble.backend.tasksrunner</module>
+        <module>hubble.backend.business.services</module>
+        <module>hubble.frontend.managers</module>
+        <module>hubble.frontend.web</module>
+    </modules>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+
+</project>

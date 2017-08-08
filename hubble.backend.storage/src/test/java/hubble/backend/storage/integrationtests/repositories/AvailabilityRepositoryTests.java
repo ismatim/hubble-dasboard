@@ -1,8 +1,8 @@
 package hubble.backend.storage.integrationtests.repositories;
 
 import hubble.backend.core.utils.CalendarHelper;
-import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.configurations.StorageComponentConfiguration;
+import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.repositories.AvailabilityRepository;
 import hubble.backend.storage.tests.AvailabilityHelper;
 import java.util.Calendar;
@@ -14,12 +14,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ActiveProfiles("test")
 @ContextConfiguration(classes = StorageComponentConfiguration.class)
 public class AvailabilityRepositoryTests {
 
@@ -38,10 +36,10 @@ public class AvailabilityRepositoryTests {
     }
 
     @Test
-    public void availability_repository_should_return_all_samples_by_its_id(){
+    public void availability_repository_should_return_all_samples_by_its_id() {
         List<AvailabilityStorage> samples = availabilityRepository.findAll();
 
-        for (AvailabilityStorage sample : samples){
+        for (AvailabilityStorage sample : samples) {
 
             assertNotNull(availabilityRepository.findOne(sample.getId()));
         }
@@ -170,37 +168,37 @@ public class AvailabilityRepositoryTests {
     }
 
     @Test
-    public void availability_repository_should_return_samples_by_application_id(){
+    public void availability_repository_should_return_samples_by_application_id() {
         List<AvailabilityStorage> samples = availabilityRepository.findAvailabilitiesByApplicationId("1");
 
         System.out.println(samples.size());
-        for (AvailabilityStorage sample : samples){
+        for (AvailabilityStorage sample : samples) {
 
-            assertEquals("1",sample.getApplicationId());
+            assertEquals("1", sample.getApplicationId());
         }
 
     }
 
     @Test
-    public void availability_repository_should_return_last_10minutes_samples_by_application_id(){
-        List<AvailabilityStorage> samples = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10,"1");
+    public void availability_repository_should_return_last_10minutes_samples_by_application_id() {
+        List<AvailabilityStorage> samples = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10, "1");
 
         System.out.println(samples.size());
-        for (AvailabilityStorage sample : samples){
+        for (AvailabilityStorage sample : samples) {
 
-            assertEquals("1",sample.getApplicationId());
+            assertEquals("1", sample.getApplicationId());
         }
 
     }
 
     @Test
-    public void availability_repository_should_return_last_hour_samples_by_application_id(){
-        List<AvailabilityStorage> samples = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(60,"1");
+    public void availability_repository_should_return_last_hour_samples_by_application_id() {
+        List<AvailabilityStorage> samples = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(60, "1");
 
         System.out.println(samples.size());
-        for (AvailabilityStorage sample : samples){
+        for (AvailabilityStorage sample : samples) {
 
-            assertEquals("1",sample.getApplicationId());
+            assertEquals("1", sample.getApplicationId());
         }
     }
 }

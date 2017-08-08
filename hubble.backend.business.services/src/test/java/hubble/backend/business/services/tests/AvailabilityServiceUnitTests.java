@@ -1,6 +1,6 @@
 package hubble.backend.business.services.tests;
 
-import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
+import hubble.backend.business.services.configurations.mappers.DtoMapperConfiguration;
 import hubble.backend.business.services.tests.configurations.ServiceBaseConfigurationTest;
 import hubble.backend.business.services.implementations.AvailabilityServiceImpl;
 import hubble.backend.business.services.models.ApplicationDto;
@@ -40,7 +40,7 @@ public class AvailabilityServiceUnitTests {
     @Mock
     private TransactionRepository transactionRepository;
     @Spy
-    private MapperConfiguration mapper;
+    private DtoMapperConfiguration mapper;
 
     @InjectMocks
     private AvailabilityServiceImpl availabilityService;
@@ -337,7 +337,7 @@ public class AvailabilityServiceUnitTests {
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(10, transactionId)).thenReturn(availabilityStorageList);
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
-        when(applicationRepository.findApplicationByTransactionId(transactionStorage.getId())).thenReturn(parentApplicationStorage);
+        when(applicationRepository.findApplicationByTransactionId("2eae220e082697be3a0646400e5b54fa")).thenReturn(parentApplicationStorage);
         average = availabilityService.calculateLast10MinutesAverageTransactionAvailability(transactionId).getAverage();
 
         //Assert
@@ -356,7 +356,7 @@ public class AvailabilityServiceUnitTests {
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(60, transactionId)).thenReturn(availabilityStorageList);
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
-        when(applicationRepository.findApplicationByTransactionId(transactionStorage.getId())).thenReturn(parentApplicationStorage);
+        when(applicationRepository.findApplicationByTransactionId("2eae220e082697be3a0646400e5b54fa")).thenReturn(parentApplicationStorage);
         average = availabilityService.calculateLastHourAverageTransactionAvailability(transactionId).getAverage();
 
         //Assert

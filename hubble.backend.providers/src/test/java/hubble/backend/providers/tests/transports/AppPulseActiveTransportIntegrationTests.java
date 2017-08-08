@@ -1,6 +1,6 @@
 package hubble.backend.providers.tests.transports;
 
-import hubble.backend.providers.tests.configurations.BaseConfiguration;
+import hubble.backend.providers.configurations.ProvidersConfiguration;
 import hubble.backend.providers.transports.interfaces.AppPulseActiveTransport;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import org.json.JSONObject;
@@ -10,13 +10,11 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@ActiveProfiles("test")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = BaseConfiguration.class)
+@ContextConfiguration(classes = ProvidersConfiguration.class)
 public class AppPulseActiveTransportIntegrationTests {
 
     @Autowired
@@ -70,5 +68,19 @@ public class AppPulseActiveTransportIntegrationTests {
         //Assert
         assertNotNull(data);
         assertTrue(data.length() > 0);
+    }
+
+    @Test
+    public void AppPulseActiveTransportImpl_when_it_runs_should_connect_get_data_and_save_it() {
+
+        //Act
+        appPulseActiveTransport.getToken();
+        JSONObject data = appPulseActiveTransport.getData();
+
+        //Assert
+        assertNotNull(data);
+        assertTrue(data.has("hasMoreDataToFetch"));
+        assertTrue(data.has("lastRetrievedSequenceId"));
+        assertTrue(data.has("data"));
     }
 }

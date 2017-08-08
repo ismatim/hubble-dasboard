@@ -6,7 +6,6 @@ import hubble.backend.providers.configurations.mappers.apppulse.MapperConfigurat
 import hubble.backend.providers.models.apppulse.ApplicationProviderModel;
 import hubble.backend.providers.parsers.implementations.apppulse.AppPulseActiveApplicationsParserImpl;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
-import hubble.backend.providers.tests.configurations.BaseConfiguration;
 import hubble.backend.providers.transports.implementations.apppulse.AppPulseActiveTransportImpl;
 import hubble.backend.storage.repositories.ApplicationRepository;
 import java.io.InputStream;
@@ -16,12 +15,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Spy;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
 
-@ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
-@ContextConfiguration(classes = BaseConfiguration.class)
 public class AppPulseActiveApplicationParserExtractUnitTests extends AppPulseBaseUnitTests {
 
     @Spy

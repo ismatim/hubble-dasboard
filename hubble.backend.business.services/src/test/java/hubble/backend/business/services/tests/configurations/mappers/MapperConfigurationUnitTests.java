@@ -1,8 +1,8 @@
 package hubble.backend.business.services.tests.configurations.mappers;
 
-import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
-import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
+import hubble.backend.business.services.configurations.mappers.DtoMapperConfiguration;
 import hubble.backend.business.services.models.ApplicationDto;
+import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
 import hubble.backend.business.services.models.AvailabilityDto;
 import hubble.backend.business.services.models.AvailabilityTransactionAvgDto;
 import hubble.backend.business.services.models.TransactionDto;
@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.junit.Assert;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -26,11 +26,11 @@ import org.springframework.test.context.ActiveProfiles;
 @RunWith(MockitoJUnitRunner.class)
 public class MapperConfigurationUnitTests {
 
-    MapperConfiguration mapperConfiguration = new MapperConfiguration();
+    DtoMapperConfiguration mapperConfiguration = new DtoMapperConfiguration();
     AvailabilityHelper availabilityHelper = new AvailabilityHelper();
 
     @Test
-    public void mapper_should_map_availabilitystorage_to_availabilitydto(){
+    public void mapper_should_map_availabilitystorage_to_availabilitydto() {
         AvailabilityStorage availabilityStorage = mock(AvailabilityStorage.class);
 
         when(availabilityStorage.getApplicationId()).thenReturn("1");
@@ -48,25 +48,25 @@ public class MapperConfigurationUnitTests {
         when(availabilityStorage.getScriptName()).thenReturn("homebanking");
         when(availabilityStorage.getErrors()).thenReturn(null);
 
-        AvailabilityDto availabilityDto = mapperConfiguration.getMapper().map(availabilityStorage,AvailabilityDto.class);
+        AvailabilityDto availabilityDto = mapperConfiguration.getMapper().map(availabilityStorage, AvailabilityDto.class);
 
-        Assert.assertEquals(availabilityStorage.getApplicationId(),availabilityDto.getApplicationId());
-        Assert.assertEquals(availabilityStorage.getApplicationName(),availabilityDto.getApplicationName());
-        Assert.assertEquals(availabilityStorage.getAvailabilityStatus(),availabilityDto.getAvailabilityStatus());
-        Assert.assertEquals(availabilityStorage.getId(),availabilityDto.getId());
-        Assert.assertEquals(availabilityStorage.getLocationId(),availabilityDto.getLocationId());
-        Assert.assertEquals(availabilityStorage.getLocationName(),availabilityDto.getLocationName());
-        Assert.assertEquals(availabilityStorage.getNumberOfErrors(),availabilityDto.getNumberOfErrors());
-        Assert.assertEquals(availabilityStorage.getProviderOrigin(),availabilityDto.getProviderOrigin());
-        Assert.assertEquals(availabilityStorage.getTransactionName(),availabilityDto.getTransactionName());
-        Assert.assertEquals(availabilityStorage.getTimeStamp(),availabilityDto.getTimeStamp());
-        Assert.assertEquals(availabilityStorage.getTransactionId(),availabilityDto.getTransactionId());
-        Assert.assertEquals(availabilityStorage.getServerName(),availabilityDto.getServerName());
-        Assert.assertEquals(availabilityStorage.getScriptName(),availabilityDto.getScriptName());
+        Assert.assertEquals(availabilityStorage.getApplicationId(), availabilityDto.getApplicationId());
+        Assert.assertEquals(availabilityStorage.getApplicationName(), availabilityDto.getApplicationName());
+        Assert.assertEquals(availabilityStorage.getAvailabilityStatus(), availabilityDto.getAvailabilityStatus());
+        Assert.assertEquals(availabilityStorage.getId(), availabilityDto.getId());
+        Assert.assertEquals(availabilityStorage.getLocationId(), availabilityDto.getLocationId());
+        Assert.assertEquals(availabilityStorage.getLocationName(), availabilityDto.getLocationName());
+        Assert.assertEquals(availabilityStorage.getNumberOfErrors(), availabilityDto.getNumberOfErrors());
+        Assert.assertEquals(availabilityStorage.getProviderOrigin(), availabilityDto.getProviderOrigin());
+        Assert.assertEquals(availabilityStorage.getTransactionName(), availabilityDto.getTransactionName());
+        Assert.assertEquals(availabilityStorage.getTimeStamp(), availabilityDto.getTimeStamp());
+        Assert.assertEquals(availabilityStorage.getTransactionId(), availabilityDto.getTransactionId());
+        Assert.assertEquals(availabilityStorage.getServerName(), availabilityDto.getServerName());
+        Assert.assertEquals(availabilityStorage.getScriptName(), availabilityDto.getScriptName());
     }
 
     @Test
-    public void mapper_convert_availabilityStorage_to_availabilityDto_model(){
+    public void mapper_convert_availabilityStorage_to_availabilityDto_model() {
         //Assign
         AvailabilityStorage availabilityStorage = availabilityHelper.mockOneAvailabilityStorage();
 
@@ -81,7 +81,7 @@ public class MapperConfigurationUnitTests {
     }
 
     @Test
-    public void mapper_convert_availabilityStorageList_to_availabilityDtoList_model(){
+    public void mapper_convert_availabilityStorageList_to_availabilityDtoList_model() {
         //Assign
         List<AvailabilityStorage> availabilityStorageList = availabilityHelper.mockData();
 
@@ -96,7 +96,7 @@ public class MapperConfigurationUnitTests {
     }
 
     @Test
-    public void mapper_should_map_applicationStorage_to_applicationDto(){
+    public void mapper_should_map_applicationStorage_to_applicationDto() {
         ApplicationStorage applicationStorage = mock(ApplicationStorage.class);
 
         when(applicationStorage.getApplicationId()).thenReturn("1234");
@@ -125,7 +125,7 @@ public class MapperConfigurationUnitTests {
     }
 
     @Test
-    public void mapper_should_map_transactionStorage_to_transactionDto(){
+    public void mapper_should_map_transactionStorage_to_transactionDto() {
         TransactionStorage transactionStorage = mock(TransactionStorage.class);
 
         when(transactionStorage.getTransactionId()).thenReturn("1234");
@@ -148,7 +148,7 @@ public class MapperConfigurationUnitTests {
     }
 
     @Test
-    public void mapper_convert_applicationStorageList_to_applicationDtoList_model(){
+    public void mapper_convert_applicationStorageList_to_applicationDtoList_model() {
         //Assign
         List<ApplicationStorage> applicationStorageList = new ArrayList();
         applicationStorageList.add(availabilityHelper.mockApplicationStorage());
@@ -163,7 +163,7 @@ public class MapperConfigurationUnitTests {
     }
 
     @Test
-    public void mapper_convert_transactionStorageList_to_transactionDtoList_model(){
+    public void mapper_convert_transactionStorageList_to_transactionDtoList_model() {
         //Assign
         List<TransactionStorage> transactionStorageList = availabilityHelper.mockTransactionStorage();
 
@@ -173,12 +173,11 @@ public class MapperConfigurationUnitTests {
         //Assert
         assertNotNull(transactionDtoList);
         assertEquals("2eae220e082697be3a0646400e5b54fa", transactionDtoList.get(0).getTransactionId());
-        assertEquals("b566958ec4ff28028672780d15edcf56", transactionDtoList.get(0).getApplicationId());
         assertEquals("Auntenticacion Biometrica", transactionDtoList.get(0).getTransactionName());
     }
 
     @Test
-    public void mapper_should_map_transactionStorage_to_transactionAvailabilityAverage(){
+    public void mapper_should_map_transactionStorage_to_transactionAvailabilityAverage() {
         TransactionStorage transactionStorage = mock(TransactionStorage.class);
 
         when(transactionStorage.getTransactionId()).thenReturn("1234");
@@ -201,7 +200,7 @@ public class MapperConfigurationUnitTests {
     }
 
     @Test
-    public void mapper_should_map_transactionStorage_to_applicationAvailabilityAverage(){
+    public void mapper_should_map_transactionStorage_to_applicationAvailabilityAverage() {
         ApplicationStorage applicationStorage = mock(ApplicationStorage.class);
 
         when(applicationStorage.getApplicationId()).thenReturn("1234");
@@ -230,7 +229,7 @@ public class MapperConfigurationUnitTests {
     }
 
     @Test
-    public void mapper_convert_transactionStorageList_to_transactionAvailabilityAvgList_model(){
+    public void mapper_convert_transactionStorageList_to_transactionAvailabilityAvgList_model() {
         //Assign
         List<TransactionStorage> transactionStorageList = availabilityHelper.mockTransactionStorage();
 
@@ -240,12 +239,11 @@ public class MapperConfigurationUnitTests {
         //Assert
         assertNotNull(transactionAvailabilityAvgList);
         assertEquals("2eae220e082697be3a0646400e5b54fa", transactionAvailabilityAvgList.get(0).getTransactionId());
-        assertEquals("b566958ec4ff28028672780d15edcf56", transactionAvailabilityAvgList.get(0).getApplicationId());
         assertEquals("Auntenticacion Biometrica", transactionAvailabilityAvgList.get(0).getTransactionName());
     }
 
     @Test
-    public void mapper_convert_applicationStorageList_to_applicationAvailabilityAvgList_model(){
+    public void mapper_convert_applicationStorageList_to_applicationAvailabilityAvgList_model() {
         //Assign
         List<ApplicationStorage> applicationStorageList = new ArrayList();
         applicationStorageList.add(availabilityHelper.mockApplicationStorage());
