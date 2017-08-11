@@ -3,36 +3,8 @@
 <div th:replace="mainTemplates/header"></div>
 <body>
   <div th:replace="mainTemplates/navbar"></div>
-  <div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3 class="modal-title" id="modal_title">Titulo</h3>
-        </div>
-        <div class="modal-body">
-          <h5 class="text-center" id="modal_button_pressed">Algun Texto</h5>
-          <table class="table table-striped" id="tblGrid">
-            <thead id="tblHead">
-              <tr>
-                <th>Transacción</th>
-                <th>Performance</th>
-                <th class="text-right">Tiempo de respuesta</th>
-                <th>Disponibilidad</th>
-                <th>Fecha</th>
-
-              </tr>
-            </thead>
-            <tbody id="myModalData">
-            </tbody>
-          </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default " data-dismiss="modal">Cerrar</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
+  <div th:replace="mainTemplates/detailsModal"></div>
+  
   <div class="container top-buffer">
     <h4 >Aplicacion</h4>
     <div class="row d-flex">
@@ -60,10 +32,12 @@
                     <td th:id="${transaction.id}+'_id_disponibilidad_10'" class="icon-center"></td>
                   </tr>
                   <tr>
-                    <td><i class="fa fa-clock-o" title="Indica Performance" data-toggle="tooltip" data-placement="top" ></i>
+                      <td><i class="fa fa-clock-o" title="Indica Performance" data-toggle="tooltip" data-placement="top"></i>
                     </td>
-                    <td th:text="${performanceLastHourAvgs[iter.index].average}+'s'"></td>
-                    <td th:text="${performanceLast10MinutesAvgs[iter.index].average}+'s'"></td>
+                    <td th:unless="${performanceLastHourAvgs[iter.index].average &lt; 0} " th:text="${performanceLastHourAvgs[iter.index].average}/1000+'s'"></td>
+                    <td th:unless="${performanceLast10MinutesAvgs[iter.index].average &lt; 0} " th:text="${performanceLast10MinutesAvgs[iter.index].average}/1000+'s'"></td>
+                    <td th:if="${performanceLastHourAvgs[iter.index].average &lt; 0} " th:text="${performanceLastHourAvgs[iter.index].average}+'s'"></td>
+                    <td th:if="${performanceLast10MinutesAvgs[iter.index].average &lt; 0} " th:text="${performanceLast10MinutesAvgs[iter.index].average}+'s'"></td>
                     <td th:id="${transaction.id}+'_id_performance_60'" class="icon-center"></td>
                     <td th:id="${transaction.id}+'_id_performance_10'" class="icon-center"></td>
                   </tr>
@@ -76,53 +50,98 @@
       </div>
     </div>
   </div>
-
+  <script src="/js/detailsModal.js"></script>
   <script src="/js/block_color_transfer.js"></script>
   <script th:inline="javascript">
     /*<![CDATA[*/
-
-    var transactionAvailabilityAvgData = [[${availabilityLastHourAvgs}]];
+    var transactionAvailabilityAvgData = [[${availabilityLast10MinutesAvgs}]];
     var transactionPerformanceAvgData = [[${performanceLastHourAvgs}]];
-    var dataList = [[${transactions}]];
-
-
+    var transactions = [[${transactions}]];
+    
+    var availabilitiesLastHour = [[${availabilitiesLastHour}]];
+    var availabilitiesLast10Minutes = [[${availabilitiesLast10Minutes}]];
+    var performancesLastHour = [[${performancesLastHour}]];
+    var performancesLast10Minutes = [[${performancesLast10Minutes}]];
+        
+        
     for (i = 0; i < transactionAvailabilityAvgData.length; i++) {
       var id_object = transactionAvailabilityAvgData[i]["transaction"]["id"];
-      setBlockColor(id_object+"_id_disponibilidad_60",transactionAvailabilityAvgData[i]["average"]);
-      setBlockColor(id_object+"_id_disponibilidad_10",transactionAvailabilityAvgData[i]["average"]);
+      setBlockColor(id_object+"_id_disponibilidad_60",transactionAvailabilityAvgData[i]["average"],id_object+"_id_disponibilidad_60");
+      setBlockColor(id_object+"_id_disponibilidad_10",transactionAvailabilityAvgData[i]["average"],id_object+"_id_disponibilidad_10");
     }
 
-    /*
+    
     for (i = 0; i < transactionPerformanceAvgData.length; i++) {
-      alert(Object.keys(transactionPerformanceAvgData[0]));
-      var id_object = transactionPerformanceAvgData[i]["id"];
-      setBlockColor(id_object+"_id_performance_60",transactionPerformanceAvgData[i]["average"]);
-      setBlockColor(id_object+"_id_performance_10",transactionPerformanceAvgData[i]["average"]);
+      var id_object = transactionPerformanceAvgData[i]["transaction"]["id"];
+      setBlockColor(id_object+"_id_performance_60",transactionPerformanceAvgData[i]["average"],id_object+"_id_performance_60");
+      setBlockColor(id_object+"_id_performance_10",transactionPerformanceAvgData[i]["average"],id_object+"_id_performance_10");
     }
-    */
-
-$('#myModal').on('show.bs.modal', function(e) {
-var getIdFromRow = $(e.relatedTarget);
-fillModal(getIdFromRow[0].id)
-});
-$("#myModal").on("hidden.bs.modal", function(){
+    
+    $('#myModal').on('show.bs.modal', function (e) {
+    var getIdFromRow = $(e.relatedTarget);
+    for (var key in getIdFromRow[0]["id"]) {
+        //alert(key);
+    }
+    fillModal(getIdFromRow[0].id);
+     });
+$("#myModal").on("hidden.bs.modal", function () {
     $("#myModalData").html("");
+    $("#myModalHead").html("");
 });
-  function fillModal(id){
+
+function fillModal(id) {
+    
     var idList = id.split("_");
-    var obj= dataList[idList[0]]['disponibilidadPerformance'+idList[2]+'MinutosList'];
-    document.getElementById("modal_title").textContent=dataList[idList[0]]['name'];
-    document.getElementById("modal_button_pressed").textContent='informacion de los ultimos '+idList[2]+' Minutos';
-
-    if (obj == null || obj == undefined) {
-      return;
+    var transactionId = idList[0];
+    var collection = idList[2];
+    var period = idList[3];
+    var data;
+    var description = "";
+    
+    document.getElementById("modal_title").textContent = "Detalle de mediciones";
+    
+    if(collection == "performance"){
+        if(period=="60"){
+            data = performancesLastHour;
+            description = "Performance última Hora"
+        }
+        if(period=="10"){
+            data = performancesLast10Minutes;
+            description = "Performance últimos 10 Minutos"
+        }          
+    }    
+    if(collection == "disponibilidad"){
+        if(period=="60"){
+            data = availabilitiesLastHour;
+            description = "Disponibilidad última Hora"
+        }
+        if(period=="10"){
+            data = availabilitiesLast10Minutes;
+            description = "Disponibilidad últimos 10 Minutos"
+        }   
     }
-    for (i = 0; i < obj.length; i++) {
-$('#myModalData').append('<tr><td>'+obj[i]['name']+'</td><td>'+obj[i]['performance']+'</td><td>'+obj[i]['tiempoDeRespuesta']+'</td><td>'+obj[i]['disponibilidad']+'</td><td>'+obj[i]['date']+'</td></tr>');
+    
+    document.getElementById("modal_button_pressed").textContent = description;
+    
+    //var obj = dataList[0]['disponibilidadPerformance' + idList[2] + '10MinutosList'];
+    //document.getElementById("modal_title").textContent = dataList[0]['displayName'];
+    //
 
+    if(collection == "disponibilidad"){
+        $('#myModalHead').append('<tr><th>Fecha y Hora</th><th>Transacción</th><th>Locación</th><th>Estado de Disponibilidad</th><th>Cantidad de warnings</th></tr>');
+        for (i = 0; i < data.length; i++) { 
+            if(data[i]['transaction']['id']==transactionId)
+                $('#myModalData').append('<tr><td>' + data[i]['timeStamp'] + '</td><td>' + data[i]['transaction']['name'] + '</td><td>' + data[i]['location']['name'] + '</td><td>' + data[i]['status'] + '</td><td>' + data[i]['numberOfErrors'] + '</td><td>');
+        }
     }
-
-  }
+    if(collection == "performance"){
+        $('#myModalHead').append('<tr><th>Fecha y Hora</th><th>Transacción</th><th>Locación</th><th>Tiempo de Respuesta</th></tr>');
+        for (i = 0; i < data.length; i++) { 
+            if(data[i]['transaction']['id']==transactionId)
+                $('#myModalData').append('<tr><td>' + data[i]['timeStamp'] + '</td><td>' + data[i]['transaction']['name'] + '</td><td>' + data[i]['location']['name'] + '</td><td>' + data[i]['responseTime'] + '</td><td>');
+        }
+    }
+}
     /*]]>*/
 
   </script>

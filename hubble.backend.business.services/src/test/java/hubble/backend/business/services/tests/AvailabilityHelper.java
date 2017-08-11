@@ -87,8 +87,8 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-
-        availabilityStorage.setApplicationId("1");
+        
+        availabilityStorage.setApplicationId("2");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
         availabilityStorage.setAvailabilityStatus("Success");
@@ -108,8 +108,8 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-
-        availabilityStorage.setApplicationId("1");
+        
+        availabilityStorage.setApplicationId("3");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
         availabilityStorage.setAvailabilityStatus("Error");
@@ -129,7 +129,8 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-
+        
+        availabilityStorage.setApplicationId("4");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
         availabilityStorage.setAvailabilityStatus("Success");

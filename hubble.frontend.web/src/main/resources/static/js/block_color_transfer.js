@@ -4,6 +4,7 @@ $(document).ready(function(){
 
 function setBlockColor(id,number,idButton){
   var number = number;
+
   var el = document.getElementById(id);
   el.innerHTML = '';
   el.classList.remove('block-grey');
@@ -14,6 +15,9 @@ function setBlockColor(id,number,idButton){
     el.classList.add('block-grey');
     $("#"+id).append("<a id='"+idButton+"' class='icon-center center-block' href='#myModal' data-toggle='modal'><i class='fa fa-exclamation fa-lg' style='color:#f7f7f7;' data-toggle='tooltip' data-placement='bottom' title='Sin informacion' ></i></a>");
     return;
+  }
+  if(id.split("_")[2] == "performance"){
+    number/=1000
   }
   if(number>90){
     el.classList.add('block-green');

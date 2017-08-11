@@ -337,7 +337,7 @@ public class AvailabilityServiceUnitTests {
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(10, transactionId)).thenReturn(availabilityStorageList);
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
-        when(applicationRepository.findApplicationByTransactionId("2eae220e082697be3a0646400e5b54fa")).thenReturn(parentApplicationStorage);
+        when(applicationRepository.findApplicationByTransactionId(transactionId)).thenReturn(parentApplicationStorage);
         average = availabilityService.calculateLast10MinutesAverageTransactionAvailability(transactionId).getAverage();
 
         //Assert
@@ -356,10 +356,11 @@ public class AvailabilityServiceUnitTests {
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(60, transactionId)).thenReturn(availabilityStorageList);
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
-        when(applicationRepository.findApplicationByTransactionId("2eae220e082697be3a0646400e5b54fa")).thenReturn(parentApplicationStorage);
+        when(applicationRepository.findApplicationByTransactionId(transactionId)).thenReturn(parentApplicationStorage);
         average = availabilityService.calculateLastHourAverageTransactionAvailability(transactionId).getAverage();
 
         //Assert
         assertEquals(75, average);
     }
+   
 }

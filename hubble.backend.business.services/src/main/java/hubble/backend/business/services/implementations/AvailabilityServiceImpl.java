@@ -1,7 +1,6 @@
 package hubble.backend.business.services.implementations;
 
 import hubble.backend.business.services.configurations.mappers.DtoMapperConfiguration;
-import hubble.backend.business.services.models.AvailabilityDto;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.repositories.AvailabilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import hubble.backend.business.services.interfaces.AvailabilityService;
 import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
 import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.models.AvailabilityTransactionAvgDto;
+import hubble.backend.business.services.models.AvailabilityDto;
 import hubble.backend.business.services.models.TransactionDto;
 import hubble.backend.core.enums.MonitoringFields;
 import hubble.backend.storage.models.ApplicationStorage;
@@ -204,4 +204,6 @@ public class AvailabilityServiceImpl implements AvailabilityService{
         else 
             return MonitoringFields.STATUS.NO_DATA;
     }
+
+    
 }
