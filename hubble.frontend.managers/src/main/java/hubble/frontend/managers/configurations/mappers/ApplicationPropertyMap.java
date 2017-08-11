@@ -2,8 +2,6 @@ package hubble.frontend.managers.configurations.mappers;
 
 import hubble.backend.business.services.models.ApplicationDto;
 import hubble.frontend.managers.models.entities.BusinessApplication;
-import java.util.ArrayList;
-import java.util.List;
 import org.modelmapper.PropertyMap;
 
 public class ApplicationPropertyMap extends PropertyMap<ApplicationDto, BusinessApplication> {

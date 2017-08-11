@@ -17,6 +17,7 @@ function setBlockColor(id,number){
     checkBlockNumber(id,'block-grey');
     return;
   }
+  number /=1000
   if(number>90 && !isNumber){
     el.classList.add('block-green');
     checkBlockNumber(id,'block-green');

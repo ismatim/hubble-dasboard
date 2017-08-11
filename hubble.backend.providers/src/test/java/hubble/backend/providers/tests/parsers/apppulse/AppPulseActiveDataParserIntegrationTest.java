@@ -44,6 +44,7 @@ public class AppPulseActiveDataParserIntegrationTest extends AppPulseBaseUnitTes
             return availabilityRepository.exist(availabilityFromAppPulse);
         }));
 
+        assertTrue(availabilityRepository.count() == availabilities.size());
         availabilities.stream().forEach((availabilityFromAppPulse) -> {
             availabilityRepository.delete(availabilityFromAppPulse);
         });

@@ -1,10 +1,12 @@
 package hubble.frontend.managers.models.aggregations;
 
 import hubble.backend.core.enums.MonitoringFields;
+import hubble.frontend.managers.models.entities.BusinessApplication;
 import hubble.frontend.managers.models.entities.Transaction;
 
 public class AvailabilityTransactionAvg {
 
+    private BusinessApplication businessApplication;
     private Transaction transaction;
     private MonitoringFields.STATUS Status;
     private int average;

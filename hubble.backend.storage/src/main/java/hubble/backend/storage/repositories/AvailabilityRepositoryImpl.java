@@ -32,14 +32,31 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
     }
 
     @Override
+    public List<AvailabilityStorage> findAvailabilitiesByDurationMonths(int duration) {
+
+        Calendar from = CalendarHelper.getNow();
+        from.add(Calendar.MONTH, -duration);
+
+        Criteria tenMinutesMinusCriteria = Criteria.where("timeStamp").gte(from.getTime());
+
+        List<AvailabilityStorage> availabilities = mongo
+                .find(Query
+                        .query(tenMinutesMinusCriteria),
+                        AvailabilityStorage.class);
+
+        return availabilities;
+    }
+
+    @Override
     public boolean exist(AvailabilityStorage availability) {
 
         Criteria isSameTimeStamp = Criteria.where("timeStamp").is(availability.getTimeStamp());
         Criteria isSameProvider = Criteria.where("providerOrigin").is(availability.getProviderOrigin());
+        Criteria isSameTransactionId = Criteria.where("transactionId").is(availability.getTransactionId());
 
         List<AvailabilityStorage> availabilities = mongo
                 .find(Query
-                        .query(isSameTimeStamp.andOperator(isSameProvider)),
+                        .query(isSameTimeStamp.andOperator(isSameProvider, isSameTransactionId)),
                         AvailabilityStorage.class);
 
         return !availabilities.isEmpty();
@@ -68,7 +85,7 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
 
         List<AvailabilityStorage> availabilities = mongo
                 .find(Query
-                       .query(durationCriteria.andOperator(isApplicationId)),
+                        .query(durationCriteria.andOperator(isApplicationId)),
                         AvailabilityStorage.class);
 
         return availabilities;
@@ -77,7 +94,7 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
     @Override
     public List<AvailabilityStorage> findAvailabilitiesByTransactionId(String transactionId) {
         Criteria isTransactionId = Criteria.where("transactionId").is(transactionId);
-        
+
         List<AvailabilityStorage> availabilities = mongo
                 .find(Query
                         .query(isTransactionId),
@@ -96,9 +113,41 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
 
         List<AvailabilityStorage> availabilities = mongo
                 .find(Query
-                       .query(durationCriteria.andOperator(isTransactionId)),
+                        .query(durationCriteria.andOperator(isTransactionId)),
                         AvailabilityStorage.class);
 
         return availabilities;
-    }  
+    }
+
+    @Override
+    public List<AvailabilityStorage> findAvailabilitiesByApplicationIdAndDurationMonths(int duration, String applicationId) {
+        Calendar from = CalendarHelper.getNow();
+        from.add(Calendar.MONTH, -duration);
+
+        Criteria isApplicationId = Criteria.where("applicationId").is(applicationId);
+        Criteria durationCriteria = Criteria.where("timeStamp").gte(from.getTime());
+
+        List<AvailabilityStorage> availabilities = mongo
+                .find(Query
+                        .query(durationCriteria.andOperator(isApplicationId)),
+                        AvailabilityStorage.class);
+
+        return availabilities;
+    }
+
+    @Override
+    public List<AvailabilityStorage> findAvailabilitiesByTransactionIdAndDurationMonths(int duration, String transactionId) {
+        Calendar from = CalendarHelper.getNow();
+        from.add(Calendar.MONTH, -duration);
+
+        Criteria isTransactionId = Criteria.where("transactionId").is(transactionId);
+        Criteria durationCriteria = Criteria.where("timeStamp").gte(from.getTime());
+
+        List<AvailabilityStorage> availabilities = mongo
+                .find(Query
+                        .query(durationCriteria.andOperator(isTransactionId)),
+                        AvailabilityStorage.class);
+
+        return availabilities;
+    }
 }

@@ -43,7 +43,7 @@ public class DashboardMainController {
         for(BusinessApplication application : applications){
             availabilityApplicationsLastHourAvgs.add(availabilityManager.findLastHourAverageByApplication(application.getId()));
             availabilityApplicationsLast10MinutesAvgs.add(availabilityManager.findLast10MinutesAverageByApplication(application.getId()));
-            performanceApplicationsLast10MinutesAvgs.add(performanceManager.findLastHourAverageByApplication(application.getId()));
+            performanceApplicationsLast10MinutesAvgs.add(performanceManager.findLast10MinutesAverageByApplication(application.getId()));
             performanceApplicationsLastHourAvgs.add(performanceManager.findLastHourAverageByApplication(application.getId()));
         }
 

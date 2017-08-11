@@ -2,6 +2,7 @@ package hubble.backend.business.services.tests;
 
 import hubble.backend.business.services.interfaces.AvailabilityService;
 import hubble.backend.business.services.models.AvailabilityDto;
+import hubble.backend.business.services.models.PerformanceDto;
 import hubble.backend.business.services.tests.configurations.ServiceBaseConfigurationTest;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.repositories.AvailabilityRepository;
@@ -94,7 +95,7 @@ public class AvailabilityServiceIntegrationTests {
         }
 
     }
-
+    
     @Test
     public void availability_service_should_return_last_10minutes_availabilities() {
         List<AvailabilityDto> availabilities = availabilityService.findLast10MinutesAvailabilities();

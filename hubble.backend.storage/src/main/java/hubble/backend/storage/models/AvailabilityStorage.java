@@ -14,7 +14,7 @@ public class AvailabilityStorage {
     private String transactionId;
     private String locationName;
     private String locationId;
-    private long responseTime;
+    private int responseTime;
     private Date timeStamp;
     private String serverName;
     private String scriptName;
@@ -97,7 +97,7 @@ public class AvailabilityStorage {
         return responseTime;
     }
 
-    public void setResponseTime(long responseTime) {
+    public void setResponseTime(int responseTime) {
         this.responseTime = responseTime;
     }
 

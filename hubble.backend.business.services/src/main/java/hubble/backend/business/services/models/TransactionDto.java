@@ -1,12 +1,13 @@
 package hubble.backend.business.services.models;
 
 public class TransactionDto {
-    
+
     private String transactionId;
     private String applicationId;
     private String transactionName;
     private String transactionType;
     private String scriptName;
+    private int availabilityThreshold;
     private int okThreshold;
     private int criticalThreshold;
     private boolean assigned;
@@ -73,5 +74,14 @@ public class TransactionDto {
 
     public void setAssigned(boolean assigned) {
         this.assigned = assigned;
-    }  
+    }
+
+    public int getAvailabilityThreshold() {
+        return availabilityThreshold;
+    }
+
+    public void setAvailabilityThreshold(int availabilityThreshold) {
+        this.availabilityThreshold = availabilityThreshold;
+    }
+
 }
