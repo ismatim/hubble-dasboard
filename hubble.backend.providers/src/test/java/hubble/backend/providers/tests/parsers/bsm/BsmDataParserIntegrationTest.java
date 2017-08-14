@@ -1,7 +1,7 @@
-package hubble.backend.providers.tests.parsers.apppulse;
+package hubble.backend.providers.tests.parsers.bsm;
 
 import hubble.backend.providers.configurations.ProvidersConfiguration;
-import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveDataParser;
+import hubble.backend.providers.parsers.interfaces.bsm.BsmDataParser;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.repositories.AvailabilityRepository;
@@ -16,38 +16,37 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ProvidersConfiguration.class)
-public class AppPulseActiveDataParserIntegrationTest extends AppPulseBaseUnitTests {
+public class BsmDataParserIntegrationTest extends AppPulseBaseUnitTests {
 
     @Autowired
-    private AppPulseActiveDataParser appPulseActiveParser;
+    private BsmDataParser bsmParser;
     @Autowired
     private AvailabilityRepository availabilityRepository;
 
     @Test
-    public void AppPulseActiveParser_should_be_instantiated() {
-        assertNotNull(appPulseActiveParser);
+    public void BsmParser_should_be_instantiated() {
+        assertNotNull(bsmParser);
     }
 
-//    @Test
-    public void AppPulseActiveParser_when_it_runs_should_connect_get_data_and_save_it() {
+    @Test
+    public void BsmParser_when_it_runs_should_connect_get_data_and_save_it() {
 
         //Assign
         availabilityRepository.deleteAll();
 
         //Act
-        appPulseActiveParser.run();
+        bsmParser.run();
 
         //Assert
-        List<AvailabilityStorage> availabilities = appPulseActiveParser.getAvailabilitiesStorage();
+        List<AvailabilityStorage> availabilities = bsmParser.getAvailabilitiesStorage();
         assertNotNull(availabilities);
-        assertTrue(availabilities.stream().allMatch((availabilityFromAppPulse) -> {
-            return availabilityRepository.exist(availabilityFromAppPulse);
+        assertTrue(availabilities.stream().allMatch((availabilityFromBsm) -> {
+            return availabilityRepository.exist(availabilityFromBsm);
         }));
 
         assertTrue(availabilityRepository.count() == availabilities.size());
-        availabilities.stream().forEach((availabilityFromAppPulse) -> {
-            availabilityRepository.delete(availabilityFromAppPulse);
+        availabilities.stream().forEach((availabilityFromBsm) -> {
+            availabilityRepository.delete(availabilityFromBsm);
         });
     }
-
 }

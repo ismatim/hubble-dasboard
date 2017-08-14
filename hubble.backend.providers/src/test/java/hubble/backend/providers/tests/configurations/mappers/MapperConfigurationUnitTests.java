@@ -1,6 +1,6 @@
 package hubble.backend.providers.tests.configurations.mappers;
 
-import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
+import hubble.backend.providers.configurations.mappers.apppulse.AppPulseMapperConfiguration;
 import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
 import hubble.backend.storage.models.AvailabilityStorage;
@@ -13,7 +13,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 @RunWith(MockitoJUnitRunner.class)
 public class MapperConfigurationUnitTests extends AppPulseBaseUnitTests {
 
-    MapperConfiguration mapperConfifuration = new MapperConfiguration();
+    AppPulseMapperConfiguration mapperConfifuration = new AppPulseMapperConfiguration();
 
     @Test
     public void AppPulseActiveParser_convert_apppulse_model_provider_to_storage() {

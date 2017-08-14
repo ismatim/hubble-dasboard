@@ -5,17 +5,16 @@ import hubble.backend.providers.models.apppulse.AvailabilityProviderModel;
 import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.AvailabilityStorage;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MapperConfiguration {
+public class AppPulseMapperConfiguration {
 
     private ModelMapper mapper;
 
-    public MapperConfiguration() {
+    public AppPulseMapperConfiguration() {
         mapper = new ModelMapper();
         this.mapper.addMappings(new AvailabilityPropertyMap());
         this.mapper.addMappings(new ApplicationPropertyMap());
@@ -40,7 +39,6 @@ public class MapperConfiguration {
             AvailabilityStorage newAppPulseRecord = new AvailabilityStorage();
 
             this.mapper.map(item, newAppPulseRecord);
-            newAppPulseRecord.setTimeStamp(new Date(item.getTimeStamp() * 1000));
             availabilitiesRecordsToBeSaved.add(newAppPulseRecord);
         });
 
