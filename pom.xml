@@ -26,6 +26,23 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <dependencies>
+         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jcabi</groupId>
+            <artifactId>jcabi-log</artifactId>
+            <version>0.17.2</version>
+        </dependency>
         <dependency>
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
