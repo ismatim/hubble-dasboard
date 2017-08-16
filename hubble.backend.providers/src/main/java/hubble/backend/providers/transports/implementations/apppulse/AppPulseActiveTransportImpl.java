@@ -45,7 +45,7 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
         }
 
         if (jsonResponse == null || jsonResponse.getBody() == null) {
-            return null;
+            return EMPTY;
         }
 
         JSONObject response = jsonResponse.getBody().getObject();
