@@ -1,7 +1,7 @@
 package hubble.backend.providers.parsers.implementations.apppulse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
+import hubble.backend.providers.configurations.mappers.apppulse.AppPulseMapperConfiguration;
 import hubble.backend.providers.models.apppulse.ApplicationProviderModel;
 import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveApplicationsParser;
 import hubble.backend.providers.transports.interfaces.AppPulseActiveTransport;
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppPulseActiveApplicationsParserImpl implements AppPulseActiveApplicationsParser {
 
-    private MapperConfiguration mapperConfifuration;
+    private AppPulseMapperConfiguration mapperConfifuration;
     private AppPulseActiveTransport appPulseActiveTransport;
     private List<ApplicationStorage> applicationsStorage;
     private ApplicationRepository applicationRepository;
@@ -27,7 +27,7 @@ public class AppPulseActiveApplicationsParserImpl implements AppPulseActiveAppli
     @Autowired
     public AppPulseActiveApplicationsParserImpl(
             AppPulseActiveTransport appPulseActiveTransport,
-            MapperConfiguration mapperConfifuration,
+            AppPulseMapperConfiguration mapperConfifuration,
             ApplicationRepository applicationRepository) {
         this.appPulseActiveTransport = appPulseActiveTransport;
         this.mapperConfifuration = mapperConfifuration;

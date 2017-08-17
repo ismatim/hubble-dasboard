@@ -2,7 +2,7 @@ package hubble.backend.providers.tests.parsers.apppulse;
 
 import hubble.backend.providers.configurations.environments.AppPulseTestProviderEnvironmentImpl;
 import hubble.backend.providers.configurations.environments.ProviderEnvironment;
-import hubble.backend.providers.configurations.mappers.apppulse.MapperConfiguration;
+import hubble.backend.providers.configurations.mappers.apppulse.AppPulseMapperConfiguration;
 import hubble.backend.providers.models.apppulse.ApplicationProviderModel;
 import hubble.backend.providers.parsers.implementations.apppulse.AppPulseActiveApplicationsParserImpl;
 import hubble.backend.providers.tests.AppPulseBaseUnitTests;
@@ -24,7 +24,7 @@ public class AppPulseActiveApplicationParserExtractUnitTests extends AppPulseBas
     @Spy
     AppPulseActiveTransportImpl appPulseActiveTransport = new AppPulseActiveTransportImpl(environment);
     @Spy
-    MapperConfiguration mapperConfifuration = new MapperConfiguration();
+    AppPulseMapperConfiguration mapperConfifuration = new AppPulseMapperConfiguration();
     @Mock
     private ApplicationRepository availabilityRepository;
 

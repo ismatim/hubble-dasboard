@@ -1,19 +1,19 @@
 package hubble.backend.core.enums;
 
-public class Providers {
+public class Status {
 
-    public static enum PROVIDERS_NAME {
+    public static enum STATUS_NAMES {
 
-        APP_PULSE {
+        SUCCESS {
             @Override
             public String toString() {
-                return "HP AppPulse Active";
+                return "Success";
             }
         },
-        BSM {
+        FAILED {
             @Override
             public String toString() {
-                return "HP BSM";
+                return "Failed";
             }
         }
     }
