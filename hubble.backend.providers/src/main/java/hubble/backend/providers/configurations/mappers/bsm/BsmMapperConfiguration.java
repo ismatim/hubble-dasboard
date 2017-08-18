@@ -15,7 +15,9 @@ public interface BsmMapperConfiguration {
 
     List<AvailabilityStorage> mapToAvailabilitiesStorage(List<BsmProviderModel> bsmProviderModels);
 
-    List<BsmProviderModel> mapToBsmProviderModel(SOAPBody data);
+    List<BsmProviderModel> mapDataToBsmProviderModel(SOAPBody data);
+
+    List<BsmProviderModel> mapApplicationsToBsmProviderModel(SOAPBody data);
 
     void setMapper(ModelMapper mapper);
 

@@ -1,7 +1,9 @@
 package hubble.backend.providers.tests.transports;
 
+import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.providers.configurations.ProvidersConfiguration;
 import hubble.backend.providers.transports.interfaces.BsmTransport;
+import java.util.Calendar;
 import javax.xml.soap.SOAPBody;
 import static org.junit.Assert.assertNotNull;
 import org.junit.Test;
@@ -33,13 +35,23 @@ public class BsmTransportIntegrationTests {
     }
 
     @Test
-    public void BsmTransport_call_should_getProfiles() {
+    public void BsmTransport_call_should_getApplications() {
 
         //Assign
-        String query = "SELECT distinct(profile_name) from trans_t";
-        bsmTransport.createMessage(query);
+        Calendar from = CalendarHelper.getNow();
+        Calendar to = CalendarHelper.getNow();
+
+        from.add(Calendar.HOUR, -1);
+
+        long since = from.getTimeInMillis() / 1000;
+        long now = to.getTimeInMillis() / 1000;
+
+        StringBuilder queryBuilder = new StringBuilder("SELECT distinct(profile_name), dGreenThreshold, dRedThreshold from trans_t");
+        queryBuilder.append(" where time_stamp>=").append(Long.toString(since));
+        queryBuilder.append(" and time_stamp<=").append(Long.toString(now));
+
         //Act
-        bsmTransport.createMessage(query);
+        bsmTransport.createMessage(queryBuilder.toString());
         SOAPBody response = bsmTransport.call();
 
         //Assert

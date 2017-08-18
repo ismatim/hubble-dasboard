@@ -2,10 +2,10 @@ package hubble.backend.providers.parsers.implementations.bsm;
 
 import hubble.backend.providers.configurations.mappers.bsm.BsmMapperConfiguration;
 import hubble.backend.providers.models.bsm.BsmProviderModel;
-import hubble.backend.providers.parsers.interfaces.bsm.BsmDataParser;
+import hubble.backend.providers.parsers.interfaces.bsm.BsmApplicationParser;
 import hubble.backend.providers.transports.interfaces.BsmTransport;
-import hubble.backend.storage.models.AvailabilityStorage;
-import hubble.backend.storage.repositories.AvailabilityRepository;
+import hubble.backend.storage.models.ApplicationStorage;
+import hubble.backend.storage.repositories.ApplicationRepository;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.soap.SOAPBody;
@@ -13,46 +13,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BsmParserDataImpl implements BsmDataParser {
+public class BsmParserApplicationImpl implements BsmApplicationParser {
 
     private BsmMapperConfiguration mapperConfifuration;
-    private List<AvailabilityStorage> availabilitiesStorage;
-    private AvailabilityRepository availabilityRepository;
+    private List<ApplicationStorage> applicationstorage;
+    private ApplicationRepository applicationRepository;
     private BsmTransport bsmTransport;
 
     @Autowired
-    public BsmParserDataImpl(
+    public BsmParserApplicationImpl(
             BsmTransport appPulseActiveTransport,
             BsmMapperConfiguration mapperConfifuration,
-            AvailabilityRepository availabilityRepository) {
+            ApplicationRepository applicationRepository) {
         this.bsmTransport = appPulseActiveTransport;
         this.mapperConfifuration = mapperConfifuration;
-        this.availabilityRepository = availabilityRepository;
+        this.applicationRepository = applicationRepository;
     }
 
     @Override
     public void run() {
 
-        SOAPBody data = bsmTransport.getData();
+        SOAPBody data = bsmTransport.getApplications();
 
         List<BsmProviderModel> transactions = parse(data);
 
-        this.availabilitiesStorage = new ArrayList<>();
-        this.availabilitiesStorage = mapperConfifuration.mapToAvailabilitiesStorage(transactions);
+        this.applicationstorage = new ArrayList<>();
+        this.applicationstorage = mapperConfifuration.mapToApplicationsStorage(transactions);
 
-        availabilityRepository.save(availabilitiesStorage);
+        applicationRepository.save(applicationstorage);
     }
 
     @Override
     public List<BsmProviderModel> parse(SOAPBody data) {
 
-        List<BsmProviderModel> transactions = mapperConfifuration.mapDataToBsmProviderModel(data);
+        List<BsmProviderModel> transactions = mapperConfifuration.mapApplicationsToBsmProviderModel(data);
 
         return transactions;
     }
 
     @Override
-    public List<AvailabilityStorage> getAvailabilitiesStorage() {
-        return this.availabilitiesStorage;
+    public List<ApplicationStorage> getApplicationStorage() {
+        return this.applicationstorage;
     }
 }

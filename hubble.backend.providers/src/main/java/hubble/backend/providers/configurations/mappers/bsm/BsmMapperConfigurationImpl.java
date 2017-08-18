@@ -17,6 +17,7 @@ public class BsmMapperConfigurationImpl implements BsmMapperConfiguration {
     public BsmMapperConfigurationImpl() {
         mapper = new ModelMapper();
         this.mapper.addMappings(new AvailabilityPropertyMap());
+        this.mapper.addMappings(new ApplicationPropertyMap());
     }
 
     @Override
@@ -38,11 +39,10 @@ public class BsmMapperConfigurationImpl implements BsmMapperConfiguration {
 
         List<AvailabilityStorage> availabilitiesRecordsToBeSaved = new ArrayList<>();
         bsmProviderModels.forEach(item -> {
-            AvailabilityStorage newAppPulseRecord = new AvailabilityStorage();
+            AvailabilityStorage newBsmRecord = new AvailabilityStorage();
 
-            this.mapper.map(item, newAppPulseRecord);
-//            newAppPulseRecord.setTimeStamp(new Date(item.getTime_stamp() * 1000));
-            availabilitiesRecordsToBeSaved.add(newAppPulseRecord);
+            this.mapper.map(item, newBsmRecord);
+            availabilitiesRecordsToBeSaved.add(newBsmRecord);
         });
 
         return availabilitiesRecordsToBeSaved;
@@ -57,17 +57,17 @@ public class BsmMapperConfigurationImpl implements BsmMapperConfiguration {
 
         List<ApplicationStorage> applicationsRecordsToBeSaved = new ArrayList<>();
         bsmProviderModels.forEach(item -> {
-            ApplicationStorage newAppPulseRecord = new ApplicationStorage();
+            ApplicationStorage newBsmRecord = new ApplicationStorage();
 
-            this.mapper.map(item, newAppPulseRecord);
-            applicationsRecordsToBeSaved.add(newAppPulseRecord);
+            this.mapper.map(item, newBsmRecord);
+            applicationsRecordsToBeSaved.add(newBsmRecord);
         });
 
         return applicationsRecordsToBeSaved;
     }
 
     @Override
-    public List<BsmProviderModel> mapToBsmProviderModel(SOAPBody data) {
+    public List<BsmProviderModel> mapDataToBsmProviderModel(SOAPBody data) {
         String content = data.getFirstChild().getFirstChild().getChildNodes().item(0).getNodeValue();
         List<BsmProviderModel> transactions = new ArrayList<>();
 
@@ -91,4 +91,23 @@ public class BsmMapperConfigurationImpl implements BsmMapperConfiguration {
 
         return transactions;
     }
+
+    @Override
+    public List<BsmProviderModel> mapApplicationsToBsmProviderModel(SOAPBody data) {
+        String content = data.getFirstChild().getFirstChild().getChildNodes().item(0).getNodeValue();
+        List<BsmProviderModel> transactions = new ArrayList<>();
+
+        String[] row = content.split("\\r?\\n");
+        for (int i = 1; i < row.length; i++) {
+            String[] record = row[i].split(",");
+            BsmProviderModel newBsmProviderModel = new BsmProviderModel();
+            newBsmProviderModel.setProfile_name(record[0]);
+            newBsmProviderModel.setDgreenthreshold((int) Double.parseDouble(record[1]));
+            newBsmProviderModel.setDredthreshold((int) Double.parseDouble(record[2]));
+            transactions.add(newBsmProviderModel);
+        }
+
+        return transactions;
+    }
+
 }
