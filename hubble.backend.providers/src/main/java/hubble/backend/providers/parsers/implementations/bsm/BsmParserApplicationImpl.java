@@ -40,7 +40,7 @@ public class BsmParserApplicationImpl implements BsmApplicationParser {
         this.applicationstorage = new ArrayList<>();
         this.applicationstorage = mapperConfifuration.mapToApplicationsStorage(transactions);
 
-        applicationRepository.save(applicationstorage);
+        this.save(applicationstorage);
     }
 
     @Override
@@ -55,4 +55,13 @@ public class BsmParserApplicationImpl implements BsmApplicationParser {
     public List<ApplicationStorage> getApplicationStorage() {
         return this.applicationstorage;
     }
+
+    public void save(List<ApplicationStorage> appPulseApplicationRecords) {
+        appPulseApplicationRecords.stream().forEach((applicationToSave) -> {
+            if (!applicationRepository.exist(applicationToSave)) {
+                applicationRepository.save(applicationToSave);
+            }
+        });
+    }
+
 }

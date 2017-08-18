@@ -40,7 +40,7 @@ public class BsmParserDataImpl implements BsmDataParser {
         this.availabilitiesStorage = new ArrayList<>();
         this.availabilitiesStorage = mapperConfifuration.mapToAvailabilitiesStorage(transactions);
 
-        availabilityRepository.save(availabilitiesStorage);
+        this.save(availabilitiesStorage);
     }
 
     @Override
@@ -54,5 +54,13 @@ public class BsmParserDataImpl implements BsmDataParser {
     @Override
     public List<AvailabilityStorage> getAvailabilitiesStorage() {
         return this.availabilitiesStorage;
+    }
+
+    public void save(List<AvailabilityStorage> bsmRecords) {
+        bsmRecords.stream().forEach((availabilityRecordToSave) -> {
+            if (!availabilityRepository.exist(availabilityRecordToSave)) {
+                availabilityRepository.save(availabilityRecordToSave);
+            }
+        });
     }
 }

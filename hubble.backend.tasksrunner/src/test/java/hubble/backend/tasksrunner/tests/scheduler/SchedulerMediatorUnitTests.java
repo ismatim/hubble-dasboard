@@ -3,11 +3,11 @@ package hubble.backend.tasksrunner.tests.scheduler;
 import hubble.backend.providers.parsers.interfaces.Parser;
 import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveDataParser;
 import hubble.backend.tasksrunner.application.scheduler.SchedulerMediator;
-import hubble.backend.tasksrunner.jobs.apppulse.AppPulseDataParserJob;
 import hubble.backend.tasksrunner.jobs.ParserJob;
-import hubble.backend.tasksrunner.tasks.apppulse.AppPulseDataTaskImpl;
+import hubble.backend.tasksrunner.jobs.apppulse.AppPulseDataParserJob;
 import hubble.backend.tasksrunner.tasks.ParserTask;
 import hubble.backend.tasksrunner.tasks.Task;
+import hubble.backend.tasksrunner.tasks.apppulse.AppPulseDataTaskImpl;
 import hubble.backend.tasksrunner.tests.configurations.TasksRunnerTestConfiguration;
 import org.junit.Rule;
 import org.junit.Test;
@@ -17,13 +17,13 @@ import static org.mockito.Mockito.*;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.stubbing.Answer;
-import static org.modelmapper.internal.util.Assert.isTrue;
 import org.quartz.JobKey;
 import org.quartz.SchedulerException;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import static org.springframework.util.Assert.isTrue;
 
 @ActiveProfiles("test")
 @RunWith(MockitoJUnitRunner.class)
