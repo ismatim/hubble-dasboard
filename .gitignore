@@ -12,6 +12,7 @@
 .DS_Store/
 target/
 *.iml
+.DS_Store
 
 #Netbeans
 target/

@@ -1,7 +1,7 @@
 package hubble.frontend.managers.configurations.mappers;
 
 import hubble.backend.business.services.models.TransactionDto;
-import hubble.frontend.managers.models.entities.Transaction;
+import hubble.frontend.managers.models.Transaction;
 import java.lang.reflect.Type;
 import java.util.List;
 import org.modelmapper.ModelMapper;
@@ -26,14 +26,11 @@ public class TransactionMapperConfiguration {
         this.mapper = mapper;
     }
 
-    public Transaction mapToTransaction(TransactionDto transactionDto){
-        if (transactionDto == null) {
-            return null;
-        }
+    public Transaction mapToTransaction(TransactionDto transactionDto) {
         return mapper.map(transactionDto, Transaction.class);
     }
 
-    public List<Transaction> mapToTransactionList(List<TransactionDto> transactionDtoList){
+    public List<Transaction> mapToTransactionList(List<TransactionDto> transactionDtoList) {
         if (transactionDtoList == null) {
             return null;
         }

@@ -1,206 +1,155 @@
 package hubble.frontend.managers.implementations;
 
-import hubble.backend.business.services.interfaces.PerformanceService;
-import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
+import hubble.backend.business.services.interfaces.services.PerformanceService;
+import hubble.backend.business.services.interfaces.services.TransactionService;
 import hubble.backend.business.services.models.ApplicationDto;
-import hubble.frontend.managers.interfaces.PerformanceManager;
-import hubble.frontend.managers.models.entities.BusinessApplication;
-import hubble.frontend.managers.models.collections.Performance;
 import hubble.backend.business.services.models.PerformanceDto;
-import hubble.backend.business.services.models.AvailabilityTransactionAvgDto;
 import hubble.backend.business.services.models.TransactionDto;
-import hubble.frontend.managers.configurations.mappers.ApplicationMapperConfiguration;
-import hubble.frontend.managers.configurations.mappers.ManagerPerformanceMapperConfiguration;
+import hubble.frontend.managers.configurations.mappers.ApplicationMapper;
+import hubble.frontend.managers.configurations.mappers.PerformanceMapper;
 import hubble.frontend.managers.configurations.mappers.TransactionMapperConfiguration;
-import hubble.frontend.managers.models.aggregations.BusinessApplicationAvg;
-import hubble.frontend.managers.models.aggregations.TransactionAvg;
-import hubble.frontend.managers.models.entities.Transaction;
-
+import hubble.frontend.managers.interfaces.PerformanceManager;
+import hubble.frontend.managers.models.BusinessApplication;
+import hubble.frontend.managers.models.Performance;
+import hubble.frontend.managers.models.Transaction;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PerformanceManagerImpl implements PerformanceManager{
-    
+public class PerformanceManagerImpl implements PerformanceManager {
+
     @Autowired
-    ManagerPerformanceMapperConfiguration performanceMapper;
+    PerformanceMapper performanceMapper;
     @Autowired
-    ApplicationMapperConfiguration applicationMapper;
+    ApplicationMapper applicationMapper;
     @Autowired
     TransactionMapperConfiguration transactionMapper;
-    
+    @Autowired
+    TransactionService transactionService;
+
     @Autowired
     PerformanceService performanceService;
 
-    
     @Override
-    public Performance findPerformanceById(String id) {
-        PerformanceDto performanceDto = performanceService.findPerformanceById(id);
+    public Performance getPerformanceById(String id) {
+        PerformanceDto performanceDto = performanceService.getById(id);
         Performance a = performanceMapper.mapToPerformance(performanceDto);
         return a;
     }
 
     @Override
-    public List<Performance> findAllPerformances() {
-        List<PerformanceDto> performanceDtoList = performanceService.findAllPerformances();
+    public List<Performance> getAllPerformances() {
+        List<PerformanceDto> performanceDtoList = performanceService.getAll();
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public List<Performance> findPerformanceByApplicationId(String applicationId) {
-        List<PerformanceDto> performanceDtoList = performanceService.findPerformanceByApplicationId(applicationId);
+    public List<Performance> getPerformanceByApplicationId(String applicationId) {
+        List<PerformanceDto> performanceDtoList = performanceService.getAll(applicationId);
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public List<Performance> findPerformanceByTransactionId(String transactionId) {
-        List<PerformanceDto> performanceDtoList = performanceService.findPerformanceByTransactionId(transactionId);
+    public List<Performance> getPerformanceByTransactionId(String transactionId) {
+        List<PerformanceDto> performanceDtoList = transactionService.findPerformanceByTransactionId(transactionId);
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public List<Performance> findLast10MinutesPerformance() {
-        List<PerformanceDto> performanceDtoList = performanceService.findLast10MinutesPerformances();
+    public List<Performance> getLast10MinutesPerformance() {
+        List<PerformanceDto> performanceDtoList = performanceService.getLast10Minutes();
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public List<Performance> findLastHourPerformance() {
-        List<PerformanceDto> performanceDtoList = performanceService.findLastHourPerformances();
+    public List<Performance> getLastHourPerformance() {
+        List<PerformanceDto> performanceDtoList = performanceService.getLastHour();
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public List<Performance> findLast10MinutesPerformanceByApplicationId(String applicationId) {
-        List<PerformanceDto> performanceDtoList = performanceService.findLast10MinutesPerformanceByApplicationId(applicationId);
+    public List<Performance> getLast10MinutesPerformanceByApplicationId(String applicationId) {
+        List<PerformanceDto> performanceDtoList = performanceService.getLast10Minutes(applicationId);
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public List<Performance> findLast10MinutesPerformanceByTransactionId(String transactionId) {
-        List<PerformanceDto> performanceDtoList = performanceService.findLast10MinutesPerformanceByTransactionId(transactionId);
+    public List<Performance> getLast10MinutesPerformanceByTransactionId(String transactionId) {
+        List<PerformanceDto> performanceDtoList = transactionService.findLast10MinutesPerformanceByTransactionId(transactionId);
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public List<Performance> findLastHourPerformanceByApplicationId(String applicationId) {
-        List<PerformanceDto> performanceDtoList = performanceService.findLastHourPerformanceByApplicationId(applicationId);
+    public List<Performance> getLastHourPerformanceByApplicationId(String applicationId) {
+        List<PerformanceDto> performanceDtoList = performanceService.getLastHour(applicationId);
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public List<Performance> findLastHourPerformanceByTransactionId(String transactionId) {
-        List<PerformanceDto> performanceDtoList = performanceService.findLastHourPerformanceByTransactionId(transactionId);
+    public List<Performance> getLastHourPerformanceByTransactionId(String transactionId) {
+        List<PerformanceDto> performanceDtoList = transactionService.findLastHourPerformanceByTransactionId(transactionId);
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public BusinessApplicationAvg findLast10MinutesAverageByApplication(String applicationId) {
-        AvailabilityApplicationAvgDto performanceAvgDto = performanceService.calculateLast10MinutesAverageApplicationPerformance(applicationId);
-        return performanceMapper.mapToPerformanceApplicationAvg(performanceAvgDto);
-    }
-
-    @Override
-    public BusinessApplicationAvg findLastHourAverageByApplication(String applicationId) {
-        AvailabilityApplicationAvgDto performanceAvgDto = performanceService.calculateLastHourAverageApplicationPerformance(applicationId);
-        return performanceMapper.mapToPerformanceApplicationAvg(performanceAvgDto);
-    }
-
-    @Override
-    public TransactionAvg findLast10MinutesAverageByTransaction(String transactionId) {
-        AvailabilityTransactionAvgDto performanceAvgDto = performanceService.calculateLast10MinutesAverageTransactionPerformance(transactionId);
-        return performanceMapper.mapToPerformanceTransactionAvg(performanceAvgDto);
-    }
-
-    @Override
-    public TransactionAvg findLastHourAverageByTransaction(String transactionId) {
-        AvailabilityTransactionAvgDto performanceAvgDto = performanceService.calculateLastHourAverageTransactionPerformance(transactionId);
-        return performanceMapper.mapToPerformanceTransactionAvg(performanceAvgDto);
-    }
-
-    @Override
-    public BusinessApplication findBusinessApplicationById(String applicationId) {
-        ApplicationDto applicationDto = performanceService.findApplicationById(applicationId);
+    public BusinessApplication getBusinessApplicationById(String applicationId) {
+        ApplicationDto applicationDto = performanceService.getApplication(applicationId);
         return applicationMapper.mapToBusinessApplication(applicationDto);
     }
 
     @Override
-    public List<BusinessApplication> findAllApplications() {
-        List<ApplicationDto> applicationDtoList = performanceService.findAllApplications();
+    public List<BusinessApplication> getAllApplications() {
+        List<ApplicationDto> applicationDtoList = performanceService.getAllApplications();
         return applicationMapper.mapToBusinessApplicationList(applicationDtoList);
     }
 
     @Override
-    public Transaction findBusinessTransactionById(String transactionId) {
-        TransactionDto transactionDto = performanceService.findTransactionById(transactionId);
+    public Transaction getBusinessTransactionById(String transactionId) {
+        TransactionDto transactionDto = transactionService.findTransactionById(transactionId);
         return transactionMapper.mapToTransaction(transactionDto);
     }
 
     @Override
-    public List<Transaction> findTransactionsByApplication(String applicationId) {
-        List<TransactionDto> transactionDtoList = performanceService.findTransactionsByApplicationId(applicationId);
+    public List<Transaction> getTransactionsByApplication(String applicationId) {
+        List<TransactionDto> transactionDtoList = transactionService.findTransactionsByApplicationId(applicationId);
         return transactionMapper.mapToTransactionList(transactionDtoList);
     }
 
     @Override
-    public List<Performance> findLastDayPerformances() {
-        List<PerformanceDto> performanceDtoList = performanceService.findLastDayPerformances();
+    public List<Performance> getLastDayPerformances() {
+        List<PerformanceDto> performanceDtoList = performanceService.getLastDay();
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public List<Performance> findLastMonthPerformances() {
-        List<PerformanceDto> performanceDtoList = performanceService.findLastMonthPerformances();
+    public List<Performance> getLastMonthPerformances() {
+        List<PerformanceDto> performanceDtoList = performanceService.getLastMonth();
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public List<Performance> findLastDayPerformanceByApplicationId(String applicationId) {
-        List<PerformanceDto> performanceDtoList = performanceService.findLastDayPerformanceByApplicationId(applicationId);
+    public List<Performance> getLastDayPerformanceByApplicationId(String applicationId) {
+        List<PerformanceDto> performanceDtoList = performanceService.getLastDay(applicationId);
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public List<Performance> findLastDayPerformanceByTransactionId(String transactionId) {
-        List<PerformanceDto> performanceDtoList = performanceService.findLastDayPerformanceByTransactionId(transactionId);
+    public List<Performance> getLastDayPerformanceByTransactionId(String transactionId) {
+        List<PerformanceDto> performanceDtoList = transactionService.findLastDayPerformanceByTransactionId(transactionId);
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public List<Performance> findLastMonthPerformanceByApplicationId(String applicationId) {
-        List<PerformanceDto> performanceDtoList = performanceService.findLastMonthPerformanceByApplicationId(applicationId);
+    public List<Performance> getLastMonthPerformanceByApplicationId(String applicationId) {
+        List<PerformanceDto> performanceDtoList = performanceService.getLastMonth(applicationId);
         return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
     @Override
-    public List<Performance> findLastMonthPerformanceByTransactionId(String transactionId) {
-        List<PerformanceDto> performanceDtoList = performanceService.findLastMonthPerformanceByTransactionId(transactionId) ;
-        return performanceMapper.mapToPerformanceList(performanceDtoList);    
+    public List<Performance> getLastMonthPerformanceByTransactionId(String transactionId) {
+        List<PerformanceDto> performanceDtoList = transactionService.findLastMonthPerformanceByTransactionId(transactionId);
+        return performanceMapper.mapToPerformanceList(performanceDtoList);
     }
 
-    @Override
-    public BusinessApplicationAvg findLastDayAverageByApplication(String applicationId) {
-        AvailabilityApplicationAvgDto performanceAvgDto = performanceService.calculateLastDayAverageApplicationPerformance(applicationId);
-        return performanceMapper.mapToPerformanceApplicationAvg(performanceAvgDto);   
-    }
-
-    @Override
-    public TransactionAvg findLastDayAverageByTransaction(String transactionId) {
-        AvailabilityTransactionAvgDto performanceAvgDto = performanceService.calculateLastDayAverageTransactionPerformance(transactionId);
-        return performanceMapper.mapToPerformanceTransactionAvg(performanceAvgDto);
-    }
-
-    @Override
-    public BusinessApplicationAvg findLastMonthAverageByApplication(String applicationId) {
-        AvailabilityApplicationAvgDto performanceAvgDto = performanceService.calculateLastMonthAverageApplicationPerformance(applicationId);
-        return performanceMapper.mapToPerformanceApplicationAvg(performanceAvgDto);   
-    }
-
-    @Override
-    public TransactionAvg findLastMonthAverageByTransaction(String transactionId) {
-        AvailabilityTransactionAvgDto performanceAvgDto = performanceService.calculateLastMonthAverageTransactionPerformance(transactionId);
-        return performanceMapper.mapToPerformanceTransactionAvg(performanceAvgDto);
-    }
-    
 }

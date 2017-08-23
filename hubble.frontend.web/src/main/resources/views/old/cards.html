@@ -1,0 +1,54 @@
+
+
+
+<div class="container top-buffer">
+    <h4 >Aplicacion</h4>
+
+    <div class="row d-flex">
+        <div class="col-sm-6 col-md-4 col-lg-3 d-flex" th:each="reg : ${regs}">
+
+            <div class="card top-buffer" style="border-color: #2E2E2E;border-style: solid;border-width: 1px;border-radius: 3px;" >
+                <div class="card-block">
+                    <a th:href="${reg.id}+'/transactions'" ><h4 class="card-title" th:text="${reg.displayName}"></h4></a>
+                    <div class="row">
+                        <div class="col-xs-6 nopadding-right">
+                            <div th:id="${reg.id}+'_id_disponibilidad'" class="block-padding" >
+                                <a class="icon-center center-block" href="#"><span class="fa fa-calendar fa-2x" aria-hidden="true" style="color:#f7f7f7" data-toggle="tooltip" title="Indica Disponibilidad"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 nopadding-left">
+                            <div th:id="${reg.id}+'_id_performance'" class="block-padding">
+                                <a class="icon-center center-block" href="#"><span class="fa fa-clock-o fa-2x" aria-hidden="true" style="color:#f7f7f7" data-toggle="tooltip" title="Indica Performance"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 nopadding-right">
+                            <div th:id="${reg.id}+'_id_disponibilidad_10'" class="block-padding"></div>
+                        </div>
+                        <div class="col-xs-6 nopadding-left">
+                            <div th:id="${reg.id}+'_id_performance_10'" class="block-padding"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/js/block_color.js"></script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var dataList = [[${regs}]];
+    for (i = 0; i < dataList.length; i++) {
+        var id_object = dataList[i]["id"];
+        setBlockColor(id_object + "_id_disponibilidad", dataList[i]["disponibilidad10Minutos"], id_object + "_disponibilidad_10");
+        setBlockColor(id_object + "_id_performance", dataList[i]["performance10Minutos"], id_object + "_performance_10");
+        setBlockColor(id_object + "_id_disponibilidad_10", dataList[i]["disponibilidad10Minutos"], id_object + "_disponibilidad_10");
+        setBlockColor(id_object + "_id_performance_10", dataList[i]["performance10Minutos"], id_object + "_performance_10");
+    }
+
+    /*]]>*/
+
+</script>

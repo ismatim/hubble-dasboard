@@ -1,9 +1,9 @@
-   package hubble.backend.business.services.models;
+package hubble.backend.business.services.models;
 
 import java.util.List;
 
 public class ApplicationDto {
-    
+
     private String applicationId;
     private String applicationName;
     private boolean active;
@@ -94,5 +94,4 @@ public class ApplicationDto {
     public void setTransactions(List<TransactionDto> transactions) {
         this.transactions = transactions;
     }
-    
 }

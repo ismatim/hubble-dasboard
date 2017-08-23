@@ -1,9 +1,9 @@
 package hubble.backend.business.services.tests;
 
-import hubble.backend.business.services.interfaces.AvailabilityService;
+import hubble.backend.business.services.interfaces.services.AvailabilityService;
 import hubble.backend.business.services.models.AvailabilityDto;
 import hubble.backend.business.services.tests.configurations.ServiceBaseConfigurationTest;
-import hubble.backend.core.utils.HubbleConstants;
+import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.repositories.AvailabilityRepository;
 import java.util.Calendar;
@@ -24,7 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ServiceBaseConfigurationTest.class)
 public class AvailabilityServiceIntegrationTests {
-    
+
     @Autowired
     private AvailabilityService availabilityService;
 
@@ -66,7 +66,7 @@ public class AvailabilityServiceIntegrationTests {
         List<AvailabilityDto> availabilities;
 
         //Act
-        availabilities = availabilityService.findAllAvailabilities();
+        availabilities = availabilityService.getAll();
 
         //Assert
         assertTrue("Service did not find any availabilities", availabilities.size() > 0);
@@ -75,19 +75,19 @@ public class AvailabilityServiceIntegrationTests {
 
     @Test
     public void availability_service_should_return_all_availabilities_by_its_id() {
-        List<AvailabilityDto> availabilities = availabilityService.findAllAvailabilities();
+        List<AvailabilityDto> availabilities = availabilityService.getAll();
 
         assertTrue("Service did not find any availabilities", availabilities.size() > 0);
 
         for (AvailabilityDto availability : availabilities) {
-            assertNotNull(availabilityService.findAvailabilityById(availability.getId()));
+            assertNotNull(availabilityService.get(availability.getId()));
         }
 
     }
 
     @Test
     public void availability_service_should_return_availabilities_by_application_id() {
-        List<AvailabilityDto> availabilities = availabilityService.findAvailabilitiesByApplicationId("1");
+        List<AvailabilityDto> availabilities = availabilityService.getAll("fake-app-example-1");
 
         assertTrue("Service did not find any availabilities", availabilities.size() > 0);
         for (AvailabilityDto availability : availabilities) {
@@ -95,119 +95,119 @@ public class AvailabilityServiceIntegrationTests {
         }
 
     }
-    
+
     @Test
     public void availability_service_should_return_last_10minutes_availabilities() {
-        List<AvailabilityDto> availabilities = availabilityService.findLast10MinutesAvailabilities();
+        List<AvailabilityDto> availabilities = availabilityService.getLast10Minutes();
         Date date;
         assertTrue("Service did not find any availabilities", availabilities.size() > 0);
         for (AvailabilityDto availability : availabilities) {
             date = availability.getTimeStamp();
-            assertTrue(date.after(new Date(Calendar.MINUTE - HubbleConstants.TEN_MINUTES)));
+            assertTrue(date.after(new Date(Calendar.MINUTE - CalendarHelper.TEN_MINUTES)));
         }
 
     }
 
     @Test
     public void availability_service_should_return_last_hour_availabilities() {
-        List<AvailabilityDto> availabilities = availabilityService.findLastHourAvailabilities();
+        List<AvailabilityDto> availabilities = availabilityService.getLastHour();
         Date date;
         assertTrue("Service did not find any availabilities", availabilities.size() > 0);
         for (AvailabilityDto availability : availabilities) {
             date = availability.getTimeStamp();
-            assertTrue(date.after(new Date(Calendar.MINUTE - HubbleConstants.ONE_HOUR)));
+            assertTrue(date.after(new Date(Calendar.MINUTE - CalendarHelper.ONE_HOUR)));
         }
 
     }
 
     @Test
     public void availability_service_should_return_last_10minutes_availabilities_by_application_id() {
-        List<AvailabilityDto> availabilities = availabilityService.findLast10MinutesAvailabilities();
+        List<AvailabilityDto> availabilities = availabilityService.getLast10Minutes();
         List<AvailabilityDto> availabilitiesByApplicationID;
         Date date;
         assertTrue("Service did not find any availabilities", availabilities.size() > 0);
 
         for (AvailabilityDto availability : availabilities) {
-            availabilitiesByApplicationID = availabilityService.findLast10MinutesAvailabilitiesByApplicationId(availability.getApplicationId());
+            availabilitiesByApplicationID = availabilityService.getLast10Minutes(availability.getApplicationId());
             for (AvailabilityDto availabilityByApplicationId : availabilitiesByApplicationID) {
                 date = availability.getTimeStamp();
                 assertNotNull(availabilityByApplicationId);
-                assertTrue(date.after(new Date(Calendar.MINUTE - HubbleConstants.TEN_MINUTES)));
+                assertTrue(date.after(new Date(Calendar.MINUTE - CalendarHelper.TEN_MINUTES)));
             }
         }
     }
 
     @Test
     public void availability_service_should_return_last_hour_availabilities_by_application_id() {
-        List<AvailabilityDto> availabilities = availabilityService.findLastHourAvailabilities();
+        List<AvailabilityDto> availabilities = availabilityService.getLastHour();
         List<AvailabilityDto> availabilitiesByApplicationID;
         Date date;
         assertTrue("Service did not find any availabilities", availabilities.size() > 0);
 
         for (AvailabilityDto availability : availabilities) {
-            availabilitiesByApplicationID = availabilityService.findLastHourAvailabilitiesByApplicationId(availability.getApplicationId());
+            availabilitiesByApplicationID = availabilityService.getLastHour(availability.getApplicationId());
             for (AvailabilityDto availabilityByApplicationId : availabilitiesByApplicationID) {
                 date = availability.getTimeStamp();
                 assertNotNull(availabilityByApplicationId);
-                assertTrue(date.after(new Date(Calendar.MINUTE - HubbleConstants.ONE_HOUR)));
+                assertTrue(date.after(new Date(Calendar.MINUTE - CalendarHelper.ONE_HOUR)));
             }
         }
     }
-        
+
     @Test
     public void availability_service_should_return_last_day_availabilities() {
-        List<AvailabilityDto> availabilities = availabilityService.findLastDayAvailabilities();
+        List<AvailabilityDto> availabilities = availabilityService.getLastDay();
         Date date;
         assertTrue("Service did not find any availabilities", availabilities.size() > 0);
         for (AvailabilityDto availability : availabilities) {
             date = availability.getTimeStamp();
-            assertTrue(date.after(new Date(Calendar.MINUTE - HubbleConstants.ONE_DAY)));
+            assertTrue(date.after(new Date(Calendar.MINUTE - CalendarHelper.ONE_DAY)));
         }
 
     }
 
     @Test
     public void availability_service_should_return_last_month_availabilities() {
-        List<AvailabilityDto> availabilities = availabilityService.findLastMonthAvailabilities();
+        List<AvailabilityDto> availabilities = availabilityService.getLastMonth();
         Date date;
         assertTrue("Service did not find any availabilities", availabilities.size() > 0);
         for (AvailabilityDto availability : availabilities) {
             date = availability.getTimeStamp();
-            assertTrue(date.after(new Date(Calendar.MONTH - HubbleConstants.ONE_MONTH)));
+            assertTrue(date.after(new Date(Calendar.MONTH - CalendarHelper.ONE_MONTH)));
         }
 
     }
 
     @Test
     public void availability_service_should_return_last_day_availabilities_by_application_id() {
-        List<AvailabilityDto> availabilities = availabilityService.findLastDayAvailabilities();
+        List<AvailabilityDto> availabilities = availabilityService.getLastDay();
         List<AvailabilityDto> availabilitiesByApplicationID;
         Date date;
         assertTrue("Service did not find any availabilities", availabilities.size() > 0);
 
         for (AvailabilityDto availability : availabilities) {
-            availabilitiesByApplicationID = availabilityService.findLastDayAvailabilitiesByApplicationId(availability.getApplicationId());
+            availabilitiesByApplicationID = availabilityService.getLastDay(availability.getApplicationId());
             for (AvailabilityDto availabilityByApplicationId : availabilitiesByApplicationID) {
                 date = availability.getTimeStamp();
                 assertNotNull(availabilityByApplicationId);
-                assertTrue(date.after(new Date(Calendar.MINUTE - HubbleConstants.ONE_DAY)));
+                assertTrue(date.after(new Date(Calendar.MINUTE - CalendarHelper.ONE_DAY)));
             }
         }
     }
 
     @Test
     public void availability_service_should_return_last_month_availabilities_by_application_id() {
-        List<AvailabilityDto> availabilities = availabilityService.findLastMonthAvailabilities();
+        List<AvailabilityDto> availabilities = availabilityService.getLastMonth();
         List<AvailabilityDto> availabilitiesByApplicationID;
         Date date;
         assertTrue("Service did not find any availabilities", availabilities.size() > 0);
 
         for (AvailabilityDto availability : availabilities) {
-            availabilitiesByApplicationID = availabilityService.findLastMonthAvailabilitiesByApplicationId(availability.getApplicationId());
+            availabilitiesByApplicationID = availabilityService.getLastMonth(availability.getApplicationId());
             for (AvailabilityDto availabilityByApplicationId : availabilitiesByApplicationID) {
                 date = availability.getTimeStamp();
                 assertNotNull(availabilityByApplicationId);
-                assertTrue(date.after(new Date(Calendar.MONTH - HubbleConstants.ONE_MONTH)));
+                assertTrue(date.after(new Date(Calendar.MONTH - CalendarHelper.ONE_MONTH)));
             }
         }
     }

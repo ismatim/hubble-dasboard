@@ -65,7 +65,7 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
 
     @Override
     public List<AvailabilityStorage> findAvailabilitiesByApplicationId(String applicationId) {
-        Criteria isApplicationId = Criteria.where("applicationId").is(applicationId);
+        Criteria isApplicationId = Criteria.where("applicationName").is(applicationId);
 
         List<AvailabilityStorage> availabilities = mongo
                 .find(Query
@@ -80,7 +80,7 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
         Calendar from = CalendarHelper.getNow();
         from.add(Calendar.MINUTE, -duration);
 
-        Criteria isApplicationId = Criteria.where("applicationId").is(applicationId);
+        Criteria isApplicationId = Criteria.where("applicationName").is(applicationId);
         Criteria durationCriteria = Criteria.where("timeStamp").gte(from.getTime());
 
         List<AvailabilityStorage> availabilities = mongo
@@ -124,7 +124,7 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
         Calendar from = CalendarHelper.getNow();
         from.add(Calendar.MONTH, -duration);
 
-        Criteria isApplicationId = Criteria.where("applicationId").is(applicationId);
+        Criteria isApplicationId = Criteria.where("applicationName").is(applicationId);
         Criteria durationCriteria = Criteria.where("timeStamp").gte(from.getTime());
 
         List<AvailabilityStorage> availabilities = mongo

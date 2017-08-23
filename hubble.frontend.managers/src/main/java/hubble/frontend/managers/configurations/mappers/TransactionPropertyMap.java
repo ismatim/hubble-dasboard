@@ -1,7 +1,7 @@
 package hubble.frontend.managers.configurations.mappers;
 
 import hubble.backend.business.services.models.TransactionDto;
-import hubble.frontend.managers.models.entities.Transaction;
+import hubble.frontend.managers.models.Transaction;
 import org.modelmapper.PropertyMap;
 
 public class TransactionPropertyMap extends PropertyMap<TransactionDto, Transaction> {

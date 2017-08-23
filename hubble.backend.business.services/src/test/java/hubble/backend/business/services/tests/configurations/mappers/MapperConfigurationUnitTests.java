@@ -1,10 +1,10 @@
 package hubble.backend.business.services.tests.configurations.mappers;
 
-import hubble.backend.business.services.configurations.mappers.DtoMapperConfiguration;
+import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
 import hubble.backend.business.services.models.ApplicationDto;
-import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
+import hubble.backend.business.services.models.ApplicationAvgDto;
 import hubble.backend.business.services.models.AvailabilityDto;
-import hubble.backend.business.services.models.AvailabilityTransactionAvgDto;
+import hubble.backend.business.services.models.TransactionAvgDto;
 import hubble.backend.business.services.models.TransactionDto;
 import hubble.backend.business.services.tests.AvailabilityHelper;
 import hubble.backend.storage.models.ApplicationStorage;
@@ -26,7 +26,7 @@ import org.springframework.test.context.ActiveProfiles;
 @RunWith(MockitoJUnitRunner.class)
 public class MapperConfigurationUnitTests {
 
-    DtoMapperConfiguration mapperConfiguration = new DtoMapperConfiguration();
+    MapperConfiguration mapperConfiguration = new MapperConfiguration();
     AvailabilityHelper availabilityHelper = new AvailabilityHelper();
 
     @Test
@@ -188,7 +188,7 @@ public class MapperConfigurationUnitTests {
         when(transactionStorage.getTransactionType()).thenReturn("script");
         when(transactionStorage.getScriptName()).thenReturn("Script Name");
 
-        AvailabilityTransactionAvgDto transactionAvailabilityAvg = mapperConfiguration.mapToTransactionAvailabilityAvg(transactionStorage);
+        TransactionAvgDto transactionAvailabilityAvg = mapperConfiguration.mapToTransactionAvailabilityAvg(transactionStorage);
 
         assertEquals("1234", transactionAvailabilityAvg.getTransactionId());
         assertEquals("Transaction Name", transactionAvailabilityAvg.getTransactionName());
@@ -214,7 +214,7 @@ public class MapperConfigurationUnitTests {
         when(applicationStorage.getTimeZoneId()).thenReturn("1");
         when(applicationStorage.getTransactions()).thenReturn(null);
 
-        AvailabilityApplicationAvgDto applicationAvailabilityAvg = mapperConfiguration.mapToApplicationAvailabilityAvg(applicationStorage);
+        ApplicationAvgDto applicationAvailabilityAvg = mapperConfiguration.mapToApplicationAvailabilityAvg(applicationStorage);
 
         assertEquals("1234", applicationAvailabilityAvg.getApplicationId());
         assertEquals("BancoRipley - HomeBanking", applicationAvailabilityAvg.getApplicationName());
@@ -234,7 +234,7 @@ public class MapperConfigurationUnitTests {
         List<TransactionStorage> transactionStorageList = availabilityHelper.mockTransactionStorage();
 
         //Act
-        List<AvailabilityTransactionAvgDto> transactionAvailabilityAvgList = mapperConfiguration.mapToTransactionAvailabilityAvgList(transactionStorageList);
+        List<TransactionAvgDto> transactionAvailabilityAvgList = mapperConfiguration.mapToTransactionAvailabilityAvgList(transactionStorageList);
 
         //Assert
         assertNotNull(transactionAvailabilityAvgList);
@@ -249,7 +249,7 @@ public class MapperConfigurationUnitTests {
         applicationStorageList.add(availabilityHelper.mockApplicationStorage());
 
         //Act
-        List<AvailabilityApplicationAvgDto> applicationAvailabilityAvgList = mapperConfiguration.mapToApplicationAvailabilityAvgList(applicationStorageList);
+        List<ApplicationAvgDto> applicationAvailabilityAvgList = mapperConfiguration.mapToApplicationAvailabilityAvgList(applicationStorageList);
 
         //Assert
         assertNotNull(applicationAvailabilityAvgList);

@@ -1,9 +1,9 @@
 package hubble.frontend.managers.tests;
 
-import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
+import hubble.backend.business.services.models.ApplicationAvgDto;
 import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.models.PerformanceDto;
-import hubble.backend.business.services.models.AvailabilityTransactionAvgDto;
+import hubble.backend.business.services.models.TransactionAvgDto;
 import hubble.backend.business.services.models.TransactionDto;
 import hubble.backend.core.enums.MonitoringFields;
 import java.util.ArrayList;
@@ -12,8 +12,8 @@ import java.util.Date;
 import java.util.List;
 
 public class PerformanceHelper {
-    
-    public List<PerformanceDto> mockData(){
+
+    public List<PerformanceDto> mockData() {
         List<PerformanceDto> performanceList = new ArrayList();
         PerformanceDto performanceDto = new PerformanceDto();
         performanceDto.setId("1");
@@ -25,13 +25,13 @@ public class PerformanceHelper {
         performanceDto.setResponseTime(1314);
         performanceDto.setScriptName("HomeBanking");
         performanceDto.setServerName("Arizona");
-        performanceDto.setTimeStamp(new Date(System.currentTimeMillis()-Calendar.MINUTE*9));
+        performanceDto.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 9));
         performanceDto.setTransactionId("h5l394kdd9j393k");
         performanceDto.setTransactionName("Despliegue Zona Campana");
 
         performanceList.add(performanceDto);
         performanceDto = new PerformanceDto();
-        
+
         performanceDto.setApplicationId("1");
         performanceDto.setApplicationName("BancoRipley - HomeBanking");
         performanceDto.setId("h3y44h5sk58f8sdf48f");
@@ -39,11 +39,11 @@ public class PerformanceHelper {
         performanceDto.setResponseTime(1314);
         performanceDto.setScriptName("HomeBanking");
         performanceDto.setServerName("Arizona");
-        performanceDto.setTimeStamp(new Date(System.currentTimeMillis()-Calendar.MINUTE*9));
+        performanceDto.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 9));
         performanceDto.setTransactionId("h5l394kdd9j393k");
         performanceDto.setTransactionName("Despliegue Zona Campana");
         performanceDto.setTransactionName("Despliegue Zona Campana");
-        
+
         performanceList.add(performanceDto);
         performanceDto = new PerformanceDto();
         performanceDto.setApplicationId("3");
@@ -54,31 +54,32 @@ public class PerformanceHelper {
         performanceDto.setResponseTime(3000);
         performanceDto.setScriptName("HomeBanking");
         performanceDto.setServerName("Arizona");
-        performanceDto.setTimeStamp(new Date(System.currentTimeMillis()-Calendar.MINUTE*9));
+        performanceDto.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 9));
         performanceDto.setTransactionId("h5l394kdd9j393k");
         performanceDto.setTransactionName("Despliegue Zona Campana");
         performanceList.add(performanceDto);
 
         return performanceList;
     }
-    public AvailabilityApplicationAvgDto getPerformanceApplicationAvg(){
-        AvailabilityApplicationAvgDto aaad = new AvailabilityApplicationAvgDto();
+
+    public ApplicationAvgDto getPerformanceApplicationAvg() {
+        ApplicationAvgDto aaad = new ApplicationAvgDto();
         aaad.setActive(true);
         aaad.setApplicationId("1");
         aaad.setApplicationName("BancoRipley - HomeBanking");
         aaad.setAvailabilityThreshold(90);
-        aaad.setAverage(900);
+        aaad.getPerformanceAverage().set(900);
         aaad.setCriticalThreshold(12000);
         aaad.setOkThreshold(8000);
         aaad.setOutlierThreshold(45000);
-        aaad.setStatus(MonitoringFields.STATUS.SUCCESS);
+        aaad.getPerformanceAverage().setStatus(MonitoringFields.STATUS.SUCCESS);
         aaad.setTimeZoneId("");
         return aaad;
     }
-    
-    public AvailabilityTransactionAvgDto getTransactionAvailabilityAvgDto(){
-        AvailabilityTransactionAvgDto taad = new AvailabilityTransactionAvgDto();
-        
+
+    public TransactionAvgDto getTransactionAvailabilityAvgDto() {
+        TransactionAvgDto taad = new TransactionAvgDto();
+
         taad.setApplicationId("1");
         taad.setAverage(900);
         taad.setCriticalThreshold(12000);
@@ -90,12 +91,11 @@ public class PerformanceHelper {
         taad.setTransactionId("");
         taad.setTransactionName("");
         taad.setTransactionType("");
-        
+
         return taad;
     }
-    
-    
-    public ApplicationDto getApplicationDto(){
+
+    public ApplicationDto getApplicationDto() {
         ApplicationDto ad = new ApplicationDto();
         ad.setActive(true);
         ad.setApplicationId("1");
@@ -108,12 +108,12 @@ public class PerformanceHelper {
         ad.setTimeZoneId("");
         ad.setTransactions(null);
         return ad;
-    
+
     }
-    
-    public List<ApplicationDto> getAllMockAplication(){
+
+    public List<ApplicationDto> getAllMockAplication() {
         List<ApplicationDto> applicationDtoList = new ArrayList();
-        
+
         ApplicationDto applicationDto = new ApplicationDto();
         applicationDto.setActive(true);
         applicationDto.setApplicationId("1");
@@ -125,7 +125,7 @@ public class PerformanceHelper {
         applicationDto.setOutlierThreshold(45000);
         applicationDto.setTimeZoneId("");
         applicationDto.setTransactions(null);
-        
+
         applicationDtoList.add(applicationDto);
         applicationDto = new ApplicationDto();
         applicationDto.setActive(true);
@@ -138,7 +138,7 @@ public class PerformanceHelper {
         applicationDto.setOutlierThreshold(45000);
         applicationDto.setTimeZoneId("");
         applicationDto.setTransactions(null);
-        
+
         applicationDtoList.add(applicationDto);
         applicationDto = new ApplicationDto();
         applicationDto.setActive(true);
@@ -151,23 +151,23 @@ public class PerformanceHelper {
         applicationDto.setOutlierThreshold(45000);
         applicationDto.setTimeZoneId("");
         applicationDto.setTransactions(null);
-        
+
         applicationDtoList.add(applicationDto);
-        
+
         return applicationDtoList;
     }
-    
-    public TransactionDto getMockTransactionDto(){
+
+    public TransactionDto getMockTransactionDto() {
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setTransactionId("h5l3a4kdd9j393k");
         transactionDto.setAvailabilityThreshold(90);
         transactionDto.setCriticalThreshold(12000);
         transactionDto.setOkThreshold(8000);
-        
+
         return transactionDto;
     }
-    
-    public List<TransactionDto> getMockTransactionDtoList(){
+
+    public List<TransactionDto> getMockTransactionDtoList() {
         List<TransactionDto> transactionDtoList = new ArrayList();
         TransactionDto transactionDto = new TransactionDto();
         transactionDto.setTransactionId("h5l3a4kdd9j393k");
@@ -175,22 +175,21 @@ public class PerformanceHelper {
         transactionDto.setCriticalThreshold(12000);
         transactionDto.setOkThreshold(8000);
         transactionDtoList.add(transactionDto);
-        
+
         transactionDto = new TransactionDto();
         transactionDto.setTransactionId("f5l3a4kdd9j393k");
         transactionDto.setAvailabilityThreshold(90);
         transactionDto.setCriticalThreshold(12000);
         transactionDto.setOkThreshold(8000);
         transactionDtoList.add(transactionDto);
-        
+
         transactionDto = new TransactionDto();
         transactionDto.setTransactionId("f5l3a4kdd9j492k");
         transactionDto.setAvailabilityThreshold(90);
         transactionDto.setCriticalThreshold(12000);
         transactionDto.setOkThreshold(8000);
         transactionDtoList.add(transactionDto);
-        
+
         return transactionDtoList;
     }
 }
- 
