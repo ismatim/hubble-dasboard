@@ -1,11 +1,10 @@
 package hubble.frontend.managers.tests;
 
-import hubble.backend.business.services.interfaces.AvailabilityService;
 import hubble.backend.business.services.interfaces.PerformanceService;
 import hubble.backend.business.services.models.PerformanceDto;
-import hubble.frontend.managers.configurations.mappers.ManagerApplicationMapperConfiguration;
+import hubble.frontend.managers.configurations.mappers.ApplicationMapperConfiguration;
 import hubble.frontend.managers.configurations.mappers.ManagerPerformanceMapperConfiguration;
-import hubble.frontend.managers.configurations.mappers.ManagerTransactionMapperConfiguration;
+import hubble.frontend.managers.configurations.mappers.TransactionMapperConfiguration;
 import hubble.frontend.managers.implementations.PerformanceManagerImpl;
 import hubble.frontend.managers.tests.configurations.BaseConfigurationTest;
 import java.util.ArrayList;
@@ -34,9 +33,9 @@ public class PerformanceManagerUnitTest {
     @Spy
     ManagerPerformanceMapperConfiguration performanceMapper;
     @Spy
-    ManagerApplicationMapperConfiguration applicationMapper;
+    ApplicationMapperConfiguration applicationMapper;
     @Spy
-    ManagerTransactionMapperConfiguration transactionMapper;
+    TransactionMapperConfiguration transactionMapper;
     @InjectMocks
     private PerformanceManagerImpl performanceManager;
     private List<PerformanceDto> performanceDtoList;

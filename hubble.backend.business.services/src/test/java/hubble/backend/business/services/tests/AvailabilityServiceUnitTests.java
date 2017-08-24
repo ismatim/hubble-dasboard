@@ -6,6 +6,7 @@ import hubble.backend.business.services.implementations.AvailabilityServiceImpl;
 import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.models.AvailabilityDto;
 import hubble.backend.business.services.models.TransactionDto;
+import hubble.backend.core.utils.HubbleConstants;
 import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.models.TransactionStorage;
@@ -32,7 +33,7 @@ import org.mockito.Spy;
 @RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes = ServiceBaseConfigurationTest.class)
 public class AvailabilityServiceUnitTests {
-
+    
     @Mock
     private AvailabilityRepository availabilityRepository;
     @Mock
@@ -128,7 +129,7 @@ public class AvailabilityServiceUnitTests {
         List<AvailabilityDto> availabilityDtoList;
 
         //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMinutes(10)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByDurationMinutes(HubbleConstants.TEN_MINUTES)).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findLast10MinutesAvailabilities();
 
         //Assert
@@ -142,8 +143,36 @@ public class AvailabilityServiceUnitTests {
         List<AvailabilityDto> availabilityDtoList;
 
         //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMinutes(60)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByDurationMinutes(HubbleConstants.ONE_HOUR)).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findLastHourAvailabilities();
+
+        //Assert
+        assertEquals(4, availabilityDtoList.size());
+    }
+    
+    @Test
+    public void availability_service_should_return_last_day_availabilities_with_correct_model(){
+        //Assign
+        availabilityStorageList = availabilityHelper.mockData();
+        List<AvailabilityDto> availabilityDtoList;
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByDurationMinutes(HubbleConstants.ONE_DAY)).thenReturn(availabilityStorageList);
+        availabilityDtoList = availabilityService.findLastDayAvailabilities();
+
+        //Assert
+        assertEquals(4, availabilityDtoList.size());
+    }
+
+    @Test
+    public void availability_service_should_return_last_month_availabilities_with_correct_model(){
+         //Assign
+        availabilityStorageList = availabilityHelper.mockData();
+        List<AvailabilityDto> availabilityDtoList;
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByDurationMonths(HubbleConstants.ONE_MONTH)).thenReturn(availabilityStorageList);
+        availabilityDtoList = availabilityService.findLastMonthAvailabilities();
 
         //Assert
         assertEquals(4, availabilityDtoList.size());
@@ -156,7 +185,7 @@ public class AvailabilityServiceUnitTests {
         List<AvailabilityDto> availabilityDtoList;
 
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10, "1")).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, "1")).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findLast10MinutesAvailabilitiesByApplicationId("1");
 
         //Assert
@@ -170,13 +199,41 @@ public class AvailabilityServiceUnitTests {
         List<AvailabilityDto> availabilityDtoList;
 
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(60, "1")).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.ONE_HOUR, "1")).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findLastHourAvailabilitiesByApplicationId("1");
 
         //Assert
         assertEquals(4, availabilityDtoList.size());
     }
 
+    @Test
+    public void availability_service_should_return_last_day_availabilities_by_applicationid_with_correct_model(){
+         //Assign
+        availabilityStorageList = availabilityHelper.mockData();
+        List<AvailabilityDto> availabilityDtoList;
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.ONE_DAY, "1")).thenReturn(availabilityStorageList);
+        availabilityDtoList = availabilityService.findLastDayAvailabilitiesByApplicationId("1");
+
+        //Assert
+        assertEquals(4, availabilityDtoList.size());
+    }
+
+    @Test
+    public void availability_service_should_return_last_month_availabilities_by_applicationid_with_correct_model(){
+         //Assign
+        availabilityStorageList = availabilityHelper.mockData();
+        List<AvailabilityDto> availabilityDtoList;
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMonths(HubbleConstants.ONE_MONTH, "1")).thenReturn(availabilityStorageList);
+        availabilityDtoList = availabilityService.findLastMonthAvailabilitiesByApplicationId("1");
+
+        //Assert
+        assertEquals(4, availabilityDtoList.size());
+    }
+    
     @Test
     public void availability_service_should_calculate_last_10minutes_application_availability_average(){
         //Assign
@@ -186,9 +243,26 @@ public class AvailabilityServiceUnitTests {
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
 
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10, applicationId)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, applicationId)).thenReturn(availabilityStorageList);
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         average = availabilityService.calculateLast10MinutesAverageApplicationAvailability(applicationId).getAverage();
+
+        //Assert
+        assertEquals(75, average);
+    }
+    
+    @Test
+    public void availability_service_should_calculate_last_day_application_availability_average(){
+        //Assign
+        int average;
+        availabilityStorageList = availabilityHelper.mockData();
+        String applicationId = "b566958ec4ff28028672780d15edcf56";
+        ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.ONE_DAY, applicationId)).thenReturn(availabilityStorageList);
+        when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
+        average = availabilityService.calculateLastDayAverageApplicationAvailability(applicationId).getAverage();
 
         //Assert
         assertEquals(75, average);
@@ -197,17 +271,17 @@ public class AvailabilityServiceUnitTests {
     @Test
     public void availability_service_should_return_negative1_when_average_calculation_encounters_no_data(){
         //Assign
-        int average;
+        Integer average;
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
 
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10, applicationId)).thenReturn(null);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, applicationId)).thenReturn(null);
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         average = availabilityService.calculateLastHourAverageApplicationAvailability(applicationId).getAverage();
 
         //Assert
-        assertEquals(-1, average);
+        assertEquals(null, average);
     }
 
     @Test
@@ -219,9 +293,26 @@ public class AvailabilityServiceUnitTests {
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
 
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(60, applicationId)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.ONE_HOUR, applicationId)).thenReturn(availabilityStorageList);
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         average = availabilityService.calculateLastHourAverageApplicationAvailability(applicationId).getAverage();
+
+        //Assert
+        assertEquals(75, average);
+    }
+    
+    @Test
+    public void availability_service_should_calculate_last_month_application_availability_average(){
+        //Assign
+        int average;
+        availabilityStorageList = availabilityHelper.mockData();
+        String applicationId = "b566958ec4ff28028672780d15edcf56";
+        ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMonths(HubbleConstants.ONE_MONTH, applicationId)).thenReturn(availabilityStorageList);
+        when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
+        average = availabilityService.calculateLastMonthAverageApplicationAvailability(applicationId).getAverage();
 
         //Assert
         assertEquals(75, average);
@@ -304,7 +395,7 @@ public class AvailabilityServiceUnitTests {
         List<AvailabilityDto> availabilityDtoList;
 
         //Act
-        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(10, "1")).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, "1")).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findLast10MinutesAvailabilitiesByTransactionId("1");
 
         //Assert
@@ -318,7 +409,7 @@ public class AvailabilityServiceUnitTests {
         List<AvailabilityDto> availabilityDtoList;
 
         //Act
-        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(60, "1")).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.ONE_HOUR, "1")).thenReturn(availabilityStorageList);
         availabilityDtoList = availabilityService.findLastHourAvailabilitiesByTransactionId("1");
 
         //Assert
@@ -335,7 +426,7 @@ public class AvailabilityServiceUnitTests {
         ApplicationStorage parentApplicationStorage = new AvailabilityHelper().mockApplicationStorage();
 
         //Act
-        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(10, transactionId)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, transactionId)).thenReturn(availabilityStorageList);
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
         when(applicationRepository.findApplicationByTransactionId(transactionId)).thenReturn(parentApplicationStorage);
         average = availabilityService.calculateLast10MinutesAverageTransactionAvailability(transactionId).getAverage();
@@ -354,10 +445,76 @@ public class AvailabilityServiceUnitTests {
         ApplicationStorage parentApplicationStorage = new AvailabilityHelper().mockApplicationStorage();
 
         //Act
-        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(60, transactionId)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.ONE_HOUR, transactionId)).thenReturn(availabilityStorageList);
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
         when(applicationRepository.findApplicationByTransactionId(transactionId)).thenReturn(parentApplicationStorage);
         average = availabilityService.calculateLastHourAverageTransactionAvailability(transactionId).getAverage();
+
+        //Assert
+        assertEquals(75, average);
+    }
+    
+    @Test
+    public void availability_service_should_return_last_day_availabilities_by_transactionid_with_correct_model(){
+         //Assign
+        availabilityStorageList = availabilityHelper.mockData();
+        List<AvailabilityDto> availabilityDtoList;
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.ONE_DAY, "1")).thenReturn(availabilityStorageList);
+        availabilityDtoList = availabilityService.findLastDayAvailabilitiesByTransactionId("1");
+
+        //Assert
+        assertEquals(4, availabilityDtoList.size());
+    }
+
+    @Test
+    public void availability_service_should_return_last_Month_availabilities_by_transactionid_with_correct_model(){
+         //Assign
+        availabilityStorageList = availabilityHelper.mockData();
+        List<AvailabilityDto> availabilityDtoList;
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMonths(HubbleConstants.ONE_MONTH, "1")).thenReturn(availabilityStorageList);
+        availabilityDtoList = availabilityService.findLastMonthAvailabilitiesByTransactionId("1");
+
+        //Assert
+        assertEquals(4, availabilityDtoList.size());
+    }
+
+    @Test
+    public void availability_service_should_calculate_last_day_transaction_availability_average(){
+        //Assign
+        int average;
+        availabilityStorageList = availabilityHelper.mockData();
+        String transactionId = "2eae220e082697be3a0646400e5b54fa";
+        TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
+        ApplicationStorage parentApplicationStorage = new AvailabilityHelper().mockApplicationStorage();
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.ONE_DAY, transactionId)).thenReturn(availabilityStorageList);
+        when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
+        when(applicationRepository.findApplicationByTransactionId(transactionId)).thenReturn(parentApplicationStorage);
+        average = availabilityService.calculateLastDayAverageTransactionAvailability(transactionId).getAverage();
+
+        //Assert
+        assertEquals(75, average);
+    }
+
+    @Test
+    public void availability_service_should_calculate_last_month_transaction_availability_average(){
+        //Assign
+        int average;
+        availabilityStorageList = availabilityHelper.mockData();
+        String transactionId = "2eae220e082697be3a0646400e5b54fa";
+        TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
+        ApplicationStorage parentApplicationStorage = new AvailabilityHelper().mockApplicationStorage();
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMonths(HubbleConstants.ONE_MONTH, transactionId)).thenReturn(availabilityStorageList);
+        when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
+        when(applicationRepository.findApplicationByTransactionId(transactionId)).thenReturn(parentApplicationStorage);
+        average = availabilityService.calculateLastMonthAverageTransactionAvailability(transactionId).getAverage();
 
         //Assert
         assertEquals(75, average);

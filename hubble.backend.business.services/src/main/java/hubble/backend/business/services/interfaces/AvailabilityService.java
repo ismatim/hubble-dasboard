@@ -27,6 +27,10 @@ public interface AvailabilityService {
     public List<AvailabilityDto> findLast10MinutesAvailabilities();
 
     public List<AvailabilityDto> findLastHourAvailabilities();
+    
+    public List<AvailabilityDto> findLastDayAvailabilities();
+
+    public List<AvailabilityDto> findLastMonthAvailabilities();
 
     public List<AvailabilityDto> findLast10MinutesAvailabilitiesByApplicationId(String applicationId);
 
@@ -35,6 +39,14 @@ public interface AvailabilityService {
     public List<AvailabilityDto> findLastHourAvailabilitiesByApplicationId(String applicationId);
 
     public List<AvailabilityDto> findLastHourAvailabilitiesByTransactionId(String transactionId);
+    
+    public List<AvailabilityDto> findLastDayAvailabilitiesByApplicationId(String applicationId);
+
+    public List<AvailabilityDto> findLastDayAvailabilitiesByTransactionId(String transactionId);
+
+    public List<AvailabilityDto> findLastMonthAvailabilitiesByApplicationId(String applicationId);
+
+    public List<AvailabilityDto> findLastMonthAvailabilitiesByTransactionId(String transactionId);
 
     public AvailabilityApplicationAvgDto calculateLast10MinutesAverageApplicationAvailability(String applicationId);
 
@@ -43,5 +55,13 @@ public interface AvailabilityService {
     public AvailabilityApplicationAvgDto calculateLastHourAverageApplicationAvailability(String applicationId);
 
     public AvailabilityTransactionAvgDto calculateLastHourAverageTransactionAvailability(String transactionId);
+
+    public AvailabilityApplicationAvgDto calculateLastDayAverageApplicationAvailability(String applicationId);
+
+    public AvailabilityTransactionAvgDto calculateLastDayAverageTransactionAvailability(String transactionId);
+
+    public AvailabilityApplicationAvgDto calculateLastMonthAverageApplicationAvailability(String applicationId);
+
+    public AvailabilityTransactionAvgDto calculateLastMonthAverageTransactionAvailability(String transactionId);
 
 }

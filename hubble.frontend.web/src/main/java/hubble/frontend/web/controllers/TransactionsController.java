@@ -2,8 +2,7 @@ package hubble.frontend.web.controllers;
 
 import hubble.frontend.managers.interfaces.AvailabilityManager;
 import hubble.frontend.managers.interfaces.PerformanceManager;
-import hubble.frontend.managers.models.aggregations.AvailabilityTransactionAvg;
-import hubble.frontend.managers.models.aggregations.PerformanceTransactionAvg;
+import hubble.frontend.managers.models.aggregations.TransactionAvg;
 import hubble.frontend.managers.models.collections.Availability;
 import hubble.frontend.managers.models.collections.Performance;
 import hubble.frontend.managers.models.entities.BusinessApplication;
@@ -47,16 +46,18 @@ public class TransactionsController {
         List<Availability> availabilitiesLast10Minutes = availabilityManager.findLast10MinutesAvailabilitiesByApplicationId(applicationId);
         List<Performance> performancesLastHour = performanceManager.findLastHourPerformanceByApplicationId(applicationId);
         List<Performance> performancesLast10Minutes = performanceManager.findLast10MinutesPerformanceByApplicationId(applicationId);
-        List<AvailabilityTransactionAvg> availabilityTransactionsLastHourAvgs = new ArrayList();
-        List<AvailabilityTransactionAvg> availabilityTransactionsLast10MinutesAvgs = new ArrayList();
-        List<PerformanceTransactionAvg> performanceTransactionsLastHourAvgs = new ArrayList();
-        List<PerformanceTransactionAvg> performanceTransactionsLast10MinutesAvgs = new ArrayList();
-
-        for (Transaction transaction : transactions) {
-            availabilityTransactionsLastHourAvgs.add(availabilityManager.findLastHourAverageByTransaction(transaction.getId()));
-            availabilityTransactionsLast10MinutesAvgs.add(availabilityManager.findLast10MinutesAverageByTransaction(transaction.getId()));
-            performanceTransactionsLast10MinutesAvgs.add(performanceManager.findLast10MinutesAverageByTransaction(transaction.getId()));
-            performanceTransactionsLastHourAvgs.add(performanceManager.findLastHourAverageByTransaction(transaction.getId()));
+        List<TransactionAvg> availabilityTransactionsLastHourAvgs = new ArrayList();
+        List<TransactionAvg> availabilityTransactionsLast10MinutesAvgs = new ArrayList();
+        List<TransactionAvg> performanceTransactionsLastHourAvgs = new ArrayList();
+        List<TransactionAvg> performanceTransactionsLast10MinutesAvgs = new ArrayList();
+        
+        if (transactions != null){
+            for (Transaction transaction : transactions) {
+                availabilityTransactionsLastHourAvgs.add(availabilityManager.findLastHourAverageByTransaction(transaction.getId()));
+                availabilityTransactionsLast10MinutesAvgs.add(availabilityManager.findLast10MinutesAverageByTransaction(transaction.getId()));
+                performanceTransactionsLast10MinutesAvgs.add(performanceManager.findLast10MinutesAverageByTransaction(transaction.getId()));
+                performanceTransactionsLastHourAvgs.add(performanceManager.findLastHourAverageByTransaction(transaction.getId()));
+            }
         }
 
         req.setAttribute("transactions", transactions);

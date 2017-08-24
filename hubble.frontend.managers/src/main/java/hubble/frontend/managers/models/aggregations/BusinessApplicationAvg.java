@@ -3,11 +3,11 @@ package hubble.frontend.managers.models.aggregations;
 import hubble.backend.core.enums.MonitoringFields;
 import hubble.frontend.managers.models.entities.BusinessApplication;
 
-public class AvailabilityBusinessApplicationAvg {
+public class BusinessApplicationAvg {
 
     private BusinessApplication businessApplication;
     private MonitoringFields.STATUS Status;
-    private float average;
+    private Float average;
 
     public BusinessApplication getBusinessApplication() {
         return businessApplication;
@@ -25,11 +25,12 @@ public class AvailabilityBusinessApplicationAvg {
         this.Status = Status;
     }
 
-    public float getAverage() {
+    public Float getAverage() {
         return average;
     }
 
-    public void setAverage(float average) {
+    public void setAverage(Float average) {
         this.average = average;
     }
+
 }

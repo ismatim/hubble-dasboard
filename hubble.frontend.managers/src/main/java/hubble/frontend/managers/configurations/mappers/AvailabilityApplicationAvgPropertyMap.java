@@ -1,10 +1,10 @@
 package hubble.frontend.managers.configurations.mappers;
 
 import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
-import hubble.frontend.managers.models.aggregations.AvailabilityBusinessApplicationAvg;
+import hubble.frontend.managers.models.aggregations.BusinessApplicationAvg;
 import org.modelmapper.PropertyMap;
 
-public class AvailabilityApplicationAvgPropertyMap extends PropertyMap<AvailabilityApplicationAvgDto, AvailabilityBusinessApplicationAvg>{
+public class AvailabilityApplicationAvgPropertyMap extends PropertyMap<AvailabilityApplicationAvgDto, BusinessApplicationAvg>{
 
     @Override
     protected void configure() {

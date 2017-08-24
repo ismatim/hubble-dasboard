@@ -120,8 +120,7 @@ public class AppPulseActiveDataParserUnitTest extends AppPulseBaseUnitTests {
     public void ApppulseActiveParser_when_gets_data_should_save_on_mongo() {
 
         //Assign
-        AppPulseBaseUnitTests helper = new AppPulseBaseUnitTests();
-        List<AvailabilityStorage> appPulseRecords = this.mapperConfifuration.mapToAvailabilitiesStorage(helper.getFakeAppPulseProviderModel());
+        List<AvailabilityStorage> appPulseRecords = this.mapperConfifuration.mapToAvailabilitiesStorage(AppPulseBaseUnitTests.getFakeAppPulseProviderModel());
         doReturn(appPulseRecords.get(0)).when(appPulseActiveRepository).save(any(AvailabilityStorage.class));
         doReturn(true).when(appPulseActiveRepository).exist(any());
 

@@ -4,7 +4,7 @@ import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveApplic
 import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.repositories.ApplicationRepository;
 import hubble.frontend.managers.interfaces.AvailabilityManager;
-import hubble.frontend.managers.models.aggregations.AvailabilityBusinessApplicationAvg;
+import hubble.frontend.managers.models.aggregations.BusinessApplicationAvg;
 import hubble.frontend.managers.models.collections.Availability;
 import hubble.frontend.managers.models.entities.BusinessApplication;
 import hubble.frontend.managers.tests.configurations.BaseConfigurationTest;
@@ -49,7 +49,7 @@ public class AvailabilityManagerIntegrationTests {
         String applicationId = "e071193b8376e06554eb2344173cb66d";
         //Act
         appPulseActiveParser.run();
-        AvailabilityBusinessApplicationAvg applicationAvg = availabilityManager.findLastHourAverageByApplication(applicationId);
+        BusinessApplicationAvg applicationAvg = availabilityManager.findLastHourAverageByApplication(applicationId);
 
         //Assert
         assertEquals(applicationId, applicationAvg.getBusinessApplication().getId());
@@ -63,9 +63,13 @@ public class AvailabilityManagerIntegrationTests {
                 || applicationAvg.getStatus().toString().equals("No_Data")
         );
         assertEquals("1", applicationAvg.getBusinessApplication().getTimeZoneId());
-
-        assertTrue("Error, wrong average, it is over 100%", applicationAvg.getAverage() <= 100);
-        assertTrue("Error, wrong average, it's value is less than 0%", applicationAvg.getAverage() >= -1);
+        if(applicationAvg.getAverage() != null){
+            assertTrue("Error, wrong average, it is over 100%", applicationAvg.getAverage() <= 100);
+            assertTrue("Error, wrong average, it is less than 0%", applicationAvg.getAverage() >= 0);
+        }
+        else{
+        assertNull("Error, wrong average, it's value is not compatible", applicationAvg.getAverage());
+        }
         //assertEquals(22, applicationAvg.getAverage());
         //assertEquals(2, applicationAvg.getBusinessApplication().getTransactionIds().size());
 
@@ -84,7 +88,7 @@ public class AvailabilityManagerIntegrationTests {
         String applicationId = "e3ccaa4d89e4f05650c6a371923e8796";
         //Act
         appPulseActiveParser.run();
-        AvailabilityBusinessApplicationAvg applicationAvg = availabilityManager.findLastHourAverageByApplication(applicationId);
+        BusinessApplicationAvg applicationAvg = availabilityManager.findLastHourAverageByApplication(applicationId);
 
         //Assert
         assertEquals(applicationId, applicationAvg.getBusinessApplication().getId());
@@ -98,9 +102,13 @@ public class AvailabilityManagerIntegrationTests {
                 || applicationAvg.getStatus().toString().equals("No_Data")
         );
         assertEquals("1", applicationAvg.getBusinessApplication().getTimeZoneId());
-
-        assertTrue("Error, wrong average, it is over 100%", applicationAvg.getAverage() <= 100);
-        assertTrue("Error, wrong average, it's value is less than 0%", applicationAvg.getAverage() >= -1);
+        if(applicationAvg.getAverage() != null){
+            assertTrue("Error, wrong average, it is over 100%", applicationAvg.getAverage() <= 100);
+            assertTrue("Error, wrong average, it is less than 0%", applicationAvg.getAverage() >= 0);
+        }
+        else{
+        assertNull("Error, wrong average, it's value is not compatible", applicationAvg.getAverage());
+        }
         //assertEquals(22, applicationAvg.getAverage());
         //assertEquals(2, applicationAvg.getBusinessApplication().getTransactionIds().size());
 

@@ -7,9 +7,9 @@ import org.slf4j.Logger;
 
 public class LoggingOutputStream extends OutputStream {
 
-    public static void redirectSysOutAndSysErr(Logger logger) {
-        System.setOut(new PrintStream(new LoggingOutputStream(logger, LogLevel.INFO)));
-        System.setErr(new PrintStream(new LoggingOutputStream(logger, LogLevel.ERROR)));
+    public static void redirectSysOutAndSysErr(Logger redirectLogger) {
+        System.setOut(new PrintStream(new LoggingOutputStream(redirectLogger, LogLevel.INFO)));
+        System.setErr(new PrintStream(new LoggingOutputStream(redirectLogger, LogLevel.ERROR)));
     }
 
     private final ByteArrayOutputStream baos = new ByteArrayOutputStream(1000);

@@ -27,10 +27,16 @@ public class AvailabilityMapperConfiguration {
     }
 
     public Availability mapToAvailability(AvailabilityDto availabilityDto){
+        if (availabilityDto == null) {
+            return null;
+        }
         return mapper.map(availabilityDto, Availability.class);
     }
 
     public List<Availability> mapToAvailabilityList(List<AvailabilityDto> availabilityDtoList){
+        if (availabilityDtoList == null) {
+            return null;
+        }
         Type availabilityDtoTypeList = new TypeToken<List<Availability>>() {}.getType();
         return mapper.map(availabilityDtoList, availabilityDtoTypeList);
     }

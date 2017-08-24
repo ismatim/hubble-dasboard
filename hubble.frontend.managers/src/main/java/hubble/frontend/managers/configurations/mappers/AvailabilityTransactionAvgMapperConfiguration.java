@@ -1,7 +1,7 @@
 package hubble.frontend.managers.configurations.mappers;
 
 import hubble.backend.business.services.models.AvailabilityTransactionAvgDto;
-import hubble.frontend.managers.models.aggregations.AvailabilityTransactionAvg;
+import hubble.frontend.managers.models.aggregations.TransactionAvg;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +23,10 @@ public class AvailabilityTransactionAvgMapperConfiguration {
         this.mapper = mapper;
     }
 
-    public AvailabilityTransactionAvg mapToAvailabilityTransactionAvg(AvailabilityTransactionAvgDto availabilityAvgDto){
-        return mapper.map(availabilityAvgDto, AvailabilityTransactionAvg.class);
+    public TransactionAvg mapToAvailabilityTransactionAvg(AvailabilityTransactionAvgDto availabilityAvgDto){
+        if (availabilityAvgDto == null) {
+            return null;
+        }
+        return mapper.map(availabilityAvgDto, TransactionAvg.class);
     }
 }

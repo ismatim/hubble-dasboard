@@ -29,6 +29,9 @@ public class ApplicationMapperConfiguration {
     }
 
     public BusinessApplication mapToBusinessApplication(ApplicationDto applicationDto){
+        if (applicationDto == null) {
+            return null;
+        }
         BusinessApplication businessApplication = mapper.map(applicationDto, BusinessApplication.class);
         List<String> transactionIds = new ArrayList();
         if(applicationDto.getTransactions()!=null)
@@ -40,6 +43,9 @@ public class ApplicationMapperConfiguration {
     }
 
     public List<BusinessApplication> mapToBusinessApplicationList(List<ApplicationDto> applicationDtoList){
+        if (applicationDtoList == null) {
+            return null;
+        }
         Type applicationDtoTypeList = new TypeToken<List<BusinessApplication>>() {}.getType();
         return mapper.map(applicationDtoList, applicationDtoTypeList);
     }

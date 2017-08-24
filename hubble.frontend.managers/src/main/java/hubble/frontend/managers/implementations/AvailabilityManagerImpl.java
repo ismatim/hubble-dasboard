@@ -14,8 +14,8 @@ import hubble.frontend.managers.configurations.mappers.TransactionMapperConfigur
 import java.util.List;
 import hubble.frontend.managers.interfaces.AvailabilityManager;
 import hubble.frontend.managers.models.collections.Availability;
-import hubble.frontend.managers.models.aggregations.AvailabilityBusinessApplicationAvg;
-import hubble.frontend.managers.models.aggregations.AvailabilityTransactionAvg;
+import hubble.frontend.managers.models.aggregations.BusinessApplicationAvg;
+import hubble.frontend.managers.models.aggregations.TransactionAvg;
 import hubble.frontend.managers.models.entities.BusinessApplication;
 import hubble.frontend.managers.models.entities.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,25 +98,25 @@ public class AvailabilityManagerImpl implements AvailabilityManager {
     }
 
     @Override
-    public AvailabilityBusinessApplicationAvg findLast10MinutesAverageByApplication(String applicationId) {
+    public BusinessApplicationAvg findLast10MinutesAverageByApplication(String applicationId) {
         AvailabilityApplicationAvgDto availabilityAvgDto = availabilityService.calculateLast10MinutesAverageApplicationAvailability(applicationId);
         return applicationAvgMapper.mapToAvailabilityApplicationAvg(availabilityAvgDto);
     }
 
     @Override
-    public AvailabilityBusinessApplicationAvg findLastHourAverageByApplication(String applicationId) {
+    public BusinessApplicationAvg findLastHourAverageByApplication(String applicationId) {
         AvailabilityApplicationAvgDto availabilityAvgDto = availabilityService.calculateLastHourAverageApplicationAvailability(applicationId);
         return applicationAvgMapper.mapToAvailabilityApplicationAvg(availabilityAvgDto);
     }
 
     @Override
-    public AvailabilityTransactionAvg findLast10MinutesAverageByTransaction(String transactionId) {
+    public TransactionAvg findLast10MinutesAverageByTransaction(String transactionId) {
         AvailabilityTransactionAvgDto availabilityAvgDto = availabilityService.calculateLast10MinutesAverageTransactionAvailability(transactionId);
         return transactionAvgMapper.mapToAvailabilityTransactionAvg(availabilityAvgDto);
     }
 
     @Override
-    public AvailabilityTransactionAvg findLastHourAverageByTransaction(String transactionId) {
+    public TransactionAvg findLastHourAverageByTransaction(String transactionId) {
         AvailabilityTransactionAvgDto availabilityAvgDto = availabilityService.calculateLastHourAverageTransactionAvailability(transactionId);
         return transactionAvgMapper.mapToAvailabilityTransactionAvg(availabilityAvgDto);
     }
@@ -143,5 +143,65 @@ public class AvailabilityManagerImpl implements AvailabilityManager {
     public List<Transaction> findTransactionsByApplication(String applicationId) {
         List<TransactionDto> transactionDtoList = availabilityService.findTransactionsByApplicationId(applicationId);
         return transactionMapper.mapToTransactionList(transactionDtoList);
+    }
+
+    @Override
+    public List<Availability> findLastDayAvailabilities() {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findLastDayAvailabilities();
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
+    }
+
+    @Override
+    public List<Availability> findLastMonthAvailabilities() {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findLastMonthAvailabilities();
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
+    }
+
+    @Override
+    public List<Availability> findLastDayAvailabilitiesByApplicationId(String applicationId) {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findLastDayAvailabilitiesByApplicationId(applicationId);
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
+    }
+
+    @Override
+    public List<Availability> findLastDayAvailabilitiesByTransactionId(String transactionId) {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findLastDayAvailabilitiesByTransactionId(transactionId);
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
+    }
+
+    @Override
+    public List<Availability> findLastMonthAvailabilitiesByApplicationId(String applicationId) {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findLastMonthAvailabilitiesByApplicationId(applicationId);
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
+    }
+
+    @Override
+    public List<Availability> findLastMonthAvailabilitiesByTransactionId(String transactionId) {
+        List<AvailabilityDto> availabilityDtoList = availabilityService.findLastMonthAvailabilitiesByTransactionId(transactionId);
+        return availabilityMapper.mapToAvailabilityList(availabilityDtoList);
+    }
+
+    @Override
+    public BusinessApplicationAvg findLastDayAverageByApplication(String applicationId) {
+        AvailabilityApplicationAvgDto availabilityAvgDto = availabilityService.calculateLastDayAverageApplicationAvailability(applicationId);
+        return applicationAvgMapper.mapToAvailabilityApplicationAvg(availabilityAvgDto);
+    }
+
+    @Override
+    public BusinessApplicationAvg findLastMonthAverageByApplication(String applicationId) {
+        AvailabilityApplicationAvgDto availabilityAvgDto = availabilityService.calculateLastMonthAverageApplicationAvailability(applicationId);
+        return applicationAvgMapper.mapToAvailabilityApplicationAvg(availabilityAvgDto);
+    }
+
+    @Override
+    public TransactionAvg findLastDayAverageByTransaction(String transactionId) {
+        AvailabilityTransactionAvgDto availabilityAvgDto = availabilityService.calculateLastDayAverageTransactionAvailability(transactionId);
+        return transactionAvgMapper.mapToAvailabilityTransactionAvg(availabilityAvgDto);
+    }
+
+    @Override
+    public TransactionAvg findLastMonthAverageByTransaction(String transactionId) {
+        AvailabilityTransactionAvgDto availabilityAvgDto = availabilityService.calculateLastMonthAverageTransactionAvailability(transactionId);
+        return transactionAvgMapper.mapToAvailabilityTransactionAvg(availabilityAvgDto);
     }
 }
