@@ -3,7 +3,7 @@ package hubble.frontend.managers.configurations.mappers;
 import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
 import hubble.backend.business.services.models.AvailabilityDto;
 import hubble.backend.core.enums.MonitoringFields;
-import hubble.frontend.managers.models.aggregations.AvailabilityBusinessApplicationAvg;
+import hubble.frontend.managers.models.aggregations.BusinessApplicationAvg;
 import hubble.frontend.managers.models.collections.Availability;
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -67,7 +67,7 @@ public class MapperConfigurationUnitTests {
         when(availabilityAvgDto.getStatus()).thenReturn(MonitoringFields.STATUS.NO_DATA);
         when(availabilityAvgDto.getTimeZoneId()).thenReturn("1");
 
-        AvailabilityBusinessApplicationAvg availabilityApplicationAvg = mapperAvailabilityApplicationAvg.mapToAvailabilityApplicationAvg(availabilityAvgDto);
+        BusinessApplicationAvg availabilityApplicationAvg = mapperAvailabilityApplicationAvg.mapToAvailabilityApplicationAvg(availabilityAvgDto);
 
         //Assert
         assertEquals("123", availabilityApplicationAvg.getBusinessApplication().getId());

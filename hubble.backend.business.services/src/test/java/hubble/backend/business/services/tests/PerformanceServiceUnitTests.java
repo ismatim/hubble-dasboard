@@ -4,6 +4,7 @@ import hubble.backend.business.services.configurations.mappers.DtoMapperConfigur
 import hubble.backend.business.services.tests.configurations.ServiceBaseConfigurationTest;
 import hubble.backend.business.services.implementations.PerformanceServiceImpl;
 import hubble.backend.business.services.models.PerformanceDto;
+import hubble.backend.core.utils.HubbleConstants;
 import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.models.TransactionStorage;
@@ -92,7 +93,7 @@ public class PerformanceServiceUnitTests {
         List<PerformanceDto> performanceDtoList;
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMinutes(10)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByDurationMinutes(HubbleConstants.TEN_MINUTES)).thenReturn(availabilityStorageList);
         performanceDtoList = performanceService.findLast10MinutesPerformances();
         
         //Assert
@@ -106,7 +107,7 @@ public class PerformanceServiceUnitTests {
         List<PerformanceDto> performanceDtoList;
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMinutes(60)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByDurationMinutes(HubbleConstants.ONE_HOUR)).thenReturn(availabilityStorageList);
         performanceDtoList = performanceService.findLastHourPerformances();
         
         //Assert
@@ -120,7 +121,7 @@ public class PerformanceServiceUnitTests {
         List<PerformanceDto> performanceDtoList;
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10, "1")).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, "1")).thenReturn(availabilityStorageList);
         performanceDtoList = performanceService.findLast10MinutesPerformanceByApplicationId("1");
         
         //Assert
@@ -134,7 +135,7 @@ public class PerformanceServiceUnitTests {
         List<PerformanceDto> performanceDtoList;
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(60, "1")).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.ONE_HOUR, "1")).thenReturn(availabilityStorageList);
         performanceDtoList = performanceService.findLastHourPerformanceByApplicationId("1");
         
         //Assert
@@ -150,7 +151,7 @@ public class PerformanceServiceUnitTests {
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10, applicationId)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, applicationId)).thenReturn(availabilityStorageList);
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         average = performanceService.calculateLast10MinutesAverageApplicationPerformance(applicationId).getAverage();
         
@@ -161,17 +162,17 @@ public class PerformanceServiceUnitTests {
     @Test
     public void performance_service_should_return_negative1_when_average_performance_calculation_encounters_no_data(){
         //Assign
-        int average;
+        Integer average;
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10, applicationId)).thenReturn(null);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, applicationId)).thenReturn(null);
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         average = performanceService.calculateLastHourAverageApplicationPerformance(applicationId).getAverage();
         
         //Assert
-        assertEquals(-1, average);
+        assertEquals(null, average);
     }
     
     @Test
@@ -183,7 +184,7 @@ public class PerformanceServiceUnitTests {
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(60, applicationId)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.ONE_HOUR, applicationId)).thenReturn(availabilityStorageList);
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         average = performanceService.calculateLastHourAverageApplicationPerformance(applicationId).getAverage();
         
@@ -212,7 +213,7 @@ public class PerformanceServiceUnitTests {
         List<PerformanceDto> performanceDtoList;
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(10, "1")).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, "1")).thenReturn(availabilityStorageList);
         performanceDtoList = performanceService.findLast10MinutesPerformanceByTransactionId("1");
         
         //Assert
@@ -226,7 +227,7 @@ public class PerformanceServiceUnitTests {
         List<PerformanceDto> performanceDtoList;
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(60, "1")).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.ONE_HOUR, "1")).thenReturn(availabilityStorageList);
         performanceDtoList = performanceService.findLastHourPerformanceByTransactionId("1");
         
         //Assert
@@ -243,7 +244,7 @@ public class PerformanceServiceUnitTests {
         ApplicationStorage parentApplicationStorage = new AvailabilityHelper().mockApplicationStorage();
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(10, transactionId)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, transactionId)).thenReturn(availabilityStorageList);
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
         when(applicationRepository.findApplicationByTransactionId(transactionStorage.getTransactionId())).thenReturn(parentApplicationStorage);
         average = performanceService.calculateLast10MinutesAverageTransactionPerformance(transactionId).getAverage();
@@ -262,7 +263,7 @@ public class PerformanceServiceUnitTests {
         ApplicationStorage parentApplicationStorage = new AvailabilityHelper().mockApplicationStorage();
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(60, transactionId)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.ONE_HOUR, transactionId)).thenReturn(availabilityStorageList);
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
         when(applicationRepository.findApplicationByTransactionId(transactionStorage.getTransactionId())).thenReturn(parentApplicationStorage);
         average = performanceService.calculateLastHourAverageTransactionPerformance(transactionId).getAverage();
@@ -278,7 +279,7 @@ public class PerformanceServiceUnitTests {
         List<PerformanceDto> performanceDtoList;
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMinutes(10)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByDurationMinutes(HubbleConstants.TEN_MINUTES)).thenReturn(availabilityStorageList);
         performanceDtoList = performanceService.findLast10MinutesPerformances();
         
         //Assert
@@ -306,7 +307,7 @@ public class PerformanceServiceUnitTests {
         List<PerformanceDto> performanceDtoList;
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(1440, "1")).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.ONE_DAY, "1")).thenReturn(availabilityStorageList);
         performanceDtoList = performanceService.findLastDayPerformanceByApplicationId("1");
         
         //Assert
@@ -320,7 +321,7 @@ public class PerformanceServiceUnitTests {
         List<PerformanceDto> performanceDtoList;
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMonths(1, "1")).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMonths(HubbleConstants.ONE_MONTH, "1")).thenReturn(availabilityStorageList);
         performanceDtoList = performanceService.findLastMonthPerformanceByApplicationId("1");
         
         //Assert
@@ -336,7 +337,7 @@ public class PerformanceServiceUnitTests {
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(1440, applicationId)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.ONE_DAY, applicationId)).thenReturn(availabilityStorageList);
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         average = performanceService.calculateLastDayAverageApplicationPerformance(applicationId).getAverage();
         
@@ -347,17 +348,17 @@ public class PerformanceServiceUnitTests {
     @Test
     public void performance_service_should_return_negative1_when_average_last_month_performance_calculation_encounters_no_data(){
         //Assign
-        int average;
+        Integer average;
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(1, applicationId)).thenReturn(null);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.ONE_MONTH, applicationId)).thenReturn(null);
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         average = performanceService.calculateLastMonthAverageApplicationPerformance(applicationId).getAverage();
         
         //Assert
-        assertEquals(-1, average);
+        assertEquals(null, average);
     }
     
     @Test
@@ -369,7 +370,7 @@ public class PerformanceServiceUnitTests {
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMonths(1, applicationId)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMonths(HubbleConstants.ONE_MONTH, applicationId)).thenReturn(availabilityStorageList);
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
         average = performanceService.calculateLastMonthAverageApplicationPerformance(applicationId).getAverage();
         
@@ -384,7 +385,7 @@ public class PerformanceServiceUnitTests {
         List<PerformanceDto> performanceDtoList;
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(1440, "1")).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.ONE_DAY, "1")).thenReturn(availabilityStorageList);
         performanceDtoList = performanceService.findLastDayPerformanceByTransactionId("1");
         
         //Assert
@@ -415,7 +416,7 @@ public class PerformanceServiceUnitTests {
         ApplicationStorage parentApplicationStorage = new AvailabilityHelper().mockApplicationStorage();
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(1440, transactionId)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.ONE_DAY, transactionId)).thenReturn(availabilityStorageList);
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
         when(applicationRepository.findApplicationByTransactionId(transactionStorage.getTransactionId())).thenReturn(parentApplicationStorage);
         average = performanceService.calculateLastDayAverageTransactionPerformance(transactionId).getAverage();
@@ -434,7 +435,7 @@ public class PerformanceServiceUnitTests {
         ApplicationStorage parentApplicationStorage = new AvailabilityHelper().mockApplicationStorage();
         
         //Act
-        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMonths(1, transactionId)).thenReturn(availabilityStorageList);
+        when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMonths(HubbleConstants.ONE_MONTH, transactionId)).thenReturn(availabilityStorageList);
         when(transactionRepository.findTransactionById(transactionId)).thenReturn(transactionStorage);
         when(applicationRepository.findApplicationByTransactionId(transactionStorage.getTransactionId())).thenReturn(parentApplicationStorage);
         average = performanceService.calculateLastMonthAverageTransactionPerformance(transactionId).getAverage();

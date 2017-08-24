@@ -27,10 +27,16 @@ public class LocationMapperConfiguration {
     }
 
     public Location mapToLocation(LocationDto locationDto){
+        if (locationDto == null) {
+            return null;
+        }
         return mapper.map(locationDto, Location.class);
     }
 
     public List<Location> mapToLocationList(List<LocationDto> locationDtoList){
+        if (locationDtoList == null) {
+            return null;
+        }
         Type locationDtoTypeList = new TypeToken<List<Location>>() {}.getType();
         return mapper.map(locationDtoList, locationDtoTypeList);
     }

@@ -6,14 +6,14 @@ import hubble.backend.business.services.models.ApplicationDto;
 import hubble.frontend.managers.interfaces.PerformanceManager;
 import hubble.frontend.managers.models.entities.BusinessApplication;
 import hubble.frontend.managers.models.collections.Performance;
-import hubble.frontend.managers.models.aggregations.PerformanceApplicationAvg;
 import hubble.backend.business.services.models.PerformanceDto;
 import hubble.backend.business.services.models.AvailabilityTransactionAvgDto;
 import hubble.backend.business.services.models.TransactionDto;
-import hubble.frontend.managers.configurations.mappers.ManagerApplicationMapperConfiguration;
+import hubble.frontend.managers.configurations.mappers.ApplicationMapperConfiguration;
 import hubble.frontend.managers.configurations.mappers.ManagerPerformanceMapperConfiguration;
-import hubble.frontend.managers.configurations.mappers.ManagerTransactionMapperConfiguration;
-import hubble.frontend.managers.models.aggregations.PerformanceTransactionAvg;
+import hubble.frontend.managers.configurations.mappers.TransactionMapperConfiguration;
+import hubble.frontend.managers.models.aggregations.BusinessApplicationAvg;
+import hubble.frontend.managers.models.aggregations.TransactionAvg;
 import hubble.frontend.managers.models.entities.Transaction;
 
 import java.util.List;
@@ -26,10 +26,10 @@ public class PerformanceManagerImpl implements PerformanceManager{
     @Autowired
     ManagerPerformanceMapperConfiguration performanceMapper;
     @Autowired
-    ManagerApplicationMapperConfiguration applicationMapper;
+    ApplicationMapperConfiguration applicationMapper;
     @Autowired
-    ManagerTransactionMapperConfiguration transactionMapper;
-
+    TransactionMapperConfiguration transactionMapper;
+    
     @Autowired
     PerformanceService performanceService;
 
@@ -96,25 +96,25 @@ public class PerformanceManagerImpl implements PerformanceManager{
     }
 
     @Override
-    public PerformanceApplicationAvg findLast10MinutesAverageByApplication(String applicationId) {
+    public BusinessApplicationAvg findLast10MinutesAverageByApplication(String applicationId) {
         AvailabilityApplicationAvgDto performanceAvgDto = performanceService.calculateLast10MinutesAverageApplicationPerformance(applicationId);
         return performanceMapper.mapToPerformanceApplicationAvg(performanceAvgDto);
     }
 
     @Override
-    public PerformanceApplicationAvg findLastHourAverageByApplication(String applicationId) {
+    public BusinessApplicationAvg findLastHourAverageByApplication(String applicationId) {
         AvailabilityApplicationAvgDto performanceAvgDto = performanceService.calculateLastHourAverageApplicationPerformance(applicationId);
         return performanceMapper.mapToPerformanceApplicationAvg(performanceAvgDto);
     }
 
     @Override
-    public PerformanceTransactionAvg findLast10MinutesAverageByTransaction(String transactionId) {
+    public TransactionAvg findLast10MinutesAverageByTransaction(String transactionId) {
         AvailabilityTransactionAvgDto performanceAvgDto = performanceService.calculateLast10MinutesAverageTransactionPerformance(transactionId);
         return performanceMapper.mapToPerformanceTransactionAvg(performanceAvgDto);
     }
 
     @Override
-    public PerformanceTransactionAvg findLastHourAverageByTransaction(String transactionId) {
+    public TransactionAvg findLastHourAverageByTransaction(String transactionId) {
         AvailabilityTransactionAvgDto performanceAvgDto = performanceService.calculateLastHourAverageTransactionPerformance(transactionId);
         return performanceMapper.mapToPerformanceTransactionAvg(performanceAvgDto);
     }
@@ -134,13 +134,13 @@ public class PerformanceManagerImpl implements PerformanceManager{
     @Override
     public Transaction findBusinessTransactionById(String transactionId) {
         TransactionDto transactionDto = performanceService.findTransactionById(transactionId);
-        return transactionMapper.mapToBusinessTransaction(transactionDto);
+        return transactionMapper.mapToTransaction(transactionDto);
     }
 
     @Override
     public List<Transaction> findTransactionsByApplication(String applicationId) {
         List<TransactionDto> transactionDtoList = performanceService.findTransactionsByApplicationId(applicationId);
-        return transactionMapper.mapToBusinessTransactionList(transactionDtoList);
+        return transactionMapper.mapToTransactionList(transactionDtoList);
     }
 
     @Override
@@ -180,25 +180,25 @@ public class PerformanceManagerImpl implements PerformanceManager{
     }
 
     @Override
-    public PerformanceApplicationAvg findLastDayAverageByApplication(String applicationId) {
+    public BusinessApplicationAvg findLastDayAverageByApplication(String applicationId) {
         AvailabilityApplicationAvgDto performanceAvgDto = performanceService.calculateLastDayAverageApplicationPerformance(applicationId);
         return performanceMapper.mapToPerformanceApplicationAvg(performanceAvgDto);   
     }
 
     @Override
-    public PerformanceTransactionAvg findLastDayAverageByTransaction(String transactionId) {
+    public TransactionAvg findLastDayAverageByTransaction(String transactionId) {
         AvailabilityTransactionAvgDto performanceAvgDto = performanceService.calculateLastDayAverageTransactionPerformance(transactionId);
         return performanceMapper.mapToPerformanceTransactionAvg(performanceAvgDto);
     }
 
     @Override
-    public PerformanceApplicationAvg findLastMonthAverageByApplication(String applicationId) {
+    public BusinessApplicationAvg findLastMonthAverageByApplication(String applicationId) {
         AvailabilityApplicationAvgDto performanceAvgDto = performanceService.calculateLastMonthAverageApplicationPerformance(applicationId);
         return performanceMapper.mapToPerformanceApplicationAvg(performanceAvgDto);   
     }
 
     @Override
-    public PerformanceTransactionAvg findLastMonthAverageByTransaction(String transactionId) {
+    public TransactionAvg findLastMonthAverageByTransaction(String transactionId) {
         AvailabilityTransactionAvgDto performanceAvgDto = performanceService.calculateLastMonthAverageTransactionPerformance(transactionId);
         return performanceMapper.mapToPerformanceTransactionAvg(performanceAvgDto);
     }

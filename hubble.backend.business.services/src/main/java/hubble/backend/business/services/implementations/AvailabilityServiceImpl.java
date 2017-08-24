@@ -13,6 +13,7 @@ import hubble.backend.business.services.models.AvailabilityTransactionAvgDto;
 import hubble.backend.business.services.models.AvailabilityDto;
 import hubble.backend.business.services.models.TransactionDto;
 import hubble.backend.core.enums.MonitoringFields;
+import hubble.backend.core.utils.HubbleConstants;
 import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.TransactionStorage;
 import hubble.backend.storage.repositories.ApplicationRepository;
@@ -49,13 +50,13 @@ public class AvailabilityServiceImpl implements AvailabilityService{
 
     @Override
     public List<AvailabilityDto> findLast10MinutesAvailabilitiesByTransactionId(String transactionId) {
-         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(10, transactionId);
+         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, transactionId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
     public List<AvailabilityDto> findLastHourAvailabilitiesByTransactionId(String transactionId) {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(60,transactionId);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.ONE_HOUR,transactionId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
     
@@ -90,36 +91,36 @@ public class AvailabilityServiceImpl implements AvailabilityService{
 
     @Override
     public List<AvailabilityDto> findLast10MinutesAvailabilities() {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(10);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(HubbleConstants.TEN_MINUTES);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
     public List<AvailabilityDto> findLastHourAvailabilities() {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(60);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(HubbleConstants.ONE_HOUR);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
     public List<AvailabilityDto> findLast10MinutesAvailabilitiesByApplicationId(String applicationId) {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10, applicationId);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, applicationId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
     public List<AvailabilityDto> findLastHourAvailabilitiesByApplicationId(String applicationId) {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(60, applicationId);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.ONE_HOUR, applicationId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
     public AvailabilityApplicationAvgDto calculateLast10MinutesAverageApplicationAvailability(String applicationId) {
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(10, applicationId);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, applicationId);
         AvailabilityApplicationAvgDto applicationAvailabilityAvg = mapper.mapToApplicationAvailabilityAvg(applicationStorage);
         
         if(availabilityStorageList.isEmpty()){//No data for last 10 minutes
-            applicationAvailabilityAvg.setAverage(-1);
+            applicationAvailabilityAvg.setAverage(null);
             applicationAvailabilityAvg.setStatus(MonitoringFields.STATUS.NO_DATA);
         }
         else{
@@ -132,11 +133,11 @@ public class AvailabilityServiceImpl implements AvailabilityService{
     @Override
     public AvailabilityApplicationAvgDto calculateLastHourAverageApplicationAvailability(String applicationId){
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(60, applicationId);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.ONE_HOUR, applicationId);
         AvailabilityApplicationAvgDto applicationAvailabilityAvg = mapper.mapToApplicationAvailabilityAvg(applicationStorage);
         
         if(availabilityStorageList.isEmpty()){//No data for last hour
-            applicationAvailabilityAvg.setAverage(-1);
+            applicationAvailabilityAvg.setAverage(null);
             applicationAvailabilityAvg.setStatus(MonitoringFields.STATUS.NO_DATA);
         }
         else{
@@ -151,11 +152,11 @@ public class AvailabilityServiceImpl implements AvailabilityService{
         TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
         ApplicationStorage parentApplicationStorage = applicationRepository.findApplicationByTransactionId(transactionId);
         AvailabilityTransactionAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(10, transactionId);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.TEN_MINUTES, transactionId);
         ApplicationDto parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
                 
         if(availabilityStorageList.isEmpty()){//No data for last 10 minutes
-            transactionAvailabilityAvg.setAverage(-1);
+            transactionAvailabilityAvg.setAverage(null);
             transactionAvailabilityAvg.setStatus(MonitoringFields.STATUS.NO_DATA);
         }
         else{
@@ -170,11 +171,11 @@ public class AvailabilityServiceImpl implements AvailabilityService{
         TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
         ApplicationStorage parentApplicationStorage = applicationRepository.findApplicationByTransactionId(transactionId);
         AvailabilityTransactionAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(60, transactionId);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.ONE_HOUR, transactionId);
         ApplicationDto parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
                 
         if(availabilityStorageList.isEmpty()){//No data for last hour
-            transactionAvailabilityAvg.setAverage(-1);
+            transactionAvailabilityAvg.setAverage(null);
             transactionAvailabilityAvg.setStatus(MonitoringFields.STATUS.NO_DATA);
         }
         else{
@@ -184,10 +185,10 @@ public class AvailabilityServiceImpl implements AvailabilityService{
         return transactionAvailabilityAvg;
     }
     
-    private int calculateAverageAvailability(List<AvailabilityStorage> availabilityStorageList){
+    private Integer calculateAverageAvailability(List<AvailabilityStorage> availabilityStorageList){
         int totalAvailabilities = availabilityStorageList.size();
         if(totalAvailabilities==0)
-            return -1;
+            return null;
         int okAvailabilites = 0;
         for(AvailabilityStorage availability : availabilityStorageList){
             if(availability.getAvailabilityStatus().equals(MonitoringFields.STATUS.SUCCESS.toString()))
@@ -203,6 +204,113 @@ public class AvailabilityServiceImpl implements AvailabilityService{
             return MonitoringFields.STATUS.CRITICAL;
         else 
             return MonitoringFields.STATUS.NO_DATA;
+    }
+
+    @Override
+    public List<AvailabilityDto> findLastDayAvailabilities() {
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(HubbleConstants.ONE_DAY);
+        return mapper.mapToAvailabilityDtoList(availabilityStorageList);    }
+
+    @Override
+    public List<AvailabilityDto> findLastMonthAvailabilities() {
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMonths(HubbleConstants.ONE_MONTH);
+        return mapper.mapToAvailabilityDtoList(availabilityStorageList);
+    }
+
+    @Override
+    public List<AvailabilityDto> findLastDayAvailabilitiesByApplicationId(String applicationId) {
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.ONE_DAY, applicationId);
+        return mapper.mapToAvailabilityDtoList(availabilityStorageList);
+    }
+
+    @Override
+    public List<AvailabilityDto> findLastDayAvailabilitiesByTransactionId(String transactionId) {
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.ONE_DAY,transactionId);
+        return mapper.mapToAvailabilityDtoList(availabilityStorageList);
+    }
+
+    @Override
+    public List<AvailabilityDto> findLastMonthAvailabilitiesByApplicationId(String applicationId) {
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMonths(HubbleConstants.ONE_MONTH, applicationId);
+        return mapper.mapToAvailabilityDtoList(availabilityStorageList);
+    }
+
+    @Override
+    public List<AvailabilityDto> findLastMonthAvailabilitiesByTransactionId(String transactionId) {
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMonths(HubbleConstants.ONE_MONTH,transactionId);
+        return mapper.mapToAvailabilityDtoList(availabilityStorageList);
+    }
+
+    @Override
+    public AvailabilityApplicationAvgDto calculateLastDayAverageApplicationAvailability(String applicationId) {
+        ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(HubbleConstants.ONE_DAY, applicationId);
+        AvailabilityApplicationAvgDto applicationAvailabilityAvg = mapper.mapToApplicationAvailabilityAvg(applicationStorage);
+        
+        if(availabilityStorageList.isEmpty()){//No data for last hour
+            applicationAvailabilityAvg.setAverage(null);
+            applicationAvailabilityAvg.setStatus(MonitoringFields.STATUS.NO_DATA);
+        }
+        else{
+            applicationAvailabilityAvg.setAverage(calculateAverageAvailability(availabilityStorageList));
+            applicationAvailabilityAvg.setStatus(calculateAvailabilityStatus(applicationAvailabilityAvg.getAvailabilityThreshold(), applicationAvailabilityAvg.getAverage()));
+        }
+        return applicationAvailabilityAvg;
+    }
+
+    @Override
+    public AvailabilityTransactionAvgDto calculateLastDayAverageTransactionAvailability(String transactionId) {
+        TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
+        ApplicationStorage parentApplicationStorage = applicationRepository.findApplicationByTransactionId(transactionId);
+        AvailabilityTransactionAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(HubbleConstants.ONE_DAY, transactionId);
+        ApplicationDto parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
+                
+        if(availabilityStorageList.isEmpty()){//No data for last hour
+            transactionAvailabilityAvg.setAverage(null);
+            transactionAvailabilityAvg.setStatus(MonitoringFields.STATUS.NO_DATA);
+        }
+        else{
+            transactionAvailabilityAvg.setAverage(calculateAverageAvailability(availabilityStorageList));
+            transactionAvailabilityAvg.setStatus(calculateAvailabilityStatus(parentApplicationDto.getAvailabilityThreshold(), transactionAvailabilityAvg.getAverage()));
+        }
+        return transactionAvailabilityAvg;
+    }
+
+    @Override
+    public AvailabilityApplicationAvgDto calculateLastMonthAverageApplicationAvailability(String applicationId) {
+        ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMonths(HubbleConstants.ONE_MONTH, applicationId);
+        AvailabilityApplicationAvgDto applicationAvailabilityAvg = mapper.mapToApplicationAvailabilityAvg(applicationStorage);
+        
+        if(availabilityStorageList.isEmpty()){//No data for last hour
+            applicationAvailabilityAvg.setAverage(null);
+            applicationAvailabilityAvg.setStatus(MonitoringFields.STATUS.NO_DATA);
+        }
+        else{
+            applicationAvailabilityAvg.setAverage(calculateAverageAvailability(availabilityStorageList));
+            applicationAvailabilityAvg.setStatus(calculateAvailabilityStatus(applicationAvailabilityAvg.getAvailabilityThreshold(), applicationAvailabilityAvg.getAverage()));
+        }
+        return applicationAvailabilityAvg;
+    }
+
+    @Override
+    public AvailabilityTransactionAvgDto calculateLastMonthAverageTransactionAvailability(String transactionId) {
+        TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
+        ApplicationStorage parentApplicationStorage = applicationRepository.findApplicationByTransactionId(transactionId);
+        AvailabilityTransactionAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMonths(HubbleConstants.ONE_MONTH, transactionId);
+        ApplicationDto parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
+                
+        if(availabilityStorageList.isEmpty()){//No data for last hour
+            transactionAvailabilityAvg.setAverage(null);
+            transactionAvailabilityAvg.setStatus(MonitoringFields.STATUS.NO_DATA);
+        }
+        else{
+            transactionAvailabilityAvg.setAverage(calculateAverageAvailability(availabilityStorageList));
+            transactionAvailabilityAvg.setStatus(calculateAvailabilityStatus(parentApplicationDto.getAvailabilityThreshold(), transactionAvailabilityAvg.getAverage()));
+        }
+        return transactionAvailabilityAvg;
     }
 
     

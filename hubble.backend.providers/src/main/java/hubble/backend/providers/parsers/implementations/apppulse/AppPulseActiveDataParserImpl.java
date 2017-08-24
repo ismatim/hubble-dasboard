@@ -52,7 +52,7 @@ public class AppPulseActiveDataParserImpl implements AppPulseActiveDataParser {
     public AvailabilityProviderModel extract(InputStream appPulseTransactions) {
 
         ObjectMapper objMapper = new ObjectMapper();
-        AvailabilityProviderModel records = null;
+        AvailabilityProviderModel records;
         try {
             records = objMapper.readValue(appPulseTransactions, AvailabilityProviderModel.class);
         } catch (IOException ex) {

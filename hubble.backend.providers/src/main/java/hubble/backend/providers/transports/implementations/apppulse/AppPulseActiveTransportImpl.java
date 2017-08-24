@@ -17,7 +17,7 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
     @Autowired
     private ProviderEnvironment environment;
 
-    private String APP_PULSE_ACTIVE_URL;
+    private final String APP_PULSE_ACTIVE_URL;
     private String clientId;
     private String clientSecret;
     private String tokenValue = EMPTY;
@@ -42,6 +42,7 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
                     .asJson();
         } catch (UnirestException ex) {
             //TODO: Log here
+            ex.printStackTrace(System.out);
         }
 
         if (jsonResponse == null || jsonResponse.getBody() == null) {
@@ -76,6 +77,7 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
                     .asJson();
         } catch (UnirestException ex) {
             //TODO: Log here.
+            ex.printStackTrace(System.out);
         }
 
         if (appPulseActiveHttpResponse == null || appPulseActiveHttpResponse.getBody() == null) {
@@ -144,6 +146,8 @@ public class AppPulseActiveTransportImpl implements AppPulseActiveTransport {
                     .asJson();
         } catch (UnirestException ex) {
             //TODO: Log here.
+            ex.printStackTrace(System.out);
+
         }
 
         if (appPulseActiveHttpResponse == null || appPulseActiveHttpResponse.getBody() == null) {

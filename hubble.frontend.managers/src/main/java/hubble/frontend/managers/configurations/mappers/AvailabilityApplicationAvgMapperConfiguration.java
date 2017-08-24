@@ -2,7 +2,7 @@ package hubble.frontend.managers.configurations.mappers;
 
 import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
 import hubble.backend.business.services.models.TransactionDto;
-import hubble.frontend.managers.models.aggregations.AvailabilityBusinessApplicationAvg;
+import hubble.frontend.managers.models.aggregations.BusinessApplicationAvg;
 import java.util.ArrayList;
 import java.util.List;
 import org.modelmapper.ModelMapper;
@@ -26,8 +26,11 @@ public class AvailabilityApplicationAvgMapperConfiguration {
         this.mapper = mapper;
     }
 
-    public AvailabilityBusinessApplicationAvg mapToAvailabilityApplicationAvg(AvailabilityApplicationAvgDto availabilityAvgDto){
-        AvailabilityBusinessApplicationAvg availabilityBusinessApplicationAvg = mapper.map(availabilityAvgDto, AvailabilityBusinessApplicationAvg.class);
+    public BusinessApplicationAvg mapToAvailabilityApplicationAvg(AvailabilityApplicationAvgDto availabilityAvgDto){
+        if (availabilityAvgDto == null) {
+            return null;
+        }
+        BusinessApplicationAvg availabilityBusinessApplicationAvg = mapper.map(availabilityAvgDto, BusinessApplicationAvg.class);
         List<String> transactionIds = new ArrayList();
         if(availabilityAvgDto.getTransactions()!=null)
             for(TransactionDto transaction : availabilityAvgDto.getTransactions()){

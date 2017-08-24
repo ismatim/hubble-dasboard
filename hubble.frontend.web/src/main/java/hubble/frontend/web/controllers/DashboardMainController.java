@@ -1,10 +1,9 @@
 package hubble.frontend.web.controllers;
 
-import hubble.frontend.managers.interfaces.AvailabilityManager;
+import hubble.frontend.managers.implementations.AvailabilityManagerImpl;
 import hubble.frontend.managers.interfaces.PerformanceManager;
-import hubble.frontend.managers.models.aggregations.AvailabilityBusinessApplicationAvg;
+import hubble.frontend.managers.models.aggregations.BusinessApplicationAvg;
 import hubble.frontend.managers.models.entities.BusinessApplication;
-import hubble.frontend.managers.models.aggregations.PerformanceApplicationAvg;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class DashboardMainController {
 
     @Autowired
-    private AvailabilityManager availabilityManager;
+    private AvailabilityManagerImpl availabilityManager;
     @Autowired
     private PerformanceManager performanceManager;
 
@@ -35,10 +34,10 @@ public class DashboardMainController {
     public ModelAndView getApplications(HttpServletRequest req) {
         ModelAndView mav = new ModelAndView();
         List<BusinessApplication> applications = availabilityManager.findAllApplications();
-        List<AvailabilityBusinessApplicationAvg> availabilityApplicationsLastHourAvgs = new ArrayList();
-        List<AvailabilityBusinessApplicationAvg> availabilityApplicationsLast10MinutesAvgs = new ArrayList();
-        List<PerformanceApplicationAvg> performanceApplicationsLastHourAvgs = new ArrayList();
-        List<PerformanceApplicationAvg> performanceApplicationsLast10MinutesAvgs = new ArrayList();
+        List<BusinessApplicationAvg> availabilityApplicationsLastHourAvgs = new ArrayList();
+        List<BusinessApplicationAvg> availabilityApplicationsLast10MinutesAvgs = new ArrayList();
+        List<BusinessApplicationAvg> performanceApplicationsLastHourAvgs = new ArrayList();
+        List<BusinessApplicationAvg> performanceApplicationsLast10MinutesAvgs = new ArrayList();
 
         for(BusinessApplication application : applications){
             availabilityApplicationsLastHourAvgs.add(availabilityManager.findLastHourAverageByApplication(application.getId()));

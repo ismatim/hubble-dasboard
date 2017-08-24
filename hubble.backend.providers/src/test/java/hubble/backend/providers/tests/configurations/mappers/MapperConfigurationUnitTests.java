@@ -19,15 +19,15 @@ public class MapperConfigurationUnitTests extends AppPulseBaseUnitTests {
     public void AppPulseActiveParser_convert_apppulse_model_provider_to_storage() {
 
         //Assign
-        AvailabilityProviderModel appPulseActivity = this.getFakeAppPulseProviderModel();
+        AvailabilityProviderModel appPulseActivity = MapperConfigurationUnitTests.getFakeAppPulseProviderModel();
 
         //Act
         List<AvailabilityStorage> availabilityStorageList = mapperConfifuration.mapToAvailabilitiesStorage(appPulseActivity);
 
         //Assert
         assertNotNull(availabilityStorageList);
-        assertTrue(availabilityStorageList.get(0).getApplicationId() == "1");
-        assertTrue(availabilityStorageList.get(0).getApplicationName() == "fake-name");
-        assertTrue(availabilityStorageList.get(0).getAvailabilityStatus() == "fake-status");
+        assertTrue(availabilityStorageList.get(0).getApplicationId().equals("1"));
+        assertTrue(availabilityStorageList.get(0).getApplicationName().equals("fake-name"));
+        assertTrue(availabilityStorageList.get(0).getAvailabilityStatus().equals("fake-status"));
     }
 }

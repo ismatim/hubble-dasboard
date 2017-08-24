@@ -27,11 +27,19 @@ public class TransactionMapperConfiguration {
     }
 
     public Transaction mapToTransaction(TransactionDto transactionDto){
+        if (transactionDto == null) {
+            return null;
+        }
         return mapper.map(transactionDto, Transaction.class);
     }
 
     public List<Transaction> mapToTransactionList(List<TransactionDto> transactionDtoList){
-        Type transactionDtoTypeList = new TypeToken<List<Transaction>>() {}.getType();
+        if (transactionDtoList == null) {
+            return null;
+        }
+
+        Type transactionDtoTypeList = new TypeToken<List<Transaction>>() {
+        }.getType();
         return mapper.map(transactionDtoList, transactionDtoTypeList);
     }
 }

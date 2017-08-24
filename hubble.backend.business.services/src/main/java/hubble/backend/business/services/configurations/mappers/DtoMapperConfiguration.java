@@ -33,62 +33,98 @@ public class DtoMapperConfiguration {
     }
 
     public List<AvailabilityDto> mapToAvailabilityDtoList(List<AvailabilityStorage> availabilityStorageList) {
+        if (availabilityStorageList == null) {
+            return null;
+        }
         Type availabilityDtoTypeList = new TypeToken<List<AvailabilityDto>>() {
         }.getType();
         return mapper.map(availabilityStorageList, availabilityDtoTypeList);
     }
 
     public AvailabilityDto mapToAvailabilityDto(AvailabilityStorage availabilityStorage) {
+        if (availabilityStorage == null) {
+            return null;
+        }
         return mapper.map(availabilityStorage, AvailabilityDto.class);
     }
 
     public ApplicationDto mapToApplicationDto(ApplicationStorage applicationStorage) {
+        if (applicationStorage == null) {
+            return null;
+        }
         return mapper.map(applicationStorage, ApplicationDto.class);
     }
 
     public List<ApplicationDto> mapToApplicationDtoList(List<ApplicationStorage> applicationStorageList) {
+        if (applicationStorageList == null) {
+            return null;
+        }
         Type applicationDtoTypeList = new TypeToken<List<ApplicationDto>>() {
         }.getType();
         return mapper.map(applicationStorageList, applicationDtoTypeList);
     }
 
     public TransactionDto mapToTransactionDto(TransactionStorage transactionStorage) {
+        if (transactionStorage == null) {
+            return null;
+        }
         return mapper.map(transactionStorage, TransactionDto.class);
     }
 
     public List<TransactionDto> mapToTransactionDtoList(List<TransactionStorage> transactionStorageList) {
+        if (transactionStorageList == null) {
+            return null;
+        }
         Type transactionDtoTypeList = new TypeToken<List<TransactionDto>>() {
         }.getType();
         return mapper.map(transactionStorageList, transactionDtoTypeList);
     }
 
     public AvailabilityApplicationAvgDto mapToApplicationAvailabilityAvg(ApplicationStorage applicationStorage) {
+        if (applicationStorage == null) {
+            return null;
+        }
         return mapper.map(applicationStorage, AvailabilityApplicationAvgDto.class);
     }
 
     public List<AvailabilityApplicationAvgDto> mapToApplicationAvailabilityAvgList(List<ApplicationStorage> applicationStorageList) {
+        if (applicationStorageList == null) {
+            return null;
+        }
         Type applicationAvailabilityAvgTypeList = new TypeToken<List<AvailabilityApplicationAvgDto>>() {
         }.getType();
         return mapper.map(applicationStorageList, applicationAvailabilityAvgTypeList);
     }
 
     public List<AvailabilityTransactionAvgDto> mapToTransactionAvailabilityAvgList(List<TransactionStorage> transactionStorageList) {
+        if (transactionStorageList == null) {
+            return null;
+        }
         Type transactionAvailabilityAvgTypeList = new TypeToken<List<AvailabilityTransactionAvgDto>>() {
         }.getType();
         return mapper.map(transactionStorageList, transactionAvailabilityAvgTypeList);
     }
 
     public AvailabilityTransactionAvgDto mapToTransactionAvailabilityAvg(TransactionStorage transactionStorage) {
+        if (transactionStorage == null) {
+            return null;
+        }
         return mapper.map(transactionStorage, AvailabilityTransactionAvgDto.class);
     }
 
     public List<PerformanceDto> mapToPerformanceDtoList(List<AvailabilityStorage> availabilityStorageList) {
+        if (availabilityStorageList == null) {
+            return null;
+        }
         Type availabilityDtoTypeList = new TypeToken<List<AvailabilityDto>>() {
         }.getType();
         return mapper.map(availabilityStorageList, availabilityDtoTypeList);
     }
 
     public PerformanceDto mapToPerformanceDto(AvailabilityStorage availabilityStorage) {
+        if (availabilityStorage == null) {
+            return null;
+        }
         return mapper.map(availabilityStorage, PerformanceDto.class);
     }
 
