@@ -3,7 +3,7 @@ package hubble.backend.business.services.models;
 import java.util.Date;
 import java.util.List;
 
-public class AvailabilityDto{
+public class AvailabilityDto {
 
     private String id;
     private String applicationName;

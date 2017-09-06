@@ -1,7 +1,7 @@
 package hubble.frontend.managers.configurations.mappers;
 
 import hubble.backend.business.services.models.LocationDto;
-import hubble.frontend.managers.models.entities.Location;
+import hubble.frontend.managers.models.Location;
 import java.lang.reflect.Type;
 import java.util.List;
 import org.modelmapper.ModelMapper;

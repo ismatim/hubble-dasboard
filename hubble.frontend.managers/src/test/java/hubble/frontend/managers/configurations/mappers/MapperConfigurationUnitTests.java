@@ -1,10 +1,11 @@
 package hubble.frontend.managers.configurations.mappers;
 
-import hubble.backend.business.services.models.AvailabilityApplicationAvgDto;
+import hubble.backend.business.services.models.ApplicationAvgDto;
 import hubble.backend.business.services.models.AvailabilityDto;
+import hubble.backend.business.services.models.measures.AvailabilityAverage;
 import hubble.backend.core.enums.MonitoringFields;
-import hubble.frontend.managers.models.aggregations.BusinessApplicationAvg;
-import hubble.frontend.managers.models.collections.Availability;
+import hubble.frontend.managers.models.Availability;
+import hubble.frontend.managers.models.BusinessApplicationAvg;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +21,7 @@ public class MapperConfigurationUnitTests {
     AvailabilityMapperConfiguration mapperAvailability = new AvailabilityMapperConfiguration();
     ApplicationMapperConfiguration mapperApplication = new ApplicationMapperConfiguration();
     TransactionMapperConfiguration mapperTransaction = new TransactionMapperConfiguration();
-    AvailabilityApplicationAvgMapperConfiguration mapperAvailabilityApplicationAvg = new AvailabilityApplicationAvgMapperConfiguration();
+    ApplicationAvgMapperConfiguration mapperAvailabilityApplicationAvg = new ApplicationAvgMapperConfiguration();
 
     @Test
     public void validate_availability_mapper_from_availabilitydto_to_availability() {
@@ -54,17 +55,19 @@ public class MapperConfigurationUnitTests {
     @Test
     public void mapper_configuration_should_map_availabilityApplicationAvgDto_to_AvailabilityBusinessApplicationAvg() {
         //Assign
-        AvailabilityApplicationAvgDto availabilityAvgDto = mock(AvailabilityApplicationAvgDto.class);
+        ApplicationAvgDto availabilityAvgDto = mock(ApplicationAvgDto.class);
+        AvailabilityAverage availabilityAvgFake = mock(AvailabilityAverage.class);
 
         //Act
         when(availabilityAvgDto.getApplicationId()).thenReturn("123");
         when(availabilityAvgDto.getApplicationName()).thenReturn("Application Name");
         when(availabilityAvgDto.getAvailabilityThreshold()).thenReturn(90);
-        when(availabilityAvgDto.getAverage()).thenReturn(7510);
+        when(availabilityAvgDto.getAvailabilityAverageValue()).thenReturn(7510);
         when(availabilityAvgDto.getCriticalThreshold()).thenReturn(12000);
         when(availabilityAvgDto.getOkThreshold()).thenReturn(8000);
         when(availabilityAvgDto.getOutlierThreshold()).thenReturn(45000);
-        when(availabilityAvgDto.getStatus()).thenReturn(MonitoringFields.STATUS.NO_DATA);
+        when(availabilityAvgDto.getAvailabilityAverage()).thenReturn(availabilityAvgFake);
+        when(availabilityAvgFake.getStatus()).thenReturn(MonitoringFields.STATUS.NO_DATA);
         when(availabilityAvgDto.getTimeZoneId()).thenReturn("1");
 
         BusinessApplicationAvg availabilityApplicationAvg = mapperAvailabilityApplicationAvg.mapToAvailabilityApplicationAvg(availabilityAvgDto);
@@ -80,65 +83,4 @@ public class MapperConfigurationUnitTests {
         assertEquals("No_Data", availabilityApplicationAvg.getStatus().toString());
         assertEquals("1", availabilityApplicationAvg.getBusinessApplication().getTimeZoneId());
     }
-    /*
-    @Test
-    public void mapper_configuration_should_map_availability_transaction_avg() {
-        //Assign
-        AvailabilityTransactionAvgDto availabilityAvgDto = mock(AvailabilityTransactionAvgDto.class);
-
-        //Act
-        when(availabilityAvgDto.getApplicationId()).thenReturn("123");
-        when(availabilityAvgDto.getTransactionName()).thenReturn("Transaction Name");
-        when(availabilityAvgDto.getAverage()).thenReturn(75);
-        when(availabilityAvgDto.getCriticalThreshold()).thenReturn(12000);
-        when(availabilityAvgDto.getOkThreshold()).thenReturn(8000);
-        when(availabilityAvgDto.getStatus()).thenReturn(MonitoringFields.STATUS.NO_DATA);
-        when(availabilityAvgDto.getTransactionType()).thenReturn("Script");
-        when(availabilityAvgDto.getScriptName()).thenReturn("Script Name");
-
-        AvailabilityTransactionAvg availabilityTransactionAvg = mapperAvailability.mapToAvailabilityTransactionAvg(availabilityAvgDto);
-
-        //Assert
-        assertEquals("123", availabilityTransactionAvg.getApplicationId());
-        assertEquals("Transaction Name", availabilityTransactionAvg.getTransactionName());
-        assertEquals(75, availabilityTransactionAvg.getAverage());
-        assertEquals(12000, availabilityTransactionAvg.getCriticalThreshold());
-        assertEquals(8000, availabilityTransactionAvg.getOkThreshold());
-        assertEquals("No_Data", availabilityTransactionAvg.getStatus().toString());
-        assertEquals("Script", availabilityTransactionAvg.getTransactionType());
-        assertEquals("Script Name", availabilityTransactionAvg.getScriptName());
-    }
-
-    @Test
-    public void appliation_mapper_should_map_to_business_application(){
-        //Assign
-        ApplicationDto applicationDto = mock(ApplicationDto.class);
-
-        //Act
-        when(applicationDto.getApplicationId()).thenReturn("123");
-        when(applicationDto.getApplicationName()).thenReturn("Application Name");
-        BusinessApplication businessApplication = mapperApplication.mapToBusinessApplication(applicationDto);
-
-        //Assert
-        //assertEquals("123", businessApplication.getId());
-        //assertEquals("Application Name", businessApplication.getBusinessApplicationName());
-        //assertEquals("Application Name", businessApplication.getBusinessApplicationDisplayName());
-    }
-
-    @Test
-    public void application_mapper_should_map_to_business_transaction(){
-        //Assign
-        TransactionDto transactionDto = mock(TransactionDto.class);
-
-        //Act
-        when(transactionDto.getTransactionId()).thenReturn("123");
-        when(transactionDto.getTransactionName()).thenReturn("Transaction Name");
-        Transaction businessTransaction = mapperTransaction.mapToBusinessTransaction(transactionDto);
-
-        //Assert
-        assertEquals("123", businessTransaction.getId());
-        assertEquals("Transaction Name", businessTransaction.getBusinessTransactionName());
-        assertEquals("Transaction Name", businessTransaction.getBusinessTransactionDisplayName());
-    }
-     */
 }

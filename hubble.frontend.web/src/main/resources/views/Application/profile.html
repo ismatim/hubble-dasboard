@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+    <body class="theme-default">
+
+        <!-- Main section-->
+        <main class="main-container" layout:fragment="content">
+            <!-- Page content-->
+            <section class="section-container">
+                <div  class="container-fluid">
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <div class="cardbox cardbox-flat">
+                                <div class="cardbox-heading">
+                                    <div class="float-right">
+                                        <div class="icon-lg text-muted"></div>
+                                    </div>
+                                    <div>Disponibilidad (10 minutos)</div>
+                                </div>
+                                <div class="cardbox-body">
+                                    <div class="text-center">
+                                        <input id="chart-disponibilidad-10-min" type="text" th:value="${applicationView.getAvailabilityAverage10min()}"
+                                               th:attr="data-status=${applicationView.getStatusAvailability10min()}, data-max=${applicationView.getAvailabilityCriticalValue10min()}" ></input>
+                                    </div>
+                                    <small>
+                                        <span class="float-right" th:text="${applicationView.getMeasuresQtyAvailability10min()}" id="measures-availability-value"></span>
+                                        Mediciones
+                                    </small>
+                                    <div class="progress progress-xs mb-4">
+                                        <!--<div class="progress-bar bg-success" id="availabilityMeasures10minProgressBar" role="progressbar" style="width: 25%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                    </div>
+                                    <small>
+                                        <span class="float-right" id="uptime-value">0</span>Uptime</small>
+                                    <div class="progress progress-xs mb-3">
+                                        <!--<div class="progress-bar bg-info" id="uptime" role="progressbar" style="width: 50%;" aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="cardbox cardbox-flat">
+                                <div class="cardbox-heading">
+                                    <div class="float-right">
+                                        <div class="icon-lg text-muted"></div>
+                                    </div>
+                                    <div>Performance (10 minutos)</div>
+                                </div>
+                                <div class="cardbox-body">
+                                    <div class="text-center">
+                                        <input id="chart-performance-10-min" type="text" th:value="${applicationView.getPerformanceAverage10min()}"
+                                               th:attr="data-status=${applicationView.getStatusPerformance10min()} , data-max=${applicationView.getPerformanceCriticalValue10min()}"  ></input>
+                                    </div><small><span class="float-right" th:text="${applicationView.getMeasuresQtyPerformance10min()}" id="measures-performance"></span>Mediciones</small>
+                                    <div class="progress progress-xs mb-4">
+                                        <!--<div class="progress-bar bg-success" id="measures-performance-progressbar" role="progressbar" style="width: 25%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                    </div><small><span class="float-right" id="time-value">0</span>Tiempo</small>
+                                    <div class="progress progress-xs mb-3">
+                                        <!--<div class="progress-bar bg-info" id="time" role="progressbar" style="width: 50%;" aria-valuenow="16" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="cardbox cardbox-flat">
+                                <div class="cardbox-heading">
+                                    <div class="float-right">
+                                        <div class="icon-lg text-muted"></div>
+                                    </div>
+                                    <div>Incidencias</div>
+                                </div>
+                                <div class="cardbox-body">
+                                    <div class="text-center">
+                                        <input id="chart-incidencias-10-min" type="text" value="0" data-max="0" data-status="No_Data" ></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="cardbox cardbox-flat">
+                                <div class="cardbox-heading">
+                                    <div class="float-right">
+                                        <div class="icon-lg text-muted"></div>
+                                    </div>
+                                    <div>Tareas</div>
+                                </div>
+                                <div class="cardbox-body">
+                                    <div class="text-center">
+                                        <input id="chart-tareas-10-min" type="text" value="0" data-max="0" data-status="No_Data" ></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <div class="cardbox cardbox-flat">
+                                <div class="cardbox-heading">
+                                    <div class="float-right">
+                                        <div class="icon-lg text-muted"></div>
+                                    </div>
+                                    <div>Disponibilidad (1 hora)</div>
+                                </div>
+                                <div class="cardbox-body">
+                                    <div class="text-center">
+                                        <input id="chart-disponibilidad-1-hora" type="text" th:value="${applicationView.availabilityAverage1hour}"
+                                               th:attr="data-status=${applicationView.getStatusAvailability1hour()}, data-max=${applicationView.getAvailabilityCriticalValue1hour()}" ></input>
+                                    </div>
+                                    <small>
+                                        <span class="float-right" th:text="${applicationView.measuresQtyAvailability1hour}" id="measures-availability-value"></span>
+                                        Mediciones
+                                    </small>
+                                    <div class="progress progress-xs mb-4">
+                                        <!--<div class="progress-bar bg-success" id="ram" role="progressbar" style="width: 25%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                    </div><small><span class="float-right" id="uptime-value">0</span>Uptime</small>
+                                    <div class="progress progress-xs mb-3">
+                                        <!--<div class="progress-bar bg-info" id="uptime" role="progressbar" style="width: 50%;" aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="cardbox cardbox-flat">
+                                <div class="cardbox-heading">
+                                    <div class="float-right">
+                                        <div class="icon-lg text-muted"></div>
+                                    </div>
+                                    <div>Performance (1 hora)</div>
+                                </div>
+                                <div class="cardbox-body">
+                                    <div class="text-center">
+                                        <input id="chart-performance-1-hora" type="text" th:value="${applicationView.performanceAverage1hour}"
+                                               th:attr="data-status=${applicationView.getStatusPerformance1hour()}, data-max=${applicationView.getPerformanceCriticalValue1hour()}" ></input>
+                                    </div>
+                                    <small>
+                                        <span class="float-right" th:text="${applicationView.measuresQtyPerformance1hour}" id="measures-performance"></span>Mediciones</small>
+                                    <div class="progress progress-xs mb-4">
+                                        <!--<div class="progress-bar bg-success" id="measures-performance-progressbar" role="progressbar" style="width: 25%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                    </div><small><span class="float-right" id="time-value">0</span>Tiempo</small>
+                                    <div class="progress progress-xs mb-3">
+                                        <!--<div class="progress-bar bg-info" id="time" role="progressbar" style="width: 50%;" aria-valuenow="16" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="cardbox cardbox-flat">
+                                <div class="cardbox-heading">
+                                    <div class="float-right">
+                                        <div class="icon-lg text-muted"></div>
+                                    </div>
+                                    <div>Incidencias</div>
+                                </div>
+                                <div class="cardbox-body">
+                                    <div class="text-center">
+                                        <input id="chart-incidencias-1-hora" type="text" value="0" data-max="0" data-status="No_Data" ></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="cardbox cardbox-flat">
+                                <div class="cardbox-heading">
+                                    <div class="float-right">
+                                        <div class="icon-lg text-muted"></div>
+                                    </div>
+                                    <div>Tareas</div>
+                                </div>
+                                <div class="cardbox-body">
+                                    <div class="text-center">
+                                        <input id="chart-tareas-1-hora" type="text" value="0" data-max="0" data-status="No_Data"  ></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <div class="cardbox cardbox-flat">
+                                <div class="cardbox-heading">
+                                    <div class="float-right">
+                                        <div class="icon-lg text-muted"></div>
+                                    </div>
+                                    <div>Disponibilidad (1 día)</div>
+                                </div>
+                                <div class="cardbox-body">
+                                    <div class="text-center">
+                                        <input id="chart-disponibilidad-1-day" type="text" th:value="${applicationView.availabilityAverage1day}"
+                                               th:attr="data-status=${applicationView.getStatusAvailability1day()}, data-max=${applicationView.getAvailabilityCriticalValue1day()}"></input>
+                                    </div>
+                                    <small>
+                                        <span class="float-right" th:text="${applicationView.measuresQtyAvailability1day}" id="measures-availability-value"></span>
+                                        Mediciones
+                                    </small>
+                                    <div class="progress progress-xs mb-4">
+                                        <!--<div class="progress-bar bg-success" id="ram" role="progressbar" style="width: 25%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                    </div><small><span class="float-right" id="uptime-value">0</span>Uptime</small>
+                                    <div class="progress progress-xs mb-3">
+                                        <!--<div class="progress-bar bg-info" id="uptime" role="progressbar" style="width: 50%;" aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="cardbox cardbox-flat">
+                                <div class="cardbox-heading">
+                                    <div class="float-right">
+                                        <div class="icon-lg text-muted"></div>
+                                    </div>
+                                    <div>Performance (1 día)</div>
+                                </div>
+                                <div class="cardbox-body">
+                                    <div class="text-center">
+                                        <input id="chart-performance-1-day" type="text" th:value="${applicationView.performanceAverage1day}"
+                                               th:attr="data-status=${applicationView.getStatusPerformance1day()} , data-max=${applicationView.getPerformanceCriticalValue1day()}"></input>
+                                    </div><small><span class="float-right" th:text="${applicationView.measuresQtyPerformance1day}" id="measures-performance"></span>Mediciones</small>
+                                    <div class="progress progress-xs mb-4">
+                                        <!--<div class="progress-bar bg-success" id="measures-performance-progressbar" role="progressbar" style="width: 25%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                    </div><small><span class="float-right" id="time-value">0</span>Tiempo</small>
+                                    <div class="progress progress-xs mb-3">
+                                        <!--<div class="progress-bar bg-info" id="time" role="progressbar" style="width: 50%;" aria-valuenow="16" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="cardbox cardbox-flat">
+                                <div class="cardbox-heading">
+                                    <div class="float-right">
+                                        <div class="icon-lg text-muted"></div>
+                                    </div>
+                                    <div>Incidencias (1 día)</div>
+                                </div>
+                                <div class="cardbox-body">
+                                    <div class="text-center">
+                                        <input id="chart-incidencias-1-day" type="text" value="0" data-max="0" data-status="No_Data" ></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="cardbox cardbox-flat">
+                                <div class="cardbox-heading">
+                                    <div class="float-right">
+                                        <div class="icon-lg text-muted"></div>
+                                    </div>
+                                    <div>Tareas (1 día)</div>
+                                </div>
+                                <div class="cardbox-body">
+                                    <div class="text-center">
+                                        <input id="chart-tareas-1-day" type="text" value="0" data-max="0" data-status="No_Data" ></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </body>
+</html>

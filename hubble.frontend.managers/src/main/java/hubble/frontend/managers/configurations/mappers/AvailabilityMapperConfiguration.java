@@ -1,7 +1,7 @@
 package hubble.frontend.managers.configurations.mappers;
 
 import hubble.backend.business.services.models.AvailabilityDto;
-import hubble.frontend.managers.models.collections.Availability;
+import hubble.frontend.managers.models.Availability;
 import java.lang.reflect.Type;
 import java.util.List;
 import org.modelmapper.ModelMapper;

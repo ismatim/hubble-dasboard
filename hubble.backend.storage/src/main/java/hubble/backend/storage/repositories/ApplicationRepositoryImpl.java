@@ -28,16 +28,17 @@ public class ApplicationRepositoryImpl implements ApplicationOperations {
     @Override
     public ApplicationStorage findApplicationById(String applicationId) {
         List<ApplicationStorage> applicationStorageList = getApplications();
-        List<ApplicationStorage> filteredList = applicationStorageList
-                .stream()
-                .filter(t -> t.getApplicationId().equals(applicationId))
-                .collect(toList());
 
         if (applicationStorageList.isEmpty()) {
             return null;
         }
 
-        return filteredList.get(0);
+        List<ApplicationStorage> filteredList = applicationStorageList
+                .stream()
+                .filter(t -> t.getApplicationId().equals(applicationId))
+                .collect(toList());
+
+        return !filteredList.isEmpty() ? filteredList.get(0) : null;
     }
 
     @Override
