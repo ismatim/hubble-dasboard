@@ -1,6 +1,7 @@
 package hubble.backend.business.services.implementations.operations;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
+import hubble.backend.business.services.interfaces.operations.AvailabilityOperations;
 import hubble.backend.business.services.models.ApplicationAvgDto;
 import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.core.enums.MonitoringFields;
@@ -13,7 +14,6 @@ import hubble.backend.storage.repositories.AvailabilityRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import hubble.backend.business.services.interfaces.operations.AvailabilityOperations;
 
 @Component
 public class AvailabilityOperationImpl implements AvailabilityOperations {
@@ -26,10 +26,10 @@ public class AvailabilityOperationImpl implements AvailabilityOperations {
     MapperConfiguration mapper;
 
     @Override
-    public int calculateAverage(List<AvailabilityStorage> availabilityStorageList) {
+    public Float calculateAverage(List<AvailabilityStorage> availabilityStorageList) {
         int totalAvailabilities = availabilityStorageList.size();
         if (totalAvailabilities == 0) {
-            return -1;
+            return null;
         }
         int okAvailabilites = 0;
         for (AvailabilityStorage availability : availabilityStorageList) {
@@ -37,17 +37,17 @@ public class AvailabilityOperationImpl implements AvailabilityOperations {
                 okAvailabilites++;
             }
         }
-        return 100 * okAvailabilites / totalAvailabilities;
+        return Float.valueOf(100 * okAvailabilites / totalAvailabilities);
     }
 
     @Override
-    public MonitoringFields.STATUS calculateStatus(ApplicationDto appAvg, Integer avgAvailability) {
+    public MonitoringFields.STATUS calculateStatus(ApplicationDto appAvg, Float avgAvailability) {
 
         if (avgAvailability == null) {
-            appAvg.setAvailabilityThreshold(0);
+            appAvg.setAvailabilityThreshold(0f);
             return MonitoringFields.STATUS.NO_DATA;
         } else if (appAvg.getAvailabilityThreshold() == 0) {
-            appAvg.setAvailabilityThreshold(Threshold.TOP_AVAILABILITY_PERCENTAGE);
+            appAvg.setAvailabilityThreshold(Float.valueOf(Threshold.TOP_AVAILABILITY_PERCENTAGE));
         }
 
         if (avgAvailability <= Threshold.CRITICAL_AVAILABILITY_DEFAULT) {

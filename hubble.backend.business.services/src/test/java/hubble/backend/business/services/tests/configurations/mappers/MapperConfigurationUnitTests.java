@@ -1,8 +1,8 @@
 package hubble.backend.business.services.tests.configurations.mappers;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
-import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.models.ApplicationAvgDto;
+import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.models.AvailabilityDto;
 import hubble.backend.business.services.models.TransactionAvgDto;
 import hubble.backend.business.services.models.TransactionDto;
@@ -114,12 +114,12 @@ public class MapperConfigurationUnitTests {
 
         assertEquals("1234", applicationDto.getApplicationId());
         assertEquals("BancoRipley - HomeBanking", applicationDto.getApplicationName());
-        assertEquals(90, applicationDto.getAvailabilityThreshold());
-        assertEquals(12000, applicationDto.getCriticalThreshold());
+        assertEquals(90, applicationDto.getAvailabilityThreshold().intValue());
+        assertEquals(12000, applicationDto.getCriticalThreshold().intValue());
         assertEquals(true, applicationDto.isActive());
         assertEquals(null, applicationDto.getLocations());
-        assertEquals(8000, applicationDto.getOkThreshold());
-        assertEquals(45000, applicationDto.getOutlierThreshold());
+        assertEquals(8000, applicationDto.getOkThreshold().intValue());
+        assertEquals(45000, applicationDto.getOutlierThreshold().intValue());
         assertEquals("1", applicationDto.getTimeZoneId());
         assertEquals(null, applicationDto.getTransactions());
     }
@@ -218,12 +218,12 @@ public class MapperConfigurationUnitTests {
 
         assertEquals("1234", applicationAvailabilityAvg.getApplicationId());
         assertEquals("BancoRipley - HomeBanking", applicationAvailabilityAvg.getApplicationName());
-        assertEquals(90, applicationAvailabilityAvg.getAvailabilityThreshold());
-        assertEquals(12000, applicationAvailabilityAvg.getCriticalThreshold());
+        assertEquals(90, applicationAvailabilityAvg.getAvailabilityThreshold().intValue());
+        assertEquals(12000, applicationAvailabilityAvg.getCriticalThreshold().intValue());
         assertEquals(true, applicationAvailabilityAvg.isActive());
         assertEquals(null, applicationAvailabilityAvg.getLocations());
-        assertEquals(8000, applicationAvailabilityAvg.getOkThreshold());
-        assertEquals(45000, applicationAvailabilityAvg.getOutlierThreshold());
+        assertEquals(8000, applicationAvailabilityAvg.getOkThreshold().intValue());
+        assertEquals(45000, applicationAvailabilityAvg.getOutlierThreshold().intValue());
         assertEquals("1", applicationAvailabilityAvg.getTimeZoneId());
         assertEquals(null, applicationAvailabilityAvg.getTransactions());
     }

@@ -157,7 +157,7 @@ public class TransactionServiceUnitTests {
     @Test
     public void availability_service_should_calculate_last_10minutes_transaction_availability_average() {
         //Assign
-        int average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -170,13 +170,13 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLast10MinutesAverageTransactionAvailability(transactionId).getAverage();
 
         //Assert
-        assertEquals(58, average);
+        assertEquals(58, average.intValue());
     }
 
     @Test
     public void availability_service_should_calculate_last_hour_transaction_availability_average() {
         //Assign
-        int average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -189,7 +189,7 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLastHourAverageTransactionAvailability(transactionId).getAverage();
 
         //Assert
-        assertEquals(58, average);
+        assertEquals(58, average.intValue());
     }
 
     @Test
@@ -223,7 +223,7 @@ public class TransactionServiceUnitTests {
     @Test
     public void availability_service_should_calculate_last_day_transaction_availability_average() {
         //Assign
-        int average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -236,13 +236,13 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLastDayAverageTransactionAvailability(transactionId).getAverage();
 
         //Assert
-        assertEquals(58, average);
+        assertEquals(58, average.intValue());
     }
 
     @Test
     public void availability_service_should_calculate_last_month_transaction_availability_average() {
         //Assign
-        int average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -255,7 +255,7 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLastMonthAverageTransactionAvailability(transactionId).getAverage();
 
         //Assert
-        assertEquals(58, average);
+        assertEquals(58, average.intValue());
     }
 
     @Test
@@ -289,7 +289,7 @@ public class TransactionServiceUnitTests {
     @Test
     public void performance_service_should_calculate_last_10minutes_transaction_performance_average() {
         //Assign
-        int average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -302,13 +302,13 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLast10MinutesAverageTransactionPerformance(transactionId).getAverage();
 
         //Assert
-        assertEquals(1389, average);
+        assertEquals(1389, average.intValue());
     }
 
     @Test
     public void performance_service_should_calculate_last_hour_transaction_performance_average() {
         //Assign
-        int average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -321,7 +321,7 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLastHourAverageTransactionPerformance(transactionId).getAverage();
 
         //Assert
-        assertEquals(1389, average);
+        assertEquals(1389, average.intValue());
     }
 
     @Test
@@ -355,7 +355,7 @@ public class TransactionServiceUnitTests {
     @Test
     public void performance_service_should_calculate_last_day_transaction_performance_average() {
         //Assign
-        int average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -368,13 +368,13 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLastDayAverageTransactionPerformance(transactionId).getAverage();
 
         //Assert
-        assertEquals(1389, average);
+        assertEquals(1389, average.intValue());
     }
 
     @Test
     public void performance_service_should_calculate_last_month_transaction_performance_average() {
         //Assign
-        int average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -387,7 +387,7 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLastMonthAverageTransactionPerformance(transactionId).getAverage();
 
         //Assert
-        assertEquals(1389, average);
+        assertEquals(1389, average.intValue());
     }
 
     @Test

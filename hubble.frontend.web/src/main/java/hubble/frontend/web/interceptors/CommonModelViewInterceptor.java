@@ -1,7 +1,7 @@
 package hubble.frontend.web.interceptors;
 
-import hubble.frontend.managers.interfaces.AvailabilityManager;
-import hubble.frontend.managers.models.BusinessApplication;
+import hubble.frontend.business.interfaces.AvailabilityManager;
+import hubble.frontend.business.models.BusinessApplication;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

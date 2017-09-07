@@ -1,9 +1,11 @@
 package hubble.backend.business.services.implementations.operations;
 
+import hubble.backend.business.services.configurations.UnitConverter;
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
 import hubble.backend.business.services.interfaces.operations.PerformanceOperations;
 import hubble.backend.business.services.models.ApplicationAvgDto;
 import hubble.backend.business.services.models.ApplicationDto;
+import hubble.backend.business.services.models.measures.Unit.MEASURES;
 import hubble.backend.core.enums.MonitoringFields;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.ApplicationStorage;
@@ -22,42 +24,45 @@ public class PerformanceOperationImpl implements PerformanceOperations {
     @Autowired
     ApplicationRepository applicationRepository;
     @Autowired
+    UnitConverter<ApplicationAvgDto> unitConverter;
+    @Autowired
     MapperConfiguration mapper;
 
     @Override
-    public int calculateAverage(List<AvailabilityStorage> availabilityStorageList) {
+    public Float calculateAverage(List<AvailabilityStorage> availabilityStorageList) {
         int totalAvailabilities = availabilityStorageList.size();
         if (totalAvailabilities == 0) {
-            return -1;
+            return null;
         }
         int averagePerformance = 0;
         for (AvailabilityStorage availability : availabilityStorageList) {
             averagePerformance += availability.getResponseTime();
         }
 
-        return averagePerformance / totalAvailabilities;
+        return Float.valueOf(averagePerformance / totalAvailabilities);
     }
 
     @Override
-    public MonitoringFields.STATUS calculateStatus(ApplicationDto appAvg, Integer avgPerformance) {
+    public MonitoringFields.STATUS calculateStatus(ApplicationDto appAvg, Float avgPerformance) {
 
         if (avgPerformance == null) {
-            appAvg.setCriticalThreshold(0);
+            appAvg.setCriticalThreshold(0f);
             return MonitoringFields.STATUS.NO_DATA;
         }
 
-        if (avgPerformance >= appAvg.getCriticalThreshold()) {
+        Float criticalThresholdInSeconds = appAvg.getCriticalThreshold();
+        Float okThresholdInSeconds = appAvg.getOkThreshold();
+
+        if (avgPerformance >= criticalThresholdInSeconds) {
             appAvg.setCriticalThreshold(avgPerformance);
             return MonitoringFields.STATUS.CRITICAL;
-
-        } else if (avgPerformance > appAvg.getOkThreshold() && avgPerformance < appAvg.getCriticalThreshold()) {
+        } else if (avgPerformance > okThresholdInSeconds && avgPerformance < criticalThresholdInSeconds) {
             return MonitoringFields.STATUS.WARNING;
-        } else if (avgPerformance > 0 && avgPerformance < appAvg.getOkThreshold()) {
+        } else if (avgPerformance > 0 && avgPerformance < okThresholdInSeconds) {
             return MonitoringFields.STATUS.SUCCESS;
         }
 
         return MonitoringFields.STATUS.NO_DATA;
-
     }
 
     @Override
@@ -75,6 +80,7 @@ public class PerformanceOperationImpl implements PerformanceOperations {
         applicationPerformanceAvg.getPerformanceAverage()
                 .setStatus(this.calculateStatus(applicationPerformanceAvg, applicationPerformanceAvg.getPerformanceAverage().get()));
 
+        applicationPerformanceAvg = unitConverter.to(applicationPerformanceAvg, MEASURES.SECONDS);
         return applicationPerformanceAvg;
     }
 
@@ -92,6 +98,7 @@ public class PerformanceOperationImpl implements PerformanceOperations {
         applicationPerformanceAvg.getPerformanceAverage()
                 .setStatus(this.calculateStatus(applicationPerformanceAvg, applicationPerformanceAvg.getPerformanceAverage().get()));
 
+        applicationPerformanceAvg = unitConverter.to(applicationPerformanceAvg, MEASURES.SECONDS);
         return applicationPerformanceAvg;
     }
 
@@ -111,6 +118,7 @@ public class PerformanceOperationImpl implements PerformanceOperations {
                 .getPerformanceAverage()
                 .setStatus(this.calculateStatus(applicationPerformanceAvg, applicationPerformanceAvg.getPerformanceAverage().get()));
 
+        applicationPerformanceAvg = unitConverter.to(applicationPerformanceAvg, MEASURES.SECONDS);
         return applicationPerformanceAvg;
     }
 
@@ -128,6 +136,7 @@ public class PerformanceOperationImpl implements PerformanceOperations {
                 .getPerformanceAverage()
                 .setStatus(this.calculateStatus(applicationPerformanceAvg, applicationPerformanceAvg.getPerformanceAverage().get()));
 
+        applicationPerformanceAvg = unitConverter.to(applicationPerformanceAvg, MEASURES.SECONDS);
         return applicationPerformanceAvg;
     }
 }

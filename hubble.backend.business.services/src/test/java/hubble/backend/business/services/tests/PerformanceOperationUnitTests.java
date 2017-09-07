@@ -1,5 +1,6 @@
 package hubble.backend.business.services.tests;
 
+import hubble.backend.business.services.configurations.UnitConverterImpl;
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
 import hubble.backend.business.services.implementations.operations.PerformanceOperationImpl;
 import hubble.backend.business.services.implementations.services.TransactionServiceImpl;
@@ -38,6 +39,8 @@ public class PerformanceOperationUnitTests {
     private TransactionRepository transactionRepository;
     @Spy
     private MapperConfiguration mapper;
+    @Spy
+    UnitConverterImpl unitConverter;
     @InjectMocks
     private PerformanceOperationImpl performanceOperation;
     @Spy
@@ -60,7 +63,7 @@ public class PerformanceOperationUnitTests {
     @Test
     public void performance_service_should_calculate_last_10minutes_application_performance_average() {
         //Assign
-        Integer average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
@@ -71,13 +74,13 @@ public class PerformanceOperationUnitTests {
         average = performanceOperation.calculateLast10MinutesAverageByApplication(applicationId).getPerformanceAverage().get();
 
         //Assert
-        assertEquals(1389, average.intValue());
+        assertEquals(1, average.intValue());
     }
 
     @Test
     public void performance_service_should_calculate_last_hour_application_performance_average() {
         //Assign
-        Integer average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
@@ -88,13 +91,13 @@ public class PerformanceOperationUnitTests {
         average = performanceOperation.calculateLastHourAverageByApplication(applicationId).getPerformanceAverageValue();
 
         //Assert
-        assertEquals(1389, average.intValue());
+        assertEquals(1, average.intValue());
     }
 
     @Test
     public void performance_service_should_calculate_last_day_application_performance_average() {
         //Assign
-        int average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
@@ -105,13 +108,13 @@ public class PerformanceOperationUnitTests {
         average = performanceOperation.calculateLastDayAverageByApplication(applicationId).getPerformanceAverageValue();
 
         //Assert
-        assertEquals(1389, average);
+        assertEquals(1, average.intValue());
     }
 
     @Test
     public void performance_service_should_calculate_last_month_application_performance_average() {
         //Assign
-        Integer average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
@@ -122,13 +125,13 @@ public class PerformanceOperationUnitTests {
         average = performanceOperation.calculateLastMonthAverageByApplication(applicationId).getPerformanceAverageValue();
 
         //Assert
-        assertEquals(1389, average.intValue());
+        assertEquals(1, average.intValue());
     }
 
     @Test
     public void performance_service_should_return_negative1_when_average_last_month_performance_calculation_encounters_no_data() {
         //Assign
-        Integer average;
+        Float average;
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
 
