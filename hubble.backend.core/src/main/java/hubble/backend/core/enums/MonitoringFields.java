@@ -1,5 +1,7 @@
 package hubble.backend.core.enums;
 
+import java.util.concurrent.TimeUnit;
+
 public class MonitoringFields {
     
     public static enum STATUS {
@@ -40,4 +42,31 @@ public class MonitoringFields {
             }            
         }
     }    
+    
+    public enum FRECUENCY {
+               
+        MINUTE("Minute",TimeUnit.MINUTES),
+        HOUR("Hour",TimeUnit.HOURS),
+        DAY("Day",TimeUnit.DAYS),
+        WEEK("Week",TimeUnit.DAYS),
+        MONTH("Month",TimeUnit.DAYS),
+        QUARTER("Quarter",TimeUnit.DAYS),
+        YEAR("Year",TimeUnit.DAYS);
+        
+        private final String name;
+        private final TimeUnit timeUnit;
+       
+        private FRECUENCY(String name, TimeUnit timeUnit){
+            this.name=name;
+            this.timeUnit=timeUnit;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public TimeUnit getTimeUnit() {
+            return timeUnit;
+        }    
+    }
 }

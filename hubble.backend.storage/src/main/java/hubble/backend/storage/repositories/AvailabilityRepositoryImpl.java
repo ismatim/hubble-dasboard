@@ -4,6 +4,7 @@ import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.operations.AvailabilityOperations;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -150,4 +151,19 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
 
         return availabilities;
     }
+
+    @Override
+    public List<AvailabilityStorage> findAvailabilitiesByTransactionIdAndPeriod(String transactionId, Date startDate, Date endDate) {
+        Criteria isTransactionId = Criteria.where("transactionId").is(transactionId);
+        Criteria startDateCriteria = Criteria.where("timeStamp").gte(startDate);
+        Criteria endDateCriteria = Criteria.where("timeStamp").lte(endDate);
+
+        List<AvailabilityStorage> availabilities = mongo
+                .find(Query
+                        .query(isTransactionId.andOperator(startDateCriteria, endDateCriteria)),
+                        AvailabilityStorage.class);        
+
+        return availabilities;
+    }
+    
 }

@@ -1,6 +1,7 @@
 package hubble.backend.business.services.implementations.operations;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
+import hubble.backend.business.services.interfaces.operations.PerformanceOperations;
 import hubble.backend.business.services.models.ApplicationAvgDto;
 import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.core.enums.MonitoringFields;
@@ -12,7 +13,6 @@ import hubble.backend.storage.repositories.AvailabilityRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import hubble.backend.business.services.interfaces.operations.PerformanceOperations;
 
 @Component
 public class PerformanceOperationImpl implements PerformanceOperations {
@@ -47,7 +47,9 @@ public class PerformanceOperationImpl implements PerformanceOperations {
         }
 
         if (avgPerformance >= appAvg.getCriticalThreshold()) {
+            appAvg.setCriticalThreshold(avgPerformance);
             return MonitoringFields.STATUS.CRITICAL;
+
         } else if (avgPerformance > appAvg.getOkThreshold() && avgPerformance < appAvg.getCriticalThreshold()) {
             return MonitoringFields.STATUS.WARNING;
         } else if (avgPerformance > 0 && avgPerformance < appAvg.getOkThreshold()) {

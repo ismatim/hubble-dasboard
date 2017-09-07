@@ -1,6 +1,6 @@
 package hubble.backend.business.services.interfaces.operations;
 
-public interface OperationsBase<T> {
+public interface AverageOperationsBase<T> {
 
     public T calculateLast10MinutesAverageByApplication(String applicationId);
 

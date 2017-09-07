@@ -89,7 +89,7 @@ public class AvailabilityServiceUnitTests {
         when(availabilityRepository.findAll()).thenReturn(availabilityStorageList);
 
         //Assert
-        assertEquals(4, availabilityService.getAll().size());
+        assertEquals(12, availabilityService.getAll().size());
     }
 
     @Test
@@ -118,7 +118,7 @@ public class AvailabilityServiceUnitTests {
         availabilityDtoList = availabilityService.getAll("1");
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test
@@ -132,7 +132,7 @@ public class AvailabilityServiceUnitTests {
         availabilityDtoList = availabilityService.getLast10Minutes();
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test
@@ -146,7 +146,7 @@ public class AvailabilityServiceUnitTests {
         availabilityDtoList = availabilityService.getLastHour();
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test
@@ -160,7 +160,7 @@ public class AvailabilityServiceUnitTests {
         availabilityDtoList = availabilityService.getLastDay();
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test
@@ -174,7 +174,7 @@ public class AvailabilityServiceUnitTests {
         availabilityDtoList = availabilityService.getLastMonth();
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test
@@ -188,7 +188,7 @@ public class AvailabilityServiceUnitTests {
         availabilityDtoList = availabilityService.getLast10Minutes("1");
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test
@@ -202,7 +202,7 @@ public class AvailabilityServiceUnitTests {
         availabilityDtoList = availabilityService.getLastHour("1");
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test
@@ -216,7 +216,7 @@ public class AvailabilityServiceUnitTests {
         availabilityDtoList = availabilityService.getLastDay("1");
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test
@@ -230,7 +230,7 @@ public class AvailabilityServiceUnitTests {
         availabilityDtoList = availabilityService.getLastMonth("1");
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test

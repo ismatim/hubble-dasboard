@@ -71,7 +71,7 @@ public class PerformanceOperationUnitTests {
         average = performanceOperation.calculateLast10MinutesAverageByApplication(applicationId).getPerformanceAverage().get();
 
         //Assert
-        assertEquals(1226, average.intValue());
+        assertEquals(1389, average.intValue());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class PerformanceOperationUnitTests {
         average = performanceOperation.calculateLastHourAverageByApplication(applicationId).getPerformanceAverageValue();
 
         //Assert
-        assertEquals(1226, average.intValue());
+        assertEquals(1389, average.intValue());
     }
 
     @Test
@@ -105,7 +105,7 @@ public class PerformanceOperationUnitTests {
         average = performanceOperation.calculateLastDayAverageByApplication(applicationId).getPerformanceAverageValue();
 
         //Assert
-        assertEquals(1226, average);
+        assertEquals(1389, average);
     }
 
     @Test
@@ -122,7 +122,7 @@ public class PerformanceOperationUnitTests {
         average = performanceOperation.calculateLastMonthAverageByApplication(applicationId).getPerformanceAverageValue();
 
         //Assert
-        assertEquals(1226, average.intValue());
+        assertEquals(1389, average.intValue());
     }
 
     @Test

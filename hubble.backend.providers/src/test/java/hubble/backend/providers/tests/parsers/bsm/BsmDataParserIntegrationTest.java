@@ -28,7 +28,7 @@ public class BsmDataParserIntegrationTest extends AppPulseBaseUnitTests {
         assertNotNull(bsmParser);
     }
 
-//    @Test
+ /*   @Test
     public void BsmParser_when_it_runs_should_connect_get_data_and_save_it() {
 
         //Assign
@@ -48,5 +48,5 @@ public class BsmDataParserIntegrationTest extends AppPulseBaseUnitTests {
         availabilities.stream().forEach((availabilityFromBsm) -> {
             availabilityRepository.delete(availabilityFromBsm);
         });
-    }
+    }*/
 }

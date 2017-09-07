@@ -87,7 +87,7 @@ public class PerformanceServiceUnitTests {
         performanceDtoList = performanceService.getAll("1");
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 
     @Test
@@ -101,7 +101,7 @@ public class PerformanceServiceUnitTests {
         performanceDtoList = performanceService.getLast10Minutes();
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 
     @Test
@@ -115,7 +115,7 @@ public class PerformanceServiceUnitTests {
         performanceDtoList = performanceService.getLastHour();
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 
     @Test
@@ -129,7 +129,7 @@ public class PerformanceServiceUnitTests {
         performanceDtoList = performanceService.getLast10Minutes("1");
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 
     @Test
@@ -143,7 +143,7 @@ public class PerformanceServiceUnitTests {
         performanceDtoList = performanceService.getLastHour("1");
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 
     @Test
@@ -157,7 +157,7 @@ public class PerformanceServiceUnitTests {
         performanceDtoList = performanceService.getLast10Minutes();
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 
     @Test
@@ -171,7 +171,7 @@ public class PerformanceServiceUnitTests {
         performanceDtoList = performanceService.getLastMonth();
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 
     @Test
@@ -185,7 +185,7 @@ public class PerformanceServiceUnitTests {
         performanceDtoList = performanceService.getLastDay("1");
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 
     @Test
@@ -199,7 +199,7 @@ public class PerformanceServiceUnitTests {
         performanceDtoList = performanceService.getLastMonth("1");
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 
 }
