@@ -26,7 +26,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <dependencies>
-        <dependency>
+         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
@@ -71,7 +71,7 @@
                         <id>post-unit-test</id>
                         <phase>test</phase>
                         <goals>
-                            <goal>report</goal>
+                            <goal>report</goal>        
                             <goal>check</goal>
                         </goals>
                         <configuration>
@@ -82,7 +82,7 @@
                                         <limit implementation="org.jacoco.report.check.Limit">
                                             <counter>INSTRUCTION</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.00</minimum>
+                                            <minimum>0.00</minimum>    
                                         </limit>
                                         <limit implementation="org.jacoco.report.check.Limit">
                                             <counter>COMPLEXITY</counter>
@@ -95,11 +95,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.0.1</version>
             </plugin>
         </plugins>
     </build>

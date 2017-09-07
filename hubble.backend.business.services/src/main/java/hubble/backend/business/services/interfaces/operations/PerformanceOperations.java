@@ -6,7 +6,7 @@ import hubble.backend.core.enums.MonitoringFields;
 import hubble.backend.storage.models.AvailabilityStorage;
 import java.util.List;
 
-public interface PerformanceOperations extends OperationsBase<ApplicationAvgDto> {
+public interface PerformanceOperations extends AverageOperationsBase<ApplicationAvgDto> {
 
     public int calculateAverage(List<AvailabilityStorage> availabilityStorageList);
 

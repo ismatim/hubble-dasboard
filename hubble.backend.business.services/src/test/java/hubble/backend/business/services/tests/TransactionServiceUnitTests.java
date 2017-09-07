@@ -123,7 +123,7 @@ public class TransactionServiceUnitTests {
         availabilityDtoList = transactionService.findAvailabilitiesByTransactionId("1");
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test
@@ -137,7 +137,7 @@ public class TransactionServiceUnitTests {
         availabilityDtoList = transactionService.findLast10MinutesAvailabilitiesByTransactionId("1");
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test
@@ -151,7 +151,7 @@ public class TransactionServiceUnitTests {
         availabilityDtoList = transactionService.findLastHourAvailabilitiesByTransactionId("1");
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test
@@ -170,7 +170,7 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLast10MinutesAverageTransactionAvailability(transactionId).getAverage();
 
         //Assert
-        assertEquals(75, average);
+        assertEquals(58, average);
     }
 
     @Test
@@ -189,7 +189,7 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLastHourAverageTransactionAvailability(transactionId).getAverage();
 
         //Assert
-        assertEquals(75, average);
+        assertEquals(58, average);
     }
 
     @Test
@@ -203,7 +203,7 @@ public class TransactionServiceUnitTests {
         availabilityDtoList = transactionService.findLastDayAvailabilitiesByTransactionId("1");
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test
@@ -217,7 +217,7 @@ public class TransactionServiceUnitTests {
         availabilityDtoList = transactionService.findLastMonthAvailabilitiesByTransactionId("1");
 
         //Assert
-        assertEquals(4, availabilityDtoList.size());
+        assertEquals(12, availabilityDtoList.size());
     }
 
     @Test
@@ -236,7 +236,7 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLastDayAverageTransactionAvailability(transactionId).getAverage();
 
         //Assert
-        assertEquals(75, average);
+        assertEquals(58, average);
     }
 
     @Test
@@ -255,7 +255,7 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLastMonthAverageTransactionAvailability(transactionId).getAverage();
 
         //Assert
-        assertEquals(75, average);
+        assertEquals(58, average);
     }
 
     @Test
@@ -269,7 +269,7 @@ public class TransactionServiceUnitTests {
         performanceDtoList = transactionService.findLast10MinutesPerformanceByTransactionId("1");
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 
     @Test
@@ -283,7 +283,7 @@ public class TransactionServiceUnitTests {
         performanceDtoList = transactionService.findLastHourPerformanceByTransactionId("1");
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 
     @Test
@@ -302,7 +302,7 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLast10MinutesAverageTransactionPerformance(transactionId).getAverage();
 
         //Assert
-        assertEquals(1226, average);
+        assertEquals(1389, average);
     }
 
     @Test
@@ -321,7 +321,7 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLastHourAverageTransactionPerformance(transactionId).getAverage();
 
         //Assert
-        assertEquals(1226, average);
+        assertEquals(1389, average);
     }
 
     @Test
@@ -335,7 +335,7 @@ public class TransactionServiceUnitTests {
         performanceDtoList = transactionService.findLastDayPerformanceByTransactionId("1");
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 
     @Test
@@ -349,7 +349,7 @@ public class TransactionServiceUnitTests {
         performanceDtoList = transactionService.findLastMonthPerformanceByTransactionId("1");
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 
     @Test
@@ -368,7 +368,7 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLastDayAverageTransactionPerformance(transactionId).getAverage();
 
         //Assert
-        assertEquals(1226, average);
+        assertEquals(1389, average);
     }
 
     @Test
@@ -387,7 +387,7 @@ public class TransactionServiceUnitTests {
         average = transactionService.calculateLastMonthAverageTransactionPerformance(transactionId).getAverage();
 
         //Assert
-        assertEquals(1226, average);
+        assertEquals(1389, average);
     }
 
     @Test
@@ -401,6 +401,6 @@ public class TransactionServiceUnitTests {
         performanceDtoList = transactionService.findPerformanceByTransactionId("1");
 
         //Assert
-        assertEquals(4, performanceDtoList.size());
+        assertEquals(12, performanceDtoList.size());
     }
 }

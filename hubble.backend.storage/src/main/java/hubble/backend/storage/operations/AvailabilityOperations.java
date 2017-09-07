@@ -1,6 +1,7 @@
 package hubble.backend.storage.operations;
 
 import hubble.backend.storage.models.AvailabilityStorage;
+import java.util.Date;
 import java.util.List;
 
 public interface AvailabilityOperations {
@@ -15,4 +16,5 @@ public interface AvailabilityOperations {
   List<AvailabilityStorage> findAvailabilitiesByTransactionId(String transactionId);
   List<AvailabilityStorage> findAvailabilitiesByTransactionIdAndDurationMinutes(int duration, String transactionId);
   List<AvailabilityStorage> findAvailabilitiesByTransactionIdAndDurationMonths(int duration, String transactionId);
+  List<AvailabilityStorage> findAvailabilitiesByTransactionIdAndPeriod(String transactionId, Date startDate, Date endDate);
 }

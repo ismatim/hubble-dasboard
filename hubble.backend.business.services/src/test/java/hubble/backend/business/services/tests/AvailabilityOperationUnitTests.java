@@ -69,7 +69,7 @@ public class AvailabilityOperationUnitTests {
         average = availabilityOperation.calculateLast10MinutesAverageByApplication(applicationId).getAvailabilityAverage().get();
 
         //Assert
-        assertEquals(75, average);
+        assertEquals(58, average);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class AvailabilityOperationUnitTests {
         average = availabilityOperation.calculateLastDayAverageByApplication(applicationId).getAvailabilityAverage().get();
 
         //Assert
-        assertEquals(75, average);
+        assertEquals(58, average);
     }
 
     @Test
@@ -119,7 +119,7 @@ public class AvailabilityOperationUnitTests {
         average = availabilityOperation.calculateLastHourAverageByApplication(applicationId).getAvailabilityAverage().get();
 
         //Assert
-        assertEquals(75, average);
+        assertEquals(58, average);
     }
 
     @Test
@@ -136,6 +136,6 @@ public class AvailabilityOperationUnitTests {
         average = availabilityOperation.calculateLastMonthAverageByApplication(applicationId).getAvailabilityAverage().get();
 
         //Assert
-        assertEquals(75, average);
+        assertEquals(58, average);
     }
 }
