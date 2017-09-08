@@ -1,7 +1,7 @@
 package hubble.frontend.web.controllers;
 
-import hubble.frontend.managers.interfaces.BusinessApplicationManager;
-import hubble.frontend.managers.views.application.BusinessApplicationView;
+import hubble.frontend.business.interfaces.BusinessApplicationManager;
+import hubble.frontend.business.views.application.BusinessApplicationView;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

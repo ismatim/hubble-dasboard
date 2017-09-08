@@ -5,7 +5,7 @@ import hubble.backend.core.enums.MonitoringFields;
 public class TransactionAvgDto extends TransactionDto {
 
     private MonitoringFields.STATUS Status;
-    private Integer average;
+    private Float average;
 
     public TransactionAvgDto() {
         this.average = null;
@@ -20,11 +20,11 @@ public class TransactionAvgDto extends TransactionDto {
         this.Status = Status;
     }
 
-    public Integer getAverage() {
+    public Float getAverage() {
         return average;
     }
 
-    public void setAverage(Integer average) {
+    public void setAverage(Float average) {
         this.average = average;
     }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PerformanceOperations extends AverageOperationsBase<ApplicationAvgDto> {
 
-    public int calculateAverage(List<AvailabilityStorage> availabilityStorageList);
+    public Float calculateAverage(List<AvailabilityStorage> availabilityStorageList);
 
-    public MonitoringFields.STATUS calculateStatus(ApplicationDto appAvg, Integer avgAvailability);
+    public MonitoringFields.STATUS calculateStatus(ApplicationDto appAvg, Float avgAvailability);
 }

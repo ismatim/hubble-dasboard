@@ -58,7 +58,7 @@ public class AvailabilityOperationUnitTests {
     @Test
     public void availability_service_should_calculate_last_10minutes_application_availability_average() {
         //Assign
-        int average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
@@ -69,13 +69,13 @@ public class AvailabilityOperationUnitTests {
         average = availabilityOperation.calculateLast10MinutesAverageByApplication(applicationId).getAvailabilityAverage().get();
 
         //Assert
-        assertEquals(58, average);
+        assertEquals(58, average.intValue());
     }
 
     @Test
     public void availability_service_should_calculate_last_day_application_availability_average() {
         //Assign
-        int average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
@@ -86,13 +86,13 @@ public class AvailabilityOperationUnitTests {
         average = availabilityOperation.calculateLastDayAverageByApplication(applicationId).getAvailabilityAverage().get();
 
         //Assert
-        assertEquals(58, average);
+        assertEquals(58, average.intValue());
     }
 
     @Test
     public void availability_service_should_return_null_when_average_calculation_encounters_no_data() {
         //Assign
-        Integer average;
+        Float average;
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
 
@@ -108,7 +108,7 @@ public class AvailabilityOperationUnitTests {
     @Test
     public void availability_service_should_calculate_last_hour_application_availability_average() {
         //Assign
-        int average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
@@ -119,13 +119,13 @@ public class AvailabilityOperationUnitTests {
         average = availabilityOperation.calculateLastHourAverageByApplication(applicationId).getAvailabilityAverage().get();
 
         //Assert
-        assertEquals(58, average);
+        assertEquals(58, average.intValue());
     }
 
     @Test
     public void availability_service_should_calculate_last_month_application_availability_average() {
         //Assign
-        int average;
+        Float average;
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
@@ -136,6 +136,6 @@ public class AvailabilityOperationUnitTests {
         average = availabilityOperation.calculateLastMonthAverageByApplication(applicationId).getAvailabilityAverage().get();
 
         //Assert
-        assertEquals(58, average);
+        assertEquals(58, average.intValue());
     }
 }

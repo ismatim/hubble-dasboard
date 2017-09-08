@@ -34,7 +34,8 @@
                 bgColor: 'rgba(162,162,162, .09)',
                 angleOffset: -125,
                 angleArc: 250,
-                readOnly: true
+                readOnly: true,
+                step: 0.01
             };
             var knobLoaderOptionsDanger = $.extend({}, knobLoaderOptionsSuccess, {
                 fgColor: Colors.byName('danger')
@@ -45,8 +46,23 @@
             });
 
             var knobLoaderOptionsNoData = $.extend({}, knobLoaderOptionsSuccess, {
-                 displayInput: false
+                displayInput: false
             });
+
+            var setFormat = function (knobSelected, configuration) {
+                if ($(knobSelected).attr('id').indexOf('disponibilidad') >= 0)
+                    return configuration = $.extend({}, configuration, {
+                        format: function (v) {
+                            return v + "%";
+                        }
+                    });
+                else
+                    return configuration = $.extend({}, configuration, {
+                        format: function (v) {
+                            return v + "s";
+                        }
+                    });
+            };
 
             var getKnobStatus = function (status) {
                 if (status === 'Success')
@@ -65,9 +81,33 @@
 
             $.each(knobs, function (index, knobSelected) {
                 //init
-                knobSelected.knob(getKnobStatus(getChartStatus(knobSelected)));
+                var configuration = getKnobStatus(getChartStatus(knobSelected));
+                configuration = setFormat(knobSelected, configuration);
+                knobSelected.knob(configuration);
+
             });
+
+            function doOnResizeWindows() {
+                $.each(knobs, function (index, knobSelected) {
+                    //init
+                    var configuration = getKnobStatus(getChartStatus(knobSelected));
+                    configuration = setFormat(knobSelected, configuration);
+                    knobSelected.trigger('configure', configuration );
+                    knobSelected.trigger('change');
+                    console.log(configuration);
+
+                });
+            }
+
+            var timeOutId;
+            $(window).resize(function () {
+                clearTimeout(timeOutId); // The ID value of the timer returned by the setTimeout().
+                setTimeout(doOnResizeWindows, 1/10);
+            });
+
         };
+
+
 
         return {
             init: init

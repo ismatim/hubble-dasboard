@@ -17,8 +17,8 @@
         <module>hubble.backend.storage</module>
         <module>hubble.backend.tasksrunner</module>
         <module>hubble.backend.business.services</module>
-        <module>hubble.frontend.managers</module>
         <module>hubble.frontend.web</module>
+        <module>hubble.frontend.business</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -71,7 +71,7 @@
                         <id>post-unit-test</id>
                         <phase>test</phase>
                         <goals>
-                            <goal>report</goal>        
+                            <goal>report</goal>
                             <goal>check</goal>
                         </goals>
                         <configuration>
@@ -82,7 +82,7 @@
                                         <limit implementation="org.jacoco.report.check.Limit">
                                             <counter>INSTRUCTION</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.00</minimum>    
+                                            <minimum>0.00</minimum>
                                         </limit>
                                         <limit implementation="org.jacoco.report.check.Limit">
                                             <counter>COMPLEXITY</counter>

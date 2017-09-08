@@ -4,6 +4,10 @@ public abstract class Quantity extends Status {
 
     private Integer quantity;
 
+    public Quantity() {
+        unitMeasure = Unit.MEASURES.QUANTITY;
+    }
+
     public Integer getQuantity() {
         return quantity;
     }

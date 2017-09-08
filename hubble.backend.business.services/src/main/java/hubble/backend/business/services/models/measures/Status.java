@@ -2,7 +2,7 @@ package hubble.backend.business.services.models.measures;
 
 import hubble.backend.core.enums.MonitoringFields;
 
-public abstract class Status {
+public abstract class Status extends UnitMeasure {
 
     private MonitoringFields.FRECUENCY frecuency;
     private MonitoringFields.STATUS Status;

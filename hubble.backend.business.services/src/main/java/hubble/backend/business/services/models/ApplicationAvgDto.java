@@ -55,19 +55,19 @@ public class ApplicationAvgDto extends ApplicationDto {
         this.performanceAverage = performanceAverage;
     }
 
-    public void setAvailabilityAverage(int availabilityAverage) {
+    public void setAvailabilityAverage(Float availabilityAverage) {
         this.availabilityAverage.set(availabilityAverage);
     }
 
-    public void setPerformanceAverage(int performanceAverage) {
+    public void setPerformanceAverage(Float performanceAverage) {
         this.getPerformanceAverage().set(performanceAverage);
     }
 
-    public Integer getPerformanceAverageValue() {
+    public Float getPerformanceAverageValue() {
         return this.performanceAverage.get();
     }
 
-    public Integer getAvailabilityAverageValue() {
+    public Float getAvailabilityAverageValue() {
         return this.availabilityAverage.get();
     }
 }

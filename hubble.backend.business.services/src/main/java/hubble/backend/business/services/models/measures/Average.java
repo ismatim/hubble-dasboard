@@ -2,13 +2,17 @@ package hubble.backend.business.services.models.measures;
 
 public abstract class Average extends Status {
 
-    private Integer average;
+    private Float average;
 
-    public Integer get() {
+    public Average() {
+        unitMeasure = Unit.MEASURES.PERCENTAGE;
+    }
+
+    public Float get() {
         return average;
     }
 
-    public void set(Integer average) {
+    public void set(Float average) {
         this.average = average;
     }
 }

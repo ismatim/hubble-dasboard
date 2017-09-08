@@ -8,10 +8,10 @@ public class ApplicationDto {
     private String applicationName;
     private boolean active;
     private String timeZoneId;
-    private int okThreshold;
-    private int criticalThreshold;
-    private int outlierThreshold;
-    private int availabilityThreshold;
+    private Float okThreshold;
+    private Float criticalThreshold;
+    private Float outlierThreshold;
+    private Float availabilityThreshold;
     private List<LocationDto> locations;
     private List<TransactionDto> transactions;
 
@@ -47,35 +47,35 @@ public class ApplicationDto {
         this.timeZoneId = timeZoneId;
     }
 
-    public int getOkThreshold() {
+    public Float getOkThreshold() {
         return okThreshold;
     }
 
-    public void setOkThreshold(int okThreshold) {
+    public void setOkThreshold(Float okThreshold) {
         this.okThreshold = okThreshold;
     }
 
-    public int getCriticalThreshold() {
+    public Float getCriticalThreshold() {
         return criticalThreshold;
     }
 
-    public void setCriticalThreshold(int criticalThreshold) {
+    public void setCriticalThreshold(Float criticalThreshold) {
         this.criticalThreshold = criticalThreshold;
     }
 
-    public int getOutlierThreshold() {
+    public Float getOutlierThreshold() {
         return outlierThreshold;
     }
 
-    public void setOutlierThreshold(int outlierThreshold) {
+    public void setOutlierThreshold(Float outlierThreshold) {
         this.outlierThreshold = outlierThreshold;
     }
 
-    public int getAvailabilityThreshold() {
+    public Float getAvailabilityThreshold() {
         return availabilityThreshold;
     }
 
-    public void setAvailabilityThreshold(int availabilityThreshold) {
+    public void setAvailabilityThreshold(Float availabilityThreshold) {
         this.availabilityThreshold = availabilityThreshold;
     }
 
