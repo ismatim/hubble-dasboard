@@ -16,7 +16,6 @@ public class ApplicationPropertyMap extends PropertyMap<ApplicationData, Applica
 
         skip().setId(null);
         skip().setOutlierThreshold(0);
-        map().setProviderOrigin(providerName);
         map().setCriticalThreshold(source.getDefaultPerformanceCriticalThreshold());
         map().setOkThreshold(source.getDefaultPerformanceOkThreshold());
         map().setActive(source.getApplicationIsActive());

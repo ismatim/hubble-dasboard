@@ -4,7 +4,6 @@
     'use strict';
     var applicationProfileModule = (function () {
 
-        var that = this;
         var chartAvailability10min = $('#chart-disponibilidad-10-min');
         var chartPerformance10min = $('#chart-performance-10-min');
         var chartIncidences10min = $('#chart-incidencias-10-min');

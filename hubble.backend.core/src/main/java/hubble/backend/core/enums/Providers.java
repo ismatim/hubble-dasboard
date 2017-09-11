@@ -15,6 +15,12 @@ public class Providers {
             public String toString() {
                 return "HP BSM";
             }
+        },
+        ALM {
+            @Override
+            public String toString() {
+                return "HP ALM";
+            }
         }
     }
 }

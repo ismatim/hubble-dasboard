@@ -1,5 +1,7 @@
 package hubble.backend.tasksrunner.application;
 
+import hubble.backend.providers.parsers.interfaces.alm.AlmApplicationParser;
+import hubble.backend.providers.parsers.interfaces.alm.AlmDataParser;
 import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveApplicationsParser;
 import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveDataParser;
 import hubble.backend.providers.parsers.interfaces.bsm.BsmApplicationParser;
@@ -13,6 +15,8 @@ import hubble.backend.tasksrunner.jobs.bsm.BsmApplicationParserJob;
 import hubble.backend.tasksrunner.jobs.bsm.BsmDataParserJob;
 import hubble.backend.tasksrunner.tasks.ParserTask;
 import hubble.backend.tasksrunner.tasks.Task;
+import hubble.backend.tasksrunner.tasks.alm.AlmApplicationTaskImpl;
+import hubble.backend.tasksrunner.tasks.alm.AlmDataTaskImpl;
 import hubble.backend.tasksrunner.tasks.apppulse.AppPulseApplicationTaskImpl;
 import hubble.backend.tasksrunner.tasks.apppulse.AppPulseDataTaskImpl;
 import hubble.backend.tasksrunner.tasks.bsm.BsmApplicationTaskImpl;
@@ -71,6 +75,24 @@ public class TasksRunnerApplication {
         bsmApplicationTask.setIntervalSeconds(1);
         scheduler.addTask(bsmApplicationTask);
         scheduler.addTask(bsmTask);
+        
+        //Alm
+        AlmDataParser almParser = context.getBean(AlmDataParser.class);
+        ParserJob almJob = new AppPulseDataParserJob(almParser);
+        ParserTask almDataTask = new AlmDataTaskImpl(almJob);
+        almDataTask.setIndentityGroupName("Alm Provider Job");
+        almDataTask.setIndentityName("Alm Data");
+        almDataTask.setIntervalSeconds(40);
+        
+        AlmApplicationParser almApplicationParser = context.getBean(AlmApplicationParser.class);
+        ParserJob almApplicationJob = new AppPulseApplicationParserJob(almApplicationParser);
+        ParserTask almApplicationTask = new AlmApplicationTaskImpl(almApplicationJob);
+        almApplicationTask.setIndentityGroupName("Alm Provider Job");
+        almApplicationTask.setIndentityName("Alm Applications");
+        almApplicationTask.setIntervalSeconds(100);
+
+        scheduler.addTask(almDataTask);
+        scheduler.addTask(almApplicationTask);
 
         scheduler.showMenu();
     }

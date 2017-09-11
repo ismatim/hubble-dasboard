@@ -17,7 +17,6 @@ public class ApplicationStorage {
     private int availabilityThreshold;
     private List<TransactionStorage> transactions;
     private List<LocationStorage> locations;
-    private String providerOrigin;
     private int applicationConfigurationVersion;
 
     public ApplicationStorage() {
@@ -109,14 +108,6 @@ public class ApplicationStorage {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getProviderOrigin() {
-        return providerOrigin;
-    }
-
-    public void setProviderOrigin(String providerOrigin) {
-        this.providerOrigin = providerOrigin;
     }
 
     public int getApplicationConfigurationVersion() {

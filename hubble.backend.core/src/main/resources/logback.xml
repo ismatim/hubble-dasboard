@@ -4,7 +4,7 @@
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg %n</pattern>
         </encoder>
-    </appender>    
+    </appender>
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>../out/logFile.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -21,7 +21,7 @@
     <logger name="hubble.backend.core" level="info"/>
     <logger name="hubble.backend.providers" level="info"/>
     <logger name="hubble.backend.tasksrunner" level="info"/>
-    <logger name="hubble.frontend.managers" level="info"/>
+    <logger name="hubble.frontend.business" level="info"/>
     <logger name="hubble.frontend.web" level="info"/>
     <root level="info">
         <appender-ref ref="STDOUT"/>

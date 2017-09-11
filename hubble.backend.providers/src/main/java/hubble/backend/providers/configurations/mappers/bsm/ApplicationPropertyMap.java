@@ -10,13 +10,10 @@ public class ApplicationPropertyMap extends PropertyMap<BsmProviderModel, Applic
     @Override
     protected void configure() {
 
-        String providerName = Providers.PROVIDERS_NAME.BSM.toString();
-
         skip().setId(null);
         skip().setOutlierThreshold(0);
 
         map().setApplicationId(source.getProfile_name());
-        map().setProviderOrigin(providerName);
         map().setCriticalThreshold(source.getDredthreshold());
         map().setOkThreshold(source.getDgreenthreshold());
         map().setApplicationName(source.getProfile_name());
