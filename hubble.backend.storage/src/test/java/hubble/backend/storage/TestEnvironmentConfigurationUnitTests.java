@@ -1,4 +1,4 @@
-package hubble.backend.storage.tests;
+package hubble.backend.storage;
 
 import hubble.backend.storage.configurations.StorageComponentConfiguration;
 import hubble.backend.storage.configurations.environment.StorageEnvironment;

@@ -1,4 +1,4 @@
-package hubble.backend.storage.tests;
+package hubble.backend.storage.helper;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

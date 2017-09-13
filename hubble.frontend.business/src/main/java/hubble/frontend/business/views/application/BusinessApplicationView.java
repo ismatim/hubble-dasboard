@@ -1,13 +1,10 @@
 package hubble.frontend.business.views.application;
 
-import hubble.frontend.business.models.Availability;
-import hubble.frontend.business.models.Performance;
-import java.util.List;
-
 public class BusinessApplicationView {
 
-    private List<Availability> availabilityApplicationsLast10MinutesAvgs;
-    private List<Performance> performanceApplicationsLast10MinutesAvgs;
+    private Integer issuesQtyLastDay;
+    private Integer issuesQtyCriticalThreshold;
+    private String statusIssuesQty;
     private Float availabilityAverage10min;
     private Float performanceAverage10min;
     private Integer measuresQtyAvailability10min;
@@ -34,22 +31,6 @@ public class BusinessApplicationView {
     private String statusAvailability1day;
 
     public BusinessApplicationView() {
-    }
-
-    public List<Availability> getAvailabilityApplicationsLast10MinutesAvgs() {
-        return availabilityApplicationsLast10MinutesAvgs;
-    }
-
-    public void setAvailabilityApplicationsLast10MinutesAvgs(List<Availability> availabilityApplicationsLast10MinutesAvgs) {
-        this.availabilityApplicationsLast10MinutesAvgs = availabilityApplicationsLast10MinutesAvgs;
-    }
-
-    public List<Performance> getPerformanceApplicationsLast10MinutesAvgs() {
-        return performanceApplicationsLast10MinutesAvgs;
-    }
-
-    public void setPerformanceApplicationsLast10MinutesAvgs(List<Performance> performanceApplicationsLast10MinutesAvgs) {
-        this.performanceApplicationsLast10MinutesAvgs = performanceApplicationsLast10MinutesAvgs;
     }
 
     public Float getAvailabilityAverage10min() {
@@ -243,4 +224,29 @@ public class BusinessApplicationView {
     public void setPerformanceCriticalValue1day(Float performanceCriticalValue1day) {
         this.performanceCriticalValue1day = performanceCriticalValue1day;
     }
+
+    public Integer getIssuesQtyLastDay() {
+        return issuesQtyLastDay;
+    }
+
+    public void setIssuesQtyLastDay(Integer issuesQtyLastDay) {
+        this.issuesQtyLastDay = issuesQtyLastDay;
+    }
+
+    public Integer getIssuesQtyCriticalThreshold() {
+        return issuesQtyCriticalThreshold;
+    }
+
+    public void setIssuesQtyCriticalThreshold(Integer issuesQtyCriticalThreshold) {
+        this.issuesQtyCriticalThreshold = issuesQtyCriticalThreshold;
+    }
+
+    public String getStatusIssuesQty() {
+        return statusIssuesQty;
+    }
+
+    public void setStatusIssuesQty(String statusIssuesQty) {
+        this.statusIssuesQty = statusIssuesQty;
+    }
+
 }

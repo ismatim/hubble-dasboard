@@ -62,34 +62,10 @@
                             </div>
                         </div>
                         <div class="col-xl-3">
-                            <div class="cardbox cardbox-flat">
-                                <div class="cardbox-heading">
-                                    <div class="float-right">
-                                        <div class="icon-lg text-muted"></div>
-                                    </div>
-                                    <div>Incidencias</div>
-                                </div>
-                                <div class="cardbox-body">
-                                    <div class="text-center">
-                                        <input id="chart-incidencias-10-min" type="text" value="0" data-max="0" data-status="No_Data" ></input>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="col-xl-3">
-                            <div class="cardbox cardbox-flat">
-                                <div class="cardbox-heading">
-                                    <div class="float-right">
-                                        <div class="icon-lg text-muted"></div>
-                                    </div>
-                                    <div>Tareas</div>
-                                </div>
-                                <div class="cardbox-body">
-                                    <div class="text-center">
-                                        <input id="chart-tareas-10-min" type="text" value="0" data-max="0" data-status="No_Data" ></input>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -144,34 +120,10 @@
                             </div>
                         </div>
                         <div class="col-xl-3">
-                            <div class="cardbox cardbox-flat">
-                                <div class="cardbox-heading">
-                                    <div class="float-right">
-                                        <div class="icon-lg text-muted"></div>
-                                    </div>
-                                    <div>Incidencias</div>
-                                </div>
-                                <div class="cardbox-body">
-                                    <div class="text-center">
-                                        <input id="chart-incidencias-1-hora" type="text" value="0" data-max="0" data-status="No_Data" ></input>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="col-xl-3">
-                            <div class="cardbox cardbox-flat">
-                                <div class="cardbox-heading">
-                                    <div class="float-right">
-                                        <div class="icon-lg text-muted"></div>
-                                    </div>
-                                    <div>Tareas</div>
-                                </div>
-                                <div class="cardbox-body">
-                                    <div class="text-center">
-                                        <input id="chart-tareas-1-hora" type="text" value="0" data-max="0" data-status="No_Data"  ></input>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div class="row">
@@ -233,7 +185,8 @@
                                 </div>
                                 <div class="cardbox-body">
                                     <div class="text-center">
-                                        <input id="chart-incidencias-1-day" type="text" value="0" data-max="0" data-status="No_Data" ></input>
+                                        <input id="chart-incidencias-1-day" type="text" th:value="${applicationView.issuesQtyLastDay}"
+                                                th:attr="data-status=${applicationView.getStatusIssuesQty()} , data-max=${applicationView.getIssuesQtyCriticalThreshold()}" ></input>
                                     </div>
                                 </div>
                             </div>

@@ -99,6 +99,10 @@ public class AppPulseActiveDataParserImpl implements AppPulseActiveDataParser {
             AvailabilityProviderModel dataProviderModel = parse(data);
             this.availabilitiesStorage = convert(dataProviderModel);
 
+            if (this.availabilitiesStorage == null) {
+                return;
+            }
+
             //Guardar.
             availabilitiesStorage.stream().forEach(availabilityStorage -> {
 

@@ -102,6 +102,7 @@ public class AlmTransportImpl implements AlmTransport {
         if (data.getBody() == null) {
             return null;
         }
+
         return data.getBody().getObject();
     }
 
@@ -110,14 +111,20 @@ public class AlmTransportImpl implements AlmTransport {
         String pathSession = "/rest/site-session";
         String sessionUri = buildUri(pathSession);
         HttpResponse<JsonNode> data = null;
-        Map<String, String> cookiesMap = new HashMap<String, String>();
+        Map<String, String> cookiesMap = new HashMap<>();
 
         try {
             data = Unirest.post(sessionUri).asJson();
         } catch (UnirestException e) {
             logger.error(e.getMessage());
+            return null;
         }
+
         List<String> cookies = data.getHeaders().get("Set-Cookie");
+
+        if (cookies == null) {
+            return null;
+        }
 
         for (String item : cookies) {
             cookiesMap.put(item.split("=")[0], item.split("=")[1].split(";")[0]);

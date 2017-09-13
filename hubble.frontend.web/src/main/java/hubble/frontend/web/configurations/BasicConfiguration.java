@@ -1,6 +1,6 @@
 package hubble.frontend.web.configurations;
 
-import hubble.frontend.business.interfaces.AvailabilityManager;
+import hubble.frontend.business.interfaces.BusinessApplicationManager;
 import hubble.frontend.web.interceptors.CommonModelViewInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class BasicConfiguration extends WebMvcConfigurerAdapter {
 
     @Autowired
-    private AvailabilityManager availabilityManager;
+    private BusinessApplicationManager availabilityManager;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {

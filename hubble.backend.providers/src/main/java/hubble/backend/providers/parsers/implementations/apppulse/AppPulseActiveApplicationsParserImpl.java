@@ -65,6 +65,11 @@ public class AppPulseActiveApplicationsParserImpl implements AppPulseActiveAppli
     }
 
     public void save(List<ApplicationStorage> appPulseApplicationRecords) {
+
+        if (appPulseApplicationRecords == null) {
+            return;
+        }
+
         appPulseApplicationRecords.stream().forEach((applicationToSave) -> {
             if (!applicationRepository.exist(applicationToSave)) {
                 applicationRepository.save(applicationToSave);

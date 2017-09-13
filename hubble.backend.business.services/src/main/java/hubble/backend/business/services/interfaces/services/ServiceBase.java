@@ -4,16 +4,7 @@ import java.util.List;
 
 public interface ServiceBase<T> {
 
-    public T findById(String id);
+    public List<T> getLastDay(String applicationId);
 
-    public List<T> findLast10Minutes();
-
-    public List<T> findLastHour();
-
-    public List<T> findLastDay();
-
-    public List<T> findLastMonth();
-
-    public List<T> findAll();
-
+    public List<T> getLastMonth(String applicationId);
 }

@@ -6,8 +6,10 @@ import hubble.backend.business.services.models.AvailabilityDto;
 import hubble.backend.business.services.models.PerformanceDto;
 import hubble.backend.business.services.models.TransactionAvgDto;
 import hubble.backend.business.services.models.TransactionDto;
+import hubble.backend.business.services.models.IssueDto;
 import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.AvailabilityStorage;
+import hubble.backend.storage.models.IssueStorage;
 import hubble.backend.storage.models.TransactionStorage;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -22,6 +24,7 @@ public class MapperConfiguration {
 
     public MapperConfiguration() {
         mapper = new ModelMapper();
+        this.mapper.addMappings(new IssuePropertyMap());
     }
 
     public ModelMapper getMapper() {
@@ -135,4 +138,21 @@ public class MapperConfiguration {
         }
         return mapper.map(availabilityStorage, PerformanceDto.class);
     }
+
+    public IssueDto mapToIssueDto(IssueStorage issueStorage) {
+        if (issueStorage == null) {
+            return null;
+        }
+        return mapper.map(issueStorage, IssueDto.class);
+    }
+
+    public List<IssueDto> mapToIssueDtoList(List<IssueStorage> issueStorageList) {
+        if (issueStorageList == null) {
+            return null;
+        }
+        Type issueDtoTypeList = new TypeToken<List<IssueDto>>() {
+        }.getType();
+        return mapper.map(issueStorageList, issueDtoTypeList);
+    }
+
 }
