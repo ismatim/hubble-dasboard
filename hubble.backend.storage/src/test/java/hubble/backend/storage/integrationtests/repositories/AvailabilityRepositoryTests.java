@@ -4,7 +4,7 @@ import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.configurations.StorageComponentConfiguration;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.repositories.AvailabilityRepository;
-import hubble.backend.storage.tests.StorageTestsHelper;
+import hubble.backend.storage.helper.StorageTestsHelper;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;

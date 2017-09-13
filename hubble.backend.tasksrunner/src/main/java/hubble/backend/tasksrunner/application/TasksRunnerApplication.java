@@ -9,6 +9,8 @@ import hubble.backend.providers.parsers.interfaces.bsm.BsmDataParser;
 import hubble.backend.tasksrunner.application.scheduler.SchedulerMediator;
 import hubble.backend.tasksrunner.configurations.TasksRunnerConfiguration;
 import hubble.backend.tasksrunner.jobs.ParserJob;
+import hubble.backend.tasksrunner.jobs.alm.AlmApplicationParserJob;
+import hubble.backend.tasksrunner.jobs.alm.AlmDataParserJob;
 import hubble.backend.tasksrunner.jobs.apppulse.AppPulseApplicationParserJob;
 import hubble.backend.tasksrunner.jobs.apppulse.AppPulseDataParserJob;
 import hubble.backend.tasksrunner.jobs.bsm.BsmApplicationParserJob;
@@ -55,7 +57,6 @@ public class TasksRunnerApplication {
         appPulseApplicationTask.setIndentityGroupName("AppPulse Active Provider Job");
         appPulseApplicationTask.setIndentityName("AppPulse Applications");
         appPulseApplicationTask.setIntervalSeconds(100);
-
         scheduler.addTask(appPulseApplicationTask);
         scheduler.addTask(appPulseDataTask);
 
@@ -72,20 +73,20 @@ public class TasksRunnerApplication {
         Task bsmApplicationTask = new BsmApplicationTaskImpl(bsmApplicationJob);
         bsmApplicationTask.setIndentityGroupName("BSM");
         bsmApplicationTask.setIndentityName("BSM Applicaciones");
-        bsmApplicationTask.setIntervalSeconds(1);
+        bsmApplicationTask.setIntervalSeconds(100);
         scheduler.addTask(bsmApplicationTask);
         scheduler.addTask(bsmTask);
-        
+
         //Alm
         AlmDataParser almParser = context.getBean(AlmDataParser.class);
-        ParserJob almJob = new AppPulseDataParserJob(almParser);
+        ParserJob almJob = new AlmDataParserJob(almParser);
         ParserTask almDataTask = new AlmDataTaskImpl(almJob);
         almDataTask.setIndentityGroupName("Alm Provider Job");
         almDataTask.setIndentityName("Alm Data");
         almDataTask.setIntervalSeconds(40);
-        
+
         AlmApplicationParser almApplicationParser = context.getBean(AlmApplicationParser.class);
-        ParserJob almApplicationJob = new AppPulseApplicationParserJob(almApplicationParser);
+        ParserJob almApplicationJob = new AlmApplicationParserJob(almApplicationParser);
         ParserTask almApplicationTask = new AlmApplicationTaskImpl(almApplicationJob);
         almApplicationTask.setIndentityGroupName("Alm Provider Job");
         almApplicationTask.setIndentityName("Alm Applications");

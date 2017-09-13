@@ -6,20 +6,16 @@
 
         var chartAvailability10min = $('#chart-disponibilidad-10-min');
         var chartPerformance10min = $('#chart-performance-10-min');
-        var chartIncidences10min = $('#chart-incidencias-10-min');
-        var chartTasks10min = $('#chart-tareas-10-min');
         var chartAvailability1hour = $('#chart-disponibilidad-1-hora');
         var chartPerformance1hour = $('#chart-performance-1-hora');
-        var chartTasks1hour = $('#chart-tareas-1-hora');
-        var chartIncidences1hour = $('#chart-incidencias-1-hora');
         var chartAvailability1day = $('#chart-disponibilidad-1-day');
         var chartPerformance1day = $('#chart-performance-1-day');
         var chartTasks1day = $('#chart-tareas-1-day');
         var chartIncidences1day = $('#chart-incidencias-1-day');
 
-        var knobs = [chartAvailability10min, chartPerformance10min, chartIncidences10min,
-            chartTasks10min, chartAvailability1hour, chartPerformance1hour, chartTasks1hour,
-            chartIncidences1hour, chartAvailability1day, chartPerformance1day, chartTasks1day, chartIncidences1day];
+        var knobs = [chartAvailability10min, chartPerformance10min,
+            chartAvailability1hour, chartPerformance1hour,
+            chartAvailability1day, chartPerformance1day, chartTasks1day, chartIncidences1day];
 
         var init = function () {
 
@@ -55,10 +51,22 @@
                             return v + "%";
                         }
                     });
-                else
+                else if($(knobSelected).attr('id').indexOf('performance') >= 0)
                     return configuration = $.extend({}, configuration, {
                         format: function (v) {
                             return v + "s";
+                        }
+                    });
+                else if($(knobSelected).attr('id').indexOf('incidencias') >= 0)
+                    return configuration = $.extend({}, configuration, {
+                        format: function (v) {
+                            return v + "#";
+                        }
+                    });
+                else if($(knobSelected).attr('id').indexOf('tareas') >= 0)
+                    return configuration = $.extend({}, configuration, {
+                        format: function (v) {
+                            return v + "#";
                         }
                     });
             };
@@ -105,8 +113,6 @@
             });
 
         };
-
-
 
         return {
             init: init

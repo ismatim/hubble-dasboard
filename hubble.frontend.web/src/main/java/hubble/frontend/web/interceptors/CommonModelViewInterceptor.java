@@ -1,6 +1,6 @@
 package hubble.frontend.web.interceptors;
 
-import hubble.frontend.business.interfaces.AvailabilityManager;
+import hubble.frontend.business.interfaces.BusinessApplicationManager;
 import hubble.frontend.business.models.BusinessApplication;
 import java.util.List;
 import java.util.logging.Level;
@@ -13,9 +13,9 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class CommonModelViewInterceptor extends HandlerInterceptorAdapter {
 
     private static final Logger logger = Logger.getLogger(CommonModelViewInterceptor.class.getName());
-    private AvailabilityManager availabilityManager;
+    private BusinessApplicationManager availabilityManager;
 
-    public CommonModelViewInterceptor(AvailabilityManager availabilityManager) {
+    public CommonModelViewInterceptor(BusinessApplicationManager availabilityManager) {
         this.availabilityManager = availabilityManager;
     }
 

@@ -37,6 +37,10 @@ public class BsmParserDataImpl implements BsmDataParser {
 
         List<BsmProviderModel> transactions = parse(data);
 
+        if (transactions == null) {
+            return;
+        }
+
         this.availabilitiesStorage = new ArrayList<>();
         this.availabilitiesStorage = mapperConfifuration.mapToAvailabilitiesStorage(transactions);
 
@@ -45,6 +49,10 @@ public class BsmParserDataImpl implements BsmDataParser {
 
     @Override
     public List<BsmProviderModel> parse(SOAPBody data) {
+
+        if (data == null) {
+            return null;
+        }
 
         List<BsmProviderModel> transactions = mapperConfifuration.mapDataToBsmProviderModel(data);
 

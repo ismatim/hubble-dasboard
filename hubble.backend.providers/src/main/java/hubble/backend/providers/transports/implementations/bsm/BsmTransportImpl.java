@@ -3,7 +3,6 @@ package hubble.backend.providers.transports.implementations.bsm;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.core.utils.LoggingOutputStream;
 import hubble.backend.providers.transports.interfaces.BsmTransport;
-import java.io.IOException;
 import java.util.Calendar;
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.MimeHeaders;
@@ -93,11 +92,8 @@ public class BsmTransportImpl implements BsmTransport {
 
             soapMessage.saveChanges();
 
-            logger.info("Request SOAP Message:");
-            soapMessage.writeTo(logging);
-
             this.message = soapMessage;
-        } catch (IOException | SOAPException ex) {
+        } catch (SOAPException ex) {
             logger.error(ex.toString());
         }
 
@@ -153,14 +149,10 @@ public class BsmTransportImpl implements BsmTransport {
             // Send SOAP Message to SOAP Server
             SOAPMessage soapResponse = soapConnection.call(this.message, soapEndpointUrl);
 
-            // Print the SOAP Response
-            logger.debug("Response SOAP Message:");
-            soapResponse.writeTo(logging);
-
             soapConnection.close();
 
             return soapResponse.getSOAPBody();
-        } catch (SOAPException | IOException ex) {
+        } catch (SOAPException ex) {
             logger.debug(ex.toString());
         }
 
