@@ -32,6 +32,18 @@ Usamos el prefijo `get` para obtener datos, ya que es el standard para las comun
 
 ### Docker
 
+Para ejecutar el docker-compose file se escribe en la terminal de preferencia.
+
+`$ docker-compose up -d`
+
+Para ver el log, de algún contenedor simplemente escribir el siguiente comando en la terminal.
+
+`$ docker logs <Nombre de Contenedor>`
+
+Para detener los contenedores se escribe en la terminal el comando
+
+`$ docker-compose down`
+
 ### MongoDB
 
 ### Jenkins
