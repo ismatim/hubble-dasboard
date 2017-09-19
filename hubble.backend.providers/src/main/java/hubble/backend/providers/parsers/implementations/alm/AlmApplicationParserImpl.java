@@ -10,6 +10,7 @@ import hubble.backend.storage.repositories.ApplicationRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import static org.apache.commons.lang.StringUtils.EMPTY;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -31,7 +32,6 @@ public class AlmApplicationParserImpl implements AlmApplicationParser {
 
     private final Logger logger = LoggerFactory.getLogger(AlmApplicationParserImpl.class);
 
-
     @Override
     public AlmApplicationProviderModel parse(JSONObject data) {
         if (data == null) {
@@ -47,14 +47,15 @@ public class AlmApplicationParserImpl implements AlmApplicationParser {
     @Override
     public void run() {
         almTransport.login();
-        Map<String,String> cookies=almTransport.getSessionCookies();
+        Map<String, String> cookies = almTransport.getSessionCookies();
         ApplicationStorage application = new ApplicationStorage();
-        JSONObject allDefects=almTransport.getAllDefects(cookies);
+        JSONObject allDefects = almTransport.getAllDefects(cookies);
         List<JSONObject> defects = this.parseList(allDefects);
-        for(JSONObject defect:defects){
+        for (JSONObject defect : defects) {
             application = this.convert(this.parse(defect));
-            if(!applicationRepository.exist(application))
+            if (!applicationRepository.exist(application)) {
                 applicationRepository.save(application);
+            }
         }
         almTransport.logout();
     }
@@ -64,7 +65,7 @@ public class AlmApplicationParserImpl implements AlmApplicationParser {
         JSONArray jsonArray = data.getJSONArray("entities");
         List<JSONObject> dataList = new ArrayList<JSONObject>();
 
-        for(int x=0;x<jsonArray.length();x++){
+        for (int x = 0; x < jsonArray.length(); x++) {
             dataList.add(jsonArray.getJSONObject(x));
         }
 
@@ -83,34 +84,36 @@ public class AlmApplicationParserImpl implements AlmApplicationParser {
         return application;
     }
 
-    private String getValue(JSONArray issueFields, String fieldName){
-        JSONObject values=new JSONObject();
-        JSONArray valueArray=new JSONArray();
+    private String getValue(JSONArray issueFields, String fieldName) {
+        JSONObject values = new JSONObject();
+        JSONArray valueArray = new JSONArray();
         String valueToReturn;
-        for (int x=0;x<issueFields.length();x++) {
-            if(fieldName.equals(issueFields.getJSONObject(x).getString("Name"))){
+        for (int x = 0; x < issueFields.length(); x++) {
+            if (fieldName.equals(issueFields.getJSONObject(x).getString("Name"))) {
                 valueArray = issueFields.getJSONObject(x).getJSONArray("values");
-                if(valueArray.length()>0 && valueArray.getJSONObject(0).has("value")){
+                if (valueArray.length() > 0 && valueArray.getJSONObject(0).has("value")) {
                     values = valueArray.getJSONObject(0);
-                    valueToReturn=values.getString("value");
+                    valueToReturn = values.getString("value");
                     return valueToReturn;
-                    }
-                else
+                } else {
                     return "";
+                }
             }
         }
-        return "";
+
+        logger.debug("ALM: no name field found");
+        return EMPTY;
     }
 
-    public String resolveApplicationIdFromConfiguration(String applicationName){
+    public String resolveApplicationIdFromConfiguration(String applicationName) {
         String[] applicationsIdMap = configuration.getApplicationValueToIdMap().split(",");
-        for(int x=0;x<applicationsIdMap.length;x++){
-            if(applicationName.equals(applicationsIdMap[x].split(":")[0]))
+        for (int x = 0; x < applicationsIdMap.length; x++) {
+            if (applicationName.equals(applicationsIdMap[x].split(":")[0])) {
                 return applicationsIdMap[x].split(":")[1];
+            }
         }
-        logger.error("Alm field for applications and ids map not correctly"
-                     +" configured in properties file for specified app name: "
-                     +applicationName);
+
+        logger.debug("ALM: field for applications and ids map not correctly configured in properties file");
         return null;
     }
 }

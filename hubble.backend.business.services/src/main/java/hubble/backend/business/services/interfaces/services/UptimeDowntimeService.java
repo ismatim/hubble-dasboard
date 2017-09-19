@@ -11,4 +11,14 @@ public interface UptimeDowntimeService {
 
     public DowntimeDto getDowntime(String transactionId, MonitoringFields.FRECUENCY period, Date startDate, Date endDate);
 
+    public UptimeDto getUptime(MonitoringFields.FRECUENCY period, Date startDate, Date endDate);
+
+    public UptimeDto getUptimeByApplication(String applicationId, MonitoringFields.FRECUENCY period, Date startDate, Date endDate);
+
+    public UptimeDto calculateLast10MinutesUptime(String applicationId);
+
+    public UptimeDto calculateLastHourUptime(String applicationId);
+
+    public UptimeDto calculateLastDayUptime(String applicationId);
+
 }

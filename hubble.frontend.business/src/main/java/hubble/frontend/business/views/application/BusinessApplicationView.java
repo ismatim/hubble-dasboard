@@ -29,6 +29,9 @@ public class BusinessApplicationView {
     private String statusAvailability1hour;
     private String statusPerformance1day;
     private String statusAvailability1day;
+    private Float uptime10min;
+    private Float uptime1hour;
+    private Float uptime1day;
 
     public BusinessApplicationView() {
     }
@@ -249,4 +252,27 @@ public class BusinessApplicationView {
         this.statusIssuesQty = statusIssuesQty;
     }
 
+    public Float getUptime10min() {
+        return uptime10min;
+    }
+
+    public void setUptime10min(Float uptime10min) {
+        this.uptime10min = uptime10min;
+    }
+
+    public Float getUptime1hour() {
+        return uptime1hour;
+    }
+
+    public void setUptime1hour(Float uptime1hour) {
+        this.uptime1hour = uptime1hour;
+    }
+
+    public Float getUptime1day() {
+        return uptime1day;
+    }
+
+    public void setUptime1day(Float uptime1day) {
+        this.uptime1day = uptime1day;
+    }
 }

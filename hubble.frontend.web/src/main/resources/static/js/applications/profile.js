@@ -2,7 +2,7 @@
 
 (function () {
     'use strict';
-    var applicationProfileModule = (function () {
+    var applicationProfileKnobModule = (function () {
 
         var chartAvailability10min = $('#chart-disponibilidad-10-min');
         var chartPerformance10min = $('#chart-performance-10-min');
@@ -23,9 +23,9 @@
                 return;
 
             var knobLoaderOptionsSuccess = {
-                width: '80%', // responsive
+//                width: '100%', // responsive
                 displayInput: true,
-                fgColor: Colors.byName('primary'),
+                fgColor: Colors.byName('success'),
                 bgColor: 'rgba(162,162,162, .09)',
                 angleOffset: -125,
                 angleArc: 250,
@@ -51,19 +51,19 @@
                             return v + "%";
                         }
                     });
-                else if($(knobSelected).attr('id').indexOf('performance') >= 0)
+                else if ($(knobSelected).attr('id').indexOf('performance') >= 0)
                     return configuration = $.extend({}, configuration, {
                         format: function (v) {
                             return v + "s";
                         }
                     });
-                else if($(knobSelected).attr('id').indexOf('incidencias') >= 0)
+                else if ($(knobSelected).attr('id').indexOf('incidencias') >= 0)
                     return configuration = $.extend({}, configuration, {
                         format: function (v) {
                             return v + "#";
                         }
                     });
-                else if($(knobSelected).attr('id').indexOf('tareas') >= 0)
+                else if ($(knobSelected).attr('id').indexOf('tareas') >= 0)
                     return configuration = $.extend({}, configuration, {
                         format: function (v) {
                             return v + "#";
@@ -99,7 +99,7 @@
                     //init
                     var configuration = getKnobStatus(getChartStatus(knobSelected));
                     configuration = setFormat(knobSelected, configuration);
-                    knobSelected.trigger('configure', configuration );
+                    knobSelected.trigger('configure', configuration);
                     knobSelected.trigger('change');
                     console.log(configuration);
 
@@ -109,7 +109,12 @@
             var timeOutId;
             $(window).resize(function () {
                 clearTimeout(timeOutId); // The ID value of the timer returned by the setTimeout().
-                setTimeout(doOnResizeWindows, 1/10);
+                setTimeout(doOnResizeWindows, 1 / 10);
+            });
+
+            $('#collapseOne').on('shown.bs.collapse', function () {
+                clearTimeout(timeOutId);
+                setTimeout(doOnResizeWindows, 2000);
             });
 
         };
@@ -119,6 +124,91 @@
         };
     })();
 
-    $(applicationProfileModule.init);
 
+    var applicationProfileChartModule = (function () {
+
+        var init = function () {
+
+            if (!$.fn.plot)
+                return;
+
+            // Dont run if charts page not loaded
+            if (!$('#area-flotchart').length)
+                return;
+
+            $.get('/applicationasync/uptime/Benchmark%20Home%20Banking', function (data) {
+
+                var areaData = [
+                    {
+                        data: [],
+                        label: "Uptime",
+                        color: "#06cb60"
+                    }];
+
+                data.forEach(function (element) {
+                    return areaData[0].data.push([element["date"], element["uptime"]]);
+                });
+
+                var areaOptions = {
+                    series: {
+                        lines: {
+                            show: true,
+                            fill: true,
+                            fillColor: {
+                                colors: [{
+                                        opacity: 0.5
+                                    }, {
+                                        opacity: 0.9
+                                    }]
+                            }
+                        },
+                        points: {
+                            show: false
+                        }
+                    },
+                    grid: {
+                        borderColor: 'rgba(162,162,162,.26)',
+                        borderWidth: 1,
+                        hoverable: true,
+                        backgroundColor: 'transparent'
+                    },
+                    tooltip: true,
+                    tooltipOpts: {
+                        content: function (label, x, y) {
+                            return x + ' : ' + y;
+                        }
+                    },
+                    xaxis: {
+                        tickColor: 'rgba(162,162,162,.26)',
+                        font: {
+                            color: Colors.byName('blueGrey-200')
+                        },
+                        mode: 'categories'
+                    },
+                    yaxis: {
+                        min: 0,
+                        max: 150,
+                        tickColor: 'rgba(162,162,162,.26)',
+                        font: {
+                            color: Colors.byName('blueGrey-200')
+                        },
+                        // position: (isRTL ? 'right' : 'left')
+                    },
+                    shadowSize: 0
+                };
+
+                $('#area-flotchart').plot(areaData, areaOptions);
+
+            });
+
+        };
+
+        return {
+            init: init
+        };
+
+    })();
+
+    $(applicationProfileKnobModule.init);
+    $(applicationProfileChartModule.init);
 })();

@@ -4,7 +4,6 @@ import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.operations.ApplicationOperations;
 import java.util.ArrayList;
 import java.util.List;
-import static java.util.stream.Collectors.toList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.aggregation.Aggregation;
@@ -27,23 +26,19 @@ public class ApplicationRepositoryImpl implements ApplicationOperations {
 
     @Override
     public ApplicationStorage findApplicationById(String applicationId) {
-        List<ApplicationStorage> applicationStorageList = getApplications();
+        Criteria isSameApplicationId = Criteria.where("applicationId").is(applicationId);
 
-        if (applicationStorageList.isEmpty()) {
-            return null;
-        }
+        List<ApplicationStorage> applications = mongo
+                .find(Query
+                        .query(isSameApplicationId),
+                        ApplicationStorage.class);
 
-        List<ApplicationStorage> filteredList = applicationStorageList
-                .stream()
-                .filter(t -> t.getApplicationId().equals(applicationId))
-                .collect(toList());
-
-        return !filteredList.isEmpty() ? filteredList.get(0) : null;
+        return !applications.isEmpty() ? applications.get(0) : null;
     }
 
     @Override
     public ApplicationStorage findApplicationByTransactionId(String transactionId) {
-        List<AggregationOperation> aggregationOperations = new ArrayList<AggregationOperation>();
+        List<AggregationOperation> aggregationOperations = new ArrayList<>();
         aggregationOperations.add(Aggregation.match(Criteria.where("transactions.transactionId").is(transactionId)));
         TypedAggregation<ApplicationStorage> applicationAggregation = Aggregation.newAggregation(ApplicationStorage.class, aggregationOperations);
         List<ApplicationStorage> applicationStorageList = mongo.aggregate(applicationAggregation, ApplicationStorage.class, ApplicationStorage.class).getMappedResults();

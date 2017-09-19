@@ -10,6 +10,7 @@ import hubble.backend.storage.repositories.IssueRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import static org.apache.commons.lang.StringUtils.EMPTY;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -120,7 +121,9 @@ public class AlmDataParserImpl implements AlmDataParser {
 
             }
         }
-        return "";
+
+        logger.debug("ALM: Name field is empty.");
+        return EMPTY;
     }
 
     private String resolveApplicationIdFromConfiguration(String applicationName) {
@@ -130,9 +133,8 @@ public class AlmDataParserImpl implements AlmDataParser {
                 return applicationsIdMap[x].split(":")[1];
             }
         }
-        logger.debug("Alm field for applications and ids map not correctly"
-                + " configured in properties file for specified app name: "
-                + applicationName);
+
+        logger.debug("ALM: field for applications and ids map not correctly configured in properties file");
         return null;
     }
 

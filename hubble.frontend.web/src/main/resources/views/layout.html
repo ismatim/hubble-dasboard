@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <head>
         <meta charset="utf-8"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
@@ -81,45 +81,48 @@
         <div layout:fragment="content">
             Page content goes here
         </div>
-    <th:block layout:fragment="scripts">
-<!--        Lodash 4.17
-        <script src="/vendor/lodash/lodash.4.17.4.js"></script>-->
-        <!--Modernizr-->
-        <script src="/vendor/modernizr/modernizr.custom.js"></script>
-        <!-- PaceJS-->
-        <script src="/vendor/pace/pace.min.js"></script>
-        <!-- jQuery-->
-        <script src="/vendor/jquery/dist/jquery.js"></script>
-        <!-- Bootstrap-->
-        <script src="/vendor/tether/dist/js/tether.min.js"></script>
-        <script src="/vendor/bootstrap/dist/js/bootstrap.js"></script>
-        <!-- Material Colors-->
-        <script src="/vendor/material-colors/dist/colors.js"></script>
-        <!-- Screenfull-->
-        <script src="/vendor/screenfull/dist/screenfull.js"></script>
-        <!-- jQuery Localize-->
-        <!--<script src="/vendor/jquery-localize-i18n/dist/jquery.localize.js"></script>-->
-        <!-- Google Maps API-->
-        <!--script(type='text/javascript', src='http://maps.google.com/maps/api/js?key=AIzaSyBNs42Rt_CyxAqdbIBK0a5Ut83QiauESPA')-->
-        <!-- Google Maps-->
-        <!--script(src='vendor/gmaps/gmaps.js')-->
-        <!-- Flot charts-->
-        <script src="/vendor/flot/jquery.flot.js"></script>
-        <!--script(src='vendor/flot/jquery.flot.categories.js')-->
-        <!--script(src='vendor/flot-spline/js/jquery.flot.spline.js')-->
-        <!--script(src='vendor/flot.tooltip/js/jquery.flot.tooltip.js')-->
-        <!--script(src='vendor/flot/jquery.flot.resize.js')-->
-        <!--script(src='vendor/flot/jquery.flot.pie.js')-->
-        <!--script(src='vendor/flot/jquery.flot.time.js')-->
-        <!--script(src='vendor/sidebysideimproved/jquery.flot.orderBars.js')-->
-        <!-- Sparkline-->
-        <script src="/vendor/sparkline/index.js"></script>
-        <!-- jQuery Knob charts-->
-        <script src="/vendor/jquery-knob/js/jquery.knob.js"></script>
-        <!-- App script-->
-        <script src="/js/app.js"></script>
-        <script src="/js/applications/profile.js"></script>
+        <th:block layout:fragment="scripts">
+            <!--        Lodash 4.17
+                    <script src="/vendor/lodash/lodash.4.17.4.js"></script>-->
+            <!--Modernizr-->
+            <script src="/vendor/modernizr/modernizr.custom.js"></script>
+            <!-- PaceJS-->
+            <script src="/vendor/pace/pace.min.js"></script>
+            <!-- jQuery-->
+            <script src="/vendor/jquery/dist/jquery.js"></script>
+            <!-- Bootstrap-->
+            <script src="/vendor/tether/dist/js/tether.min.js"></script>
+            <script src="/vendor/bootstrap/dist/js/bootstrap.js"></script>
+            <!-- Material Colors-->
+            <script src="/vendor/material-colors/dist/colors.js"></script>
+            <!-- Screenfull-->
+            <script src="/vendor/screenfull/dist/screenfull.js"></script>
+            <!-- jQuery Localize-->
+            <!--<script src="/vendor/jquery-localize-i18n/dist/jquery.localize.js"></script>-->
+            <!-- Google Maps API-->
+            <!--script(type='text/javascript', src='http://maps.google.com/maps/api/js?key=AIzaSyBNs42Rt_CyxAqdbIBK0a5Ut83QiauESPA')-->
+            <!-- Google Maps-->
+            <!--script(src='vendor/gmaps/gmaps.js')-->
+            <!-- Flot charts-->
+            <script src="/vendor/flot/jquery.flot.js"></script>
+            <script src='/vendor/flot/jquery.flot.categories.js'></script>
+            <!--        <script src='/vendor/flot-spline/js/jquery.flot.spline.js'></script>
+                   <script src='/vendor/flot.tooltip/js/jquery.flot.tooltip.js'></script>
+                    <script src='/vendor/flot/jquery.flot.resize.js'></script>
+                    <script src='/vendor/flot/jquery.flot.pie.js'></script>
+                    <script src='/vendor/flot/jquery.flot.time.js'></script>
+                    <script src='/vendor/sidebysideimproved/jquery.flot.orderBars.js'></script>-->
+            <!-- Sparkline-->
+            <script src="/vendor/sparkline/index.js"></script>
+            <!-- jQuery Knob charts-->
+            <script src="/vendor/jquery-knob/js/jquery.knob.js"></script>
+            <!-- App script-->
+            <script src="/js/app.js"></script>
+            <!--Jquery-Collapse-->
+            <script src="/vendor/jquery-collapse/src/jquery.collapse.js"></script>
+            <!--Front-End-->
+            <script src="/js/applications/profile.js"></script>
 
-    </th:block>
-</body>
+        </th:block>
+    </body>
 </html>

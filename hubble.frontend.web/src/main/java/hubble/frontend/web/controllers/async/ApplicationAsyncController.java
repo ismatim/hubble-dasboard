@@ -1,7 +1,9 @@
-package hubble.frontend.web.controllers;
+package hubble.frontend.web.controllers.async;
 
 import hubble.frontend.business.interfaces.BusinessApplicationManager;
+import hubble.frontend.business.models.Uptime;
 import hubble.frontend.business.views.application.BusinessApplicationView;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,5 +24,14 @@ public class ApplicationAsyncController {
         BusinessApplicationView applicationView = businessAppMgr.getBusinessApplicationView(applicationId);
 
         return applicationView;
+    }
+
+    @GetMapping("/applicationasync/uptime/{applicationId}")
+    public @ResponseBody
+    List<Uptime> getUptimeLastMonth(HttpServletRequest req, @PathVariable String applicationId) {
+
+        List<Uptime> uptimes = businessAppMgr.getUptimeLastMonth(applicationId);
+
+        return uptimes;
     }
 }

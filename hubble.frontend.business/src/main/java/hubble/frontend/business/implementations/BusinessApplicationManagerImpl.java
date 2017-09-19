@@ -3,13 +3,21 @@ package hubble.frontend.business.implementations;
 import hubble.backend.business.services.interfaces.services.AvailabilityService;
 import hubble.backend.business.services.interfaces.services.IssueService;
 import hubble.backend.business.services.interfaces.services.PerformanceService;
+import hubble.backend.business.services.interfaces.services.UptimeDowntimeService;
 import hubble.backend.business.services.models.ApplicationAvgDto;
 import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.models.measures.IssuesQuantity;
+import hubble.backend.business.services.models.measures.UptimeDto;
+import hubble.backend.core.enums.MonitoringFields;
+import hubble.backend.core.utils.CalendarHelper;
 import hubble.frontend.business.configurations.mappers.ApplicationMapper;
+import hubble.frontend.business.configurations.mappers.UptimeMapper;
 import hubble.frontend.business.interfaces.BusinessApplicationManager;
 import hubble.frontend.business.models.BusinessApplication;
+import hubble.frontend.business.models.Uptime;
 import hubble.frontend.business.views.application.BusinessApplicationView;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +33,10 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
     IssueService issueService;
     @Autowired
     ApplicationMapper applicationMapper;
+    @Autowired
+    UptimeDowntimeService uptimeService;
+    @Autowired
+    UptimeMapper uptimeMapper;
 
     @Override
     public BusinessApplicationView getBusinessApplicationView(String id) {
@@ -74,10 +86,15 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         businessView.setPerformanceCriticalValue1day(performanceAvg1Day.getCriticalThreshold());
 
         //Issues 1 Day
-        IssuesQuantity issues = issueService.calculateIssuesQuantityLastMonth(id);
+        IssuesQuantity issues = issueService.calculateIssuesQuantityLastDay(id);
         businessView.setIssuesQtyLastDay(issues.getQuantity());
         businessView.setStatusIssuesQty(issues.getStatus().toString());
         businessView.setIssuesQtyCriticalThreshold(issues.getCriticalThreshold());
+
+        //Uptime
+        businessView.setUptime10min(uptimeService.calculateLast10MinutesUptime(id).get());
+        businessView.setUptime1hour(uptimeService.calculateLastHourUptime(id).get());
+        businessView.setUptime1day(uptimeService.calculateLastDayUptime(id).get());
 
         return businessView;
     }
@@ -87,4 +104,22 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         List<ApplicationDto> applicationDtoList = availabilityService.getAllApplications();
         return applicationMapper.mapToBusinessApplicationList(applicationDtoList);
     }
+
+    @Override
+    public List<Uptime> getUptimeLastMonth(String applicationId) {
+
+        Calendar startCalendar = CalendarHelper.getNow();
+        startCalendar.add(Calendar.MONTH, -1);
+        Date startDate = startCalendar.getTime();
+
+        Calendar endCalendar = CalendarHelper.getNow();
+        endCalendar.add(Calendar.HOUR, 24);
+        Date endDate = endCalendar.getTime();
+
+        UptimeDto uptimeDto = uptimeService.getUptimeByApplication(applicationId, MonitoringFields.FRECUENCY.DAY, startDate, endDate);
+
+        List<Uptime> uptimes = uptimeMapper.mapToUptimeList(uptimeDto);
+        return uptimes;
+    }
+
 }

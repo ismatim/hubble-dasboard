@@ -11,11 +11,14 @@ public class TimeStatusOperationsImpl implements TimeStatusOperationsBase {
 
     @Override
     public Integer calculateUptime(List<AvailabilityStorage> availabilities) {
+
+        if (availabilities == null || availabilities.isEmpty()) {
+            return 0;
+        }
+
         int successCounter = 0;
         int totalCounter = availabilities.size();
-        if (availabilities.isEmpty()) {
-            return null;
-        }
+
         for (AvailabilityStorage availability : availabilities) {
             if (availability.getAvailabilityStatus().equals(MonitoringFields.STATUS.SUCCESS.toString())) {
                 successCounter++;
@@ -26,6 +29,11 @@ public class TimeStatusOperationsImpl implements TimeStatusOperationsBase {
 
     @Override
     public Integer calculateDowntime(List<AvailabilityStorage> availabilities) {
+
+        if (availabilities == null) {
+            return 0;
+        }
+
         int successCounter = 0;
         int totalCounter = availabilities.size();
         if (availabilities.isEmpty()) {

@@ -161,9 +161,36 @@ public class AvailabilityRepositoryImpl implements AvailabilityOperations {
         List<AvailabilityStorage> availabilities = mongo
                 .find(Query
                         .query(isTransactionId.andOperator(startDateCriteria, endDateCriteria)),
-                        AvailabilityStorage.class);        
+                        AvailabilityStorage.class);
 
         return availabilities;
     }
-    
+
+    @Override
+    public List<AvailabilityStorage> findAvailabilitiesByApplicationIdAndPeriod(String applicationId, Date startDate, Date endDate) {
+        Criteria isAppId = Criteria.where("applicationName").is(applicationId);
+        Criteria startDateCriteria = Criteria.where("timeStamp").gte(startDate);
+        Criteria endDateCriteria = Criteria.where("timeStamp").lte(endDate);
+
+        List<AvailabilityStorage> availabilities = mongo
+                .find(Query
+                        .query(isAppId.andOperator(startDateCriteria, endDateCriteria)),
+                        AvailabilityStorage.class);
+
+        return availabilities;
+    }
+
+    @Override
+    public List<AvailabilityStorage> findAvailabilitiesBydAndPeriod(Date startDate, Date endDate) {
+        Criteria startDateCriteria = Criteria.where("timeStamp").gte(startDate);
+        Criteria endDateCriteria = Criteria.where("timeStamp").lte(endDate);
+
+        List<AvailabilityStorage> availabilities = mongo
+                .find(Query
+                        .query(startDateCriteria.andOperator(endDateCriteria)),
+                        AvailabilityStorage.class);
+
+        return availabilities;
+    }
+
 }
