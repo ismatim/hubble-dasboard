@@ -7,10 +7,8 @@ import java.util.List;
 import org.json.JSONObject;
 
 public interface AlmApplicationParser extends Parser {
-
+    
     public AlmApplicationProviderModel parse(JSONObject data);
-
     public List<JSONObject> parseList(JSONObject data);
-
     public ApplicationStorage convert(AlmApplicationProviderModel almApplicationProviderModel);
 }
