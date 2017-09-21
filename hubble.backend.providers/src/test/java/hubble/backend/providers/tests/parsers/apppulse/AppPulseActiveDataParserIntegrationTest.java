@@ -28,7 +28,7 @@ public class AppPulseActiveDataParserIntegrationTest extends AppPulseBaseUnitTes
         assertNotNull(appPulseActiveParser);
     }
 
-//    @Test
+    @Test
     public void AppPulseActiveParser_when_it_runs_should_connect_get_data_and_save_it() {
 
         //Assign

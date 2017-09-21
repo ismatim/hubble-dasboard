@@ -6,6 +6,8 @@ import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveApplic
 import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveDataParser;
 import hubble.backend.providers.parsers.interfaces.bsm.BsmApplicationParser;
 import hubble.backend.providers.parsers.interfaces.bsm.BsmDataParser;
+import hubble.backend.providers.parsers.interfaces.ppm.PpmApplicationParser;
+import hubble.backend.providers.parsers.interfaces.ppm.PpmDataParser;
 import hubble.backend.tasksrunner.application.scheduler.SchedulerMediator;
 import hubble.backend.tasksrunner.configurations.TasksRunnerConfiguration;
 import hubble.backend.tasksrunner.jobs.ParserJob;
@@ -15,6 +17,8 @@ import hubble.backend.tasksrunner.jobs.apppulse.AppPulseApplicationParserJob;
 import hubble.backend.tasksrunner.jobs.apppulse.AppPulseDataParserJob;
 import hubble.backend.tasksrunner.jobs.bsm.BsmApplicationParserJob;
 import hubble.backend.tasksrunner.jobs.bsm.BsmDataParserJob;
+import hubble.backend.tasksrunner.jobs.ppm.PpmApplicationParserJob;
+import hubble.backend.tasksrunner.jobs.ppm.PpmDataParserJob;
 import hubble.backend.tasksrunner.tasks.ParserTask;
 import hubble.backend.tasksrunner.tasks.Task;
 import hubble.backend.tasksrunner.tasks.alm.AlmApplicationTaskImpl;
@@ -23,6 +27,8 @@ import hubble.backend.tasksrunner.tasks.apppulse.AppPulseApplicationTaskImpl;
 import hubble.backend.tasksrunner.tasks.apppulse.AppPulseDataTaskImpl;
 import hubble.backend.tasksrunner.tasks.bsm.BsmApplicationTaskImpl;
 import hubble.backend.tasksrunner.tasks.bsm.BsmDataTaskImpl;
+import hubble.backend.tasksrunner.tasks.ppm.PpmApplicationTaskImpl;
+import hubble.backend.tasksrunner.tasks.ppm.PpmDataTaskImpl;
 import org.quartz.SchedulerException;
 import org.springframework.boot.Banner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -76,7 +82,7 @@ public class TasksRunnerApplication {
         bsmApplicationTask.setIntervalSeconds(100);
         scheduler.addTask(bsmApplicationTask);
         scheduler.addTask(bsmTask);
-
+        
         //Alm
         AlmDataParser almParser = context.getBean(AlmDataParser.class);
         ParserJob almJob = new AlmDataParserJob(almParser);
@@ -84,7 +90,7 @@ public class TasksRunnerApplication {
         almDataTask.setIndentityGroupName("Alm Provider Job");
         almDataTask.setIndentityName("Alm Data");
         almDataTask.setIntervalSeconds(40);
-
+        
         AlmApplicationParser almApplicationParser = context.getBean(AlmApplicationParser.class);
         ParserJob almApplicationJob = new AlmApplicationParserJob(almApplicationParser);
         ParserTask almApplicationTask = new AlmApplicationTaskImpl(almApplicationJob);
@@ -94,6 +100,24 @@ public class TasksRunnerApplication {
 
         scheduler.addTask(almDataTask);
         scheduler.addTask(almApplicationTask);
+        
+        //Ppm
+        PpmDataParser ppmParser = context.getBean(PpmDataParser.class);
+        ParserJob ppmJob = new PpmDataParserJob(ppmParser);
+        ParserTask ppmDataTask = new PpmDataTaskImpl(ppmJob);
+        ppmDataTask.setIndentityGroupName("Ppm Provider Job");
+        ppmDataTask.setIndentityName("Ppm Data");
+        ppmDataTask.setIntervalSeconds(40);
+        
+        PpmApplicationParser ppmApplicationParser = context.getBean(PpmApplicationParser.class);
+        ParserJob ppmApplicationJob = new PpmApplicationParserJob(ppmApplicationParser);
+        ParserTask ppmApplicationTask = new PpmApplicationTaskImpl(ppmApplicationJob);
+        ppmApplicationTask.setIndentityGroupName("Ppm Provider Job");
+        ppmApplicationTask.setIndentityName("Ppm Applications");
+        ppmApplicationTask.setIntervalSeconds(100);
+
+        scheduler.addTask(ppmDataTask);
+        scheduler.addTask(ppmApplicationTask);
 
         scheduler.showMenu();
     }
