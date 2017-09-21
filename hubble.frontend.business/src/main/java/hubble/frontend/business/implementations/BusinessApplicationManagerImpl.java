@@ -4,10 +4,12 @@ import hubble.backend.business.services.interfaces.services.AvailabilityService;
 import hubble.backend.business.services.interfaces.services.IssueService;
 import hubble.backend.business.services.interfaces.services.PerformanceService;
 import hubble.backend.business.services.interfaces.services.UptimeDowntimeService;
+import hubble.backend.business.services.interfaces.services.WorkItemService;
 import hubble.backend.business.services.models.ApplicationAvgDto;
 import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.models.measures.IssuesQuantity;
 import hubble.backend.business.services.models.measures.UptimeDto;
+import hubble.backend.business.services.models.measures.WorkItemQuantity;
 import hubble.backend.core.enums.MonitoringFields;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.frontend.business.configurations.mappers.ApplicationMapper;
@@ -35,6 +37,8 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
     ApplicationMapper applicationMapper;
     @Autowired
     UptimeDowntimeService uptimeService;
+    @Autowired
+    WorkItemService workItemService;
     @Autowired
     UptimeMapper uptimeMapper;
 
@@ -90,6 +94,12 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         businessView.setIssuesQtyLastDay(issues.getQuantity());
         businessView.setStatusIssuesQty(issues.getStatus().toString());
         businessView.setIssuesQtyCriticalThreshold(issues.getCriticalThreshold());
+
+        //WorkItems
+        WorkItemQuantity workItems = workItemService.calculateWorkItemQuantityLastDay(id);
+        businessView.setWorkItems1day(workItems.getQuantity());
+        businessView.setStatusWorkItemsQty(workItems.getStatus().toString());
+        businessView.setWorkItemsQtyCriticalThreshold(workItems.getCriticalThreshold());
 
         //Uptime
         businessView.setUptime10min(uptimeService.calculateLast10MinutesUptime(id).get());

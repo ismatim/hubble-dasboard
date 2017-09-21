@@ -18,7 +18,7 @@ public class IssueDto {
     private int transactionId;
     private int priority;
     private int severity;
-    private String statusIssue;
+    private String state;
     private String assignee;
     private String detectedBy;
     private String detectedOnRelease;
@@ -139,12 +139,12 @@ public class IssueDto {
         this.severity = severity;
     }
 
-    public String getStatusIssue() {
-        return statusIssue;
+    public String getState() {
+        return state;
     }
 
-    public void setStatusIssue(String status) {
-        this.statusIssue = status;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getAssignee() {

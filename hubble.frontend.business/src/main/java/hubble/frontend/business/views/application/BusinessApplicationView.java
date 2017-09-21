@@ -32,6 +32,9 @@ public class BusinessApplicationView {
     private Float uptime10min;
     private Float uptime1hour;
     private Float uptime1day;
+    private Integer workItems1day;
+    private Integer workItemsQtyCriticalThreshold;
+    private String statusWorkItemsQty;
 
     public BusinessApplicationView() {
     }
@@ -274,5 +277,29 @@ public class BusinessApplicationView {
 
     public void setUptime1day(Float uptime1day) {
         this.uptime1day = uptime1day;
+    }
+
+    public Integer getWorkItems1day() {
+        return workItems1day;
+    }
+
+    public void setWorkItems1day(Integer workItems1day) {
+        this.workItems1day = workItems1day;
+    }
+
+    public Integer getWorkItemsQtyCriticalThreshold() {
+        return workItemsQtyCriticalThreshold;
+    }
+
+    public void setWorkItemsQtyCriticalThreshold(Integer workItemsQtyCriticalThreshold) {
+        this.workItemsQtyCriticalThreshold = workItemsQtyCriticalThreshold;
+    }
+
+    public String getStatusWorkItemsQty() {
+        return statusWorkItemsQty;
+    }
+
+    public void setStatusWorkItemsQty(String statusWorkItemsQty) {
+        this.statusWorkItemsQty = statusWorkItemsQty;
     }
 }

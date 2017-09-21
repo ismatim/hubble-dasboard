@@ -84,7 +84,8 @@
                                 </div>
                                 <div class="cardbox-body">
                                     <div class="text-center">
-                                        <input id="chart-tareas-1-day" type="text" value="0" data-max="0" data-status="No_Data" ></input>
+                                        <input id="chart-tareas-1-day" type="text" th:value="${applicationView.workItems1day}"
+                                               th:attr="data-status=${applicationView.getStatusWorkItemsQty()} , data-max=${applicationView.getWorkItemsQtyCriticalThreshold()}" ></input>
                                     </div>
                                 </div>
                             </div>

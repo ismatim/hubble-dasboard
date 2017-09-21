@@ -1,10 +1,10 @@
 package hubble.backend.business.services.configurations.mappers;
 
-import hubble.backend.business.services.models.IssueDto;
-import hubble.backend.storage.models.IssueStorage;
+import hubble.backend.business.services.models.WorkItemDto;
+import hubble.backend.storage.models.WorkItemStorage;
 import org.modelmapper.PropertyMap;
 
-public class IssuePropertyMap extends PropertyMap<IssueStorage, IssueDto> {
+public class WorkItemPropertyMap extends PropertyMap<WorkItemStorage, WorkItemDto> {
 
     @Override
     protected void configure() {
