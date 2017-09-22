@@ -3,14 +3,16 @@ package hubble.backend.business.services.configurations.mappers;
 import hubble.backend.business.services.models.ApplicationAvgDto;
 import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.models.AvailabilityDto;
+import hubble.backend.business.services.models.IssueDto;
 import hubble.backend.business.services.models.PerformanceDto;
 import hubble.backend.business.services.models.TransactionAvgDto;
 import hubble.backend.business.services.models.TransactionDto;
-import hubble.backend.business.services.models.IssueDto;
+import hubble.backend.business.services.models.WorkItemDto;
 import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.models.IssueStorage;
 import hubble.backend.storage.models.TransactionStorage;
+import hubble.backend.storage.models.WorkItemStorage;
 import java.lang.reflect.Type;
 import java.util.List;
 import org.modelmapper.ModelMapper;
@@ -153,6 +155,22 @@ public class MapperConfiguration {
         Type issueDtoTypeList = new TypeToken<List<IssueDto>>() {
         }.getType();
         return mapper.map(issueStorageList, issueDtoTypeList);
+    }
+
+    public WorkItemDto mapToWorkItemDto(WorkItemStorage workItemStorage) {
+        if (workItemStorage == null) {
+            return null;
+        }
+        return mapper.map(workItemStorage, WorkItemDto.class);
+    }
+
+    public List<WorkItemDto> mapToWorkItemDtoList(List<WorkItemStorage> workItemStorageList) {
+        if (workItemStorageList == null) {
+            return null;
+        }
+        Type issueDtoTypeList = new TypeToken<List<WorkItemDto>>() {
+        }.getType();
+        return mapper.map(workItemStorageList, issueDtoTypeList);
     }
 
 }
