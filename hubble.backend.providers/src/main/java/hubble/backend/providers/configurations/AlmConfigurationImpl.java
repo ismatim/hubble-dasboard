@@ -1,6 +1,5 @@
 package hubble.backend.providers.configurations;
 
-import hubble.backend.providers.configurations.AlmConfiguration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;

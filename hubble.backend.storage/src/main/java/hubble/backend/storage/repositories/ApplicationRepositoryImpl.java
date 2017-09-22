@@ -65,8 +65,7 @@ public class ApplicationRepositoryImpl implements ApplicationOperations {
     }
 
     private List<ApplicationStorage> getApplications() {
-        List<ApplicationStorage> applicationStorageList;
-        applicationStorageList = mongo.findAll(ApplicationStorage.class);
+        List<ApplicationStorage> applicationStorageList = mongo.findAll(ApplicationStorage.class);
 
         return applicationStorageList;
     }

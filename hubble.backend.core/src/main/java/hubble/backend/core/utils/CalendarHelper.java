@@ -6,6 +6,11 @@ import java.util.TimeZone;
 
 public class CalendarHelper {
 
+    public static final int TEN_MINUTES = 10;
+    public static final int ONE_HOUR = 60;
+    public static final int ONE_DAY = 1440;
+    public static final int ONE_MONTH = 1;
+    
     public static Calendar getNow() {
 
         Calendar nowCalendar = Calendar.getInstance();
@@ -30,8 +35,4 @@ public class CalendarHelper {
         return new Date(year, month, day, hour, min, sec);
     }
 
-    public static final int TEN_MINUTES = 10;
-    public static final int ONE_HOUR = 60;
-    public static final int ONE_DAY = 1440;
-    public static final int ONE_MONTH = 1;
 }

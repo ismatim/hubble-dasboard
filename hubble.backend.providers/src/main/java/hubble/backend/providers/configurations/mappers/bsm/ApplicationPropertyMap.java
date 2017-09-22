@@ -1,6 +1,5 @@
 package hubble.backend.providers.configurations.mappers.bsm;
 
-import hubble.backend.core.enums.Providers;
 import hubble.backend.providers.models.bsm.BsmProviderModel;
 import hubble.backend.storage.models.ApplicationStorage;
 import org.modelmapper.PropertyMap;

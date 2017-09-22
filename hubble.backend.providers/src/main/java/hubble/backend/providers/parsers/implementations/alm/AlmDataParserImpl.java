@@ -45,9 +45,10 @@ public class AlmDataParserImpl implements AlmDataParser {
         return almIssue;
     }
 
+    @Override
     public List<JSONObject> parseList(JSONObject data) {
         JSONArray jsonArray = data.getJSONArray("entities");
-        List<JSONObject> dataList = new ArrayList<JSONObject>();
+        List<JSONObject> dataList = new ArrayList<>();
 
         for (int x = 0; x < jsonArray.length(); x++) {
             dataList.add(jsonArray.getJSONObject(x));
@@ -65,7 +66,7 @@ public class AlmDataParserImpl implements AlmDataParser {
         model.setDescription(getValue(almIssue, "description"));
         model.setDetectedOnRelease(getValue(almIssue, "detected-in-rel"));
         model.setId(Integer.valueOf(getValue(almIssue, "id")));
-        model.setModifiedDate(getValue(almIssue, "last-modified"));
+        model.setModifiedDate(getValue(almIssue, "las-modified"));
         model.setPriority(getValue(almIssue, "priority"));
         model.setProject(getValue(almIssue, "project"));
         model.setRegisteredDate(getValue(almIssue, "creation-time"));
@@ -92,11 +93,10 @@ public class AlmDataParserImpl implements AlmDataParser {
     public void run() {
         almTransport.login();
         Map<String, String> cookies = almTransport.getSessionCookies();
-        IssueStorage issue;
         JSONObject allDefects = almTransport.getAllDefects(cookies);
         List<JSONObject> defects = this.parseList(allDefects);
         for (JSONObject defect : defects) {
-            issue = this.convert(this.parse(defect));
+            IssueStorage issue = this.convert(this.parse(defect));
             if (!issueRepository.exist(issue)) {
                 issueRepository.save(issue);
             }
@@ -105,21 +105,19 @@ public class AlmDataParserImpl implements AlmDataParser {
     }
 
     private String getValue(JSONArray issueFields, String fieldName) {
-        JSONObject values = new JSONObject();
-        JSONArray valueArray = new JSONArray();
         String valueToReturn;
         for (int x = 0; x < issueFields.length(); x++) {
-            if (fieldName.equals(issueFields.getJSONObject(x).getString("Name"))) {
-                valueArray = issueFields.getJSONObject(x).getJSONArray("values");
-                if (valueArray.length() > 0 && valueArray.getJSONObject(0).has("value")) {
-                    values = valueArray.getJSONObject(0);
-                    valueToReturn = values.getString("value");
-                    return valueToReturn;
-                } else {
-                    return "";
-                }
-
+            if (!fieldName.equals(issueFields.getJSONObject(x).getString("Name"))) {
+                continue;
             }
+            JSONArray valueArray = issueFields.getJSONObject(x).getJSONArray("values");
+            if (valueArray.length() <= 0 || !valueArray.getJSONObject(0).has("value")) {
+                return EMPTY;
+            }
+
+            JSONObject values = valueArray.getJSONObject(0);
+            valueToReturn = values.getString("value");
+            return valueToReturn;
         }
 
         logger.debug("ALM: Name field is empty.");
@@ -128,9 +126,9 @@ public class AlmDataParserImpl implements AlmDataParser {
 
     private String resolveApplicationIdFromConfiguration(String applicationName) {
         String[] applicationsIdMap = configuration.getApplicationValueToIdMap().split(",");
-        for (int x = 0; x < applicationsIdMap.length; x++) {
-            if (applicationName.equals(applicationsIdMap[x].split(":")[0])) {
-                return applicationsIdMap[x].split(":")[1];
+        for (String applicationsIdMap1 : applicationsIdMap) {
+            if (applicationName.equals(applicationsIdMap1.split(":")[0])) {
+                return applicationsIdMap1.split(":")[1];
             }
         }
 
