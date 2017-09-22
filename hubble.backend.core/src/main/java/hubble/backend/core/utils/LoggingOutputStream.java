@@ -38,15 +38,17 @@ public class LoggingOutputStream extends OutputStream {
                 case DEBUG:
                     logger.debug(line);
                     break;
-                case ERROR:
-                    logger.error(line);
-                    break;
                 case INFO:
                     logger.info(line);
                     break;
                 case WARN:
                     logger.warn(line);
                     break;
+                case ERROR:
+                    logger.error(line);
+                    break;
+                default:
+                    return;
             }
         } else {
             baos.write(b);

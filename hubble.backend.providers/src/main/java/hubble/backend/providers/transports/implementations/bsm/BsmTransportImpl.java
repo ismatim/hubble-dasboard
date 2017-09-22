@@ -2,6 +2,7 @@ package hubble.backend.providers.transports.implementations.bsm;
 
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.core.utils.LoggingOutputStream;
+import hubble.backend.providers.configurations.environments.BsmProviderEnvironment;
 import hubble.backend.providers.transports.interfaces.BsmTransport;
 import java.util.Calendar;
 import javax.xml.soap.MessageFactory;
@@ -17,17 +18,17 @@ import javax.xml.soap.SOAPPart;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component()
 public class BsmTransportImpl implements BsmTransport {
 
+    @Autowired
+    private BsmProviderEnvironment bsmProviderEnvironment;
+    
     SOAPMessage message = null;
     String query = EMPTY;
-    String soapEndpointUrl = "http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI?wsdl";
-    String soapAction = "http://t-srvbacapplsar.tsoftglobal.com/topaz/gdeopenapi/services/GdeWsOpenAPI";
-    String user = "admin";
-    String password = "admin";
     Logger logger;
     LoggingOutputStream logging;
 
@@ -71,7 +72,7 @@ public class BsmTransportImpl implements BsmTransport {
             SOAPPart soapPart = soapMessage.getSOAPPart();
 
             String myNamespace = "gdew";
-            String myNamespaceURI = soapEndpointUrl;
+            String myNamespaceURI = bsmProviderEnvironment.getSoapEndpointUrl();
 
             // SOAP Envelope
             SOAPEnvelope envelope = soapPart.getEnvelope();
@@ -83,12 +84,12 @@ public class BsmTransportImpl implements BsmTransport {
             SOAPElement soapBodyUser = soapBodyElem.addChildElement("user", myNamespace);
             SOAPElement soapBodyPassword = soapBodyElem.addChildElement("password", myNamespace);
             SOAPElement soapBodyQuery = soapBodyElem.addChildElement("query", myNamespace);
-            soapBodyUser.addTextNode(this.user);
-            soapBodyPassword.addTextNode(this.password);
+            soapBodyUser.addTextNode(bsmProviderEnvironment.getUserName());
+            soapBodyPassword.addTextNode(bsmProviderEnvironment.getPassword());
             soapBodyQuery.addTextNode(this.query);
 
             MimeHeaders headers = soapMessage.getMimeHeaders();
-            headers.addHeader("SOAPAction", soapAction);
+            headers.addHeader("SOAPAction", bsmProviderEnvironment.getSoapAction());
 
             soapMessage.saveChanges();
 
@@ -147,7 +148,7 @@ public class BsmTransportImpl implements BsmTransport {
             SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
             SOAPConnection soapConnection = soapConnectionFactory.createConnection();
             // Send SOAP Message to SOAP Server
-            SOAPMessage soapResponse = soapConnection.call(this.message, soapEndpointUrl);
+            SOAPMessage soapResponse = soapConnection.call(this.message, bsmProviderEnvironment.getSoapEndpointUrl());
 
             soapConnection.close();
 

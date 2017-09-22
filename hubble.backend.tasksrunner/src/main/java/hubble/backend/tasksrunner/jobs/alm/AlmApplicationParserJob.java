@@ -2,7 +2,6 @@ package hubble.backend.tasksrunner.jobs.alm;
 
 import hubble.backend.providers.parsers.interfaces.Parser;
 import hubble.backend.providers.parsers.interfaces.alm.AlmApplicationParser;
-import hubble.backend.providers.parsers.interfaces.alm.AlmDataParser;
 import hubble.backend.tasksrunner.jobs.ParserJob;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,7 +14,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class AlmApplicationParserJob implements ParserJob{
     
     private Parser almParser;
-    private static final Logger logger = Logger.getLogger(AlmApplicationParserJob.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(AlmApplicationParserJob.class.getName());
 
     public AlmApplicationParserJob() {
         //This constructor is used by Quartz. DON'T DELETE. CANT SET DEFAULT CONSTRUCTOR.
@@ -32,7 +31,7 @@ public class AlmApplicationParserJob implements ParserJob{
         try {
             schedulerContext = (SchedulerContext) jec.getScheduler().getContext();
         } catch (SchedulerException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
         }
 
         ConfigurableApplicationContext taskRunnerAppContext = (ConfigurableApplicationContext) schedulerContext.get("context");
@@ -41,7 +40,7 @@ public class AlmApplicationParserJob implements ParserJob{
         try {
             almParser.run();
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, null, ex);
+            LOGGER.log(Level.SEVERE, null, ex);
         }
     }
     

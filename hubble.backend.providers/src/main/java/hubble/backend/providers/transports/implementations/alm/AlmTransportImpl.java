@@ -178,15 +178,15 @@ public class AlmTransportImpl implements AlmTransport {
     }
 
     private String parseCsvConfigurations(String values, String newSeparator) {
-        String valueToReturn = "";
+        StringBuilder valueToReturn = new StringBuilder();
         String[] statusesList = values.split(",");
         for (int x = 0; x < statusesList.length; x++) {
-            valueToReturn += statusesList[x];
+            valueToReturn.append(statusesList[x]);
             if (x != (statusesList.length - 1)) {
-                valueToReturn += newSeparator;
+                valueToReturn.append(newSeparator);
             }
         }
-        return valueToReturn;
+        return valueToReturn.toString();
     }
 
 }

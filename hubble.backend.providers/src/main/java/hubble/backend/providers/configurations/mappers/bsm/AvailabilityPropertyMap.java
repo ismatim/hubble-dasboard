@@ -11,8 +11,8 @@ import org.modelmapper.spi.MappingContext;
 
 public class AvailabilityPropertyMap extends PropertyMap<BsmProviderModel, AvailabilityStorage> {
 
-    final String fail = "Fail";
-    final String pass = "Pass";
+    final String FAIL = "Fail";
+    final String PASSED = "Pass";
 
     @Override
     protected void configure() {
@@ -45,9 +45,9 @@ public class AvailabilityPropertyMap extends PropertyMap<BsmProviderModel, Avail
 
     Converter<String, String> statusConverter = (MappingContext<String, String> context) -> {
         String status = context.getSource();
-        if (fail.equals(status)) {
+        if (FAIL.equals(status)) {
             status = STATUS_NAMES.FAILED.toString();
-        } else if (pass.equals(status)) {
+        } else if (PASSED.equals(status)) {
             status = STATUS_NAMES.SUCCESS.toString();
         }
         return status;
