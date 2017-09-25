@@ -711,7 +711,7 @@
                         'margin-left' : '-' + ((this.w * 3 / 4 + 2) >> 0) + 'px',
                         'border' : 0,
                         'background' : 'none',
-                        'font' : this.o.fontWeight + ' ' + ( ((this.w / s) >> 0) )+ 'px ' + this.o.font,
+                        'font' : this.o.fontWeight + ' ' + ( ((this.w / s) >> 0) - 5 )+ 'px ' + this.o.font,
                         'text-align' : 'center',
                         'color' : this.o.inputColor || this.o.fgColor,
                         'padding' : '0px',

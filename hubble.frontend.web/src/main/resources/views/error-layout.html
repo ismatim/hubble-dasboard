@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <meta charset="utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+        <meta name="description" content="Hubble Dashboad IT Management Administration"></meta>
+        <meta name="keywords" content="tsoft, hubble, it"></meta>
+        <title>Hubble</title>
+        <!-- Vendor styles-->
+        <!-- Animate.CSS-->
+        <link rel="stylesheet" href="/vendor/animate.css/animate.css"></link>
+        <!-- Bootstrap-->
+        <link rel="stylesheet" href="/vendor/bootstrap/dist/css/bootstrap.min.css"></link>
+        <!-- Ionicons-->
+        <link rel="stylesheet" href="/vendor/ionicons/css/ionicons.css"></link>
+        <!-- Material Colors-->
+        <link rel="stylesheet" href="/vendor/material-colors/dist/colors.css"></link>
+        <!-- Application styles-->
+        <link rel="stylesheet" href="/css/app.css"></link>
+    </head>
+    <body>
+        <!-- top navbar-->
+
+        <!-- sidebar-->
+
+        <!--<div class="sidebar-layout-obfuscator"></div>-->
+        <div layout:fragment="content">
+            Page content goes here
+        </div>
+        <th:block layout:fragment="scripts">
+            <!--        Lodash 4.17
+                    <script src="/vendor/lodash/lodash.4.17.4.js"></script>-->
+            <!--Modernizr-->
+            <script src="/vendor/modernizr/modernizr.custom.js"></script>
+            <!-- jQuery-->
+            <script src="/vendor/jquery/dist/jquery.js"></script>
+            <!-- Bootstrap-->
+            <script src="/vendor/tether/dist/js/tether.min.js"></script>
+            <script src="/vendor/bootstrap/dist/js/bootstrap.js"></script>
+            <!-- Material Colors-->
+            <script src="/vendor/material-colors/dist/colors.js"></script>
+            <!-- Screenfull-->
+            <script src="/vendor/screenfull/dist/screenfull.js"></script>
+
+            <!-- App script-->
+            <script src="/js/app.js"></script>
+            <!--Front-End-->
+
+        </th:block>
+    </body>
+</html>
