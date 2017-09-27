@@ -68,7 +68,7 @@ public class PpmApplicationParserImpl implements PpmApplicationParser {
 
         for (JSONObject detailedRequest : detailedRequests) {
             application = this.convert(this.parse(detailedRequest));
-            if (!applicationRepository.exist(application)) {
+            if (!applicationRepository.exist(application) && application.isActive() == true) {
                 applicationRepository.save(application);
             }
         }

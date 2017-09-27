@@ -124,7 +124,6 @@
         };
     })();
 
-
     var applicationProfileChartModule = (function () {
 
         var init = function () {
@@ -209,6 +208,50 @@
 
     })();
 
+    var applicationProfileMapsModule = (function () {
+
+        var init = function () {
+            'use strict';
+
+            if (document.getElementById('map-markers')) {
+
+                var mapMarkers = new GMaps({
+                    div: '#map-markers',
+                    lat: -32.9521399,
+                    lng: -60.7681972
+                });
+                mapMarkers.addMarker({
+                    lat: -32.9521399,
+                    lng: -60.7681972,
+                    title: 'Rosario',
+                    infoWindow: {
+                        content: '<p>Locación Rosario</p>'
+                    }
+                });
+                mapMarkers.addMarker({
+                    lat: -34.6131708,
+                    lng: -58.3810633,
+                    title: 'Buenos Aires',
+                    infoWindow: {
+                        content: '<p>Locación Buenos Aires</p>'
+                    }
+                });
+            }
+            mapMarkers.zoomOut(9);
+
+        };
+
+        return {
+            init: init
+        };
+
+    })();
+
+
     $(applicationProfileKnobModule.init);
     $(applicationProfileChartModule.init);
+    $(applicationProfileMapsModule.init);
+
 })();
+
+

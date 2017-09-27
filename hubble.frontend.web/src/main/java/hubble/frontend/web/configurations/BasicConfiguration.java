@@ -21,5 +21,4 @@ public class BasicConfiguration extends WebMvcConfigurerAdapter {
         registry.addInterceptor(new CommonModelViewInterceptor(availabilityManager));
 
     }
-
 }

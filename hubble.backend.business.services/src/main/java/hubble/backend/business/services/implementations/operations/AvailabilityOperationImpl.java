@@ -67,6 +67,10 @@ public class AvailabilityOperationImpl implements AvailabilityOperations {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, applicationId);
         ApplicationAvgDto applicationAvailabilityAvg = mapper.mapToApplicationAvailabilityAvg(applicationStorage);
 
+        if (applicationAvailabilityAvg == null) {
+            return null;
+        }
+
         applicationAvailabilityAvg.setMeasuresQtyAvailability(availabilityStorageList.size());
 
         if (!availabilityStorageList.isEmpty()) {//No data for last 10 minutes
@@ -83,6 +87,10 @@ public class AvailabilityOperationImpl implements AvailabilityOperations {
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_HOUR, applicationId);
         ApplicationAvgDto applicationAvailabilityAvg = mapper.mapToApplicationAvailabilityAvg(applicationStorage);
+
+        if (applicationAvailabilityAvg == null) {
+            return null;
+        }
 
         applicationAvailabilityAvg.setMeasuresQtyAvailability(availabilityStorageList.size());
 
@@ -101,6 +109,10 @@ public class AvailabilityOperationImpl implements AvailabilityOperations {
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_DAY, applicationId);
         ApplicationAvgDto applicationAvailabilityAvg = mapper.mapToApplicationAvailabilityAvg(applicationStorage);
+
+        if (applicationAvailabilityAvg == null) {
+            return null;
+        }
 
         applicationAvailabilityAvg.setMeasuresQtyAvailability(availabilityStorageList.size());
 

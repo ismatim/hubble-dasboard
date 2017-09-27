@@ -71,6 +71,9 @@ public class PerformanceOperationImpl implements PerformanceOperations {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, applicationId);
         ApplicationAvgDto applicationPerformanceAvg = mapper.mapToApplicationAvailabilityAvg(applicationStorage);
 
+        if (applicationPerformanceAvg == null) {
+            return null;
+        }
         applicationPerformanceAvg.getMeasuresQtyPerformance().setQuantity(availabilityStorageList.size());
 
         if (!availabilityStorageList.isEmpty()) {
@@ -90,6 +93,10 @@ public class PerformanceOperationImpl implements PerformanceOperations {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_HOUR, applicationId);
         ApplicationAvgDto applicationPerformanceAvg = mapper.mapToApplicationAvailabilityAvg(applicationStorage);
 
+        if (applicationPerformanceAvg == null) {
+            return null;
+        }
+
         applicationPerformanceAvg.getMeasuresQtyPerformance().setQuantity(availabilityStorageList.size());
 
         if (!availabilityStorageList.isEmpty()) {
@@ -107,6 +114,10 @@ public class PerformanceOperationImpl implements PerformanceOperations {
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_DAY, applicationId);
         ApplicationAvgDto applicationPerformanceAvg = mapper.mapToApplicationAvailabilityAvg(applicationStorage);
+
+        if (applicationPerformanceAvg == null) {
+            return null;
+        }
 
         applicationPerformanceAvg.getMeasuresQtyPerformance().setQuantity(availabilityStorageList.size());
 

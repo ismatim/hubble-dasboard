@@ -3,9 +3,9 @@ version: '3.0'
 services:
     hubble-app:
         image: localhost:5000/hubble/hubble.frontend.web
-       container_name: hubble
+        container_name: hubble-frontend
         ports:
-            - 8080
+            - "32779:8080"
         hostname: hubble
         links:
             - mongodb:mongo
