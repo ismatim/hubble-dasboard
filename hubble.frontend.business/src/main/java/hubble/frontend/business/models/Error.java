@@ -1,4 +1,4 @@
-package hubble.frontend.web.models;
+package hubble.frontend.business.models;
 
 import java.util.Map;
 

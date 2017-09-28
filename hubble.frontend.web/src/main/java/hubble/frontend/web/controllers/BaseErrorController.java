@@ -1,6 +1,6 @@
 package hubble.frontend.web.controllers;
 
-import hubble.frontend.web.models.Error;
+import hubble.frontend.business.models.Error;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
