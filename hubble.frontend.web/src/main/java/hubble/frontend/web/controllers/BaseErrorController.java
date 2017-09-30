@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.web.ErrorAttributes;
 import org.springframework.boot.autoconfigure.web.ErrorController;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +28,7 @@ public class BaseErrorController implements ErrorController {
     private ErrorAttributes errorAttributes;
 
     @RequestMapping(value = PATH)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     ModelAndView error(HttpServletRequest request, HttpServletResponse response) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("Error", new Error(response.getStatus(), getErrorAttributes(request, debug)));

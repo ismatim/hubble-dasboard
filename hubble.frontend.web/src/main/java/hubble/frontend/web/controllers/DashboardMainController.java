@@ -8,11 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class DashboardMainController {
 
-    @GetMapping("/")
+    @GetMapping(value="/")
     public ModelAndView getMainDashboard(HttpServletRequest req) {
 
         ModelAndView mav = new ModelAndView();
-
+        
         mav.setViewName("home");
         return mav;
     }

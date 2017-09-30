@@ -15,12 +15,11 @@ public class ApplicationController {
     @Autowired
     private BusinessApplicationManager businessAppMgr;
 
-    @GetMapping("/application/{applicationId}")
+    @GetMapping(value = "/application/{applicationId}")
     public ModelAndView getApplications(HttpServletRequest req, @PathVariable String applicationId) {
         ModelAndView mav = new ModelAndView();
 
         BusinessApplicationView applicationView = businessAppMgr.getBusinessApplicationView(applicationId);
-
         mav.addObject("applicationView", applicationView);
         mav.setViewName("Application/profile");
         return mav;

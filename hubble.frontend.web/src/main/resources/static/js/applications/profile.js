@@ -23,7 +23,7 @@
                 return;
 
             var knobLoaderOptionsSuccess = {
-//                width: '100%', // responsive
+//              width: '100%', // responsive
                 displayInput: true,
                 fgColor: Colors.byName('success'),
                 bgColor: 'rgba(162,162,162, .09)',
@@ -101,8 +101,6 @@
                     configuration = setFormat(knobSelected, configuration);
                     knobSelected.trigger('configure', configuration);
                     knobSelected.trigger('change');
-                    console.log(configuration);
-
                 });
             }
 
@@ -135,7 +133,8 @@
             if (!$('#area-flotchart').length)
                 return;
 
-            $.get('/applicationasync/uptime/Benchmark%20Home%20Banking', function (data) {
+            var appId = $("#bussinessAppId").val();
+            $.get('/v2/application/uptime/' + appId, function (data) {
 
                 var areaData = [
                     {
@@ -147,6 +146,8 @@
                 data.forEach(function (element) {
                     return areaData[0].data.push([element["date"], element["uptime"]]);
                 });
+
+
 
                 var areaOptions = {
                     series: {
@@ -208,6 +209,46 @@
 
     })();
 
+    var applicationProfileTransactionTableModule = (function () {
+
+        var transactionTable = $('#transaction-table');
+        var init = function () {
+
+            if (!$.fn.dataTable)
+                return;
+
+            var appId = $("#bussinessAppId").val();
+            $.get('/v2/application/availability/' + appId + '/10Minutes', function (data) {
+
+                transactionTable.DataTable({'paging': false,
+                    'ordering': false,
+                    'info': false,
+                    'searching': false,
+                    "language": {
+                        "emptyTable": "No hay datos disponibles"
+                    }
+                });
+
+                if (!data)
+                    return;
+
+                data.forEach(function (element) {
+                    transactionTable.DataTable().row.add([
+                        element["id"],
+                        new Date(element["timeStamp"]),
+                        element["transactionName"],
+                        element["locationName"],
+                        element["availabilityStatus"]
+                    ]).draw(false);
+                });
+            });
+        };
+
+        return {
+            init: init
+        };
+    })();
+
     var applicationProfileMapsModule = (function () {
 
         var init = function () {
@@ -247,10 +288,10 @@
 
     })();
 
-
     $(applicationProfileKnobModule.init);
     $(applicationProfileChartModule.init);
     $(applicationProfileMapsModule.init);
+    $(applicationProfileTransactionTableModule.init);
 
 })();
 
