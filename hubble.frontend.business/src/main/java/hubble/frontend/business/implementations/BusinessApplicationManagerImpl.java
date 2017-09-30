@@ -7,6 +7,7 @@ import hubble.backend.business.services.interfaces.services.UptimeDowntimeServic
 import hubble.backend.business.services.interfaces.services.WorkItemService;
 import hubble.backend.business.services.models.ApplicationAvgDto;
 import hubble.backend.business.services.models.ApplicationDto;
+import hubble.backend.business.services.models.AvailabilityDto;
 import hubble.backend.business.services.models.measures.IssuesQuantity;
 import hubble.backend.business.services.models.measures.UptimeDto;
 import hubble.backend.business.services.models.measures.WorkItemQuantity;
@@ -19,6 +20,7 @@ import hubble.frontend.business.models.BusinessApplication;
 import hubble.frontend.business.models.Uptime;
 import hubble.frontend.business.views.application.BusinessApplicationView;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,7 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
     public BusinessApplicationView getBusinessApplicationView(String id) {
 
         BusinessApplicationView businessView = new BusinessApplicationView();
+        businessView.setId(id);
 
         //10 minuntes
         ApplicationAvgDto availabilityAvg10min = availabilityService.calculateLast10MinutesAverageByApplication(id);
@@ -132,4 +135,17 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         return uptimes;
     }
 
+    @Override
+    public List<AvailabilityDto> getAvailabilityLast10Minutes(String applicationId) {
+        List<AvailabilityDto> availabilityList = availabilityService.getLast10Minutes(applicationId);
+        availabilityList.sort(Comparator.comparing(AvailabilityDto::getTimeStamp));
+        return availabilityList;
+    }
+
+    @Override
+    public List<AvailabilityDto> getAvailabilityLastHour(String applicationId) {
+        List<AvailabilityDto> availabilityList = availabilityService.getLastHour(applicationId);
+        availabilityList.sort(Comparator.comparing(AvailabilityDto::getTimeStamp));
+        return availabilityList;
+    }
 }

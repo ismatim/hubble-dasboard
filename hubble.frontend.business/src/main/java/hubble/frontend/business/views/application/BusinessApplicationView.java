@@ -1,7 +1,11 @@
 package hubble.frontend.business.views.application;
 
+import hubble.backend.business.services.models.AvailabilityDto;
+import java.util.List;
+
 public class BusinessApplicationView {
 
+    private String id;
     private Integer issuesQtyLastDay;
     private Integer issuesQtyCriticalThreshold;
     private String statusIssuesQty;
@@ -35,8 +39,17 @@ public class BusinessApplicationView {
     private Integer workItems1day;
     private Integer workItemsQtyCriticalThreshold;
     private String statusWorkItemsQty;
+    private List<AvailabilityDto> availabilityList;
 
     public BusinessApplicationView() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Float getAvailabilityAverage10min() {
@@ -301,5 +314,13 @@ public class BusinessApplicationView {
 
     public void setStatusWorkItemsQty(String statusWorkItemsQty) {
         this.statusWorkItemsQty = statusWorkItemsQty;
+    }
+
+    public List<AvailabilityDto> getAvailabilityList10Minutes() {
+        return availabilityList;
+    }
+
+    public void setAvailabilityList10Minutes(List<AvailabilityDto> availabilityList) {
+        this.availabilityList = availabilityList;
     }
 }
