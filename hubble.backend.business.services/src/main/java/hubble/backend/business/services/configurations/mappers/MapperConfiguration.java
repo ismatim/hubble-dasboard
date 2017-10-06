@@ -27,6 +27,7 @@ public class MapperConfiguration {
     public MapperConfiguration() {
         mapper = new ModelMapper();
         this.mapper.addMappings(new IssuePropertyMap());
+        this.mapper.addMappings(new WorkItemPropertyMap());
     }
 
     public ModelMapper getMapper() {

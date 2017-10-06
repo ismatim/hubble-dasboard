@@ -4,12 +4,17 @@ import hubble.backend.business.services.configurations.mappers.MapperConfigurati
 import hubble.backend.business.services.models.ApplicationAvgDto;
 import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.models.AvailabilityDto;
+import hubble.backend.business.services.models.IssueDto;
 import hubble.backend.business.services.models.TransactionAvgDto;
 import hubble.backend.business.services.models.TransactionDto;
+import hubble.backend.business.services.models.WorkItemDto;
 import hubble.backend.business.services.tests.AvailabilityHelper;
+import hubble.backend.business.services.tests.StorageTestsHelper;
 import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.AvailabilityStorage;
+import hubble.backend.storage.models.IssueStorage;
 import hubble.backend.storage.models.TransactionStorage;
+import hubble.backend.storage.models.WorkItemStorage;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +33,7 @@ public class MapperConfigurationUnitTests {
 
     MapperConfiguration mapperConfiguration = new MapperConfiguration();
     AvailabilityHelper availabilityHelper = new AvailabilityHelper();
+    StorageTestsHelper storageHelper = new StorageTestsHelper();
 
     @Test
     public void mapper_should_map_availabilitystorage_to_availabilitydto() {
@@ -255,5 +261,53 @@ public class MapperConfigurationUnitTests {
         assertNotNull(applicationAvailabilityAvgList);
         assertEquals("b566958ec4ff28028672780d15edcf56", applicationAvailabilityAvgList.get(0).getApplicationId());
         assertEquals("BancoRipley - HomeBanking", applicationAvailabilityAvgList.get(0).getApplicationName());
+    }
+
+    @Test
+    public void mappers_should_return_null_from_null_parameters(){
+        assertNull(mapperConfiguration.mapToApplicationAvailabilityAvg(null));
+        assertNull(mapperConfiguration.mapToApplicationAvailabilityAvgList(null));
+        assertNull(mapperConfiguration.mapToApplicationDto(null));
+        assertNull(mapperConfiguration.mapToApplicationDtoList(null));
+        assertNull(mapperConfiguration.mapToAvailabilityDto(null));
+        assertNull(mapperConfiguration.mapToAvailabilityDtoList(null));
+        assertNull(mapperConfiguration.mapToIssueDto(null));
+        assertNull(mapperConfiguration.mapToIssueDtoList(null));
+        assertNull(mapperConfiguration.mapToPerformanceDto(null));
+        assertNull(mapperConfiguration.mapToPerformanceDtoList(null));
+        assertNull(mapperConfiguration.mapToTransactionAvailabilityAvg(null));
+        assertNull(mapperConfiguration.mapToTransactionAvailabilityAvgList(null));
+        assertNull(mapperConfiguration.mapToTransactionDto(null));
+        assertNull(mapperConfiguration.mapToTransactionDtoList(null));
+        assertNull(mapperConfiguration.mapToWorkItemDto(null));
+        assertNull(mapperConfiguration.mapToWorkItemDtoList(null));
+    }
+
+    @Test
+    public void mapper_convert_issueStorage_to_issueDto_model() {
+        //Assign
+        IssueStorage issueStorage = storageHelper.getFakeIssueStorage();
+
+        //Act
+        IssueDto issueDto = mapperConfiguration.mapToIssueDto(issueStorage);
+
+        //Assert
+        assertNotNull(issueDto);
+        assertEquals("Benchmark Home Banking", issueDto.getBusinessApplicationId());
+        assertEquals(1, issueDto.getExternalId());
+    }
+
+    @Test
+    public void mapper_convert_workItemStorage_to_workItemDto_model() {
+        //Assign
+        WorkItemStorage workItemStorage = storageHelper.getFakeWorkItemStorage();
+
+        //Act
+        WorkItemDto workItemDto = mapperConfiguration.mapToWorkItemDto(workItemStorage);
+
+        //Assert
+        assertNotNull(workItemDto);
+        assertEquals("Benchmark Home Banking", workItemDto.getBusinessApplicationId());
+        assertEquals(1, workItemDto.getExternalId());
     }
 }
