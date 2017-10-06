@@ -4,9 +4,13 @@ import hubble.backend.business.services.configurations.mappers.MapperConfigurati
 import hubble.backend.business.services.implementations.operations.PerformanceOperationImpl;
 import hubble.backend.business.services.implementations.services.PerformanceServiceImpl;
 import hubble.backend.business.services.implementations.services.TransactionServiceImpl;
+import hubble.backend.business.services.models.ApplicationAvgDto;
+import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.models.PerformanceDto;
+import hubble.backend.business.services.models.measures.PerformanceAverage;
 import hubble.backend.business.services.tests.configurations.ServiceBaseConfigurationTest;
 import hubble.backend.core.utils.CalendarHelper;
+import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.AvailabilityStorage;
 import hubble.backend.storage.repositories.ApplicationRepository;
 import hubble.backend.storage.repositories.AvailabilityRepository;
@@ -39,7 +43,7 @@ public class PerformanceServiceUnitTests {
     private TransactionRepository transactionRepository;
     @Spy
     private MapperConfiguration mapper;
-    @Spy
+    @Mock
     private PerformanceOperationImpl performanceOperation;
     @Spy
     private TransactionServiceImpl transactinoService;
@@ -74,6 +78,34 @@ public class PerformanceServiceUnitTests {
 
         //Assert
         assertEquals("h3y44h5sk58f8sdf48f", performanceDto.getId());
+    }
+
+    @Test
+    public void performance_service_should_return_all_performances_with_correct_model() {
+        //Assign
+        availabilityStorageList = availabilityHelper.mockData();
+        List<PerformanceDto> performanceDtoList;
+
+        //Act
+        when(availabilityRepository.findAll()).thenReturn(availabilityStorageList);
+        performanceDtoList = performanceService.getAll();
+
+        //Assert
+        assertEquals(12, performanceDtoList.size());
+    }
+
+    @Test
+    public void performance_service_should_return_lastDay_performances_with_correct_model() {
+        //Assign
+        availabilityStorageList = availabilityHelper.mockData();
+        List<PerformanceDto> performanceDtoList;
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_DAY)).thenReturn(availabilityStorageList);
+        performanceDtoList = performanceService.getLastDay();
+
+        //Assert
+        assertEquals(12, performanceDtoList.size());
     }
 
     @Test
@@ -200,6 +232,92 @@ public class PerformanceServiceUnitTests {
 
         //Assert
         assertEquals(12, performanceDtoList.size());
+    }
+
+    @Test
+    public void performance_service_should_calculateLast10MinutesAverageByApplication() {
+        //Assign
+        ApplicationAvgDto fakeApplicationAvg = new ApplicationAvgDto();
+        fakeApplicationAvg.setApplicationId("1");
+
+        //Act
+        when(performanceOperation.calculateLast10MinutesAverageByApplication("1")).thenReturn(fakeApplicationAvg);
+        ApplicationAvgDto applicationAvgDto = performanceService.calculateLast10MinutesAverageByApplication("1");
+
+        //Assert
+        assertEquals("1", applicationAvgDto.getApplicationId());
+    }
+
+    @Test
+    public void performance_service_should_calculateLastHourAverageByApplication() {
+        //Assign
+        ApplicationAvgDto fakeApplicationAvg = new ApplicationAvgDto();
+        fakeApplicationAvg.setApplicationId("1");
+
+        //Act
+        when(performanceOperation.calculateLastHourAverageByApplication("1")).thenReturn(fakeApplicationAvg);
+        ApplicationAvgDto applicationAvgDto = performanceService.calculateLastHourAverageByApplication("1");
+
+        //Assert
+        assertEquals("1", applicationAvgDto.getApplicationId());
+    }
+
+    @Test
+    public void performance_service_should_calculateLastDayAverageByApplication() {
+        //Assign
+        ApplicationAvgDto fakeApplicationAvg = new ApplicationAvgDto();
+        fakeApplicationAvg.setApplicationId("1");
+
+        //Act
+        when(performanceOperation.calculateLastDayAverageByApplication("1")).thenReturn(fakeApplicationAvg);
+        ApplicationAvgDto applicationAvgDto = performanceService.calculateLastDayAverageByApplication("1");
+
+        //Assert
+        assertEquals("1", applicationAvgDto.getApplicationId());
+    }
+
+    @Test
+    public void performance_service_should_calculateLastMonthAverageByApplication() {
+        //Assign
+        ApplicationAvgDto fakeApplicationAvg = new ApplicationAvgDto();
+        fakeApplicationAvg.setApplicationId("1");
+
+        //Act
+        when(performanceOperation.calculateLastMonthAverageByApplication("1")).thenReturn(fakeApplicationAvg);
+        ApplicationAvgDto applicationAvgDto = performanceService.calculateLastMonthAverageByApplication("1");
+
+        //Assert
+        assertEquals("1", applicationAvgDto.getApplicationId());
+    }
+
+    @Test
+    public void performance_service_should_getApplication() {
+        //Assign
+        ApplicationStorage fakeApplicationStorage = new ApplicationStorage();
+        fakeApplicationStorage.setApplicationId("1");
+
+        //Act
+        when(applicationRepository.findApplicationById("1")).thenReturn(fakeApplicationStorage);
+        ApplicationDto applicationDto = performanceService.getApplication("1");
+
+        //Assert
+        assertEquals("1", applicationDto.getApplicationId());
+    }
+
+    @Test
+    public void performance_service_should_getAllApplications() {
+        //Assign
+        ApplicationStorage fakeApplicationStorage = new ApplicationStorage();
+        fakeApplicationStorage.setApplicationId("1");
+        List<ApplicationStorage> fakeList = new ArrayList();
+        fakeList.add(fakeApplicationStorage);
+
+        //Act
+        when(applicationRepository.findAll()).thenReturn(fakeList);
+        List<ApplicationDto> fakeApplicationStorageList = performanceService.getAllApplications();
+
+        //Assert
+        assertEquals("1", fakeApplicationStorageList.get(0).getApplicationId());
     }
 
 }

@@ -2,7 +2,10 @@ package hubble.backend.business.services.tests;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
 import hubble.backend.business.services.implementations.operations.AvailabilityOperationImpl;
+import hubble.backend.business.services.models.ApplicationAvgDto;
+import hubble.backend.business.services.models.ApplicationDto;
 import hubble.backend.business.services.tests.configurations.ServiceBaseConfigurationTest;
+import hubble.backend.core.enums.MonitoringFields;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.AvailabilityStorage;
@@ -55,6 +58,17 @@ public class AvailabilityOperationUnitTests {
         assertNotNull(availabilityOperation);
     }
 
+     @Test
+    public void availability_service_shoulc_calculate_Status() {
+        ApplicationDto appAvg = new ApplicationAvgDto();
+        appAvg.setAvailabilityThreshold(0f);
+        
+
+        assertEquals(MonitoringFields.STATUS.SUCCESS, availabilityOperation.calculateStatus(appAvg, Float.MAX_VALUE));
+        assertEquals(MonitoringFields.STATUS.CRITICAL, availabilityOperation.calculateStatus(appAvg, Float.MIN_VALUE));
+        assertEquals(MonitoringFields.STATUS.WARNING, availabilityOperation.calculateStatus(appAvg, 60f));
+    }
+    
     @Test
     public void availability_service_should_calculate_last_10minutes_application_availability_average() {
         //Assign
@@ -87,6 +101,23 @@ public class AvailabilityOperationUnitTests {
 
         //Assert
         assertEquals(58, average.intValue());
+    }
+    
+    @Test
+    public void availability_service_should_return_null_when_calculate_last_day_application_availability_average() {
+
+        //Assign
+        Float average;
+        String applicationId = "b566958ec4ff28028672780d15edcf56";
+        ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, applicationId)).thenReturn(null);
+        when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
+        average = availabilityOperation.calculateLastDayAverageByApplication(applicationId).getAvailabilityAverage().get();
+
+        //Assert
+        assertEquals(null, average);
     }
 
     @Test

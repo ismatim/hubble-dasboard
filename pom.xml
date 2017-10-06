@@ -52,7 +52,14 @@
                 <version>0.7.9</version>
                 <configuration>
                     <excludes>
-                        <exclude>ac/simons/biking2/config/*</exclude>
+                        <exclude>hubble/backend/core/**/*</exclude>
+                        <exclude>hubble/backend/business/services/models/*</exclude>
+                        <exclude>hubble/backend/business/services/models/**/*</exclude>
+                        <exclude>hubble/backend/providers/models/*</exclude>
+                        <exclude>hubble/backend/providers/models/**/*</exclude>
+                        <exclude>hubble/backend/storage/models/*</exclude>
+                        <exclude>hubble/frontend/web/**/*</exclude>
+                        <exclude>hubble/frontend/business/models/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
