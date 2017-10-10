@@ -294,7 +294,6 @@
             };
 
             $('#area-flotchart').plot(areaData, areaOptions);
-
         });
 
         // LINE
