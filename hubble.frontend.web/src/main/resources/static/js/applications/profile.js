@@ -187,7 +187,8 @@
                     },
                     yaxis: {
                         min: 0,
-                        max: 150,
+                        max: 100,
+                        tickSize: 20,
                         tickColor: 'rgba(162,162,162,.26)',
                         font: {
                             color: Colors.byName('blueGrey-200')
