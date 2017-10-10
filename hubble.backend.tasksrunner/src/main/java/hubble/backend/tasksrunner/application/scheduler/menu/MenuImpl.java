@@ -18,6 +18,7 @@ public class MenuImpl implements Menu {
 
         try {
             boolean show = true;
+            scheduler.start();
             while (show) {
                 show = this.displayMenu();
             }
