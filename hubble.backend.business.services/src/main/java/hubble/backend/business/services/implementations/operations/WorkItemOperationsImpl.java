@@ -52,9 +52,14 @@ public class WorkItemOperationsImpl implements WorkItemOperations {
 
     private void calculateStatus(WorkItemQuantity workItemsQty) {
 
-        if (workItemsQty.getQuantity() < 10) {
+        if (workItemsQty.getQuantity() <= Threshold.WARNING_WORK_ITEMS_DEFAULT) {
             workItemsQty.setCriticalThreshold(Threshold.CRITICAL_WORK_ITEMS_DEFAULT);
             workItemsQty.setStatus(MonitoringFields.STATUS.SUCCESS);
+            return;
+        } else if (workItemsQty.getQuantity() > Threshold.WARNING_WORK_ITEMS_DEFAULT
+                && workItemsQty.getQuantity() < Threshold.CRITICAL_WORK_ITEMS_DEFAULT) {
+            workItemsQty.setCriticalThreshold(Threshold.CRITICAL_WORK_ITEMS_DEFAULT);
+            workItemsQty.setStatus(MonitoringFields.STATUS.WARNING);
             return;
         }
 

@@ -52,9 +52,14 @@ public class IssueOperationsImpl implements IssueOperations {
 
     private void calculateStatus(IssuesQuantity issuesQty) {
 
-        if (issuesQty.getQuantity() < 10) {
+        if (issuesQty.getQuantity() <= Threshold.WARNING_TASKS_DEFAULT) {
             issuesQty.setCriticalThreshold(Threshold.CRITICAL_TASKS_DEFAULT);
             issuesQty.setStatus(MonitoringFields.STATUS.SUCCESS);
+            return;
+        } else if (issuesQty.getQuantity() > Threshold.WARNING_TASKS_DEFAULT
+                && issuesQty.getQuantity() < Threshold.CRITICAL_TASKS_DEFAULT) {
+            issuesQty.setCriticalThreshold(Threshold.CRITICAL_TASKS_DEFAULT);
+            issuesQty.setStatus(MonitoringFields.STATUS.WARNING);
             return;
         }
 
