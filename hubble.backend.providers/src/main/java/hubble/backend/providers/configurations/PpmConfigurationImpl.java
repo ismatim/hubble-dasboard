@@ -8,24 +8,24 @@ import org.springframework.stereotype.Component;
 @PropertySource("classpath:config/ppm.config.properties")
 public class PpmConfigurationImpl implements PpmConfiguration {
 
-    @Value("${businessApplication.fieldName}")
+    @Value("${ppm.businessApplication.fieldName}")
     private String applicationFieldName;
-    @Value("${transaction.fieldName}")
+    @Value("${ppm.transaction.fieldName}")
     private String transactionFieldName;
-    @Value("${provider.origin}")
+    @Value("${ppm.provider.origin}")
     private String providerOrigin;
-    @Value("${provider.name}")
+    @Value("${ppm.provider.name}")
     private String providerName;
-    @Value("${requestTypeIds}")
+    @Value("${ppm.requestTypeIds}")
     private String requestTypeIds;
-    @Value("${businessApplication.valuesToIdMap}")
+    @Value("${ppm.businessApplication.valuesToIdMap}")
     private String applicationValueToIdMap;
 
     @Override
     public String getApplicationFieldName() {
         return applicationFieldName;
     }
-    
+
     @Override
     public String getTransactionFieldName() {
         return transactionFieldName;

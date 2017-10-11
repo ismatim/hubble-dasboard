@@ -103,7 +103,7 @@ public class PpmApplicationParserImpl implements PpmApplicationParser {
         }
         logger.warn("Ppm field for applications and ids map not correctly"
                 + " configured in properties file for specified app name: "
-                + applicationName);
+                + applicationName +" from fieldName: "+configuration.getApplicationFieldName());
         return null;
     }
 }

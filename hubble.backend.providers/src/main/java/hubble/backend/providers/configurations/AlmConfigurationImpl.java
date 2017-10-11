@@ -7,22 +7,22 @@ import org.springframework.stereotype.Component;
 @Component
 @PropertySource("classpath:config/alm.config.properties")
 public class AlmConfigurationImpl implements AlmConfiguration {
-    
-    @Value("${businessApplication.fieldName}")
+
+    @Value("${alm.businessApplication.fieldName}")
     private String applicationFieldName;
-    @Value("${status.fieldName}")
+    @Value("${alm.status.fieldName}")
     private String statusFieldName;
-    @Value("${transaction.fieldName}")
+    @Value("${alm.transaction.fieldName}")
     private String transactionFieldName;
-    @Value("${provider.origin}")
+    @Value("${alm.provider.origin}")
     private String providerOrigin;
-    @Value("${provider.name}")
+    @Value("${alm.provider.name}")
     private String providerName;
-    @Value("${status.openValues}")
+    @Value("${alm.status.openValues}")
     private String statusOpenValues;
-    @Value("${businessApplication.valuesToIdMap}")
+    @Value("${alm.businessApplication.valuesToIdMap}")
     private String applicationValueToIdMap;
-    
+
 
     @Override
     public String getApplicationFieldName() {
@@ -32,7 +32,7 @@ public class AlmConfigurationImpl implements AlmConfiguration {
     @Override
     public String getStatusFieldName() {
         return statusFieldName;
-    }    
+    }
 
     @Override
     public String getTransactionFieldName() {
