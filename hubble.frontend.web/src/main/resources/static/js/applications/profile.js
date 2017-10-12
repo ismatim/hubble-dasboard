@@ -187,8 +187,7 @@
                     },
                     yaxis: {
                         min: 0,
-                        max: 100,
-                        tickSize: 20,
+                        max: 150,
                         tickColor: 'rgba(162,162,162,.26)',
                         font: {
                             color: Colors.byName('blueGrey-200')
@@ -259,10 +258,14 @@
 
                 var mapMarkers = new GMaps({
                     div: '#map-markers',
+                    scrollwheel: false,
                     lat: -32.9521399,
                     lng: -60.7681972
                 });
+
+
                 mapMarkers.addMarker({
+                    icon: '/img/marker_green.png',
                     lat: -32.9521399,
                     lng: -60.7681972,
                     title: 'Rosario',
@@ -271,6 +274,7 @@
                     }
                 });
                 mapMarkers.addMarker({
+                    icon: '/img/marker_green.png',
                     lat: -34.6131708,
                     lng: -58.3810633,
                     title: 'Buenos Aires',
@@ -280,7 +284,13 @@
                 });
             }
             mapMarkers.zoomOut(9);
-
+            mapMarkers.addListener( 'click', function(event){
+                this.setOptions({scrollwheel:true});
+            });
+            mapMarkers.addListener( 'mouseout', function(event){
+                this.setOptions({scrollwheel:false});  
+                
+            });
         };
 
         return {
