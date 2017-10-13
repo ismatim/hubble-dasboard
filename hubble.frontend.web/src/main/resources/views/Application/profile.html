@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+    <body class="theme-default">
+
+    <th:block layout:fragment="datatable-css">
+        <link rel="stylesheet" href="/vendor/datatables.net-buttons-bs/css/buttons.bootstrap.min.css"></link>
+        <link rel="stylesheet" href="/vendor/datatables.net-keytable-bs/css/keyTable.bootstrap.min.css"></link>
+        <link rel="stylesheet" href="/vendor/datatables.net-responsive-bs/css/responsive.bootstrap.min.css"></link>
+    </th:block>
+
+    <!-- Main section-->
+    <main class="main-container" layout:fragment="content">
+        <!-- Page content-->
+        <section class="section-container">
+            <div  class="container-fluid">
+                <div class="row">
+                    <input type="hidden" id="bussinessAppId" name="bussinessAppId" th:value="${applicationView.getId()}"></input>
+                    <div class="col-xl-3">
+                        <div class="cardbox cardbox-flat">
+                            <div class="cardbox-heading">
+                                <div class="float-right">
+                                    <div class="icon-lg text-muted"></div>
+                                </div>
+                                <div>Disponibilidad (10 minutos)</div>
+                            </div>
+                            <div class="cardbox-body">
+                                <div class="text-center">
+                                    <input id="chart-disponibilidad-10-min" type="text" th:value="${applicationView.getAvailabilityAverage10min()}"
+                                           th:attr="data-status=${applicationView.getStatusAvailability10min()}, data-max=${applicationView.getAvailabilityCriticalValue10min()}" ></input>
+                                </div>
+                                <small>
+                                    <span class="float-right" th:text="${applicationView.getMeasuresQtyAvailability10min()}" id="measures-availability-value"></span>
+                                    Mediciones
+                                </small>
+                                <div class="progress progress-xs mb-4">
+                                    <!--<div class="progress-bar bg-success" id="availabilityMeasures10minProgressBar" role="progressbar" style="width: 25%;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                </div>
+                                <small>
+                                    <span class="float-right" th:text="${applicationView.getUptime10min()}"  id="uptime-value">0</span>Uptime</small>
+                                <div class="progress progress-xs mb-3">
+                                    <!--<div class="progress-bar bg-info" id="uptime" role="progressbar" style="width: 50%;" aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="cardbox cardbox-flat">
+                            <div class="cardbox-heading">
+                                <div class="float-right">
+                                    <div class="icon-lg text-muted"></div>
+                                </div>
+                                <div>Performance (10 minutos)</div>
+                            </div>
+                            <div class="cardbox-body">
+                                <div class="text-center">
+                                    <input id="chart-performance-10-min" type="text" th:value="${applicationView.getPerformanceAverage10min()}"
+                                           th:attr="data-status=${applicationView.getStatusPerformance10min()} , data-max=${applicationView.getPerformanceCriticalValue10min()}"  ></input>
+                                </div><small><span class="float-right" th:text="${applicationView.getMeasuresQtyPerformance10min()}" id="measures-performance"></span>Mediciones</small>
+                                <div class="progress progress-xs mb-4">
+                                    <!--<div class="progress-bar bg-success" id="measures-performance-progressbar" role="progressbar" style="width: 25%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="cardbox cardbox-flat">
+                            <div class="cardbox-heading">
+                                <div class="float-right">
+                                    <div class="icon-lg text-muted"></div>
+                                </div>
+                                <div>Incidencias (1 día)</div>
+                            </div>
+                            <div class="cardbox-body">
+                                <div class="text-center">
+                                    <input id="chart-incidencias-1-day" type="text" th:value="${applicationView.issuesQtyLastDay}"
+                                           th:attr="data-status=${applicationView.getStatusIssuesQty()} , data-max=${applicationView.getIssuesQtyCriticalThreshold()}" ></input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="cardbox cardbox-flat">
+                            <div class="cardbox-heading">
+                                <div class="float-right">
+                                    <div class="icon-lg text-muted"></div>
+                                </div>
+                                <div>Tareas (1 día)</div>
+                            </div>
+                            <div class="cardbox-body">
+                                <div class="text-center">
+                                    <input id="chart-tareas-1-day" type="text" th:value="${applicationView.workItems1day}"
+                                           th:attr="data-status=${applicationView.getStatusWorkItemsQty()} , data-max=${applicationView.getWorkItemsQtyCriticalThreshold()}" ></input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" role="tab" id="headingOne">
+                        <h5 class="mb-0">
+                            <a data-toggle="collapse" aria-multiselectable="true"  aria-controls="collapseOne" href="#collapseOne" >
+                                Datos Adicionales
+                            </a>
+                        </h5>
+                    </div>
+
+                    <div id="collapseOne" class="collapse hide" >
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-xl-3">
+                                    <div class="cardbox cardbox-flat">
+                                        <div class="cardbox-heading">
+                                            <div class="float-right">
+                                                <div class="icon-lg text-muted"></div>
+                                            </div>
+                                            <div>Disponibilidad (1 hora)</div>
+                                        </div>
+                                        <div class="cardbox-body">
+                                            <div class="text-center">
+                                                <input id="chart-disponibilidad-1-hora" type="text" th:value="${applicationView.availabilityAverage1hour}"
+                                                       th:attr="data-status=${applicationView.getStatusAvailability1hour()}, data-max=${applicationView.getAvailabilityCriticalValue1hour()}" ></input>
+                                            </div>
+                                            <small>
+                                                <span class="float-right" th:text="${applicationView.measuresQtyAvailability1hour}" id="measures-availability-value"></span>
+                                                Mediciones
+                                            </small>
+                                            <div class="progress progress-xs mb-4">
+                                                <!--<div class="progress-bar bg-success" id="ram" role="progressbar" style="width: 25%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                            </div><small><span class="float-right" th:text="${applicationView.getUptime1hour()}"  id="uptime-value"></span>Uptime</small>
+                                            <div class="progress progress-xs mb-3">
+                                                <!--<div class="progress-bar bg-info" id="uptime" role="progressbar" style="width: 50%;" aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3">
+                                    <div class="cardbox cardbox-flat">
+                                        <div class="cardbox-heading">
+                                            <div class="float-right">
+                                                <div class="icon-lg text-muted"></div>
+                                            </div>
+                                            <div>Performance (1 hora)</div>
+                                        </div>
+                                        <div class="cardbox-body">
+                                            <div class="text-center">
+                                                <input id="chart-performance-1-hora" type="text" th:value="${applicationView.performanceAverage1hour}"
+                                                       th:attr="data-status=${applicationView.getStatusPerformance1hour()}, data-max=${applicationView.getPerformanceCriticalValue1hour()}" ></input>
+                                            </div>
+                                            <small>
+                                                <span class="float-right" th:text="${applicationView.measuresQtyPerformance1hour}" id="measures-performance"></span>Mediciones</small>
+                                            <div class="progress progress-xs mb-4">
+                                                <!--<div class="progress-bar bg-success" id="measures-performance-progressbar" role="progressbar" style="width: 25%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3">
+                                    <div class="cardbox cardbox-flat">
+                                        <div class="cardbox-heading">
+                                            <div class="float-right">
+                                                <div class="icon-lg text-muted"></div>
+                                            </div>
+                                            <div>Disponibilidad (1 día)</div>
+                                        </div>
+                                        <div class="cardbox-body">
+                                            <div class="text-center">
+                                                <input id="chart-disponibilidad-1-day" type="text" th:value="${applicationView.availabilityAverage1day}"
+                                                       th:attr="data-status=${applicationView.getStatusAvailability1day()}, data-max=${applicationView.getAvailabilityCriticalValue1day()}"></input>
+                                            </div>
+                                            <small>
+                                                <span class="float-right" th:text="${applicationView.measuresQtyAvailability1day}" id="measures-availability-value"></span>
+                                                Mediciones
+                                            </small>
+                                            <div class="progress progress-xs mb-4">
+                                                <!--<div class="progress-bar bg-success" id="ram" role="progressbar" style="width: 25%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                            </div><small><span th:text="${applicationView.getUptime1day()}"  class="float-right" id="uptime-value"></span>Uptime</small>
+                                            <div class="progress progress-xs mb-3">
+                                                <!--<div class="progress-bar bg-info" id="uptime" role="progressbar" style="width: 50%;" aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3">
+                                    <div class="cardbox cardbox-flat">
+                                        <div class="cardbox-heading">
+                                            <div class="float-right">
+                                                <div class="icon-lg text-muted"></div>
+                                            </div>
+                                            <div>Performance (1 día)</div>
+                                        </div>
+                                        <div class="cardbox-body">
+                                            <div class="text-center">
+                                                <input id="chart-performance-1-day" type="text" th:value="${applicationView.performanceAverage1day}"
+                                                       th:attr="data-status=${applicationView.getStatusPerformance1day()} , data-max=${applicationView.getPerformanceCriticalValue1day()}"></input>
+                                            </div><small><span class="float-right" th:text="${applicationView.measuresQtyPerformance1day}" id="measures-performance"></span>Mediciones</small>
+                                            <div class="progress progress-xs mb-4">
+                                                <!--<div class="progress-bar bg-success" id="measures-performance-progressbar" role="progressbar" style="width: 25%;" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>-->
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br> </br>
+                <div class="row">
+                    <div class="col-xl-12 col-xs-12">
+                        <div class="cardbox">
+                            <div class="cardbox-body">
+                                <div class="flot-chart flot-chart-lg" id="area-flotchart"></div>
+                            </div>
+                            <div class="cardbox-footer"><strong>Uptime Chart</strong></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="cardbox">
+                            <div class="cardbox-heading">Markers</div>
+                            <div class="cardbox-body">
+                                <div class="gmap" id="map-markers"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xl-12 col-xs-12">
+                        <div class="cardbox">
+                            <div class="cardbox-heading">Disponibilidad 10 minutos</div>
+                            <table id="transaction-table" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th >#</th>
+                                        <th>Fecha</th>
+                                        <th>Transacción</th>
+                                        <th>Locación</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="trans-body">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <th:block layout:fragment="scripts">
+        <script src="/vendor/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="/vendor/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="/vendor/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+        <script src="/vendor/datatables.net-buttons/js/buttons.colVis.js"></script>
+        <script src="/vendor/datatables.net-buttons/js/buttons.flash.min.js"></script>
+        <script src="/vendor/datatables.net-buttons/js/buttons.html5.min.js"></script>
+        <script src="/vendor/datatables.net-buttons/js/buttons.print.min.js"></script>
+        <script src="/vendor/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+        <script src="/vendor/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="/vendor/datatables.net-responsive-bs/js/responsive.bootstrap.min.js"></script>
+    </th:block>
+</body>
+</html>

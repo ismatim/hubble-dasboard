@@ -1,0 +1,307 @@
+{
+  "tenantId": "949143007",
+  "applications": [
+    {
+      "applicationId": "b566958ec4ff28028672780d15edcf56",
+      "applicationName": "BancoRipley - Sinacofi",
+      "applicationIsActive": true,
+      "timeZoneId": "America/Santiago",
+      "timeZone": "America, Santiago (GMT -04:00)",
+      "applicationConfigurationVersion": 6,
+      "frequencyInMin": 10,
+      "defaultPerformanceOkThreshold": 11000,
+      "defaultPerformanceCriticalThreshold": 12000,
+      "statusCriticalIfLessThan": "90.0%",
+      "transactionFailThreshold": 300000,
+      "dynamicThresholdEnabled": false,
+      "dynamicThresholdUpperLimit": null,
+      "locations": [
+        {
+          "locationId": "305114c9930027cad1941f3b5e0694d0",
+          "locationName": "Sonda Interna - Ripley 1",
+          "locationType": "private"
+        }
+      ],
+      "transactions": [
+        {
+          "transactionId": "2eae220e082697be3a0646400e5b54fa",
+          "transactionName": "Auntenticacion Biometrica",
+          "transactionType": "script",
+          "scriptName": "Auntenticacion_Biometrica_VBIO3301",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "8f0e0ec4adb5f063b1afe794e03a0ab4",
+          "transactionName": "Firma Biometrica",
+          "transactionType": "script",
+          "scriptName": "Firma_Biometrica_VBIO3101",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        }
+      ]
+    },
+    {
+      "applicationId": "e3ccaa4d89e4f05650c6a371923e8796",
+      "applicationName": "BancoRipley - Plataforma Post Venta",
+      "applicationIsActive": true,
+      "timeZoneId": "America/Santiago",
+      "timeZone": "America, Santiago (GMT -04:00)",
+      "applicationConfigurationVersion": 25,
+      "frequencyInMin": 10,
+      "defaultPerformanceOkThreshold": 11000,
+      "defaultPerformanceCriticalThreshold": 12000,
+      "statusCriticalIfLessThan": "90.0%",
+      "transactionFailThreshold": 300000,
+      "dynamicThresholdEnabled": false,
+      "dynamicThresholdUpperLimit": null,
+      "locations": [
+        {
+          "locationId": "305114c9930027cad1941f3b5e0694d0",
+          "locationName": "Sonda Interna - Ripley 1",
+          "locationType": "private"
+        }
+      ],
+      "transactions": [
+        {
+          "transactionId": "5cd215fc65f82c7f3d63a8e460ed0bcc",
+          "transactionName": "Consulta Ultimo EPU",
+          "transactionType": "script",
+          "scriptName": "Consulta Ultimo EPU_PC",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "6dadd1dd91c1d96bf9b3e22db9244ce8",
+          "transactionName": "Consulta TC",
+          "transactionType": "script",
+          "scriptName": "Consulta TC_PC",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "aef988da8190da47a8c96c892c5e3567",
+          "transactionName": "Consulta Movimientos LC",
+          "transactionType": "script",
+          "scriptName": "Consulta Movimientos LC_PC",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "966ca539091ccfa1efa11c5873d56cb4",
+          "transactionName": "Escritorio",
+          "transactionType": "script",
+          "scriptName": "Escritorio_PC",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "e04f59ebc31ae3763cc91557fdf9afaf",
+          "transactionName": "Consulta Cuenta Vista",
+          "transactionType": "script",
+          "scriptName": "Consulta Cuenta Vista_PC",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "bc0ff71dd9a870683875b45cca233305",
+          "transactionName": "Consulta Movimientos CV",
+          "transactionType": "script",
+          "scriptName": "Consulta Movimientos CV_PC",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "3328b799c1cc12741adeb0165ab0929c",
+          "transactionName": "Consulta Linea de Credito",
+          "transactionType": "script",
+          "scriptName": "Consulta Linea de Credito_PC",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "fc77932726b0728afe7c38fe8ac9ab35",
+          "transactionName": "Consulta Movimientos TC",
+          "transactionType": "script",
+          "scriptName": "Consulta Movimientos TC_PC",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        }
+      ]
+    },
+    {
+      "applicationId": "e071193b8376e06554eb2344173cb66d",
+      "applicationName": "BancoRipley - HomeBanking",
+      "applicationIsActive": true,
+      "timeZoneId": "America/Santiago",
+      "timeZone": "America, Santiago (GMT -04:00)",
+      "applicationConfigurationVersion": 46,
+      "frequencyInMin": 10,
+      "defaultPerformanceOkThreshold": 11000,
+      "defaultPerformanceCriticalThreshold": 12000,
+      "statusCriticalIfLessThan": "90.0%",
+      "transactionFailThreshold": 25000,
+      "dynamicThresholdEnabled": false,
+      "dynamicThresholdUpperLimit": null,
+      "locations": [
+        {
+          "locationId": "16ec0037849cd0b4c4d538fe3d643621",
+          "locationName": "Washington, DC AT&T",
+          "locationType": "public"
+        },
+        {
+          "locationId": "305114c9930027cad1941f3b5e0694d0",
+          "locationName": "Sonda Interna - Ripley 1",
+          "locationType": "private"
+        }
+      ],
+      "transactions": [
+        {
+          "transactionId": "f702ea77d5dabdb0aa984f9c3c865229",
+          "transactionName": "Despliegue Pagina Publica",
+          "transactionType": "script",
+          "scriptName": "Ingreso Clientes_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "302bb0b3fd2f09e76be6a6491d97ef7b",
+          "transactionName": "Login",
+          "transactionType": "script",
+          "scriptName": "Ingreso Clientes_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "2b97f97590892f4d610866b3a1cb2616",
+          "transactionName": "Despliegue Zona Campana",
+          "transactionType": "script",
+          "scriptName": "Despliegue Zona de Campana_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "15c5d42afd76ed3b056932384149f4d9",
+          "transactionName": "Transferencia a Terceros - Paso 1",
+          "transactionType": "script",
+          "scriptName": "Transferencias_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "7e0d2e3103d09c9e4fb8b20b4a279dea",
+          "transactionName": "Transferencia a Terceros - Paso 2",
+          "transactionType": "script",
+          "scriptName": "Transferencias_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "901b092ddeb000ef7d593f2765c79b23",
+          "transactionName": "Transferencia a Terceros - Paso 3",
+          "transactionType": "script",
+          "scriptName": "Transferencias_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "d6adedee38655ceb85a84bc9c44b06b6",
+          "transactionName": "Hazte Cliente",
+          "transactionType": "script",
+          "scriptName": "Productos_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "30927759f9865ba245ee3b747a013bb1",
+          "transactionName": "Despliegue Formulario Consumo",
+          "transactionType": "script",
+          "scriptName": "Productos_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "0c8dff880d6a958f39e0c05e129182a6",
+          "transactionName": "Resultado Simulacion Consumo",
+          "transactionType": "script",
+          "scriptName": "Productos_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "7b7fdb238dac77dc3a9c05f75405c991",
+          "transactionName": "Consulta Mis Productos",
+          "transactionType": "script",
+          "scriptName": "Productos_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "fdd4c8e1efb5d951ec3e63f8c2dfe360",
+          "transactionName": "Ultimos Movimientos Cuenta Vista",
+          "transactionType": "script",
+          "scriptName": "Productos_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "c27934b52a286475474b4db991a98b21",
+          "transactionName": "Consulta Saldo Cuenta Vista",
+          "transactionType": "script",
+          "scriptName": "Productos_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "23eedd709c43d31aecaa392f6e5cfa47",
+          "transactionName": "Consulta Saldo Tarjeta",
+          "transactionType": "script",
+          "scriptName": "Productos_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "659a0bc711fd0622badc0f39f6a090ed",
+          "transactionName": "Consulta Estado de Cuenta Tarjeta",
+          "transactionType": "script",
+          "scriptName": "Productos_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        },
+        {
+          "transactionId": "1ece3b3e176e888b168d97f710c83258",
+          "transactionName": "Simulacion Deposito a Plazo",
+          "transactionType": "script",
+          "scriptName": "Productos_HB",
+          "performanceOkThreshold": 8000,
+          "performanceCriticalThreshold": 12000,
+          "assignedToLocation": true
+        }
+      ]
+    }
+  ]
+}

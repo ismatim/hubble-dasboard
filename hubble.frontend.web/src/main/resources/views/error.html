@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="error-layout">
+    <body class="theme-default">
+        <div layout:fragment="content">
+            <div class="layout-container">
+                <div class="page-container bg-blue-grey-900">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <div class="p-4 text-center">
+                                <p class="text-white text-bold text-xl lh1" th:text="${Error.status}"></p>
+                                <p class="lead">Algo raro ocurrió :(</p>
+                                <p> <a href="/">Volver al Menú Principal</a></p>
+
+                                <p th:if="${Error.status}">
+                                    <b>Status:</b> <span th:text="${Error.status}">status-code</span> <span
+                                        th:if="${Error.error}" th:text="'('+${Error.error}+')'">error ...</span>
+                                </p>
+                                <p th:if="${timestamp}" id='created'>
+                                    <b>Hora:</b> <span th:text="${timestamp}">Timestamp</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <pre
+                    th:if="${Error.trace} and (${Error.message} and ${Error.message.length() != 0})">
+                    <code>
+                    <b>Causa:</b>
+                    <span th:if="${Error.trace}" th:text="${Error.trace}">exception ...</span>
+                    <span th:if="${Error.message} and ${Error.message.length() != 0}"
+                          th:text="${Error.message}">message ...</span>
+                    </code>
+                </pre>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+version: '3.0'
+
+services:
+    hubble-app:
+        image: "${HUBBLE_FRONTEND_NAME}"
+        container_name: "${HUBBLE_FRONTEND}"
+        ports:
+            - "${HUBBLE_FRONTEND_PORT}"
+        hostname: hubble
+        links:
+            - mongodb:mongo
+
+    mongodb:
+        image: mongo:latest
+        container_name: "${HUBBLE_MONGODB}"
+        ports:
+            - 27017
+        hostname: mongodb
+        volumes:
+            - "${HUBBLE_MONGODB_VOL}"
+
+    hubble-taskrunner:
+        image: "${HUBBLE_TASKRUNNER_NAME}"
+        container_name: "${HUBBLE_TASKRUNNER}"
+        hostname: hubble-taskrunner
+        stdin_open: true
+        tty: true
+        links:
+            - mongodb:mongo
+
+
