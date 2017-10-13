@@ -1,0 +1,31 @@
+{
+  "lastRetrievedSequenceId": "12345",
+  "hasMoreDataToFetch": false,
+  "data": [
+    {
+      "applicationName": "fake-app-example",
+      "applicationId": "1",
+      "transactionName": "fake-transaction",
+      "transactionId": "1",
+      "locationName": "La Pampa",
+      "locationId": "1",
+      "timeStamp": 1301090400,
+      "responseTime": 0,
+      "serverName": "tecnosoftware.com",
+      "scriptName": "proceso-negocio-fake-name",
+      "performanceStatus": "performance-ok-fake",
+      "availabilityStatus": "disponibilidad-ok-fake",
+      "poorThreshold": 8,
+      "criticalThreshold": 12,
+      "availabilityFailIfAbove": 45,
+      "numberOfErrors": 1,
+      "errors": [
+        {
+          "fileName": "fake-filename.txt",
+          "lineNumber": 1,
+          "errorMessage": "error-time-out"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+[
+    {
+        "applicationName": "fake-app-example-1",
+        "applicationId": "1",
+        "transactionName": "fake-transaction-1",
+        "transactionId": "1",
+        "locationName": "La Pampa",
+        "locationId": "1",
+        "timeStamp": "2012-04-23T18:25:43.511Z",
+        "responseTime": 10,
+        "serverName": "fake.com",
+        "scriptName": "proceso-negocio-fake-name-1",
+        "performanceStatus": "performance-ok-fake",
+        "availabilityStatus": "disponibilidad-ok-fake-1",
+        "availabilityFailIfAbove": 45,
+        "numberOfErrors": 1,
+        "providerOrigin": "AppPulse Active",
+        "errors": [
+            {
+                "fileName": "fake-filename.txt",
+                "lineNumber": 1,
+                "errorMessage": "error-time-out"
+            }
+        ]
+    },
+
+    {
+        "applicationName": "fake-app-example-2",
+        "applicationId": "2",
+        "transactionName": "fake-transaction-1",
+        "transactionId": "1",
+        "locationName": "La Plata",
+        "locationId": "2",
+        "timeStamp": "2012-04-23T18:25:43.511Z",
+        "responseTime": 0,
+        "serverName": "app.2.com",
+        "scriptName": "proceso-negocio-fake-name",
+        "performanceStatus": "performance-ok-fake",
+        "availabilityStatus": "disponibilidad-ok-fake",
+        "availabilityFailIfAbove": 45,
+        "numberOfErrors": 1,
+        "providerOrigin": "AppPulse Active",
+        "errors": [
+            {
+                "fileName": "fake-filename.txt",
+                "lineNumber": 1,
+                "errorMessage": "error-time-out"
+            }
+        ]
+    },
+    {
+        "applicationName": "fake-app-example-3",
+        "applicationId": "1",
+        "transactionName": "fake-transaction-3",
+        "transactionId": "1",
+        "locationName": "Ciudad de Buenos Aires",
+        "locationId": "1",
+        "timeStamp": "2012-04-23T18:25:43.511Z",
+        "responseTime": 100,
+        "serverName": "app.3.com",
+        "scriptName": "proceso-negocio-fake-name-3",
+        "performanceStatus": "performance-ok-fake-3",
+        "availabilityStatus": "disponibilidad-ok-fake-3",
+        "availabilityFailIfAbove": 45,
+        "numberOfErrors": 1,
+        "providerOrigin": "AppPulse Active",
+        "errors": [
+            {
+                "fileName": "fake-filename.txt",
+                "lineNumber": 1,
+                "errorMessage": "error-time-out"
+            }
+        ]
+    },
+    {
+        "applicationName": "fake-app-example-3",
+        "applicationId": "3",
+        "transactionName": "fake-transaction-3",
+        "transactionId": "3",
+        "locationName": "Santiago del Estero",
+        "locationId": "3",
+        "timeStamp": "2012-04-23T18:25:43.511Z",
+        "responseTime": 0,
+        "serverName": "tecnosoftware.com",
+        "scriptName": "proceso-negocio-fake-name",
+        "performanceStatus": "performance-ok-fake",
+        "availabilityStatus": "disponibilidad-ok-fake",
+        "availabilityFailIfAbove": 11,
+        "numberOfErrors": 1,
+        "providerOrigin": "AppPulse Active",
+        "errors": [
+            {
+                "fileName": "fake-filename-3.txt",
+                "lineNumber": 103,
+                "errorMessage": "error-time-out"
+            }
+        ]
+    }
+]
