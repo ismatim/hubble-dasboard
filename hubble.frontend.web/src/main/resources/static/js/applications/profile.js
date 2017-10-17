@@ -187,8 +187,9 @@
                     },
                     yaxis: {
                         min: 0,
-                        max: 150,
+                        max: 100,
                         tickColor: 'rgba(162,162,162,.26)',
+                        tickSize: 20,
                         font: {
                             color: Colors.byName('blueGrey-200')
                         },
@@ -288,8 +289,8 @@
                 this.setOptions({scrollwheel:true});
             });
             mapMarkers.addListener( 'mouseout', function(event){
-                this.setOptions({scrollwheel:false});  
-                
+                this.setOptions({scrollwheel:false});
+
             });
         };
 
