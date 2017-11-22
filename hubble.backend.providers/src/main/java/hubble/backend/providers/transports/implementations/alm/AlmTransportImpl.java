@@ -41,10 +41,10 @@ public class AlmTransportImpl implements AlmTransport {
     @Override
     public void login() {
         String path = "/authentication-point/authenticate";
-        String Url = buildUri(path);
+        String url = buildUri(path);
 
         try {
-            Unirest.get(Url).basicAuth(environment.getUserName(),
+            Unirest.get(url).basicAuth(environment.getUserName(),
                     environment.getPassword()).asString();
         } catch (UnirestException e) {
             logger.error(e.getMessage());

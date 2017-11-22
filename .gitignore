@@ -18,6 +18,11 @@ target/
 target/
 nbactions.xml
 
+#Eclipse Oxygen
+.project
+.classpath
+.settings
+
 # CMake
 cmake-build-debug/
 
