@@ -14,30 +14,26 @@ public class JiraProviderEnvironmentImpl implements JiraProviderEnvironment{
 	private String port;
 	@Value("${jira.user}")
 	private String user;
-	@Value("${jira.user}")
+	@Value("${jira.password}")
 	private String password;
 	
 	@Override
 	public String getHost() {
-		// TODO Auto-generated method stub
 		return this.host;
 	}
 
 	@Override
 	public String getPort() {
-		// TODO Auto-generated method stub
 		return this.port;
 	}
 
 	@Override
 	public String getUser() {
-		// TODO Auto-generated method stub
 		return this.user;
 	}
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
 		return this.password;
 	}
 	

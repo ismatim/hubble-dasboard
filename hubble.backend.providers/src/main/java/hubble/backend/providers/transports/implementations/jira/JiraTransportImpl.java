@@ -15,6 +15,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 
+import hubble.backend.providers.configurations.JiraConfiguration;
 import hubble.backend.providers.configurations.environments.JiraProviderEnvironment;
 import hubble.backend.providers.transports.interfaces.JiraTransport;
 
@@ -24,24 +25,29 @@ public class JiraTransportImpl implements JiraTransport {
 	@Autowired
 	JiraProviderEnvironment environment;
 	
+	@Autowired
+	JiraConfiguration configuration;
+	
 	private final Logger logger = LoggerFactory.getLogger(JiraTransportImpl.class);
 	
 	@Override
 	public JSONObject getData() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public JiraProviderEnvironment getEnvironment() {
-		// TODO Auto-generated method stub
 		return this.environment;
+	}
+	
+	@Override
+	public JiraConfiguration getConfiguration() {
+		return this.configuration;
 	}
 
 	@Override
-	public List<JSONObject> getAllIssuesByProject(String encodedAuthString, String project) {
-		// TODO Auto-generated method stub
-		String path=String.format("/rest/api/2/search?jql=project=\"%s\"", project);
+	public List<JSONObject> getAllIssuesByProject(String encodedAuthString, String projectKey) {
+		String path=String.format("/rest/api/2/search?jql=project=%s", projectKey);
         String requestsUri = buildUri(path);
         HttpResponse<JsonNode> response = null;
         JSONArray jsonArray = null;
@@ -56,8 +62,18 @@ public class JiraTransportImpl implements JiraTransport {
             return null;
         }
         
-        jsonArray = response.getBody().getObject().getJSONObject("ns2:requestTypes").getJSONArray("requestType");
-
+        jsonArray = response.getBody().getObject().getJSONArray("issues");
+        
+        if (jsonArray == null) {
+        	logger.info("La respuesta para el request enviado es nula");
+        	return null;
+        }
+        
+        for(int i=0; i < jsonArray.length(); i++) {
+        	dataList.add(jsonArray.getJSONObject(i));
+        }
+        
+        return dataList;
 	}
 	
 	 private String buildUri(String path){
