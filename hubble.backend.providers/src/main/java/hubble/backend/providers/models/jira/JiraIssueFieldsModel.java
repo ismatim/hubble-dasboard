@@ -15,7 +15,7 @@ public class JiraIssueFieldsModel {
 	private String resolution;
 	private String customField10005;
 	private int aggregateTimeEstimate;
-	private long resolutionDate;
+	private Date resolutionDate;
 	private int workRatio;
 	private String summary;
 	private Date lastViewed;
@@ -107,10 +107,10 @@ public class JiraIssueFieldsModel {
 	public void setAggregateTimeEstimate(int aggregateTimeEstimate) {
 		this.aggregateTimeEstimate = aggregateTimeEstimate;
 	}
-	public long getResolutionDate() {
+	public Date getResolutionDate() {
 		return resolutionDate;
 	}
-	public void setResolutionDate(long resolutionDate) {
+	public void setResolutionDate(Date resolutionDate) {
 		this.resolutionDate = resolutionDate;
 	}
 	public int getWorkRatio() {

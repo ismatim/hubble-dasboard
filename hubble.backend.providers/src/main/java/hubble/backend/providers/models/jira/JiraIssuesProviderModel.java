@@ -2,7 +2,7 @@ package hubble.backend.providers.models.jira;
 
 import java.util.List;
 
-public class JiraProviderModel {
+public class JiraIssuesProviderModel {
 	
 	private String expand;
 	private int startAt;

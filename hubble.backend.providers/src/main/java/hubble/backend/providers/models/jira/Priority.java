@@ -4,7 +4,7 @@ public class Priority {
 	private String self;
 	private String iconUrl;
 	private String name;
-	private String id;
+	private int id;
 	
 	public String getSelf() {
 		return self;
@@ -24,10 +24,10 @@ public class Priority {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	
