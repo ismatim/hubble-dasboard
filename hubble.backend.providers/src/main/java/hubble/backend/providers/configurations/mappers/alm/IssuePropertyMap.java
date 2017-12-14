@@ -18,11 +18,11 @@ public class IssuePropertyMap extends PropertyMap<AlmDefectProviderModel,IssueSt
         map().setExternalId(source.getId());
         map().setProviderName(source.getProviderName());
         map().setProviderOrigin(source.getProviderOrigin());
-        
+
         map().setStatus(source.getStatus());
         map().setTitle(source.getTitle());
         map().setTransaction(source.getTransaction());
-        
+
     }
-    
+
 }

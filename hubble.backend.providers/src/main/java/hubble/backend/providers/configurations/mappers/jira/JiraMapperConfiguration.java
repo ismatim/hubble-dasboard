@@ -7,10 +7,11 @@ import org.springframework.stereotype.Component;
 public class JiraMapperConfiguration {
 
 	private ModelMapper mapper;
-	
+
 	public JiraMapperConfiguration() {
 		this.mapper = new ModelMapper();
 		this.mapper.addMappings(new IssuePropertyMap());
 		this.mapper.addMappings(new ApplicationPropertyMap());
 	}
 }
+

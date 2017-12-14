@@ -23,3 +23,4 @@ public class ApplicationPropertyMap extends PropertyMap<JiraApplicationProviderM
     }
 
 }
+

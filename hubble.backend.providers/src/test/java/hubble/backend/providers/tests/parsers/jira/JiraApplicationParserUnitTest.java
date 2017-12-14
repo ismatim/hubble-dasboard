@@ -14,12 +14,15 @@ public class JiraApplicationParserUnitTest extends JiraBaseUnitTest {
     
     @Test
     public void jira_parser_should_map_issue_to_application_model() {
+        //Assign
         JiraApplicationParserImpl jiraParser = new JiraApplicationParserImpl();
         JiraApplicationProviderModel jiraModel;
         JSONObject fakeResponse = loadFakeResponse();
         
+        //Act
         jiraModel = jiraParser.extract(fakeResponse);
-        
+       
+        //Assert
         assertNotNull(jiraModel);
     }
 }
