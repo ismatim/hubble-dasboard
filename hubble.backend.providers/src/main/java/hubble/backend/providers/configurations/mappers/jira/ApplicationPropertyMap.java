@@ -6,9 +6,9 @@ import hubble.backend.storage.models.ApplicationStorage;
 
 public class ApplicationPropertyMap extends PropertyMap<JiraApplicationProviderModel, ApplicationStorage> {
 
-	@Override
-	protected void configure() {
-		skip().setId(null);
+    @Override
+    protected void configure() {
+        skip().setId(null);
         skip().setActive(true);
         skip().setApplicationConfigurationVersion(0);
         skip().setAvailabilityThreshold(0);
@@ -20,6 +20,6 @@ public class ApplicationPropertyMap extends PropertyMap<JiraApplicationProviderM
         skip().setTransactions(null);
         map().setApplicationId(source.getApplicationId());
         map().setApplicationName(source.getName());
-	}
+    }
 
 }

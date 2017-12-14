@@ -2,7 +2,7 @@ package hubble.backend.providers.models.jira;
 
 public class JiraApplicationProviderModel {
 	
-	private String applicationId;
+    private String applicationId;
     private String name;
 
     public String getApplicationId() {

@@ -13,6 +13,8 @@ import java.io.InputStream;
 import java.util.List;
 import static org.apache.commons.lang.StringUtils.EMPTY;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +25,9 @@ public class AppPulseActiveApplicationsParserImpl implements AppPulseActiveAppli
     private AppPulseActiveTransport appPulseActiveTransport;
     private List<ApplicationStorage> applicationsStorage;
     private ApplicationRepository applicationRepository;
-
+    
+    private final Logger logger = LoggerFactory.getLogger(AppPulseActiveApplicationsParserImpl.class);
+    
     @Autowired
     public AppPulseActiveApplicationsParserImpl(
             AppPulseActiveTransport appPulseActiveTransport,
@@ -52,7 +56,7 @@ public class AppPulseActiveApplicationsParserImpl implements AppPulseActiveAppli
         try {
             applicationProviderModel = objMapper.readValue(appPulseApplication, ApplicationProviderModel.class);
         } catch (IOException ex) {
-            //TODO: Debe loguearse información.
+            logger.debug(ex.getMessage());
             return null;
         }
 

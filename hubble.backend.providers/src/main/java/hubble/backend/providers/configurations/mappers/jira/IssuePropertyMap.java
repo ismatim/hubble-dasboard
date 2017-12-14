@@ -16,7 +16,7 @@ public class IssuePropertyMap extends PropertyMap<JiraIssueModel, IssueStorage> 
 		map().setPriority(source.getFields().getPriority().getId());
 		map().setStatus(source.getFields().getStatus().getName());
 		map().setTitle(source.getFields().getSummary());
-		map().setClosedDate(source.getFields().getResolutionDate());
+		map().setClosedDate(source.getFields().getResolutiondate());
 		map().setRegisteredDate(source.getFields().getCreated());
 		map().setModifiedDate(source.getFields().getUpdated());
 		map().setBusinessApplication(source.getFields().getProject().getName());

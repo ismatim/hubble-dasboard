@@ -1,13 +1,10 @@
 package hubble.backend.providers.models.jira;
 
-import java.util.List;
-
 public class JiraUserModel {
 	private String self;
 	private String name;
 	private String key;
-	private String email;
-	private List<AvatarUrl> avatarUrls;
+	private String emailAddress;
 	private String displayName;
 	private boolean active;
 	private String timeZone;
@@ -31,16 +28,10 @@ public class JiraUserModel {
 		this.key = key;
 	}
 	public String getEmail() {
-		return email;
+		return emailAddress;
 	}
 	public void setEmail(String email) {
-		this.email = email;
-	}
-	public List<AvatarUrl> getAvatarUrls() {
-		return avatarUrls;
-	}
-	public void setAvatarUrls(List<AvatarUrl> avatarUrls) {
-		this.avatarUrls = avatarUrls;
+		this.emailAddress = email;
 	}
 	public String getDisplayName() {
 		return displayName;
