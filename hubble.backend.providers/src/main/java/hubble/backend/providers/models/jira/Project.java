@@ -1,13 +1,13 @@
 package hubble.backend.providers.models.jira;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Project {
 	private String self;
 	private String id;
 	private String key;
 	private String name;
-	private List<AvatarUrl> avatarUrls;
 	
 	public String getSelf() {
 		return self;
@@ -32,11 +32,5 @@ public class Project {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public List<AvatarUrl> getAvatarUrls() {
-		return avatarUrls;
-	}
-	public void setAvatarUrls(List<AvatarUrl> avatarUrls) {
-		this.avatarUrls = avatarUrls;
 	}
 }

@@ -64,9 +64,9 @@ public class AlmApplicationParserIntegrationTest {
 
         //Assert
         assertTrue(applicationStorages.size() > 0);
-        for (ApplicationStorage application : applicationStorages) {
+        applicationStorages.forEach((application) -> {
             assertTrue(applicationRepository.exist(application));
-        }
+        });
 
         //Clean
         applicationRepository.deleteAll();

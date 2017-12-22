@@ -1,6 +1,6 @@
 package hubble.backend.providers.models.jira;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class JiraIssuesProviderModel {
 	
@@ -8,7 +8,7 @@ public class JiraIssuesProviderModel {
 	private int startAt;
 	private int maxResults;
 	private int total;
-	private List<JiraIssueModel> issues;
+	private ArrayList<JiraIssueModel> issues;
 	
 	public String getExpand() {
 		return expand;
@@ -42,11 +42,11 @@ public class JiraIssuesProviderModel {
 		this.total = total;
 	}
 	
-	public List<JiraIssueModel> getIssues() {
+	public ArrayList<JiraIssueModel> getIssues() {
 		return issues;
 	}
 	
-	public void setIssues(List<JiraIssueModel> issues) {
+	public void setIssues(ArrayList<JiraIssueModel> issues) {
 		this.issues = issues;
 	}
 }

@@ -1,6 +1,7 @@
 package hubble.backend.providers.models.jira;
 
 public class Priority {
+    
 	private String self;
 	private String iconUrl;
 	private String name;
@@ -29,7 +30,6 @@ public class Priority {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	
+	}	
 }
 

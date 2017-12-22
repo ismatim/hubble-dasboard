@@ -22,59 +22,54 @@ import hubble.backend.providers.transports.interfaces.JiraTransport;
 @Component
 public class JiraTransportImpl implements JiraTransport {
 
-	@Autowired
-	JiraProviderEnvironment environment;
-	
-	@Autowired
-	JiraConfiguration configuration;
-	
-	private final Logger logger = LoggerFactory.getLogger(JiraTransportImpl.class);
-	
-	@Override
-	public JSONObject getData() {
-		return null;
-	}
+    @Autowired
+    JiraProviderEnvironment environment;
 
-	@Override
-	public JiraProviderEnvironment getEnvironment() {
-		return this.environment;
-	}
-	
-	@Override
-	public JiraConfiguration getConfiguration() {
-		return this.configuration;
-	}
+    @Autowired
+    JiraConfiguration configuration;
 
-	@Override
-	public List<JSONObject> getAllIssuesByProject(String encodedAuthString, String projectKey) {
-		String path=String.format("/rest/api/2/search?jql=project=%s", projectKey);
+    private final Logger logger = LoggerFactory.getLogger(JiraTransportImpl.class);
+
+    @Override
+    public JSONObject getData() {
+            return null;
+    }
+
+    @Override
+    public JiraProviderEnvironment getEnvironment() {
+            return this.environment;
+    }
+
+    @Override
+    public JiraConfiguration getConfiguration() {
+            return this.configuration;
+    }
+
+    @Override
+    public JSONObject getAllIssuesByProject(String encodedAuthString, String projectKey) {
+        String path=String.format("/rest/api/2/search?jql=project=%s", projectKey);
         String requestsUri = buildUri(path);
-        HttpResponse<JsonNode> response = null;
-        JSONArray jsonArray = null;
-        List<JSONObject> dataList = new ArrayList<JSONObject>();
-        
+        HttpResponse<JsonNode> response;
+        JSONObject data;
+
         try {
             response = Unirest.get(requestsUri)
-                    .header("Authorization","Basic "+encodedAuthString)
+                    .header("Authorization","Basic " + encodedAuthString)
                     .asJson();
         } catch (UnirestException e) {
             logger.error(e.getMessage());
             return null;
         }
-        
-        jsonArray = response.getBody().getObject().getJSONArray("issues");
-        
-        if (jsonArray == null) {
-        	logger.info("La respuesta para el request enviado es nula");
-        	return null;
+
+        data = response.getBody().getObject();
+
+        if (data == null) {
+                logger.info("La respuesta para el request enviado es nula");
+                return null;
         }
-        
-        for(int i=0; i < jsonArray.length(); i++) {
-        	dataList.add(jsonArray.getJSONObject(i));
-        }
-        
-        return dataList;
-	}
+
+        return data;
+    }
 	
 	 private String buildUri(String path){
          String uri = String.format("http://%s:%s%s"

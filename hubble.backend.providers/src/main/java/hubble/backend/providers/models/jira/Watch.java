@@ -1,5 +1,8 @@
 package hubble.backend.providers.models.jira;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Watch {
 	private String self;
 	private int watchCount;

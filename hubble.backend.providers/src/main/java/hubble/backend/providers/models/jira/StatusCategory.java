@@ -2,7 +2,7 @@ package hubble.backend.providers.models.jira;
 
 public class StatusCategory {
 	private String self;
-	private String iconUrl;
+	private int id;
 	private String key;
 	private String colorName;
 	private String name;
@@ -13,11 +13,11 @@ public class StatusCategory {
 	public void setSelf(String self) {
 		this.self = self;
 	}
-	public String getIconUrl() {
-		return iconUrl;
+	public int getId() {
+		return id;
 	}
-	public void setIconUrl(String iconUrl) {
-		this.iconUrl = iconUrl;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getKey() {
 		return key;

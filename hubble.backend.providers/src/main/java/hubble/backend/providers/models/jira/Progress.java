@@ -1,8 +1,10 @@
 package hubble.backend.providers.models.jira;
 
 public class Progress {
+    
 	private int progress;
 	private int total;
+        
 	public int getProgress() {
 		return progress;
 	}
@@ -14,6 +16,5 @@ public class Progress {
 	}
 	public void setTotal(int total) {
 		this.total = total;
-	}
-	
+	}	
 }

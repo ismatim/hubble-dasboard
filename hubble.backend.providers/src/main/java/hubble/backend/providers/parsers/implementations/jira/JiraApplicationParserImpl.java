@@ -1,15 +1,12 @@
 package hubble.backend.providers.parsers.implementations.jira;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import hubble.backend.core.utils.EncoderHelper;
 import hubble.backend.providers.configurations.mappers.jira.JiraMapperConfiguration;
 import hubble.backend.providers.models.jira.JiraApplicationProviderModel;
-import hubble.backend.providers.parsers.implementations.alm.AlmApplicationParserImpl;
 import hubble.backend.providers.parsers.interfaces.jira.JiraApplicationParser;
 import hubble.backend.providers.transports.interfaces.JiraTransport;
 import hubble.backend.storage.models.ApplicationStorage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import hubble.backend.storage.repositories.ApplicationRepository;
 import java.util.List;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -22,6 +19,8 @@ public class JiraApplicationParserImpl implements JiraApplicationParser {
     private JiraTransport jiraTransport;
     @Autowired
     private JiraMapperConfiguration jiraMapperConfiguration;
+    @Autowired
+    private ApplicationRepository applicationRepository;
     
     private final Logger logger = LoggerFactory.getLogger(JiraApplicationParserImpl.class);
     
@@ -30,10 +29,11 @@ public class JiraApplicationParserImpl implements JiraApplicationParser {
         if (data == null) {
             return null;
         }
-       
-        JiraApplicationProviderModel jiraModel = this.extract(data); 
         
-        return jiraModel;
+        JiraApplicationProviderModel jiraApplicationModel;
+        jiraApplicationModel = jiraMapperConfiguration.mapToApplicationModel(data);
+        
+        return jiraApplicationModel;
     }
 
     @Override
@@ -43,23 +43,19 @@ public class JiraApplicationParserImpl implements JiraApplicationParser {
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    public JiraApplicationProviderModel extract(JSONObject data) {
-        byte[] dataBytes = data.toString().getBytes();
-        InputStream dataStream = new ByteArrayInputStream(dataBytes);
+        String jiraUser = jiraTransport.getEnvironment().getUser();
+        String jiraPassword = jiraTransport.getEnvironment().getPassword();
+        String encodedAuthString = EncoderHelper.encodeToBase64(jiraUser, jiraPassword);
+        String project = jiraTransport.getConfiguration().getProjectKey();
+        JiraApplicationProviderModel jiraApplicationModel;
+        ApplicationStorage applicationStorage;
         
-        ObjectMapper objMapper = new ObjectMapper();
-        JiraApplicationProviderModel jiraModel;
+        JSONObject response = jiraTransport.getAllIssuesByProject(encodedAuthString, project);
+        jiraApplicationModel = this.parse(response);
+        applicationStorage = jiraMapperConfiguration.mapToApplicationStorage(jiraApplicationModel);
         
-        try {
-            jiraModel = objMapper.readValue(dataStream, JiraApplicationProviderModel.class);
-        } catch (IOException e) {
-            logger.debug(e.getMessage());
-            return null;
+        if (!applicationRepository.exist(applicationStorage)){
+            applicationRepository.save(applicationStorage);
         }
-        
-        return jiraModel;
     }
 }

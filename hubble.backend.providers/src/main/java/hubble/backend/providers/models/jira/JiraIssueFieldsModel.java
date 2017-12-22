@@ -1,44 +1,39 @@
 package hubble.backend.providers.models.jira;
 
-import java.util.Date;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class JiraIssueFieldsModel {
+    
 	private IssueType issuetype;
-	private List<IssueComponent> components;
 	private long timespent;
 	private long timeoriginalestimate;
 	private String description;
 	private Project project;
-	private List<FixVersion> fixVersions;
 	private int aggregatetimespent;
 	private String resolution;
 	private String customfield_10005;
 	private int aggregatetimeestimate;
-	private Date resolutiondate;
+	private String resolutiondate;
 	private int workRatio;
 	private String summary;
-	private Date lastViewed;
+	private String lastViewed;
 	private Watch watches;
 	private JiraUserModel creator;
-	private List<Subtasks> subtasks;
-	private Date created;
+	private String created;
 	private JiraUserModel reporter;
 	private String customfield_10000;
 	private Progress aggregateprogress;
 	private Priority priority;
-	private List<IssueLabel> labels;
 	private String customfield_10004;
 	private String environment;
 	private long timeestimate;
 	private long aggregatetimeoriginalestimate;
-	private List<IssueVersion> versions;
-	private Date duedate;
+	private String duedate;
 	private Progress progress;
-	private List<IssueLink> issuelinks;
 	private Vote votes;
 	private JiraUserModel assignee;
-	private Date updated;
+	private String updated;
 	private IssueStatus status;
 
         public IssueType getIssuetype() {
@@ -47,14 +42,6 @@ public class JiraIssueFieldsModel {
 
         public void setIssuetype(IssueType issuetype) {
             this.issuetype = issuetype;
-        }
-
-        public List<IssueComponent> getComponents() {
-            return components;
-        }
-
-        public void setComponents(List<IssueComponent> components) {
-            this.components = components;
         }
 
         public long getTimespent() {
@@ -89,14 +76,6 @@ public class JiraIssueFieldsModel {
             this.project = project;
         }
 
-        public List<FixVersion> getFixVersions() {
-            return fixVersions;
-        }
-
-        public void setFixVersions(List<FixVersion> fixVersions) {
-            this.fixVersions = fixVersions;
-        }
-
         public int getAggregatetimespent() {
             return aggregatetimespent;
         }
@@ -129,11 +108,11 @@ public class JiraIssueFieldsModel {
             this.aggregatetimeestimate = aggregatetimeestimate;
         }
 
-        public Date getResolutiondate() {
+        public String getResolutiondate() {
             return resolutiondate;
         }
 
-        public void setResolutiondate(Date resolutiondate) {
+        public void setResolutiondate(String resolutiondate) {
             this.resolutiondate = resolutiondate;
         }
 
@@ -153,11 +132,11 @@ public class JiraIssueFieldsModel {
             this.summary = summary;
         }
 
-        public Date getLastViewed() {
+        public String getLastViewed() {
             return lastViewed;
         }
 
-        public void setLastViewed(Date lastViewed) {
+        public void setLastViewed(String lastViewed) {
             this.lastViewed = lastViewed;
         }
 
@@ -176,20 +155,12 @@ public class JiraIssueFieldsModel {
         public void setCreator(JiraUserModel creator) {
             this.creator = creator;
         }
-
-        public List<Subtasks> getSubtasks() {
-            return subtasks;
-        }
-
-        public void setSubtasks(List<Subtasks> subtasks) {
-            this.subtasks = subtasks;
-        }
-
-        public Date getCreated() {
+        
+        public String getCreated() {
             return created;
         }
 
-        public void setCreated(Date created) {
+        public void setCreated(String created) {
             this.created = created;
         }
 
@@ -224,15 +195,7 @@ public class JiraIssueFieldsModel {
         public void setPriority(Priority priority) {
             this.priority = priority;
         }
-
-        public List<IssueLabel> getLabels() {
-            return labels;
-        }
-
-        public void setLabels(List<IssueLabel> labels) {
-            this.labels = labels;
-        }
-
+        
         public String getCustomfield_10004() {
             return customfield_10004;
         }
@@ -265,19 +228,11 @@ public class JiraIssueFieldsModel {
             this.aggregatetimeoriginalestimate = aggregatetimeoriginalestimate;
         }
 
-        public List<IssueVersion> getVersions() {
-            return versions;
-        }
-
-        public void setVersions(List<IssueVersion> versions) {
-            this.versions = versions;
-        }
-
-        public Date getDuedate() {
+        public String getDuedate() {
             return duedate;
         }
 
-        public void setDuedate(Date duedate) {
+        public void setDuedate(String duedate) {
             this.duedate = duedate;
         }
 
@@ -287,14 +242,6 @@ public class JiraIssueFieldsModel {
 
         public void setProgress(Progress progress) {
             this.progress = progress;
-        }
-
-        public List<IssueLink> getIssuelinks() {
-            return issuelinks;
-        }
-
-        public void setIssuelinks(List<IssueLink> issuelinks) {
-            this.issuelinks = issuelinks;
         }
 
         public Vote getVotes() {
@@ -313,11 +260,11 @@ public class JiraIssueFieldsModel {
             this.assignee = assignee;
         }
 
-        public Date getUpdated() {
+        public String getUpdated() {
             return updated;
         }
 
-        public void setUpdated(Date updated) {
+        public void setUpdated(String updated) {
             this.updated = updated;
         }
 
@@ -327,7 +274,5 @@ public class JiraIssueFieldsModel {
 
         public void setStatus(IssueStatus status) {
             this.status = status;
-        }
-		
-	
+        }	
 }

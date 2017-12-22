@@ -1,5 +1,8 @@
 package hubble.backend.providers.models.jira;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class JiraUserModel {
 	private String self;
 	private String name;
@@ -27,10 +30,10 @@ public class JiraUserModel {
 	public void setKey(String key) {
 		this.key = key;
 	}
-	public String getEmail() {
+	public String getEmailAddress() {
 		return emailAddress;
 	}
-	public void setEmail(String email) {
+	public void setEmailAddress(String email) {
 		this.emailAddress = email;
 	}
 	public String getDisplayName() {
