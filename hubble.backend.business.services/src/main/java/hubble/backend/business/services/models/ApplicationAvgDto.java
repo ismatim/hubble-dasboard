@@ -5,6 +5,16 @@ import hubble.backend.business.services.models.measures.AvailabilityQuantity;
 import hubble.backend.business.services.models.measures.PerformanceAverage;
 import hubble.backend.business.services.models.measures.PerformanceQuantity;
 
+/**
+ * ApplicationAvg is an Application with its average value for Performance,
+ * Availability, quantity of measures of Performance and Availability. The class
+ * holds differente kind of calculation for example: 10 minutes, 1 hours, 24
+ * hours, 1 month.
+ *
+ * @deprecated This is an old version because ApplicationAvgDto should be
+ * composed and not inheritance by ApplicationDto
+ * @author Ismael J. Tisminetzky / Alexander
+ */
 public class ApplicationAvgDto extends ApplicationDto {
 
     private AvailabilityAverage availabilityAverage;

@@ -1,6 +1,6 @@
 package hubble.backend.business.services.implementations.operations;
 
-import hubble.backend.business.services.configurations.UnitConverter;
+import hubble.backend.business.services.interfaces.unitconverters.UnitConverter;
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
 import hubble.backend.business.services.interfaces.operations.PerformanceOperations;
 import hubble.backend.business.services.models.ApplicationAvgDto;

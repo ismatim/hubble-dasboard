@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,7 @@ public class AppPulseActiveTransportIntegrationTests {
 
     }
 
+    @Ignore("AppPulse API is no longer active")
     @Test
     public void AppPulseActiveTransport_should_get_data() {
 
@@ -47,6 +49,7 @@ public class AppPulseActiveTransportIntegrationTests {
         assertTrue(data.length() > 0);
     }
 
+    @Ignore("AppPulse API is no longer active")
     @Test
     public void AppPulseActiveTransport_should_get_same_json_stucture() {
         //Act
@@ -60,6 +63,7 @@ public class AppPulseActiveTransportIntegrationTests {
         assertTrue(data.has("data"));
     }
 
+    @Ignore("AppPulse API is no longer active")
     @Test
     public void AppPulseActiveTransport_should_get_applications() {
         //Act
@@ -70,6 +74,7 @@ public class AppPulseActiveTransportIntegrationTests {
         assertTrue(data.length() > 0);
     }
 
+    @Ignore("AppPulse API is no longer active")
     @Test
     public void AppPulseActiveTransportImpl_when_it_runs_should_connect_get_data_and_save_it() {
 

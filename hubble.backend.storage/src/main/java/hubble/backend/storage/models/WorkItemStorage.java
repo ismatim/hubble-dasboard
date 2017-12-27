@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class WorkItemStorage {
-    
+
     private String id;
     private int externalId;
     private String title;
@@ -168,7 +168,7 @@ public class WorkItemStorage {
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
-    } 
+    }
 
     public int getPercentCompleted() {
         return percentCompleted;

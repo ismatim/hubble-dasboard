@@ -24,145 +24,145 @@ import org.springframework.stereotype.Component;
 @Component()
 public class BsmTransportImpl implements BsmTransport {
 
-	@Autowired
-	private BsmProviderEnvironment bsmProviderEnvironment;
+    @Autowired
+    private BsmProviderEnvironment bsmProviderEnvironment;
 
-	SOAPMessage message = null;
-	String query = EMPTY;
-	Logger logger;
-	LoggingOutputStream logging;
+    SOAPMessage message = null;
+    String query = EMPTY;
+    Logger logger;
+    LoggingOutputStream logging;
 
-	public BsmTransportImpl() {
-		logger = LoggerFactory.getLogger(BsmTransportImpl.class);
-		logging = new LoggingOutputStream(logger, LoggingOutputStream.LogLevel.INFO);
-	}
+    public BsmTransportImpl() {
+        logger = LoggerFactory.getLogger(BsmTransportImpl.class);
+        logging = new LoggingOutputStream(logger, LoggingOutputStream.LogLevel.INFO);
+    }
 
-	@Override
-	public SOAPBody getData() {
+    @Override
+    public SOAPBody getData() {
 
-		StringBuilder queryBuilder = new StringBuilder();
+        StringBuilder queryBuilder = new StringBuilder();
 
-		Calendar from = CalendarHelper.getNow();
-		Calendar to = CalendarHelper.getNow();
+        Calendar from = CalendarHelper.getNow();
+        Calendar to = CalendarHelper.getNow();
 
-		from.add(Calendar.HOUR, -1);
+        from.add(Calendar.HOUR, -1);
 
-		long since = from.getTimeInMillis() / 1000;
-		long now = to.getTimeInMillis() / 1000;
+        long since = from.getTimeInMillis() / 1000;
+        long now = to.getTimeInMillis() / 1000;
 
-		queryBuilder.append(" select profile_name, szTransactionName, szLocationName,szStatusName, iComponentErrorCount, time_stamp,szScriptName, dResponseTime, dGreenThreshold, dRedThreshold");
-		queryBuilder.append(" from trans_t  where time_stamp>=").append(Long.toString(since));
-		queryBuilder.append(" and time_stamp<=").append(Long.toString(now));
+        queryBuilder.append(" select profile_name, szTransactionName, szLocationName,szStatusName, iComponentErrorCount, time_stamp,szScriptName, dResponseTime, dGreenThreshold, dRedThreshold");
+        queryBuilder.append(" from trans_t  where time_stamp>=").append(Long.toString(since));
+        queryBuilder.append(" and time_stamp<=").append(Long.toString(now));
 
-		this.createMessage(queryBuilder.toString());
-		return call();
-	}
+        this.createMessage(queryBuilder.toString());
+        return call();
+    }
 
-	@Override
-	public SOAPMessage createMessage(String query) {
+    @Override
+    public SOAPMessage createMessage(String query) {
 
-		this.query = query;
-		try {
+        this.query = query;
+        try {
 
-			//Creaate Request
-			MessageFactory messageFactory = MessageFactory.newInstance();
-			SOAPMessage soapMessage = messageFactory.createMessage();
+            //Creaate Request
+            MessageFactory messageFactory = MessageFactory.newInstance();
+            SOAPMessage soapMessage = messageFactory.createMessage();
 
-			//CREATE SOAPENVELOPE
-			SOAPPart soapPart = soapMessage.getSOAPPart();
+            //CREATE SOAPENVELOPE
+            SOAPPart soapPart = soapMessage.getSOAPPart();
 
-			String myNamespace = "gdew";
-			String myNamespaceURI = bsmProviderEnvironment.getSoapEndpointUrl();
+            String myNamespace = "gdew";
+            String myNamespaceURI = bsmProviderEnvironment.getSoapEndpointUrl();
 
-			// SOAP Envelope
-			SOAPEnvelope envelope = soapPart.getEnvelope();
+            // SOAP Envelope
+            SOAPEnvelope envelope = soapPart.getEnvelope();
 
-			envelope.addNamespaceDeclaration(myNamespace, myNamespaceURI);
+            envelope.addNamespaceDeclaration(myNamespace, myNamespaceURI);
 
-			SOAPBody soapBody = envelope.getBody();
-			SOAPElement soapBodyElem = soapBody.addChildElement("getDataWebService", myNamespace);
-			SOAPElement soapBodyUser = soapBodyElem.addChildElement("user", myNamespace);
-			SOAPElement soapBodyPassword = soapBodyElem.addChildElement("password", myNamespace);
-			SOAPElement soapBodyQuery = soapBodyElem.addChildElement("query", myNamespace);
-			soapBodyUser.addTextNode(bsmProviderEnvironment.getUserName());
-			soapBodyPassword.addTextNode(bsmProviderEnvironment.getPassword());
-			soapBodyQuery.addTextNode(this.query);
+            SOAPBody soapBody = envelope.getBody();
+            SOAPElement soapBodyElem = soapBody.addChildElement("getDataWebService", myNamespace);
+            SOAPElement soapBodyUser = soapBodyElem.addChildElement("user", myNamespace);
+            SOAPElement soapBodyPassword = soapBodyElem.addChildElement("password", myNamespace);
+            SOAPElement soapBodyQuery = soapBodyElem.addChildElement("query", myNamespace);
+            soapBodyUser.addTextNode(bsmProviderEnvironment.getUserName());
+            soapBodyPassword.addTextNode(bsmProviderEnvironment.getPassword());
+            soapBodyQuery.addTextNode(this.query);
 
-			MimeHeaders headers = soapMessage.getMimeHeaders();
-			headers.addHeader("SOAPAction", bsmProviderEnvironment.getSoapAction());
+            MimeHeaders headers = soapMessage.getMimeHeaders();
+            headers.addHeader("SOAPAction", bsmProviderEnvironment.getSoapAction());
 
-			soapMessage.saveChanges();
+            soapMessage.saveChanges();
 
-			this.message = soapMessage;
-		} catch (SOAPException ex) {
-			logger.error(ex.toString());
-		}
+            this.message = soapMessage;
+        } catch (SOAPException ex) {
+            logger.error(ex.toString());
+        }
 
-		return this.message;
-	}
+        return this.message;
+    }
 
-	@Override
-	public String getQuery() {
-		return query;
-	}
+    @Override
+    public String getQuery() {
+        return query;
+    }
 
-	@Override
-	public void setQuery(String query) {
-		this.query = query;
-	}
+    @Override
+    public void setQuery(String query) {
+        this.query = query;
+    }
 
-	@Override
-	public SOAPBody getApplications() {
-		//Assign
-		Calendar from = CalendarHelper.getNow();
-		Calendar to = CalendarHelper.getNow();
+    @Override
+    public SOAPBody getApplications() {
+        //Assign
+        Calendar from = CalendarHelper.getNow();
+        Calendar to = CalendarHelper.getNow();
 
-		from.add(Calendar.HOUR, -1);
+        from.add(Calendar.HOUR, -1);
 
-		long since = from.getTimeInMillis() / 1000;
-		long now = to.getTimeInMillis() / 1000;
+        long since = from.getTimeInMillis() / 1000;
+        long now = to.getTimeInMillis() / 1000;
 
-		StringBuilder queryBuilder = new StringBuilder("SELECT distinct(profile_name), dGreenThreshold, dRedThreshold from trans_t");
-		queryBuilder.append(" where time_stamp>=").append(Long.toString(since));
-		queryBuilder.append(" and time_stamp<=").append(Long.toString(now));
+        StringBuilder queryBuilder = new StringBuilder("SELECT distinct(profile_name), dGreenThreshold, dRedThreshold from trans_t");
+        queryBuilder.append(" where time_stamp>=").append(Long.toString(since));
+        queryBuilder.append(" and time_stamp<=").append(Long.toString(now));
 
-		//Act
-		createMessage(queryBuilder.toString());
-		return call();
-	}
+        //Act
+        createMessage(queryBuilder.toString());
+        return call();
+    }
 
-	@Override
-	public SOAPMessage getMessage() {
-		return this.message;
-	}
+    @Override
+    public SOAPMessage getMessage() {
+        return this.message;
+    }
 
-	@Override
-	public SOAPBody call() {
+    @Override
+    public SOAPBody call() {
 
-		if (this.message == null) {
-			return null;
-		}
+        if (this.message == null) {
+            return null;
+        }
 
-		try {
-			// Create SOAP Connection
-			SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
-			SOAPConnection soapConnection = soapConnectionFactory.createConnection();
-			// Send SOAP Message to SOAP Server
-			SOAPMessage soapResponse = soapConnection.call(this.message, bsmProviderEnvironment.getSoapEndpointUrl());
+        try {
+            // Create SOAP Connection
+            SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
+            SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+            // Send SOAP Message to SOAP Server
+            SOAPMessage soapResponse = soapConnection.call(this.message, bsmProviderEnvironment.getSoapEndpointUrl());
 
-			soapConnection.close();
+            soapConnection.close();
 
-			if (soapResponse == null) {
-				logger.error("There is no response from BSM: {}", bsmProviderEnvironment.getSoapEndpointUrl());
-				return null;
-			}
+            if (soapResponse == null) {
+                logger.error("There is no response from BSM: {}", bsmProviderEnvironment.getSoapEndpointUrl());
+                return null;
+            }
 
-			return soapResponse.getSOAPBody();
-		} catch (SOAPException ex) {
-			logger.debug(ex.toString());
-		}
+            return soapResponse.getSOAPBody();
+        } catch (SOAPException ex) {
+            logger.debug(ex.toString());
+        }
 
-		return null;
-	}
+        return null;
+    }
 
 }

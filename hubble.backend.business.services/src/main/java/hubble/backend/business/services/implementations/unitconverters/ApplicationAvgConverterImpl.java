@@ -1,12 +1,19 @@
-package hubble.backend.business.services.configurations;
+package hubble.backend.business.services.implementations.unitconverters;
 
+import hubble.backend.business.services.interfaces.unitconverters.UnitConverter;
 import hubble.backend.business.services.models.ApplicationAvgDto;
 import hubble.backend.business.services.models.measures.Unit;
 import java.math.BigDecimal;
 import org.springframework.stereotype.Component;
 
+/**
+ * Converts all the values of ApplicationAvg to a specific unit of measure for
+ * example: seconds, minutes, months, percentage of.
+ *
+ * @author ismaeltisminetzky
+ */
 @Component
-public class UnitConverterImpl implements UnitConverter<ApplicationAvgDto> {
+public class ApplicationAvgConverterImpl implements UnitConverter<ApplicationAvgDto> {
 
     @Override
     public ApplicationAvgDto to(ApplicationAvgDto model, Unit.MEASURES measure) {
