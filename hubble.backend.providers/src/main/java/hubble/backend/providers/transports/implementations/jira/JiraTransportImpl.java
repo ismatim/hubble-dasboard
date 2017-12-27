@@ -1,20 +1,14 @@
 package hubble.backend.providers.transports.implementations.jira;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-
 import hubble.backend.providers.configurations.JiraConfiguration;
 import hubble.backend.providers.configurations.environments.JiraProviderEnvironment;
 import hubble.backend.providers.transports.interfaces.JiraTransport;
@@ -32,17 +26,17 @@ public class JiraTransportImpl implements JiraTransport {
 
     @Override
     public JSONObject getData() {
-            return null;
+        return null;
     }
 
     @Override
     public JiraProviderEnvironment getEnvironment() {
-            return this.environment;
+        return this.environment;
     }
 
     @Override
     public JiraConfiguration getConfiguration() {
-            return this.configuration;
+        return this.configuration;
     }
 
     @Override
@@ -64,19 +58,18 @@ public class JiraTransportImpl implements JiraTransport {
         data = response.getBody().getObject();
 
         if (data == null) {
-                logger.info("La respuesta para el request enviado es nula");
-                return null;
+            logger.error("La respuesta para el request enviado es nula");
+            return null;
         }
 
         return data;
     }
 	
-	 private String buildUri(String path){
-         String uri = String.format("http://%s:%s%s"
-                 ,environment.getHost()
-                 ,environment.getPort()
-                 ,path);
-
-     return uri;
- }
+    private String buildUri(String path) {
+        String uri = String.format("http://%s:%s%s"
+            ,environment.getHost()
+            ,environment.getPort()
+            ,path);
+        return uri;
+    }
 }

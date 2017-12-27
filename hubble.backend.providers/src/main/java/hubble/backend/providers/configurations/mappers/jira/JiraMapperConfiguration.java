@@ -51,14 +51,17 @@ public class JiraMapperConfiguration {
         return jiraModel;
     }
 
-    public String getValue(JSONObject data, String fieldName) {
-        JSONArray issues = data.getJSONArray("issues");
-        JSONObject issue = issues.getJSONObject(0);            
-        JSONObject project = issue.getJSONObject(fieldName);
-
-        if (project.has("name")) {           
-            return project.get("name").toString();
-        } else return null;
+    public String getValue(JSONObject data, String fieldName) {  
+        if (data.has("issues")) {
+            JSONArray issues = data.getJSONArray("issues");
+            JSONObject issue = issues.getJSONObject(0);
+            
+            if (issue != null && issue.has(fieldName)) {
+                JSONObject project = issue.getJSONObject(fieldName);
+                return project.has("name") ? project.get("name").toString() : null;
+            }
+        }
+        return null;
     }
 
     public String resolveApplicationId(String applicationName) {
@@ -68,7 +71,7 @@ public class JiraMapperConfiguration {
                 return applicationId.split(":")[1];
             }
         }
-        logger.debug("Jira: could not found application id in values passed over configuration file");
+        logger.error("Jira: could not found application id in values passed over configuration file");
         return null;
     } 
 }

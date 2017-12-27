@@ -80,7 +80,7 @@ public class JiraDataParserImpl implements JiraDataParser {
         try {
             jiraDataModel = objMapper.readValue(dataStream, JiraIssuesProviderModel.class);
         } catch (IOException e) {
-            logger.debug(e.getMessage());
+            logger.error(e.getMessage());
             return null;
         }
         
