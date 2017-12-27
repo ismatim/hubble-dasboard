@@ -15,6 +15,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+/**
+ * Serves all base information regarding Items To Do for a specific application.
+ * Calculate the total remaining Items and brings them too.
+ *
+ * @author Ismael J. Tisminetzky
+ */
 @Component
 public class WorkItemServiceImpl implements WorkItemService {
 
@@ -48,6 +54,11 @@ public class WorkItemServiceImpl implements WorkItemService {
         return mapper.mapToWorkItemDtoList(workitems);
     }
 
+    /**
+     *
+     * @param applicationId
+     * @return
+     */
     @Override
     public WorkItemQuantity calculateWorkItemQuantityLastMonth(String applicationId) {
         return workItemOperation.calculateWorkItemQuantityLastMonth(applicationId);

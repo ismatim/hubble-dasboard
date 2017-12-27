@@ -9,6 +9,8 @@ import hubble.backend.storage.repositories.AvailabilityRepository;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.soap.SOAPBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +22,8 @@ public class BsmParserDataImpl implements BsmDataParser {
     private AvailabilityRepository availabilityRepository;
     private BsmTransport bsmTransport;
 
+    private final Logger logger = LoggerFactory.getLogger(BsmParserDataImpl.class);
+
     @Autowired
     public BsmParserDataImpl(
             BsmTransport appPulseActiveTransport,
@@ -28,7 +32,7 @@ public class BsmParserDataImpl implements BsmDataParser {
         this.bsmTransport = appPulseActiveTransport;
         this.mapperConfifuration = mapperConfifuration;
         this.availabilityRepository = availabilityRepository;
-    }
+            }
 
     @Override
     public void run() {

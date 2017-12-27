@@ -2,6 +2,12 @@ package hubble.backend.business.services.models;
 
 import java.util.List;
 
+/**
+ * ApplicationDto entity is used as based of what an Application measured should
+ * be.
+ *
+ * @author Ismael J. Tisminetzky
+ */
 public class ApplicationDto {
 
     private String applicationId;
