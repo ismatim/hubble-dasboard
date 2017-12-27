@@ -4,7 +4,9 @@ import hubble.backend.business.services.models.ApplicationAvgDto;
 import hubble.backend.business.services.models.AvailabilityDto;
 import java.util.List;
 
-public interface AvailabilityService extends OperationsServiceBase<ApplicationAvgDto>, ApplicationServiceBase<AvailabilityDto> {
+public interface AvailabilityService extends
+        OperationsServiceBase<ApplicationAvgDto>,
+        ApplicationServiceBase<AvailabilityDto> {
 
     public List<AvailabilityDto> getAll();
 

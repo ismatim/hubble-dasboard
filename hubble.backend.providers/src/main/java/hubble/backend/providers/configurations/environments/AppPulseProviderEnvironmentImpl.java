@@ -1,14 +1,18 @@
 package hubble.backend.providers.configurations.environments;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+/**
+ * Provides a specification of configuration for HP App Pulse in Default
+ * Environment.
+ *
+ * @author Ismael J. Tisminetzky
+ */
 @Component
-@Profile({"default"})
 @PropertySource("classpath:config/apppulse.properties")
-public class AppPulseDevProviderEnvironmentImpl implements ProviderEnvironment {
+public class AppPulseProviderEnvironmentImpl implements ProviderEnvironment {
 
     @Value("${app.url}")
     private String url;

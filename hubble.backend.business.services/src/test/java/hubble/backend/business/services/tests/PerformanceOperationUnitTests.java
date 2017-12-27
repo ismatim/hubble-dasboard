@@ -1,6 +1,6 @@
 package hubble.backend.business.services.tests;
 
-import hubble.backend.business.services.configurations.UnitConverterImpl;
+import hubble.backend.business.services.implementations.unitconverters.ApplicationAvgConverterImpl;
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
 import hubble.backend.business.services.implementations.operations.PerformanceOperationImpl;
 import hubble.backend.business.services.implementations.services.TransactionServiceImpl;
@@ -40,7 +40,7 @@ public class PerformanceOperationUnitTests {
     @Spy
     private MapperConfiguration mapper;
     @Spy
-    UnitConverterImpl unitConverter;
+    ApplicationAvgConverterImpl unitConverter;
     @InjectMocks
     private PerformanceOperationImpl performanceOperation;
     @Spy

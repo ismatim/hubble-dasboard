@@ -40,11 +40,18 @@ public class BsmParserApplicationImpl implements BsmApplicationParser {
         this.applicationstorage = new ArrayList<>();
         this.applicationstorage = mapperConfifuration.mapToApplicationsStorage(transactions);
 
+        if (this.applicationstorage == null) {
+            return;
+        }
         this.save(applicationstorage);
     }
 
     @Override
     public List<BsmProviderModel> parse(SOAPBody data) {
+
+        if (data == null) {
+            return null;
+        }
 
         List<BsmProviderModel> transactions = mapperConfifuration.mapApplicationsToBsmProviderModel(data);
 
@@ -57,6 +64,11 @@ public class BsmParserApplicationImpl implements BsmApplicationParser {
     }
 
     public void save(List<ApplicationStorage> appPulseApplicationRecords) {
+
+        if (appPulseApplicationRecords == null) {
+            return;
+        }
+
         appPulseApplicationRecords.stream().forEach((applicationToSave) -> {
             if (!applicationRepository.exist(applicationToSave)) {
                 applicationRepository.save(applicationToSave);

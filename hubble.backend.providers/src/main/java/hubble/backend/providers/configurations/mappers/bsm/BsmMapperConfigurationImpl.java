@@ -98,6 +98,12 @@ public class BsmMapperConfigurationImpl implements BsmMapperConfiguration {
 
     @Override
     public List<BsmProviderModel> mapApplicationsToBsmProviderModel(SOAPBody data) {
+
+        if (data == null
+                || data.getFirstChild() == null
+                || data.getFirstChild().getFirstChild() == null) {
+            return null;
+                }
         String content = data.getFirstChild().getFirstChild().getChildNodes().item(0).getNodeValue();
         List<BsmProviderModel> transactions = new ArrayList<>();
 
