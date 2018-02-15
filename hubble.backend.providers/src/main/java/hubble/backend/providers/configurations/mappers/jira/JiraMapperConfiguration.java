@@ -55,9 +55,10 @@ public class JiraMapperConfiguration {
         if (data.has("issues")) {
             JSONArray issues = data.getJSONArray("issues");
             JSONObject issue = issues.getJSONObject(0);
+            JSONObject fields = issue.getJSONObject("fields");
             
-            if (issue != null && issue.has(fieldName)) {
-                JSONObject project = issue.getJSONObject(fieldName);
+            if (fields != null && fields.has(fieldName)) {
+                JSONObject project = fields.getJSONObject(fieldName);
                 return project.has("name") ? project.get("name").toString() : null;
             }
         }

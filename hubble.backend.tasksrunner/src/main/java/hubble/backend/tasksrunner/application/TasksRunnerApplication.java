@@ -6,6 +6,8 @@ import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveApplic
 import hubble.backend.providers.parsers.interfaces.apppulse.AppPulseActiveDataParser;
 import hubble.backend.providers.parsers.interfaces.bsm.BsmApplicationParser;
 import hubble.backend.providers.parsers.interfaces.bsm.BsmDataParser;
+import hubble.backend.providers.parsers.interfaces.jira.JiraApplicationParser;
+import hubble.backend.providers.parsers.interfaces.jira.JiraDataParser;
 import hubble.backend.providers.parsers.interfaces.ppm.PpmApplicationParser;
 import hubble.backend.providers.parsers.interfaces.ppm.PpmDataParser;
 import hubble.backend.tasksrunner.application.scheduler.SchedulerMediator;
@@ -17,6 +19,8 @@ import hubble.backend.tasksrunner.jobs.apppulse.AppPulseApplicationParserJob;
 import hubble.backend.tasksrunner.jobs.apppulse.AppPulseDataParserJob;
 import hubble.backend.tasksrunner.jobs.bsm.BsmApplicationParserJob;
 import hubble.backend.tasksrunner.jobs.bsm.BsmDataParserJob;
+import hubble.backend.tasksrunner.jobs.jira.JiraApplicationParserJob;
+import hubble.backend.tasksrunner.jobs.jira.JiraDataParserJob;
 import hubble.backend.tasksrunner.jobs.ppm.PpmApplicationParserJob;
 import hubble.backend.tasksrunner.jobs.ppm.PpmDataParserJob;
 import hubble.backend.tasksrunner.tasks.ParserTask;
@@ -27,6 +31,8 @@ import hubble.backend.tasksrunner.tasks.apppulse.AppPulseApplicationTaskImpl;
 import hubble.backend.tasksrunner.tasks.apppulse.AppPulseDataTaskImpl;
 import hubble.backend.tasksrunner.tasks.bsm.BsmApplicationTaskImpl;
 import hubble.backend.tasksrunner.tasks.bsm.BsmDataTaskImpl;
+import hubble.backend.tasksrunner.tasks.jira.JiraApplicationTaskImpl;
+import hubble.backend.tasksrunner.tasks.jira.JiraDataTaskImpl;
 import hubble.backend.tasksrunner.tasks.ppm.PpmApplicationTaskImpl;
 import hubble.backend.tasksrunner.tasks.ppm.PpmDataTaskImpl;
 import org.quartz.SchedulerException;
@@ -115,9 +121,27 @@ public class TasksRunnerApplication {
         ppmApplicationTask.setIndentityGroupName("Ppm Provider Job");
         ppmApplicationTask.setIndentityName("Ppm Applications");
         ppmApplicationTask.setIntervalSeconds(100);
-
+        
         scheduler.addTask(ppmDataTask);
         scheduler.addTask(ppmApplicationTask);
+        
+        //Jira
+        JiraDataParser jiraParser = context.getBean(JiraDataParser.class);
+        ParserJob jiraJob = new JiraDataParserJob(jiraParser);
+        ParserTask jiraDataTask = new JiraDataTaskImpl(jiraJob);
+        jiraDataTask.setIndentityGroupName("Jira Provider Job");
+        jiraDataTask.setIndentityName("Jira Data");
+        jiraDataTask.setIntervalSeconds(40);
+        
+        JiraApplicationParser jiraAppParser = context.getBean(JiraApplicationParser.class);
+        ParserJob jiraAppJob = new JiraApplicationParserJob(jiraAppParser);
+        ParserTask jiraAppTask = new JiraApplicationTaskImpl(jiraAppJob);
+        jiraAppTask.setIndentityGroupName("Jira Provider Job");
+        jiraAppTask.setIndentityName("Jira Applications");
+        jiraAppTask.setIntervalSeconds(100);
+ 
+        scheduler.addTask(jiraDataTask);
+        scheduler.addTask(jiraAppTask);
 
         scheduler.showMenu();
     }
