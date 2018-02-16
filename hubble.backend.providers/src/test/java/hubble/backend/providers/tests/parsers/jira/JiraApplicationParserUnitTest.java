@@ -11,17 +11,17 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JiraApplicationParserUnitTest extends JiraBaseUnitTest {
-    
+
     @Test
     public void jira_parser_should_map_json_to_issue_model() {
         //Assign
         JiraDataParserImpl jiraParser = new JiraDataParserImpl();
         JiraIssuesProviderModel jiraModel;
         JSONObject fakeResponse = loadFakeResponse();
-        
+
         //Act
         jiraModel = jiraParser.extract(fakeResponse);
-       
+
         //Assert
         assertNotNull(jiraModel);
     }

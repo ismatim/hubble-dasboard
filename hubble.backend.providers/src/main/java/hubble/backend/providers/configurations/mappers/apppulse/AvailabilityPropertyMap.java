@@ -13,10 +13,10 @@ public class AvailabilityPropertyMap extends PropertyMap<AvailabilityDataProvide
     @Override
     protected void configure() {
 
-        String providerName = Providers.PROVIDERS_NAME.APP_PULSE.toString();
+        String providerOrigin = Providers.PROVIDERS_NAME.APP_PULSE.toString();
 
         skip().setId(null);
-        map().setProviderOrigin(providerName);
+        map().setProviderOrigin(providerOrigin);
         using(timeStampConverter).map(source.getTimeStamp()).setTimeStamp(null);
     }
 

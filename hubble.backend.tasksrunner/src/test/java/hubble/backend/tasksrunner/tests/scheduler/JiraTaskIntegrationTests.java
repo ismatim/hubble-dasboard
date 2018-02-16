@@ -17,21 +17,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@TestExecutionListeners(listeners = {DependencyInjectionTestExecutionListener.class})
 @ContextConfiguration(classes = TasksRunnerTestConfiguration.class)
 public class JiraTaskIntegrationTests {
-    
+
     @Autowired
     private ApplicationContext appContext;
 
     public JiraTaskIntegrationTests() {
     }
-    
+
     @Test
     public void SchedulerMediator_should_schedule_jira_job() throws SchedulerException, Exception {
 
@@ -45,7 +42,7 @@ public class JiraTaskIntegrationTests {
         jiraDataTask.setIndentityName("Alm Data");
         jiraDataTask.setIntervalSeconds(1);
         schedule.addTask(jiraDataTask);
-        
+
         //Act
         schedule.start();
         Thread.sleep(4000);
@@ -53,7 +50,7 @@ public class JiraTaskIntegrationTests {
         //Assert
         schedule.shutdown();
     }
-    
+
     @Test
     public void SchedulerMediator_should_schedule_jira_applications_job() throws SchedulerException, Exception {
 
@@ -74,5 +71,5 @@ public class JiraTaskIntegrationTests {
         //Assert
         schedule.shutdown();
     }
-    
+
 }

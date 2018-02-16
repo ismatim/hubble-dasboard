@@ -7,7 +7,6 @@ import hubble.backend.providers.parsers.interfaces.jira.JiraApplicationParser;
 import hubble.backend.providers.transports.interfaces.JiraTransport;
 import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.repositories.ApplicationRepository;
-import java.util.List;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,31 +15,26 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JiraApplicationParserImpl implements JiraApplicationParser {
-    
+
     @Autowired
     private JiraTransport jiraTransport;
     @Autowired
     private JiraMapperConfiguration jiraMapperConfiguration;
     @Autowired
     private ApplicationRepository applicationRepository;
-    
+
     private final Logger logger = LoggerFactory.getLogger(JiraApplicationParserImpl.class);
-    
+
     @Override
     public JiraApplicationProviderModel parse(JSONObject data) {
         if (data == null) {
             return null;
         }
-        
+
         JiraApplicationProviderModel jiraApplicationModel;
         jiraApplicationModel = jiraMapperConfiguration.mapToApplicationModel(data);
-        
-        return jiraApplicationModel;
-    }
 
-    @Override
-    public List<ApplicationStorage> getApplicationStorage() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return jiraApplicationModel;
     }
 
     @Override
@@ -51,12 +45,13 @@ public class JiraApplicationParserImpl implements JiraApplicationParser {
         String project = jiraTransport.getConfiguration().getProjectKey();
         JiraApplicationProviderModel jiraApplicationModel;
         ApplicationStorage applicationStorage;
-        
-        JSONObject response = jiraTransport.getAllIssuesByProject(encodedAuthString, project);
+
+        jiraTransport.setEncodedCredentials(encodedAuthString);
+        JSONObject response = jiraTransport.getAllIssuesByProject(project);
         jiraApplicationModel = this.parse(response);
         applicationStorage = jiraMapperConfiguration.mapToApplicationStorage(jiraApplicationModel);
-        
-        if (!applicationRepository.exist(applicationStorage)){
+
+        if (!applicationRepository.exist(applicationStorage)) {
             applicationRepository.save(applicationStorage);
         }
     }
