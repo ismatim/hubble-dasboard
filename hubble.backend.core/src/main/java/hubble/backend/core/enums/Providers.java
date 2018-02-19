@@ -21,6 +21,12 @@ public class Providers {
             public String toString() {
                 return "HP ALM";
             }
+        },
+        JIRA {
+            @Override
+            public String toString() {
+                return "JIRA";
+            }
         }
     }
 }

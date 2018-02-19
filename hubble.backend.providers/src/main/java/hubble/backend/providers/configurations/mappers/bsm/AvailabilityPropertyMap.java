@@ -17,7 +17,7 @@ public class AvailabilityPropertyMap extends PropertyMap<BsmProviderModel, Avail
     @Override
     protected void configure() {
 
-        String providerName = Providers.PROVIDERS_NAME.BSM.toString();
+        String providerOrigin = Providers.PROVIDERS_NAME.BSM.toString();
 
         skip().setId(null);
         skip().setApplicationId(null);
@@ -35,7 +35,7 @@ public class AvailabilityPropertyMap extends PropertyMap<BsmProviderModel, Avail
         map().setScriptName(source.getSzscriptname());
         map().setNumberOfErrors(source.getIcomponenterrorcount());
 
-        map().setProviderOrigin(providerName);
+        map().setProviderOrigin(providerOrigin);
         using(timeStampConverter).map(source.getTime_stamp()).setTimeStamp(null);
         using(statusConverter).map(source.getSzstatusname()).setAvailabilityStatus("");
     }

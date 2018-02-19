@@ -1,41 +1,36 @@
 package hubble.backend.tasksrunner.tests.scheduler;
 
-import hubble.backend.providers.parsers.interfaces.alm.AlmDataParser;
 import hubble.backend.providers.parsers.interfaces.ppm.PpmApplicationParser;
 import hubble.backend.providers.parsers.interfaces.ppm.PpmDataParser;
 import hubble.backend.tasksrunner.application.scheduler.SchedulerMediator;
 import hubble.backend.tasksrunner.jobs.ParserJob;
-import hubble.backend.tasksrunner.jobs.alm.AlmDataParserJob;
 import hubble.backend.tasksrunner.jobs.ppm.PpmApplicationParserJob;
 import hubble.backend.tasksrunner.jobs.ppm.PpmDataParserJob;
 import hubble.backend.tasksrunner.tasks.Task;
-import hubble.backend.tasksrunner.tasks.alm.AlmDataTaskImpl;
 import hubble.backend.tasksrunner.tasks.ppm.PpmApplicationTaskImpl;
 import hubble.backend.tasksrunner.tasks.ppm.PpmDataTaskImpl;
 import hubble.backend.tasksrunner.tests.configurations.TasksRunnerTestConfiguration;
+import org.junit.Ignore;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@TestExecutionListeners(listeners = {DependencyInjectionTestExecutionListener.class})
 @ContextConfiguration(classes = TasksRunnerTestConfiguration.class)
+@Ignore("PPM not working")
 public class PpmTaskIntegrationTests {
-    
+
     @Autowired
     private ApplicationContext appContext;
-    
+
     public PpmTaskIntegrationTests() {
     }
-    
+
     @Test
     public void SchedulerMediator_should_schedule_ppm_job() throws SchedulerException, Exception {
 
@@ -56,7 +51,7 @@ public class PpmTaskIntegrationTests {
         //Assert
         schedule.shutdown();
     }
-    
+
     @Test
     public void SchedulerMediator_should_schedule_ppm_application_job() throws SchedulerException, Exception {
 
@@ -77,5 +72,5 @@ public class PpmTaskIntegrationTests {
         //Assert
         schedule.shutdown();
     }
-    
+
 }

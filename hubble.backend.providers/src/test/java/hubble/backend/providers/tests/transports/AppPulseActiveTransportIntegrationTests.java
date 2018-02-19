@@ -26,6 +26,7 @@ public class AppPulseActiveTransportIntegrationTests {
         assertNotNull(appPulseActiveTransport);
     }
 
+    @Ignore("AppPulse API not longer active.")
     @Test
     public void AppPulseActiveTransport_should_get_token() {
 

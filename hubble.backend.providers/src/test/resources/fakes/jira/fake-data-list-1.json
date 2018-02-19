@@ -1,0 +1,823 @@
+	{
+    "expand": "schema,names",
+    "startAt": 0,
+    "maxResults": 50,
+    "total": 6,
+    "issues": [{
+            "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+            "id": "10005",
+            "self": "http://10.10.20.175:8888/rest/api/2/issue/10005",
+            "key": "HUB-6",
+            "fields": {
+                "issuetype": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issuetype/10002",
+                    "id": "10002",
+                    "description": "Una tarea que necesita ser realizada.",
+                    "iconUrl": "http://10.10.20.175:8888/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                    "name": "Tarea",
+                    "subtask": false,
+                    "avatarId": 10318
+                },
+                "components": [],
+                "timespent": null,
+                "timeoriginalestimate": null,
+                "description": "h4. Now it's your turn!\n{color:#707070}Now, it is your turn to create your first task. Click the 'Create' button and get your project started. {color}\nh4. If you are a JIRA Core administrator, you can create and customize projects for your organization. \n* {color:#707070} Click on 'Create Project' under the Project menu above and select one of the business projects to get started. {color}\n* {color:#707070}Invite team members to JIRA Core - keyboard shortcut: !dot.png!, then type 'users' {color}\n* {color:#707070}Delete this Demo Project - keyboard shortcut: !dot.png!, then type 'projects' {color}\n{color:#707070}Previous:{color} [Keyboard shortcuts|HUB-5]\n\n----\n(i) [Visit the JIRA Core documentation|https://confluence.atlassian.com/display/JIRACORECLOUD/JIRA+Core+documentation]",
+                "project": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/project/10000",
+                    "id": "10000",
+                    "key": "HUB",
+                    "name": "hubble-test",
+                    "avatarUrls": {
+                        "48x48": "http://10.10.20.175:8888/secure/projectavatar?avatarId=10324",
+                        "24x24": "http://10.10.20.175:8888/secure/projectavatar?size=small&avatarId=10324",
+                        "16x16": "http://10.10.20.175:8888/secure/projectavatar?size=xsmall&avatarId=10324",
+                        "32x32": "http://10.10.20.175:8888/secure/projectavatar?size=medium&avatarId=10324"
+                    }
+                },
+                "fixVersions": [],
+                "aggregatetimespent": null,
+                "resolution": null,
+                "customfield_10005": "0|i00013:",
+                "aggregatetimeestimate": null,
+                "resolutiondate": null,
+                "workratio": -1,
+                "summary": "What's next?",
+                "lastViewed": "2017-11-22T19:14:13.900+0000",
+                "watches": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issue/HUB-6/watchers",
+                    "watchCount": 0,
+                    "isWatching": false
+                },
+                "creator": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "subtasks": [],
+                "created": "2017-11-21T12:52:20.000+0000",
+                "reporter": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "customfield_10000": null,
+                "aggregateprogress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "priority": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/priority/3",
+                    "iconUrl": "http://10.10.20.175:8888/images/icons/priorities/medium.svg",
+                    "name": "Medium",
+                    "id": "3"
+                },
+                "labels": [],
+                "customfield_10004": null,
+                "environment": null,
+                "timeestimate": null,
+                "aggregatetimeoriginalestimate": null,
+                "versions": [],
+                "duedate": null,
+                "progress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "issuelinks": [],
+                "votes": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issue/HUB-6/votes",
+                    "votes": 0,
+                    "hasVoted": false
+                },
+                "assignee": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "updated": "2017-11-21T12:46:12.000+0000",
+                "status": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/status/10000",
+                    "description": "",
+                    "iconUrl": "http://10.10.20.175:8888/images/icons/status_generic.gif",
+                    "name": "Por hacer",
+                    "id": "10000",
+                    "statusCategory": {
+                        "self": "http://10.10.20.175:8888/rest/api/2/statuscategory/2",
+                        "id": 2,
+                        "key": "new",
+                        "colorName": "blue-gray",
+                        "name": "Por hacer"
+                    }
+                }
+            }
+        }, {
+            "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+            "id": "10004",
+            "self": "http://10.10.20.175:8888/rest/api/2/issue/10004",
+            "key": "HUB-5",
+            "fields": {
+                "issuetype": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issuetype/10002",
+                    "id": "10002",
+                    "description": "Una tarea que necesita ser realizada.",
+                    "iconUrl": "http://10.10.20.175:8888/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                    "name": "Tarea",
+                    "subtask": false,
+                    "avatarId": 10318
+                },
+                "components": [],
+                "timespent": null,
+                "timeoriginalestimate": null,
+                "description": "h4. Working faster\n{color:#707070}!Keyboard.png! Are you a fan of keyboard shortcuts? We are too! Press !questionmark.png! to see the list.\nHere are three of our favourites that you might like to try:{color}\n* {color:#707070}!dot.png! Operations Dialog{color}\n* {color:#707070}!i.png! Assign to me{color}\n* {color:#707070}!l.png! Label Issue{color}\nNext: [Searching for Information|HUB-6]\n{color:#707070}Previous:{color} [What's next|HUB-4]\n\n----\n[Learn more about keyboard shortcuts|https://confluence.atlassian.com/display/JIRA/Using+Keyboard+Shortcuts]",
+                "project": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/project/10000",
+                    "id": "10000",
+                    "key": "HUB",
+                    "name": "hubble-test",
+                    "avatarUrls": {
+                        "48x48": "http://10.10.20.175:8888/secure/projectavatar?avatarId=10324",
+                        "24x24": "http://10.10.20.175:8888/secure/projectavatar?size=small&avatarId=10324",
+                        "16x16": "http://10.10.20.175:8888/secure/projectavatar?size=xsmall&avatarId=10324",
+                        "32x32": "http://10.10.20.175:8888/secure/projectavatar?size=medium&avatarId=10324"
+                    }
+                },
+                "fixVersions": [],
+                "aggregatetimespent": null,
+                "resolution": null,
+                "customfield_10005": "0|i0000v:",
+                "aggregatetimeestimate": null,
+                "resolutiondate": null,
+                "workratio": -1,
+                "summary": "Keyboard shortcuts",
+                "lastViewed": "2017-11-22T19:14:24.640+0000",
+                "watches": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issue/HUB-5/watchers",
+                    "watchCount": 0,
+                    "isWatching": false
+                },
+                "creator": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "subtasks": [],
+                "created": "2017-11-21T12:52:18.000+0000",
+                "reporter": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "customfield_10000": null,
+                "aggregateprogress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "priority": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/priority/3",
+                    "iconUrl": "http://10.10.20.175:8888/images/icons/priorities/medium.svg",
+                    "name": "Medium",
+                    "id": "3"
+                },
+                "labels": ["demo", "keyboard-shortcuts"],
+                "customfield_10004": null,
+                "environment": null,
+                "timeestimate": null,
+                "aggregatetimeoriginalestimate": null,
+                "versions": [],
+                "duedate": null,
+                "progress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "issuelinks": [],
+                "votes": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issue/HUB-5/votes",
+                    "votes": 0,
+                    "hasVoted": false
+                },
+                "assignee": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "updated": "2017-11-21T12:47:12.000+0000",
+                "status": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/status/10000",
+                    "description": "",
+                    "iconUrl": "http://10.10.20.175:8888/images/icons/status_generic.gif",
+                    "name": "Por hacer",
+                    "id": "10000",
+                    "statusCategory": {
+                        "self": "http://10.10.20.175:8888/rest/api/2/statuscategory/2",
+                        "id": 2,
+                        "key": "new",
+                        "colorName": "blue-gray",
+                        "name": "Por hacer"
+                    }
+                }
+            }
+        }, {
+            "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+            "id": "10003",
+            "self": "http://10.10.20.175:8888/rest/api/2/issue/10003",
+            "key": "HUB-4",
+            "fields": {
+                "issuetype": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issuetype/10002",
+                    "id": "10002",
+                    "description": "Una tarea que necesita ser realizada.",
+                    "iconUrl": "http://10.10.20.175:8888/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                    "name": "Tarea",
+                    "subtask": false,
+                    "avatarId": 10318
+                },
+                "components": [],
+                "timespent": null,
+                "timeoriginalestimate": null,
+                "description": "h4.Searching for Information\n{color:#707070}Use the Search bar in the top right to quickly find a particular task. \nFor more advanced searches, click 'Search for issues' under the Issues menu. \n{color}\nNext: [Keyboard shortcuts|HUB-5]\n{color:#707070}Previous:{color} [Editing tasks|HUB-3]\n\n----\n[Learn more about searching|https://confluence.atlassian.com/display/JIRACORECLOUD/Searching+for+issues]",
+                "project": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/project/10000",
+                    "id": "10000",
+                    "key": "HUB",
+                    "name": "hubble-test",
+                    "avatarUrls": {
+                        "48x48": "http://10.10.20.175:8888/secure/projectavatar?avatarId=10324",
+                        "24x24": "http://10.10.20.175:8888/secure/projectavatar?size=small&avatarId=10324",
+                        "16x16": "http://10.10.20.175:8888/secure/projectavatar?size=xsmall&avatarId=10324",
+                        "32x32": "http://10.10.20.175:8888/secure/projectavatar?size=medium&avatarId=10324"
+                    }
+                },
+                "fixVersions": [],
+                "aggregatetimespent": null,
+                "resolution": null,
+                "customfield_10005": "0|i0000n:",
+                "aggregatetimeestimate": null,
+                "resolutiondate": null,
+                "workratio": -1,
+                "summary": "Searching for information",
+                "lastViewed": null,
+                "watches": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issue/HUB-4/watchers",
+                    "watchCount": 0,
+                    "isWatching": false
+                },
+                "creator": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "subtasks": [],
+                "created": "2017-11-21T12:52:17.000+0000",
+                "reporter": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "customfield_10000": null,
+                "aggregateprogress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "priority": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/priority/3",
+                    "iconUrl": "http://10.10.20.175:8888/images/icons/priorities/medium.svg",
+                    "name": "Medium",
+                    "id": "3"
+                },
+                "labels": [],
+                "customfield_10004": null,
+                "environment": null,
+                "timeestimate": null,
+                "aggregatetimeoriginalestimate": null,
+                "versions": [],
+                "duedate": null,
+                "progress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "issuelinks": [],
+                "votes": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issue/HUB-4/votes",
+                    "votes": 0,
+                    "hasVoted": false
+                },
+                "assignee": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "updated": "2017-11-21T12:48:12.000+0000",
+                "status": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/status/10000",
+                    "description": "",
+                    "iconUrl": "http://10.10.20.175:8888/images/icons/status_generic.gif",
+                    "name": "Por hacer",
+                    "id": "10000",
+                    "statusCategory": {
+                        "self": "http://10.10.20.175:8888/rest/api/2/statuscategory/2",
+                        "id": 2,
+                        "key": "new",
+                        "colorName": "blue-gray",
+                        "name": "Por hacer"
+                    }
+                }
+            }
+        }, {
+            "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+            "id": "10002",
+            "self": "http://10.10.20.175:8888/rest/api/2/issue/10002",
+            "key": "HUB-3",
+            "fields": {
+                "issuetype": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issuetype/10002",
+                    "id": "10002",
+                    "description": "Una tarea que necesita ser realizada.",
+                    "iconUrl": "http://10.10.20.175:8888/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                    "name": "Tarea",
+                    "subtask": false,
+                    "avatarId": 10318
+                },
+                "components": [],
+                "timespent": null,
+                "timeoriginalestimate": 300,
+                "description": "h4. Editing tasks\n{color:#707070}Hover over the content you want to edit and make the change. Click the checkmark and you're done! You can also edit using keyboard shortcuts or by clicking the 'Edit' button. And don't forget to assign the task to someone. {color}\nh4. Commenting\n{color:#707070}You can add comments to a task below. Comments are a great way to communicate with your team and stay informed. Plus, you can notify specific team members by using @mentions.\n{color}\n!Comment.png!\nNext: [Searching|HUB-4]\n{color:#707070}Previous:{color} [Workflows and Statuses|HUB-2]\n\n\n----\n[Learn more about editing issues|https://confluence.atlassian.com/display/JIRA/Editing+an+Issue]",
+                "project": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/project/10000",
+                    "id": "10000",
+                    "key": "HUB",
+                    "name": "hubble-test",
+                    "avatarUrls": {
+                        "48x48": "http://10.10.20.175:8888/secure/projectavatar?avatarId=10324",
+                        "24x24": "http://10.10.20.175:8888/secure/projectavatar?size=small&avatarId=10324",
+                        "16x16": "http://10.10.20.175:8888/secure/projectavatar?size=xsmall&avatarId=10324",
+                        "32x32": "http://10.10.20.175:8888/secure/projectavatar?size=medium&avatarId=10324"
+                    }
+                },
+                "fixVersions": [],
+                "aggregatetimespent": null,
+                "resolution": null,
+                "customfield_10005": "0|i0000f:",
+                "aggregatetimeestimate": null,
+                "resolutiondate": null,
+                "workratio": 0,
+                "summary": "Editing tasks",
+                "lastViewed": null,
+                "watches": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issue/HUB-3/watchers",
+                    "watchCount": 0,
+                    "isWatching": false
+                },
+                "creator": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "subtasks": [],
+                "created": "2017-11-21T12:52:16.000+0000",
+                "reporter": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "customfield_10000": null,
+                "aggregateprogress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "priority": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/priority/3",
+                    "iconUrl": "http://10.10.20.175:8888/images/icons/priorities/medium.svg",
+                    "name": "Medium",
+                    "id": "3"
+                },
+                "labels": [],
+                "customfield_10004": null,
+                "environment": null,
+                "timeestimate": null,
+                "aggregatetimeoriginalestimate": 300,
+                "versions": [],
+                "duedate": null,
+                "progress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "issuelinks": [],
+                "votes": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issue/HUB-3/votes",
+                    "votes": 0,
+                    "hasVoted": false
+                },
+                "assignee": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "updated": "2017-11-21T12:49:12.000+0000",
+                "status": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/status/10000",
+                    "description": "",
+                    "iconUrl": "http://10.10.20.175:8888/images/icons/status_generic.gif",
+                    "name": "Por hacer",
+                    "id": "10000",
+                    "statusCategory": {
+                        "self": "http://10.10.20.175:8888/rest/api/2/statuscategory/2",
+                        "id": 2,
+                        "key": "new",
+                        "colorName": "blue-gray",
+                        "name": "Por hacer"
+                    }
+                }
+            }
+        }, {
+            "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+            "id": "10001",
+            "self": "http://10.10.20.175:8888/rest/api/2/issue/10001",
+            "key": "HUB-2",
+            "fields": {
+                "issuetype": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issuetype/10002",
+                    "id": "10002",
+                    "description": "Una tarea que necesita ser realizada.",
+                    "iconUrl": "http://10.10.20.175:8888/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                    "name": "Tarea",
+                    "subtask": false,
+                    "avatarId": 10318
+                },
+                "components": [],
+                "timespent": null,
+                "timeoriginalestimate": null,
+                "description": "!Workflow.png|align=left!\nh4. Workflows - What you need to know\n{color:#707070}Workflows define steps to get a task to done. To see the workflow this tasks goes through, click on 'View Workflow' above. {color}\nh4. Status\n{color:#707070} A status represents the “state” of a task at a specific point in your workflow. The current status of your task can be viewed in the 'Details' section above. Once you're ready to move to the next step, click on the appropriate transition button. {color}\n\nNext: [Editing tasks|HUB-3]\n{color:#707070}Previous:{color} [This is your first task.|HUB-1]\n\n----\n[Learn more about workflows|http://blogs.atlassian.com/2015/11/how-to-set-up-business-workflows-in-jira-core/]",
+                "project": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/project/10000",
+                    "id": "10000",
+                    "key": "HUB",
+                    "name": "hubble-test",
+                    "avatarUrls": {
+                        "48x48": "http://10.10.20.175:8888/secure/projectavatar?avatarId=10324",
+                        "24x24": "http://10.10.20.175:8888/secure/projectavatar?size=small&avatarId=10324",
+                        "16x16": "http://10.10.20.175:8888/secure/projectavatar?size=xsmall&avatarId=10324",
+                        "32x32": "http://10.10.20.175:8888/secure/projectavatar?size=medium&avatarId=10324"
+                    }
+                },
+                "fixVersions": [],
+                "aggregatetimespent": null,
+                "resolution": null,
+                "customfield_10005": "0|i00007:",
+                "aggregatetimeestimate": null,
+                "resolutiondate": null,
+                "workratio": -1,
+                "summary": "Workflows and statuses",
+                "lastViewed": null,
+                "watches": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issue/HUB-2/watchers",
+                    "watchCount": 0,
+                    "isWatching": false
+                },
+                "creator": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "subtasks": [],
+                "created": "2017-11-21T12:52:15.000+0000",
+                "reporter": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "customfield_10000": null,
+                "aggregateprogress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "priority": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/priority/3",
+                    "iconUrl": "http://10.10.20.175:8888/images/icons/priorities/medium.svg",
+                    "name": "Medium",
+                    "id": "3"
+                },
+                "labels": [],
+                "customfield_10004": null,
+                "environment": null,
+                "timeestimate": null,
+                "aggregatetimeoriginalestimate": null,
+                "versions": [],
+                "duedate": null,
+                "progress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "issuelinks": [],
+                "votes": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issue/HUB-2/votes",
+                    "votes": 0,
+                    "hasVoted": false
+                },
+                "assignee": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "updated": "2017-11-21T12:50:12.000+0000",
+                "status": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/status/10000",
+                    "description": "",
+                    "iconUrl": "http://10.10.20.175:8888/images/icons/status_generic.gif",
+                    "name": "Por hacer",
+                    "id": "10000",
+                    "statusCategory": {
+                        "self": "http://10.10.20.175:8888/rest/api/2/statuscategory/2",
+                        "id": 2,
+                        "key": "new",
+                        "colorName": "blue-gray",
+                        "name": "Por hacer"
+                    }
+                }
+            }
+        }, {
+            "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+            "id": "10000",
+            "self": "http://10.10.20.175:8888/rest/api/2/issue/10000",
+            "key": "HUB-1",
+            "fields": {
+                "issuetype": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issuetype/10002",
+                    "id": "10002",
+                    "description": "Una tarea que necesita ser realizada.",
+                    "iconUrl": "http://10.10.20.175:8888/secure/viewavatar?size=xsmall&avatarId=10318&avatarType=issuetype",
+                    "name": "Tarea",
+                    "subtask": false,
+                    "avatarId": 10318
+                },
+                "components": [],
+                "timespent": null,
+                "timeoriginalestimate": null,
+                "description": "h2. This is your first task. \n{color:#707070} Issues are the things you do in a project. In business projects, issues are called tasks. {color}\nh4. Types of tasks\n{color:#707070}A task can represent a document, a creative asset, a purchase and even a person.{color}\n!IssueTypes.png!\nh4. Details\n{color:#707070}The 'Details' section above, provides the information you need, such as priority and status, to help you track the progress of your tasks.{color}\nNext: [Workflows and statuses|HUB-2]\n\n----\n[Learn more |http://blogs.atlassian.com/2015/11/make-jira-core-issues-work-for-your-business-team/]",
+                "project": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/project/10000",
+                    "id": "10000",
+                    "key": "HUB",
+                    "name": "hubble-test",
+                    "avatarUrls": {
+                        "48x48": "http://10.10.20.175:8888/secure/projectavatar?avatarId=10324",
+                        "24x24": "http://10.10.20.175:8888/secure/projectavatar?size=small&avatarId=10324",
+                        "16x16": "http://10.10.20.175:8888/secure/projectavatar?size=xsmall&avatarId=10324",
+                        "32x32": "http://10.10.20.175:8888/secure/projectavatar?size=medium&avatarId=10324"
+                    }
+                },
+                "fixVersions": [],
+                "aggregatetimespent": null,
+                "resolution": null,
+                "customfield_10005": "0|hzzzzz:",
+                "aggregatetimeestimate": null,
+                "resolutiondate": null,
+                "workratio": -1,
+                "summary": "This is your first task",
+                "lastViewed": "2017-11-27T20:09:05.241+0000",
+                "watches": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issue/HUB-1/watchers",
+                    "watchCount": 0,
+                    "isWatching": false
+                },
+                "creator": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "subtasks": [],
+                "created": "2017-11-21T12:52:13.000+0000",
+                "reporter": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "customfield_10000": null,
+                "aggregateprogress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "priority": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/priority/3",
+                    "iconUrl": "http://10.10.20.175:8888/images/icons/priorities/medium.svg",
+                    "name": "Medium",
+                    "id": "3"
+                },
+                "labels": [],
+                "customfield_10004": null,
+                "environment": null,
+                "timeestimate": null,
+                "aggregatetimeoriginalestimate": null,
+                "versions": [],
+                "duedate": null,
+                "progress": {
+                    "progress": 0,
+                    "total": 0
+                },
+                "issuelinks": [],
+                "votes": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/issue/HUB-1/votes",
+                    "votes": 0,
+                    "hasVoted": false
+                },
+                "assignee": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/user?username=andrevigneaux",
+                    "name": "andrevigneaux",
+                    "key": "andrevigneaux",
+                    "emailAddress": "andre.vigneaux@tsoftglobal.com",
+                    "avatarUrls": {
+                        "48x48": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=48",
+                        "24x24": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=24",
+                        "16x16": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=16",
+                        "32x32": "http://www.gravatar.com/avatar/08954f805906ff41e7c2e668381becdf?d=mm&s=32"
+                    },
+                    "displayName": "Andre Vigneaux",
+                    "active": true,
+                    "timeZone": "GMT"
+                },
+                "updated": "2017-11-21T12:51:12.000+0000",
+                "status": {
+                    "self": "http://10.10.20.175:8888/rest/api/2/status/10000",
+                    "description": "",
+                    "iconUrl": "http://10.10.20.175:8888/images/icons/status_generic.gif",
+                    "name": "Por hacer",
+                    "id": "10000",
+                    "statusCategory": {
+                        "self": "http://10.10.20.175:8888/rest/api/2/statuscategory/2",
+                        "id": 2,
+                        "key": "new",
+                        "colorName": "blue-gray",
+                        "name": "Por hacer"
+                    }
+                }
+            }
+        }]
+}

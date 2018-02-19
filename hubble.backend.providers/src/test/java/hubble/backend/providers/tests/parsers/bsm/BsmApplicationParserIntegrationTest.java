@@ -8,6 +8,7 @@ import hubble.backend.storage.repositories.ApplicationRepository;
 import java.util.List;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class BsmApplicationParserIntegrationTest extends AppPulseBaseUnitTests {
         assertNotNull(bsmParser);
     }
 
+    @Ignore("BSM is down")
     @Test
     public void BsmApplicationParser_when_it_runs_should_connect_get_data_and_save_it() {
 
