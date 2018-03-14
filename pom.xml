@@ -17,8 +17,7 @@
         <module>hubble.backend.storage</module>
         <module>hubble.backend.tasksrunner</module>
         <module>hubble.backend.business.services</module>
-        <module>hubble.frontend.web</module>
-        <module>hubble.frontend.business</module>
+        <module>hubble.backend.api</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

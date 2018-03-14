@@ -18,5 +18,4 @@ public class ApplicationPropertyMap extends PropertyMap<BsmProviderModel, Applic
         map().setApplicationName(source.getProfile_name());
         map().setActive(true);
     }
-
 };

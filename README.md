@@ -169,6 +169,12 @@ Usamos el prefijo `get` para obtener datos, ya que es el standard para las comun
 
 El proyecto *frontend.business* contiene los modelos que conforman el negocio llamado *business*. El paquete de Business contiene la lógica de negocio que crea la vista del usuario, o sea, hace de la parte controladora de la vista. El paquete Views guarda las estructuras de los datos con los cuales se rellena la vista (html) que está en el proyecto *frontend.web*.
 
+
+#### API
+
+http://localhost:8080/swagger-ui.html
+
+
 ---
 
 ## Code Coverage
