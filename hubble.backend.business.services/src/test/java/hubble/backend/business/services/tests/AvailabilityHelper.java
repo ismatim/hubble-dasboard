@@ -87,7 +87,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -108,7 +108,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -129,7 +129,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -147,10 +147,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 3));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -168,10 +168,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -189,10 +189,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 2));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -210,10 +210,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 4));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -231,10 +231,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 6));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -255,7 +255,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -273,10 +273,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 26));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -294,10 +294,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 28));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -315,13 +315,13 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 32));
-        
+
         availabilityStorageList.add(availabilityStorage);
 
         return availabilityStorageList;
 
     }
-    
+
     public List<AvailabilityStorage> mockThreeDaysAgoData() {
         List<AvailabilityStorage> availabilityStorageList = new ArrayList();
         AvailabilityStorage availabilityStorage = new AvailabilityStorage();
@@ -346,7 +346,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -367,7 +367,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -388,7 +388,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -406,10 +406,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 3 - Calendar.HOUR * 24 * 2));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -427,10 +427,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR - Calendar.HOUR * 24 * 2));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -448,10 +448,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 2 - Calendar.HOUR * 24 * 2));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -469,10 +469,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 4 - Calendar.HOUR * 24 * 2));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -490,10 +490,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 6 - Calendar.HOUR * 24 * 2));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -514,7 +514,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -532,10 +532,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 5 - Calendar.HOUR * 24 * 2));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -553,10 +553,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 9 - Calendar.HOUR * 24 * 2));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -574,13 +574,13 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 2 - Calendar.HOUR * 24 * 2));
-        
+
         availabilityStorageList.add(availabilityStorage);
 
         return availabilityStorageList;
 
     }
-    
+
     public List<AvailabilityStorage> mockTwoDaysAgoData() {
         List<AvailabilityStorage> availabilityStorageList = new ArrayList();
         AvailabilityStorage availabilityStorage = new AvailabilityStorage();
@@ -605,7 +605,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -626,7 +626,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -647,7 +647,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -665,10 +665,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 3 - Calendar.HOUR * 24));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -686,10 +686,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR - Calendar.HOUR * 24));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -707,10 +707,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 2 - Calendar.HOUR * 24));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -728,10 +728,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 4 - Calendar.HOUR * 24));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -749,10 +749,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 6 - Calendar.HOUR * 24));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -773,7 +773,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -791,10 +791,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 5 - Calendar.HOUR * 24));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -812,13 +812,405 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 9 - Calendar.HOUR * 24));
-        
+
         availabilityStorageList.add(availabilityStorage);
 
         return availabilityStorageList;
 
     }
-    
+
+    public List<AvailabilityStorage> mockLowAvailabilityData() {
+        List<AvailabilityStorage> availabilityStorageList = new ArrayList();
+        AvailabilityStorage availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Success");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk58f8sdf48f");
+        availabilityStorage.setLocationId("sdfksd637373f8");
+        availabilityStorage.setLocationName("Washington DC, AT&T");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(1314);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 9 - Calendar.HOUR * 24 * 2));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Error");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk58f8sdf48g");
+        availabilityStorage.setLocationId("sdfksd637373f8");
+        availabilityStorage.setLocationName("Washington DC, AT&T");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(1208);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j39sdf");
+        availabilityStorage.setTransactionName("Despliegue Formulario Consumo");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 7 - Calendar.HOUR * 24 * 2));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Error");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk58f8sdf48h");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(914);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 6 - Calendar.HOUR * 24 * 2));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Error");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk58f8sdf48i");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(1471);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 3 - Calendar.HOUR * 24 * 2));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Error");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk58f8sdf3");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(1471);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR - Calendar.HOUR * 24 * 2));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Error");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk58f82323ar");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(1471);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 2 - Calendar.HOUR * 24 * 2));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Error");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sdf58f8sdf48por");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(1471);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 4 - Calendar.HOUR * 24 * 2));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Error");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y47h5sk58f8sdf409");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(1471);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 6 - Calendar.HOUR * 24 * 2));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Success");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h4sk58f8sdf4q");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(1471);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 3 - Calendar.HOUR * 24 * 2));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Error");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk5tyf8sdf483");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(1471);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 5 - Calendar.HOUR * 24 * 2));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Error");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk12358f8sdf48i");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(1471);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 9 - Calendar.HOUR * 24 * 2));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Error");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk5asd8sdf48i");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(1471);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 2 - Calendar.HOUR * 24 * 2));
+
+        availabilityStorageList.add(availabilityStorage);
+
+        return availabilityStorageList;
+
+    }
+
+    public List<AvailabilityStorage> mockLowPerformanceData() {
+        List<AvailabilityStorage> availabilityStorageList = new ArrayList();
+        AvailabilityStorage availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Success");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk58f8sdf48f");
+        availabilityStorage.setLocationId("sdfksd637373f8");
+        availabilityStorage.setLocationName("Washington DC, AT&T");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(131400);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 9));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Success");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk58f8sdf48g");
+        availabilityStorage.setLocationId("sdfksd637373f8");
+        availabilityStorage.setLocationName("Washington DC, AT&T");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(12008);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j39sdf");
+        availabilityStorage.setTransactionName("Despliegue Formulario Consumo");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 7));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Success");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk58f8sdf48h");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(91400);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 6));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Success");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk58f8sdf48i");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(14701);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 3));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Error");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk58f8sdf3");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(1471);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR));
+
+        availabilityStorageList.add(availabilityStorage);
+        availabilityStorage = new AvailabilityStorage();
+
+        availabilityStorage.setApplicationId("1");
+        availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
+        availabilityStorage.setAvailabilityFailIfAbove(90);
+        availabilityStorage.setAvailabilityStatus("Success");
+        availabilityStorage.setErrors(null);
+        availabilityStorage.setId("h3y44h5sk58f82323ar");
+        availabilityStorage.setLocationId("sdfksd637373ft");
+        availabilityStorage.setLocationName("Sonda Interna - Ripley 1");
+        availabilityStorage.setNumberOfErrors(0);
+        availabilityStorage.setPerformanceStatus("Warning");
+        availabilityStorage.setProviderOrigin("AppPulse Active");
+        availabilityStorage.setResponseTime(10471);
+        availabilityStorage.setScriptName("HomeBanking");
+        availabilityStorage.setServerName("Arizona");
+        availabilityStorage.setTransactionId("h5l394kdd9j393k");
+        availabilityStorage.setTransactionName("Despliegue Zona Campana");
+        availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 30));
+
+        availabilityStorageList.add(availabilityStorage);
+
+        return availabilityStorageList;
+
+    }
+
     public List<AvailabilityStorage> mockADayAgoData() {
         List<AvailabilityStorage> availabilityStorageList = new ArrayList();
         AvailabilityStorage availabilityStorage = new AvailabilityStorage();
@@ -843,7 +1235,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -864,7 +1256,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -885,7 +1277,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -903,10 +1295,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.MINUTE * 3));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -924,10 +1316,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -945,10 +1337,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 2));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -966,10 +1358,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 4));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -987,10 +1379,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 6));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -1011,7 +1403,7 @@ public class AvailabilityHelper {
 
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -1029,10 +1421,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 5));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -1050,10 +1442,10 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 9));
-        
+
         availabilityStorageList.add(availabilityStorage);
         availabilityStorage = new AvailabilityStorage();
-        
+
         availabilityStorage.setApplicationId("1");
         availabilityStorage.setApplicationName("BancoRipley - HomeBanking");
         availabilityStorage.setAvailabilityFailIfAbove(90);
@@ -1071,7 +1463,7 @@ public class AvailabilityHelper {
         availabilityStorage.setTransactionId("h5l394kdd9j393k");
         availabilityStorage.setTransactionName("Despliegue Zona Campana");
         availabilityStorage.setTimeStamp(new Date(System.currentTimeMillis() - Calendar.HOUR * 2));
-        
+
         availabilityStorageList.add(availabilityStorage);
 
         return availabilityStorageList;

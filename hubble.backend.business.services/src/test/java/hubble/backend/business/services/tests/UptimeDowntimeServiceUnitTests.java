@@ -3,8 +3,8 @@ package hubble.backend.business.services.tests;
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
 import hubble.backend.business.services.implementations.operations.TimeStatusOperationsImpl;
 import hubble.backend.business.services.implementations.services.UptimeDowntimeServiceImpl;
-import hubble.backend.business.services.models.measures.DowntimeDto;
-import hubble.backend.business.services.models.measures.UptimeDto;
+import hubble.backend.business.services.models.measures.Downtime;
+import hubble.backend.business.services.models.measures.Uptime;
 import hubble.backend.business.services.tests.configurations.ServiceBaseConfigurationTest;
 import hubble.backend.core.enums.MonitoringFields;
 import hubble.backend.storage.models.ApplicationStorage;
@@ -131,7 +131,7 @@ public class UptimeDowntimeServiceUnitTests {
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndPeriod(transactionId, firstDay, twoDaysAgo)).thenReturn(availabilityStorageFirstDay);
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndPeriod(transactionId, twoDaysAgo, oneDayAgo)).thenReturn(availabilityStorageTwoDaysAgo);
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndPeriod(transactionId, oneDayAgo, lastDay)).thenReturn(availabilityStorageADayAgo);
-        UptimeDto uptime = service.getUptime(transactionId, MonitoringFields.FRECUENCY.DAY, startDate, endDate);
+        Uptime uptime = service.getUptime(transactionId, MonitoringFields.FRECUENCY.DAY, startDate, endDate);
 
         //Assert
         verify(availabilityRepository).findAvailabilitiesByTransactionIdAndPeriod(transactionId, firstDay, twoDaysAgo);
@@ -166,7 +166,7 @@ public class UptimeDowntimeServiceUnitTests {
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndPeriod(transactionId, firstDay, twoDaysAgo)).thenReturn(availabilityStorageFirstDay);
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndPeriod(transactionId, twoDaysAgo, oneDayAgo)).thenReturn(availabilityStorageTwoDaysAgo);
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndPeriod(transactionId, oneDayAgo, lastDay)).thenReturn(availabilityStorageADayAgo);
-        DowntimeDto downtime = service.getDowntime(transactionId, MonitoringFields.FRECUENCY.DAY, startDate, endDate);
+        Downtime downtime = service.getDowntime(transactionId, MonitoringFields.FRECUENCY.DAY, startDate, endDate);
 
         //Assert
         verify(availabilityRepository).findAvailabilitiesByTransactionIdAndPeriod(transactionId, firstDay, twoDaysAgo);
@@ -199,7 +199,7 @@ public class UptimeDowntimeServiceUnitTests {
         when(availabilityRepository.findAvailabilitiesBydAndPeriod(firstDay, twoDaysAgo)).thenReturn(availabilityStorageFirstDay);
         when(availabilityRepository.findAvailabilitiesBydAndPeriod(twoDaysAgo, oneDayAgo)).thenReturn(availabilityStorageTwoDaysAgo);
         when(availabilityRepository.findAvailabilitiesBydAndPeriod(oneDayAgo, lastDay)).thenReturn(availabilityStorageADayAgo);
-        UptimeDto uptime = service.getUptime(MonitoringFields.FRECUENCY.DAY, startDate, endDate);
+        Uptime uptime = service.getUptime(MonitoringFields.FRECUENCY.DAY, startDate, endDate);
 
         //Assert
         verify(availabilityRepository).findAvailabilitiesBydAndPeriod(firstDay, twoDaysAgo);
@@ -233,7 +233,7 @@ public class UptimeDowntimeServiceUnitTests {
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndPeriod(applicationId, firstDay, twoDaysAgo)).thenReturn(availabilityStorageFirstDay);
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndPeriod(applicationId, twoDaysAgo, oneDayAgo)).thenReturn(availabilityStorageTwoDaysAgo);
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndPeriod(applicationId, oneDayAgo, lastDay)).thenReturn(availabilityStorageADayAgo);
-        UptimeDto uptime = service.getUptimeByApplication(applicationId, MonitoringFields.FRECUENCY.DAY, startDate, endDate);
+        Uptime uptime = service.getUptimeByApplication(applicationId, MonitoringFields.FRECUENCY.DAY, startDate, endDate);
 
         //Assert
         verify(availabilityRepository).findAvailabilitiesByApplicationIdAndPeriod(applicationId, firstDay, twoDaysAgo);

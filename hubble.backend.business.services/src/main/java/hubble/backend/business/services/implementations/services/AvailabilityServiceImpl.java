@@ -1,10 +1,12 @@
 package hubble.backend.business.services.implementations.services;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
+import hubble.backend.business.services.interfaces.operations.averages.AvailabilityOperations;
+import hubble.backend.business.services.interfaces.operations.kpis.AvailabilityKpiOperations;
 import hubble.backend.business.services.interfaces.services.AvailabilityService;
-import hubble.backend.business.services.models.ApplicationAvgDto;
-import hubble.backend.business.services.models.ApplicationDto;
-import hubble.backend.business.services.models.AvailabilityDto;
+import hubble.backend.business.services.models.Application;
+import hubble.backend.business.services.models.Availability;
+import hubble.backend.business.services.models.business.ApplicationIndicators;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.AvailabilityStorage;
@@ -13,7 +15,6 @@ import hubble.backend.storage.repositories.AvailabilityRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import hubble.backend.business.services.interfaces.operations.AvailabilityOperations;
 
 @Component
 public class AvailabilityServiceImpl implements AvailabilityService {
@@ -25,103 +26,134 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     @Autowired
     AvailabilityOperations availavilityOperation;
     @Autowired
+    AvailabilityKpiOperations availavilityKpiOperation;
+
+    @Autowired
     MapperConfiguration mapper;
 
     @Override
-    public List<AvailabilityDto> getAll() {
+    public List<Availability> getAll() {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAll();
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public AvailabilityDto get(String id) {
+    public Availability get(String id) {
         return mapper.mapToAvailabilityDto(availabilityRepository.findOne(id));
     }
 
     @Override
-    public List<AvailabilityDto> getLast10Minutes() {
+    public List<Availability> getLast10Minutes() {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.TEN_MINUTES);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<AvailabilityDto> getLastHour() {
+    public List<Availability> getLastHour() {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_HOUR);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<AvailabilityDto> getLastDay() {
+    public List<Availability> getLastDay() {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_DAY);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<AvailabilityDto> getLastMonth() {
+    public List<Availability> getLastMonth() {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMonths(CalendarHelper.ONE_MONTH);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<AvailabilityDto> getLast10Minutes(String applicationId) {
+    public List<Availability> getLast10Minutes(String applicationId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, applicationId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<AvailabilityDto> getLastHour(String applicationId) {
+    public List<Availability> getLastHour(String applicationId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_HOUR, applicationId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<AvailabilityDto> getLastDay(String applicationId) {
+    public List<Availability> getLastDay(String applicationId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_DAY, applicationId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<AvailabilityDto> getLastMonth(String applicationId) {
+    public List<Availability> getLastMonth(String applicationId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMonths(CalendarHelper.ONE_MONTH, applicationId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<AvailabilityDto> getAll(String applicationId) {
+    public List<Availability> getAll(String applicationId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationId(applicationId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public ApplicationDto getApplication(String applicationId) {
+    public Application getApplication(String applicationId) {
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
         return mapper.mapToApplicationDto(applicationStorage);
     }
 
     @Override
-    public ApplicationAvgDto calculateLast10MinutesAverageByApplication(String applicationId) {
+    public ApplicationIndicators calculateLast10MinutesAverageByApplication(String applicationId) {
         return availavilityOperation.calculateLast10MinutesAverageByApplication(applicationId);
     }
 
     @Override
-    public ApplicationAvgDto calculateLastHourAverageByApplication(String applicationId) {
+    public ApplicationIndicators calculateLastHourAverageByApplication(String applicationId) {
         return availavilityOperation.calculateLastHourAverageByApplication(applicationId);
     }
 
     @Override
-    public ApplicationAvgDto calculateLastDayAverageByApplication(String applicationId) {
+    public ApplicationIndicators calculateLastDayAverageByApplication(String applicationId) {
         return availavilityOperation.calculateLastDayAverageByApplication(applicationId);
     }
 
     @Override
-    public ApplicationAvgDto calculateLastMonthAverageByApplication(String applicationId) {
+    public ApplicationIndicators calculateLastMonthAverageByApplication(String applicationId) {
         return availavilityOperation.calculateLastMonthAverageByApplication(applicationId);
     }
 
     @Override
-    public List<ApplicationDto> getAllApplications() {
+    public ApplicationIndicators calculateLast10MinutesKpiByApplication(String applicationId) {
+        ApplicationIndicators appDto = new ApplicationIndicators();
+        appDto.setAvailabilityKpi(availavilityKpiOperation.calculateLast10MinutesKeyPerformanceIndicatorByApplication(applicationId));
+        return appDto;
+    }
+
+    @Override
+    public ApplicationIndicators calculateLastHourKpiByApplication(String applicationId) {
+        ApplicationIndicators appDto = new ApplicationIndicators();
+        appDto.setAvailabilityKpi(availavilityKpiOperation.calculateLastHourKeyPerformanceIndicatorByApplication(applicationId));
+        return appDto;
+    }
+
+    @Override
+    public ApplicationIndicators calculateLastDayKpiByApplication(String applicationId) {
+        ApplicationIndicators appDto = new ApplicationIndicators();
+        appDto.setAvailabilityKpi(availavilityKpiOperation.calculateLastDayKeyPerformanceIndicatorByApplication(applicationId));
+        return appDto;
+    }
+
+    @Override
+    public ApplicationIndicators calculateLastMonthKpiByApplication(String applicationId) {
+        ApplicationIndicators appDto = new ApplicationIndicators();
+        appDto.setAvailabilityKpi(availavilityKpiOperation.calculateLastMonthKeyPerformanceIndicatorByApplication(applicationId));
+        return appDto;
+    }
+
+    @Override
+    public List<Application> getAllApplications() {
+        //TODO: Mover a un servicio de aplicación.
         List<ApplicationStorage> applicationsStorage = applicationRepository.findAllApplications();
         return mapper.mapToApplicationDtoList(applicationsStorage);
     }
-
 }

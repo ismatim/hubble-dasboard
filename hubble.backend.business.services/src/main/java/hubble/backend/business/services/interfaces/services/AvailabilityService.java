@@ -1,23 +1,24 @@
 package hubble.backend.business.services.interfaces.services;
 
-import hubble.backend.business.services.models.ApplicationAvgDto;
-import hubble.backend.business.services.models.AvailabilityDto;
+import hubble.backend.business.services.models.Availability;
+import hubble.backend.business.services.models.business.ApplicationIndicators;
 import java.util.List;
 
 public interface AvailabilityService extends
-        OperationsServiceBase<ApplicationAvgDto>,
-        ApplicationServiceBase<AvailabilityDto> {
+        OperationsAverageCalculationServiceBase<ApplicationIndicators>,
+        OperationsKeyPerformanceIndicatorServiceBase<ApplicationIndicators>,
+        ApplicationServiceBase<Availability> {
 
-    public List<AvailabilityDto> getAll();
+    public List<Availability> getAll();
 
-    public AvailabilityDto get(String id);
+    public Availability get(String id);
 
-    public List<AvailabilityDto> getLast10Minutes();
+    public List<Availability> getLast10Minutes();
 
-    public List<AvailabilityDto> getLastHour();
+    public List<Availability> getLastHour();
 
-    public List<AvailabilityDto> getLastDay();
+    public List<Availability> getLastDay();
 
-    public List<AvailabilityDto> getLastMonth();
+    public List<Availability> getLastMonth();
 
 }

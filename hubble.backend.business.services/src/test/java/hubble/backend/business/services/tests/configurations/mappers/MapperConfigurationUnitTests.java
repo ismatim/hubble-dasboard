@@ -1,13 +1,13 @@
 package hubble.backend.business.services.tests.configurations.mappers;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
-import hubble.backend.business.services.models.ApplicationAvgDto;
-import hubble.backend.business.services.models.ApplicationDto;
-import hubble.backend.business.services.models.AvailabilityDto;
-import hubble.backend.business.services.models.IssueDto;
-import hubble.backend.business.services.models.TransactionAvgDto;
-import hubble.backend.business.services.models.TransactionDto;
-import hubble.backend.business.services.models.WorkItemDto;
+import hubble.backend.business.services.models.business.ApplicationIndicators;
+import hubble.backend.business.services.models.Application;
+import hubble.backend.business.services.models.Availability;
+import hubble.backend.business.services.models.Issue;
+import hubble.backend.business.services.models.TransactionAvg;
+import hubble.backend.business.services.models.Transaction;
+import hubble.backend.business.services.models.WorkItem;
 import hubble.backend.business.services.tests.AvailabilityHelper;
 import hubble.backend.business.services.tests.StorageTestsHelper;
 import hubble.backend.storage.models.ApplicationStorage;
@@ -54,7 +54,7 @@ public class MapperConfigurationUnitTests {
         when(availabilityStorage.getScriptName()).thenReturn("homebanking");
         when(availabilityStorage.getErrors()).thenReturn(null);
 
-        AvailabilityDto availabilityDto = mapperConfiguration.getMapper().map(availabilityStorage, AvailabilityDto.class);
+        Availability availabilityDto = mapperConfiguration.getMapper().map(availabilityStorage, Availability.class);
 
         Assert.assertEquals(availabilityStorage.getApplicationId(), availabilityDto.getApplicationId());
         Assert.assertEquals(availabilityStorage.getApplicationName(), availabilityDto.getApplicationName());
@@ -77,7 +77,7 @@ public class MapperConfigurationUnitTests {
         AvailabilityStorage availabilityStorage = availabilityHelper.mockOneAvailabilityStorage();
 
         //Act
-        AvailabilityDto availabilityDto = mapperConfiguration.mapToAvailabilityDto(availabilityStorage);
+        Availability availabilityDto = mapperConfiguration.mapToAvailabilityDto(availabilityStorage);
 
         //Assert
         assertNotNull(availabilityDto);
@@ -92,7 +92,7 @@ public class MapperConfigurationUnitTests {
         List<AvailabilityStorage> availabilityStorageList = availabilityHelper.mockData();
 
         //Act
-        List<AvailabilityDto> availabilityDtoList = mapperConfiguration.mapToAvailabilityDtoList(availabilityStorageList);
+        List<Availability> availabilityDtoList = mapperConfiguration.mapToAvailabilityDtoList(availabilityStorageList);
 
         //Assert
         assertNotNull(availabilityDtoList);
@@ -116,7 +116,7 @@ public class MapperConfigurationUnitTests {
         when(applicationStorage.getTimeZoneId()).thenReturn("1");
         when(applicationStorage.getTransactions()).thenReturn(null);
 
-        ApplicationDto applicationDto = mapperConfiguration.mapToApplicationDto(applicationStorage);
+        Application applicationDto = mapperConfiguration.mapToApplicationDto(applicationStorage);
 
         assertEquals("1234", applicationDto.getApplicationId());
         assertEquals("BancoRipley - HomeBanking", applicationDto.getApplicationName());
@@ -142,7 +142,7 @@ public class MapperConfigurationUnitTests {
         when(transactionStorage.getTransactionType()).thenReturn("script");
         when(transactionStorage.getScriptName()).thenReturn("Script Name");
 
-        TransactionDto transactionDto = mapperConfiguration.mapToTransactionDto(transactionStorage);
+        Transaction transactionDto = mapperConfiguration.mapToTransactionDto(transactionStorage);
 
         assertEquals("1234", transactionDto.getTransactionId());
         assertEquals("Transaction Name", transactionDto.getTransactionName());
@@ -160,7 +160,7 @@ public class MapperConfigurationUnitTests {
         applicationStorageList.add(availabilityHelper.mockApplicationStorage());
 
         //Act
-        List<ApplicationDto> applicationDtoList = mapperConfiguration.mapToApplicationDtoList(applicationStorageList);
+        List<Application> applicationDtoList = mapperConfiguration.mapToApplicationDtoList(applicationStorageList);
 
         //Assert
         assertNotNull(applicationDtoList);
@@ -174,7 +174,7 @@ public class MapperConfigurationUnitTests {
         List<TransactionStorage> transactionStorageList = availabilityHelper.mockTransactionStorage();
 
         //Act
-        List<TransactionDto> transactionDtoList = mapperConfiguration.mapToTransactionDtoList(transactionStorageList);
+        List<Transaction> transactionDtoList = mapperConfiguration.mapToTransactionDtoList(transactionStorageList);
 
         //Assert
         assertNotNull(transactionDtoList);
@@ -194,7 +194,7 @@ public class MapperConfigurationUnitTests {
         when(transactionStorage.getTransactionType()).thenReturn("script");
         when(transactionStorage.getScriptName()).thenReturn("Script Name");
 
-        TransactionAvgDto transactionAvailabilityAvg = mapperConfiguration.mapToTransactionAvailabilityAvg(transactionStorage);
+        TransactionAvg transactionAvailabilityAvg = mapperConfiguration.mapToTransactionAvailabilityAvg(transactionStorage);
 
         assertEquals("1234", transactionAvailabilityAvg.getTransactionId());
         assertEquals("Transaction Name", transactionAvailabilityAvg.getTransactionName());
@@ -220,7 +220,7 @@ public class MapperConfigurationUnitTests {
         when(applicationStorage.getTimeZoneId()).thenReturn("1");
         when(applicationStorage.getTransactions()).thenReturn(null);
 
-        ApplicationAvgDto applicationAvailabilityAvg = mapperConfiguration.mapToApplicationAvailabilityAvg(applicationStorage);
+        ApplicationIndicators applicationAvailabilityAvg = mapperConfiguration.mapToApplicationIndicatorsDto(applicationStorage);
 
         assertEquals("1234", applicationAvailabilityAvg.getApplicationId());
         assertEquals("BancoRipley - HomeBanking", applicationAvailabilityAvg.getApplicationName());
@@ -240,7 +240,7 @@ public class MapperConfigurationUnitTests {
         List<TransactionStorage> transactionStorageList = availabilityHelper.mockTransactionStorage();
 
         //Act
-        List<TransactionAvgDto> transactionAvailabilityAvgList = mapperConfiguration.mapToTransactionAvailabilityAvgList(transactionStorageList);
+        List<TransactionAvg> transactionAvailabilityAvgList = mapperConfiguration.mapToTransactionAvailabilityAvgList(transactionStorageList);
 
         //Assert
         assertNotNull(transactionAvailabilityAvgList);
@@ -255,7 +255,7 @@ public class MapperConfigurationUnitTests {
         applicationStorageList.add(availabilityHelper.mockApplicationStorage());
 
         //Act
-        List<ApplicationAvgDto> applicationAvailabilityAvgList = mapperConfiguration.mapToApplicationAvailabilityAvgList(applicationStorageList);
+        List<ApplicationIndicators> applicationAvailabilityAvgList = mapperConfiguration.mapToApplicationIndicatorsDtoList(applicationStorageList);
 
         //Assert
         assertNotNull(applicationAvailabilityAvgList);
@@ -265,8 +265,8 @@ public class MapperConfigurationUnitTests {
 
     @Test
     public void mappers_should_return_null_from_null_parameters(){
-        assertNull(mapperConfiguration.mapToApplicationAvailabilityAvg(null));
-        assertNull(mapperConfiguration.mapToApplicationAvailabilityAvgList(null));
+        assertNull(mapperConfiguration.mapToApplicationIndicatorsDto(null));
+        assertNull(mapperConfiguration.mapToApplicationIndicatorsDtoList(null));
         assertNull(mapperConfiguration.mapToApplicationDto(null));
         assertNull(mapperConfiguration.mapToApplicationDtoList(null));
         assertNull(mapperConfiguration.mapToAvailabilityDto(null));
@@ -289,7 +289,7 @@ public class MapperConfigurationUnitTests {
         IssueStorage issueStorage = storageHelper.getFakeIssueStorage();
 
         //Act
-        IssueDto issueDto = mapperConfiguration.mapToIssueDto(issueStorage);
+        Issue issueDto = mapperConfiguration.mapToIssueDto(issueStorage);
 
         //Assert
         assertNotNull(issueDto);
@@ -303,7 +303,7 @@ public class MapperConfigurationUnitTests {
         WorkItemStorage workItemStorage = storageHelper.getFakeWorkItemStorage();
 
         //Act
-        WorkItemDto workItemDto = mapperConfiguration.mapToWorkItemDto(workItemStorage);
+        WorkItem workItemDto = mapperConfiguration.mapToWorkItemDto(workItemStorage);
 
         //Assert
         assertNotNull(workItemDto);

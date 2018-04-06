@@ -1,10 +1,10 @@
 package hubble.backend.business.services.tests;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
-import hubble.backend.business.services.implementations.operations.AvailabilityOperationImpl;
+import hubble.backend.business.services.implementations.operations.averages.AvailabilityOperationImpl;
 import hubble.backend.business.services.implementations.services.AvailabilityServiceImpl;
-import hubble.backend.business.services.models.ApplicationDto;
-import hubble.backend.business.services.models.AvailabilityDto;
+import hubble.backend.business.services.models.Application;
+import hubble.backend.business.services.models.Availability;
 import hubble.backend.business.services.tests.configurations.ServiceBaseConfigurationTest;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.ApplicationStorage;
@@ -96,7 +96,7 @@ public class AvailabilityServiceUnitTests {
     public void availability_service_should_return_availability_by_id_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        AvailabilityDto availabilityDto;
+        Availability availabilityDto;
 
         //Act
         AvailabilityStorage availabilityStorage = availabilityStorageList.get(0);
@@ -111,7 +111,7 @@ public class AvailabilityServiceUnitTests {
     public void availability_service_should_return_availability_by_application_id_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationId("1")).thenReturn(availabilityStorageList);
@@ -125,7 +125,7 @@ public class AvailabilityServiceUnitTests {
     public void availability_service_should_return_last_10minutes_availabilities_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.TEN_MINUTES)).thenReturn(availabilityStorageList);
@@ -139,7 +139,7 @@ public class AvailabilityServiceUnitTests {
     public void availability_service_should_return_last_hour_availabilities_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_HOUR)).thenReturn(availabilityStorageList);
@@ -153,7 +153,7 @@ public class AvailabilityServiceUnitTests {
     public void availability_service_should_return_last_day_availabilities_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_DAY)).thenReturn(availabilityStorageList);
@@ -167,7 +167,7 @@ public class AvailabilityServiceUnitTests {
     public void availability_service_should_return_last_month_availabilities_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByDurationMonths(CalendarHelper.ONE_MONTH)).thenReturn(availabilityStorageList);
@@ -181,7 +181,7 @@ public class AvailabilityServiceUnitTests {
     public void availability_service_should_return_last_10minutes_availabilities_by_applicationid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, "1")).thenReturn(availabilityStorageList);
@@ -195,7 +195,7 @@ public class AvailabilityServiceUnitTests {
     public void availability_service_should_return_last_hour_availabilities_by_applicationid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_HOUR, "1")).thenReturn(availabilityStorageList);
@@ -209,7 +209,7 @@ public class AvailabilityServiceUnitTests {
     public void availability_service_should_return_last_day_availabilities_by_applicationid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_DAY, "1")).thenReturn(availabilityStorageList);
@@ -223,7 +223,7 @@ public class AvailabilityServiceUnitTests {
     public void availability_service_should_return_last_month_availabilities_by_applicationid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMonths(CalendarHelper.ONE_MONTH, "1")).thenReturn(availabilityStorageList);
@@ -250,7 +250,7 @@ public class AvailabilityServiceUnitTests {
     public void service_should_return_all_applications() {
         //Assign
         List<ApplicationStorage> applicationStorageList = new ArrayList();
-        List<ApplicationDto> applicationDtoList = new ArrayList();
+        List<Application> applicationDtoList;
 
         //Act
         applicationStorageList.add(new AvailabilityHelper().mockApplicationStorage());
@@ -260,4 +260,5 @@ public class AvailabilityServiceUnitTests {
         //Assert
         assertEquals(1, applicationDtoList.size());
     }
+
 }

@@ -3,7 +3,7 @@ package hubble.backend.business.services.implementations.services;
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
 import hubble.backend.business.services.interfaces.operations.WorkItemOperations;
 import hubble.backend.business.services.interfaces.services.WorkItemService;
-import hubble.backend.business.services.models.WorkItemDto;
+import hubble.backend.business.services.models.WorkItem;
 import hubble.backend.business.services.models.measures.WorkItemQuantity;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.WorkItemStorage;
@@ -32,7 +32,7 @@ public class WorkItemServiceImpl implements WorkItemService {
     WorkItemOperations workItemOperation;
 
     @Override
-    public List<WorkItemDto> getLastDay(String applicationId) {
+    public List<WorkItem> getLastDay(String applicationId) {
 
         Calendar yesterday = CalendarHelper.getNow();
         yesterday.add(Calendar.HOUR, -24);
@@ -44,7 +44,7 @@ public class WorkItemServiceImpl implements WorkItemService {
     }
 
     @Override
-    public List<WorkItemDto> getLastMonth(String applicationId) {
+    public List<WorkItem> getLastMonth(String applicationId) {
         Calendar lastmonth = CalendarHelper.getNow();
         lastmonth.add(Calendar.MONTH, -1);
         Date today = new GregorianCalendar().getTime();

@@ -2,11 +2,11 @@ package hubble.backend.business.services.implementations.services;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
 import hubble.backend.business.services.interfaces.services.TransactionService;
-import hubble.backend.business.services.models.ApplicationDto;
-import hubble.backend.business.services.models.AvailabilityDto;
-import hubble.backend.business.services.models.PerformanceDto;
-import hubble.backend.business.services.models.TransactionAvgDto;
-import hubble.backend.business.services.models.TransactionDto;
+import hubble.backend.business.services.models.Application;
+import hubble.backend.business.services.models.Availability;
+import hubble.backend.business.services.models.Performance;
+import hubble.backend.business.services.models.TransactionAvg;
+import hubble.backend.business.services.models.Transaction;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.ApplicationStorage;
 import hubble.backend.storage.models.AvailabilityStorage;
@@ -17,8 +17,8 @@ import hubble.backend.storage.repositories.TransactionRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import hubble.backend.business.services.interfaces.operations.AvailabilityOperations;
-import hubble.backend.business.services.interfaces.operations.PerformanceOperations;
+import hubble.backend.business.services.interfaces.operations.averages.AvailabilityOperations;
+import hubble.backend.business.services.interfaces.operations.averages.PerformanceOperations;
 
 @Component
 public class TransactionServiceImpl implements TransactionService {
@@ -37,54 +37,54 @@ public class TransactionServiceImpl implements TransactionService {
     MapperConfiguration mapper;
 
     @Override
-    public TransactionDto findTransactionById(String transactionId) {
+    public Transaction findTransactionById(String transactionId) {
         TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
         return mapper.mapToTransactionDto(transactionStorage);
     }
 
     @Override
-    public List<TransactionDto> findTransactionsByApplicationId(String applicationId) {
+    public List<Transaction> findTransactionsByApplicationId(String applicationId) {
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
         return mapper.mapToApplicationDto(applicationStorage).getTransactions();
     }
 
     @Override
-    public List<AvailabilityDto> findAvailabilitiesByTransactionId(String transactionId) {
+    public List<Availability> findAvailabilitiesByTransactionId(String transactionId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionId(transactionId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<AvailabilityDto> findLast10MinutesAvailabilitiesByTransactionId(String transactionId) {
+    public List<Availability> findLast10MinutesAvailabilitiesByTransactionId(String transactionId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, transactionId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<AvailabilityDto> findLastHourAvailabilitiesByTransactionId(String transactionId) {
+    public List<Availability> findLastHourAvailabilitiesByTransactionId(String transactionId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.ONE_HOUR, transactionId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<AvailabilityDto> findLastMonthAvailabilitiesByTransactionId(String transactionId) {
+    public List<Availability> findLastMonthAvailabilitiesByTransactionId(String transactionId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMonths(CalendarHelper.ONE_MONTH, transactionId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<AvailabilityDto> findLastDayAvailabilitiesByTransactionId(String transactionId) {
+    public List<Availability> findLastDayAvailabilitiesByTransactionId(String transactionId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.ONE_DAY, transactionId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);
     }
 
     @Override
-    public TransactionAvgDto calculateLast10MinutesAverageTransactionAvailability(String transactionId) {
+    public TransactionAvg calculateLast10MinutesAverageTransactionAvailability(String transactionId) {
         TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
         ApplicationStorage parentApplicationStorage = applicationRepository.findApplicationByTransactionId(transactionId);
-        TransactionAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
+        TransactionAvg transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, transactionId);
-        ApplicationDto parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
+        Application parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
 
         if (!availabilityStorageList.isEmpty()) {//No data for last 10 minutes
             transactionAvailabilityAvg.setAverage(availavilityOperation.calculateAverage(availabilityStorageList));
@@ -95,12 +95,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionAvgDto calculateLastHourAverageTransactionAvailability(String transactionId) {
+    public TransactionAvg calculateLastHourAverageTransactionAvailability(String transactionId) {
         TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
         ApplicationStorage parentApplicationStorage = applicationRepository.findApplicationByTransactionId(transactionId);
-        TransactionAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
+        TransactionAvg transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.ONE_HOUR, transactionId);
-        ApplicationDto parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
+        Application parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
 
         if (!availabilityStorageList.isEmpty()) {//No data for last hour
             transactionAvailabilityAvg.setAverage(availavilityOperation.calculateAverage(availabilityStorageList));
@@ -112,12 +112,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionAvgDto calculateLastDayAverageTransactionAvailability(String transactionId) {
+    public TransactionAvg calculateLastDayAverageTransactionAvailability(String transactionId) {
         TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
         ApplicationStorage parentApplicationStorage = applicationRepository.findApplicationByTransactionId(transactionId);
-        TransactionAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
+        TransactionAvg transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.ONE_DAY, transactionId);
-        ApplicationDto parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
+        Application parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
 
         if (!availabilityStorageList.isEmpty()) {//No data for last hour
             transactionAvailabilityAvg.setAverage(availavilityOperation.calculateAverage(availabilityStorageList));
@@ -127,12 +127,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionAvgDto calculateLastMonthAverageTransactionAvailability(String transactionId) {
+    public TransactionAvg calculateLastMonthAverageTransactionAvailability(String transactionId) {
         TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
         ApplicationStorage parentApplicationStorage = applicationRepository.findApplicationByTransactionId(transactionId);
-        TransactionAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
+        TransactionAvg transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMonths(CalendarHelper.ONE_MONTH, transactionId);
-        ApplicationDto parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
+        Application parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
 
         if (!availabilityStorageList.isEmpty()) {//No data for last hour
             transactionAvailabilityAvg.setAverage(availavilityOperation.calculateAverage(availabilityStorageList));
@@ -143,42 +143,42 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<PerformanceDto> findPerformanceByTransactionId(String transactionId) {
+    public List<Performance> findPerformanceByTransactionId(String transactionId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionId(transactionId);
         return mapper.mapToPerformanceDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<PerformanceDto> findLast10MinutesPerformanceByTransactionId(String transactionId) {
+    public List<Performance> findLast10MinutesPerformanceByTransactionId(String transactionId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, transactionId);
         return mapper.mapToPerformanceDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<PerformanceDto> findLastHourPerformanceByTransactionId(String transactionId) {
+    public List<Performance> findLastHourPerformanceByTransactionId(String transactionId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.ONE_HOUR, transactionId);
         return mapper.mapToPerformanceDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<PerformanceDto> findLastDayPerformanceByTransactionId(String transactionId) {
+    public List<Performance> findLastDayPerformanceByTransactionId(String transactionId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.ONE_DAY, transactionId);
         return mapper.mapToPerformanceDtoList(availabilityStorageList);
     }
 
     @Override
-    public List<PerformanceDto> findLastMonthPerformanceByTransactionId(String transactionId) {
+    public List<Performance> findLastMonthPerformanceByTransactionId(String transactionId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMonths(CalendarHelper.ONE_MONTH, transactionId);
         return mapper.mapToPerformanceDtoList(availabilityStorageList);
     }
 
     @Override
-    public TransactionAvgDto calculateLast10MinutesAverageTransactionPerformance(String transactionId) {
+    public TransactionAvg calculateLast10MinutesAverageTransactionPerformance(String transactionId) {
         TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
         ApplicationStorage parentApplicationStorage = applicationRepository.findApplicationByTransactionId(transactionId);
-        TransactionAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
+        TransactionAvg transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, transactionId);
-        ApplicationDto parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
+        Application parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
 
         if (!availabilityStorageList.isEmpty()) {
             transactionAvailabilityAvg.setAverage(performanceOperation.calculateAverage(availabilityStorageList));
@@ -190,12 +190,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionAvgDto calculateLastHourAverageTransactionPerformance(String transactionId) {
+    public TransactionAvg calculateLastHourAverageTransactionPerformance(String transactionId) {
         TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
         ApplicationStorage parentApplicationStorage = applicationRepository.findApplicationByTransactionId(transactionId);
-        TransactionAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
+        TransactionAvg transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.ONE_HOUR, transactionId);
-        ApplicationDto parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
+        Application parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
 
         if (!availabilityStorageList.isEmpty()) {
             transactionAvailabilityAvg.setAverage(performanceOperation.calculateAverage(availabilityStorageList));
@@ -207,12 +207,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionAvgDto calculateLastDayAverageTransactionPerformance(String transactionId) {
+    public TransactionAvg calculateLastDayAverageTransactionPerformance(String transactionId) {
         TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
         ApplicationStorage parentApplicationStorage = applicationRepository.findApplicationByTransactionId(transactionId);
-        TransactionAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
+        TransactionAvg transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.ONE_DAY, transactionId);
-        ApplicationDto parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
+        Application parentApplicationDto = mapper.mapToApplicationDto(parentApplicationStorage);
 
         if (!availabilityStorageList.isEmpty()) {
             transactionAvailabilityAvg.setAverage(performanceOperation.calculateAverage(availabilityStorageList));
@@ -224,12 +224,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public TransactionAvgDto calculateLastMonthAverageTransactionPerformance(String transactionId) {
+    public TransactionAvg calculateLastMonthAverageTransactionPerformance(String transactionId) {
         TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
         ApplicationStorage applicationStorage = applicationRepository.findApplicationByTransactionId(transactionId);
-        TransactionAvgDto transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
+        TransactionAvg transactionAvailabilityAvg = mapper.mapToTransactionAvailabilityAvg(transactionStorage);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMonths(CalendarHelper.ONE_MONTH, transactionId);
-        ApplicationDto applicationDto = mapper.mapToApplicationDto(applicationStorage);
+        Application applicationDto = mapper.mapToApplicationDto(applicationStorage);
 
         if (!availabilityStorageList.isEmpty()) {// data for last month
             transactionAvailabilityAvg.setAverage(performanceOperation.calculateAverage(availabilityStorageList));

@@ -1,12 +1,12 @@
 package hubble.backend.business.services.tests;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
-import hubble.backend.business.services.implementations.operations.PerformanceOperationImpl;
+import hubble.backend.business.services.implementations.operations.averages.PerformanceOperationImpl;
 import hubble.backend.business.services.implementations.services.PerformanceServiceImpl;
 import hubble.backend.business.services.implementations.services.TransactionServiceImpl;
-import hubble.backend.business.services.models.ApplicationAvgDto;
-import hubble.backend.business.services.models.ApplicationDto;
-import hubble.backend.business.services.models.PerformanceDto;
+import hubble.backend.business.services.models.business.ApplicationIndicators;
+import hubble.backend.business.services.models.Application;
+import hubble.backend.business.services.models.Performance;
 import hubble.backend.business.services.models.measures.PerformanceAverage;
 import hubble.backend.business.services.tests.configurations.ServiceBaseConfigurationTest;
 import hubble.backend.core.utils.CalendarHelper;
@@ -69,7 +69,7 @@ public class PerformanceServiceUnitTests {
     public void performance_service_should_return_performance_by_id_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        PerformanceDto performanceDto;
+        Performance performanceDto;
 
         //Act
         AvailabilityStorage availabilityStorage = availabilityStorageList.get(0);
@@ -84,7 +84,7 @@ public class PerformanceServiceUnitTests {
     public void performance_service_should_return_all_performances_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAll()).thenReturn(availabilityStorageList);
@@ -98,7 +98,7 @@ public class PerformanceServiceUnitTests {
     public void performance_service_should_return_lastDay_performances_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_DAY)).thenReturn(availabilityStorageList);
@@ -112,7 +112,7 @@ public class PerformanceServiceUnitTests {
     public void performance_service_should_return_performance_by_application_id_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationId("1")).thenReturn(availabilityStorageList);
@@ -126,7 +126,7 @@ public class PerformanceServiceUnitTests {
     public void performance_service_should_return_last_10minutes_performances_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.TEN_MINUTES)).thenReturn(availabilityStorageList);
@@ -140,7 +140,7 @@ public class PerformanceServiceUnitTests {
     public void performance_service_should_return_last_hour_performances_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_HOUR)).thenReturn(availabilityStorageList);
@@ -154,7 +154,7 @@ public class PerformanceServiceUnitTests {
     public void performance_service_should_return_last_10minutes_performances_by_applicationid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, "1")).thenReturn(availabilityStorageList);
@@ -168,7 +168,7 @@ public class PerformanceServiceUnitTests {
     public void performance_service_should_return_last_hour_performance_by_applicationid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_HOUR, "1")).thenReturn(availabilityStorageList);
@@ -182,7 +182,7 @@ public class PerformanceServiceUnitTests {
     public void performance_service_should_return_last_day_performances_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.TEN_MINUTES)).thenReturn(availabilityStorageList);
@@ -196,7 +196,7 @@ public class PerformanceServiceUnitTests {
     public void performance_service_should_return_last_month_performances_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByDurationMonths(1)).thenReturn(availabilityStorageList);
@@ -210,7 +210,7 @@ public class PerformanceServiceUnitTests {
     public void performance_service_should_return_last_day_performances_by_applicationid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_DAY, "1")).thenReturn(availabilityStorageList);
@@ -224,7 +224,7 @@ public class PerformanceServiceUnitTests {
     public void performance_service_should_return_last_month_performance_by_applicationid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMonths(CalendarHelper.ONE_MONTH, "1")).thenReturn(availabilityStorageList);
@@ -237,12 +237,12 @@ public class PerformanceServiceUnitTests {
     @Test
     public void performance_service_should_calculateLast10MinutesAverageByApplication() {
         //Assign
-        ApplicationAvgDto fakeApplicationAvg = new ApplicationAvgDto();
+        ApplicationIndicators fakeApplicationAvg = new ApplicationIndicators();
         fakeApplicationAvg.setApplicationId("1");
 
         //Act
         when(performanceOperation.calculateLast10MinutesAverageByApplication("1")).thenReturn(fakeApplicationAvg);
-        ApplicationAvgDto applicationAvgDto = performanceService.calculateLast10MinutesAverageByApplication("1");
+        ApplicationIndicators applicationAvgDto = performanceService.calculateLast10MinutesAverageByApplication("1");
 
         //Assert
         assertEquals("1", applicationAvgDto.getApplicationId());
@@ -251,12 +251,12 @@ public class PerformanceServiceUnitTests {
     @Test
     public void performance_service_should_calculateLastHourAverageByApplication() {
         //Assign
-        ApplicationAvgDto fakeApplicationAvg = new ApplicationAvgDto();
+        ApplicationIndicators fakeApplicationAvg = new ApplicationIndicators();
         fakeApplicationAvg.setApplicationId("1");
 
         //Act
         when(performanceOperation.calculateLastHourAverageByApplication("1")).thenReturn(fakeApplicationAvg);
-        ApplicationAvgDto applicationAvgDto = performanceService.calculateLastHourAverageByApplication("1");
+        ApplicationIndicators applicationAvgDto = performanceService.calculateLastHourAverageByApplication("1");
 
         //Assert
         assertEquals("1", applicationAvgDto.getApplicationId());
@@ -265,12 +265,12 @@ public class PerformanceServiceUnitTests {
     @Test
     public void performance_service_should_calculateLastDayAverageByApplication() {
         //Assign
-        ApplicationAvgDto fakeApplicationAvg = new ApplicationAvgDto();
+        ApplicationIndicators fakeApplicationAvg = new ApplicationIndicators();
         fakeApplicationAvg.setApplicationId("1");
 
         //Act
         when(performanceOperation.calculateLastDayAverageByApplication("1")).thenReturn(fakeApplicationAvg);
-        ApplicationAvgDto applicationAvgDto = performanceService.calculateLastDayAverageByApplication("1");
+        ApplicationIndicators applicationAvgDto = performanceService.calculateLastDayAverageByApplication("1");
 
         //Assert
         assertEquals("1", applicationAvgDto.getApplicationId());
@@ -279,12 +279,12 @@ public class PerformanceServiceUnitTests {
     @Test
     public void performance_service_should_calculateLastMonthAverageByApplication() {
         //Assign
-        ApplicationAvgDto fakeApplicationAvg = new ApplicationAvgDto();
+        ApplicationIndicators fakeApplicationAvg = new ApplicationIndicators();
         fakeApplicationAvg.setApplicationId("1");
 
         //Act
         when(performanceOperation.calculateLastMonthAverageByApplication("1")).thenReturn(fakeApplicationAvg);
-        ApplicationAvgDto applicationAvgDto = performanceService.calculateLastMonthAverageByApplication("1");
+        ApplicationIndicators applicationAvgDto = performanceService.calculateLastMonthAverageByApplication("1");
 
         //Assert
         assertEquals("1", applicationAvgDto.getApplicationId());
@@ -298,7 +298,7 @@ public class PerformanceServiceUnitTests {
 
         //Act
         when(applicationRepository.findApplicationById("1")).thenReturn(fakeApplicationStorage);
-        ApplicationDto applicationDto = performanceService.getApplication("1");
+        Application applicationDto = performanceService.getApplication("1");
 
         //Assert
         assertEquals("1", applicationDto.getApplicationId());
@@ -314,7 +314,7 @@ public class PerformanceServiceUnitTests {
 
         //Act
         when(applicationRepository.findAll()).thenReturn(fakeList);
-        List<ApplicationDto> fakeApplicationStorageList = performanceService.getAllApplications();
+        List<Application> fakeApplicationStorageList = performanceService.getAllApplications();
 
         //Assert
         assertEquals("1", fakeApplicationStorageList.get(0).getApplicationId());

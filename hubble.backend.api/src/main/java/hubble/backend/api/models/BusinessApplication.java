@@ -12,10 +12,10 @@ public class BusinessApplication extends ApiResponseBase {
     private String timeZone;
     private int applicationConfigurationVersion;
     private int frequencyMin;
-    private float defaultPerformanceOkThreshold;
-    private float defaultPerformanceCriticalThreshold;
-    private float defaultPerformanceOutlierThreshold;
-    private float availabilityThreshold;
+    private double defaultPerformanceOkThreshold;
+    private double defaultPerformanceCriticalThreshold;
+    private double defaultPerformanceOutlierThreshold;
+    private double availabilityThreshold;
     private boolean dynamicThresholdEnabled;
     private List<String> transactionIds;
     private List<String> locationIds;
@@ -84,35 +84,35 @@ public class BusinessApplication extends ApiResponseBase {
         this.frequencyMin = frequencyMin;
     }
 
-    public float getDefaultPerformanceOkThreshold() {
+    public double getDefaultPerformanceOkThreshold() {
         return defaultPerformanceOkThreshold;
     }
 
-    public void setDefaultPerformanceOkThreshold(float defaultPerformanceOkThreshold) {
+    public void setDefaultPerformanceOkThreshold(double defaultPerformanceOkThreshold) {
         this.defaultPerformanceOkThreshold = defaultPerformanceOkThreshold;
     }
 
-    public float getDefaultPerformanceCriticalThreshold() {
+    public double getDefaultPerformanceCriticalThreshold() {
         return defaultPerformanceCriticalThreshold;
     }
 
-    public void setDefaultPerformanceCriticalThreshold(float defaultPerformanceCriticalThreshold) {
+    public void setDefaultPerformanceCriticalThreshold(double defaultPerformanceCriticalThreshold) {
         this.defaultPerformanceCriticalThreshold = defaultPerformanceCriticalThreshold;
     }
 
-    public float getDefaultPerformanceOutlierThreshold() {
+    public double getDefaultPerformanceOutlierThreshold() {
         return defaultPerformanceOutlierThreshold;
     }
 
-    public void setDefaultPerformanceOutlierThreshold(float defaultPerformanceOutlierThreshold) {
+    public void setDefaultPerformanceOutlierThreshold(double defaultPerformanceOutlierThreshold) {
         this.defaultPerformanceOutlierThreshold = defaultPerformanceOutlierThreshold;
     }
 
-    public float getAvailabilityThreshold() {
+    public double getAvailabilityThreshold() {
         return availabilityThreshold;
     }
 
-    public void setAvailabilityThreshold(float availabilityThreshold) {
+    public void setAvailabilityThreshold(double availabilityThreshold) {
         this.availabilityThreshold = availabilityThreshold;
     }
 

@@ -1,13 +1,13 @@
 package hubble.backend.business.services.interfaces.services;
 
-import hubble.backend.business.services.models.ApplicationDto;
+import hubble.backend.business.services.models.Application;
 import java.util.List;
 
 public interface ApplicationServiceBase<T> extends ServiceBase<T> {
 
-    public ApplicationDto getApplication(String applicationId);
+    public Application getApplication(String applicationId);
 
-    public List<ApplicationDto> getAllApplications();
+    public List<Application> getAllApplications();
 
     public List<T> getAll(String applicationId);
 

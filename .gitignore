@@ -13,7 +13,7 @@
 target/
 *.iml
 .DS_Store
-
+*.vim
 #Netbeans
 target/
 nbactions.xml

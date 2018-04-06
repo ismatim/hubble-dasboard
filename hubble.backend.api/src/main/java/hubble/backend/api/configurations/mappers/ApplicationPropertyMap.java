@@ -1,10 +1,10 @@
 package hubble.backend.api.configurations.mappers;
 
 import hubble.backend.api.models.BusinessApplication;
-import hubble.backend.business.services.models.ApplicationDto;
+import hubble.backend.business.services.models.Application;
 import org.modelmapper.PropertyMap;
 
-public class ApplicationPropertyMap extends PropertyMap<ApplicationDto, BusinessApplication> {
+public class ApplicationPropertyMap extends PropertyMap<Application, BusinessApplication> {
 
     @Override
     protected void configure() {

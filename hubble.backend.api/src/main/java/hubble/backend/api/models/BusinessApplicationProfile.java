@@ -1,45 +1,51 @@
 package hubble.backend.api.models;
 
-import hubble.backend.business.services.models.AvailabilityDto;
-import java.util.List;
-
 public class BusinessApplicationProfile extends ApiResponseBase {
 
     private String id;
     private Integer issuesQtyLastDay;
     private Integer issuesQtyCriticalThreshold;
     private String statusIssuesQty;
-    private Float availabilityAverage10min;
-    private Float performanceAverage10min;
+    private Double availabilityAverage10min;
+    private Double performanceAverage10min;
     private Integer measuresQtyAvailability10min;
     private Integer measuresQtyPerformance10min;
-    private Float availabilityAverage1hour;
-    private Float performanceAverage1hour;
+    private Double availabilityAverage1hour;
+    private Double performanceAverage1hour;
     private Integer measuresQtyAvailability1hour;
     private Integer measuresQtyPerformance1hour;
-    private Float availabilityAverage1day;
-    private Float performanceAverage1day;
+    private Double availabilityAverage1day;
+    private Double performanceAverage1day;
     private Integer measuresQtyAvailability1day;
     private Integer measuresQtyPerformance1day;
-    private Float availabilityCriticalValue10min;
-    private Float performanceCriticalValue10min;
-    private Float availabilityCriticalValue1hour;
-    private Float performanceCriticalValue1hour;
-    private Float availabilityCriticalValue1day;
-    private Float performanceCriticalValue1day;
+    private Double availabilityCriticalValue10min;
+    private Double performanceCriticalValue10min;
+    private Double availabilityCriticalValue1hour;
+    private Double performanceCriticalValue1hour;
+    private Double availabilityCriticalValue1day;
+    private Double performanceCriticalValue1day;
     private String statusPerformance10min;
     private String statusAvailability10min;
     private String statusPerformance1hour;
     private String statusAvailability1hour;
     private String statusPerformance1day;
     private String statusAvailability1day;
-    private Float uptime10min;
-    private Float uptime1hour;
-    private Float uptime1day;
+    private Double uptime10min;
+    private Double uptime1hour;
+    private Double uptime1day;
     private Integer workItems1day;
     private Integer workItemsQtyCriticalThreshold;
     private String statusWorkItemsQty;
-    private List<AvailabilityDto> availabilityList;
+    private Double performanceLast10MinKpi;
+    private Double availabilityLast10MinKpi;
+    private Double performanceLastHourKpi;
+    private Double availabilityLastHourKpi;
+    private Double performanceLastDayKpi;
+    private Double availabilityLastDayKpi;
+    private Double performanceLastMonthKpi;
+    private Double availabilityLastMonthKpi;
+    private Double issuesKpiLastDay;
+    private Double issuesKpiLastMonth;
 
     public BusinessApplicationProfile() {
     }
@@ -52,19 +58,19 @@ public class BusinessApplicationProfile extends ApiResponseBase {
         this.id = id;
     }
 
-    public Float getAvailabilityAverage10min() {
+    public Double getAvailabilityAverage10min() {
         return availabilityAverage10min;
     }
 
-    public void setAvailabilityAverage10min(Float availabilityAverage) {
+    public void setAvailabilityAverage10min(Double availabilityAverage) {
         this.availabilityAverage10min = availabilityAverage;
     }
 
-    public Float getPerformanceAverage10min() {
+    public Double getPerformanceAverage10min() {
         return performanceAverage10min;
     }
 
-    public void setPerformanceAverage10min(Float performanceAverage) {
+    public void setPerformanceAverage10min(Double performanceAverage) {
         this.performanceAverage10min = performanceAverage;
     }
 
@@ -84,15 +90,15 @@ public class BusinessApplicationProfile extends ApiResponseBase {
         this.measuresQtyPerformance10min = measuresQtyPerformance;
     }
 
-    public void setAvailabilityAverage1hour(Float availabilityAverage1hour) {
+    public void setAvailabilityAverage1hour(Double availabilityAverage1hour) {
         this.availabilityAverage1hour = availabilityAverage1hour;
     }
 
-    public Float getPerformanceAverage1hour() {
+    public Double getPerformanceAverage1hour() {
         return performanceAverage1hour;
     }
 
-    public void setPerformanceAverage1hour(Float performanceAverage1hour) {
+    public void setPerformanceAverage1hour(Double performanceAverage1hour) {
         this.performanceAverage1hour = performanceAverage1hour;
     }
 
@@ -112,19 +118,19 @@ public class BusinessApplicationProfile extends ApiResponseBase {
         this.measuresQtyPerformance1hour = measuresQtyPerformance1hour;
     }
 
-    public Float getAvailabilityAverage1day() {
+    public Double getAvailabilityAverage1day() {
         return availabilityAverage1day;
     }
 
-    public void setAvailabilityAverage1day(Float availabilityAverage1day) {
+    public void setAvailabilityAverage1day(Double availabilityAverage1day) {
         this.availabilityAverage1day = availabilityAverage1day;
     }
 
-    public Float getPerformanceAverage1day() {
+    public Double getPerformanceAverage1day() {
         return performanceAverage1day;
     }
 
-    public void setPerformanceAverage1day(Float performanceAverage1day) {
+    public void setPerformanceAverage1day(Double performanceAverage1day) {
         this.performanceAverage1day = performanceAverage1day;
     }
 
@@ -192,55 +198,55 @@ public class BusinessApplicationProfile extends ApiResponseBase {
         this.statusAvailability1day = statusAvailability1day;
     }
 
-    public Float getAvailabilityAverage1hour() {
+    public Double getAvailabilityAverage1hour() {
         return availabilityAverage1hour;
     }
 
-    public Float getAvailabilityCriticalValue10min() {
+    public Double getAvailabilityCriticalValue10min() {
         return availabilityCriticalValue10min;
     }
 
-    public void setAvailabilityCriticalValue10min(Float availabilityCriticalValue10min) {
+    public void setAvailabilityCriticalValue10min(Double availabilityCriticalValue10min) {
         this.availabilityCriticalValue10min = availabilityCriticalValue10min;
     }
 
-    public Float getPerformanceCriticalValue10min() {
+    public Double getPerformanceCriticalValue10min() {
         return performanceCriticalValue10min;
     }
 
-    public void setPerformanceCriticalValue10min(Float performanceCriticalValue10min) {
+    public void setPerformanceCriticalValue10min(Double performanceCriticalValue10min) {
         this.performanceCriticalValue10min = performanceCriticalValue10min;
     }
 
-    public Float getAvailabilityCriticalValue1hour() {
+    public Double getAvailabilityCriticalValue1hour() {
         return availabilityCriticalValue1hour;
     }
 
-    public void setAvailabilityCriticalValue1hour(Float availabilityCriticalValue1hour) {
+    public void setAvailabilityCriticalValue1hour(Double availabilityCriticalValue1hour) {
         this.availabilityCriticalValue1hour = availabilityCriticalValue1hour;
     }
 
-    public Float getPerformanceCriticalValue1hour() {
+    public Double getPerformanceCriticalValue1hour() {
         return performanceCriticalValue1hour;
     }
 
-    public void setPerformanceCriticalValue1hour(Float performanceCriticalValue1hour) {
+    public void setPerformanceCriticalValue1hour(Double performanceCriticalValue1hour) {
         this.performanceCriticalValue1hour = performanceCriticalValue1hour;
     }
 
-    public Float getAvailabilityCriticalValue1day() {
+    public Double getAvailabilityCriticalValue1day() {
         return availabilityCriticalValue1day;
     }
 
-    public void setAvailabilityCriticalValue1day(Float availabilityCriticalValue1day) {
+    public void setAvailabilityCriticalValue1day(Double availabilityCriticalValue1day) {
         this.availabilityCriticalValue1day = availabilityCriticalValue1day;
     }
 
-    public Float getPerformanceCriticalValue1day() {
+    public Double getPerformanceCriticalValue1day() {
         return performanceCriticalValue1day;
     }
 
-    public void setPerformanceCriticalValue1day(Float performanceCriticalValue1day) {
+    public void setPerformanceCriticalValue1day(Double performanceCriticalValue1day) {
         this.performanceCriticalValue1day = performanceCriticalValue1day;
     }
 
@@ -268,27 +274,27 @@ public class BusinessApplicationProfile extends ApiResponseBase {
         this.statusIssuesQty = statusIssuesQty;
     }
 
-    public Float getUptime10min() {
+    public Double getUptime10min() {
         return uptime10min;
     }
 
-    public void setUptime10min(Float uptime10min) {
+    public void setUptime10min(Double uptime10min) {
         this.uptime10min = uptime10min;
     }
 
-    public Float getUptime1hour() {
+    public Double getUptime1hour() {
         return uptime1hour;
     }
 
-    public void setUptime1hour(Float uptime1hour) {
+    public void setUptime1hour(Double uptime1hour) {
         this.uptime1hour = uptime1hour;
     }
 
-    public Float getUptime1day() {
+    public Double getUptime1day() {
         return uptime1day;
     }
 
-    public void setUptime1day(Float uptime1day) {
+    public void setUptime1day(Double uptime1day) {
         this.uptime1day = uptime1day;
     }
 
@@ -316,4 +322,83 @@ public class BusinessApplicationProfile extends ApiResponseBase {
         this.statusWorkItemsQty = statusWorkItemsQty;
     }
 
+    public Double getPerformanceLast10MinKpi() {
+        return performanceLast10MinKpi;
+    }
+
+    public void setPerformanceLast10MinKpi(Double performanceLast10MinKpi) {
+        this.performanceLast10MinKpi = performanceLast10MinKpi;
+    }
+
+    public Double getAvailabilityLast10MinKpi() {
+        return availabilityLast10MinKpi;
+    }
+
+    public void setAvailabilityLast10MinKpi(Double availabilityLast10MinKpi) {
+        this.availabilityLast10MinKpi = availabilityLast10MinKpi;
+    }
+
+    public Double getPerformanceLastHourKpi() {
+        return performanceLastHourKpi;
+    }
+
+    public void setPerformanceLastHourKpi(Double performanceLastHourKpi) {
+        this.performanceLastHourKpi = performanceLastHourKpi;
+    }
+
+    public Double getAvailabilityLastHourKpi() {
+        return availabilityLastHourKpi;
+    }
+
+    public void setAvailabilityLastHourKpi(Double availabilityLastHourKpi) {
+        this.availabilityLastHourKpi = availabilityLastHourKpi;
+    }
+
+    public Double getPerformanceLastDayKpi() {
+        return performanceLastDayKpi;
+    }
+
+    public void setPerformanceLastDayKpi(Double performanceLastDayKpi) {
+        this.performanceLastDayKpi = performanceLastDayKpi;
+    }
+
+    public Double getAvailabilityLastDayKpi() {
+        return availabilityLastDayKpi;
+    }
+
+    public void setAvailabilityLastDayKpi(Double availabilityLastDayKpi) {
+        this.availabilityLastDayKpi = availabilityLastDayKpi;
+    }
+
+    public Double getPerformanceLastMonthKpi() {
+        return performanceLastMonthKpi;
+    }
+
+    public void setPerformanceLastMonthKpi(Double performanceLastMonthKpi) {
+        this.performanceLastMonthKpi = performanceLastMonthKpi;
+    }
+
+    public Double getAvailabilityLastMonthKpi() {
+        return availabilityLastMonthKpi;
+    }
+
+    public void setAvailabilityLastMonthKpi(Double availabilityLastMonthKpi) {
+        this.availabilityLastMonthKpi = availabilityLastMonthKpi;
+    }
+
+    public Double getIssuesKpiLastDay() {
+        return issuesKpiLastDay;
+    }
+
+    public void setIssuesKpiLastDay(Double issuesKpiLastDay) {
+        this.issuesKpiLastDay = issuesKpiLastDay;
+    }
+
+    public Double getIssuesKpiLastMonth() {
+        return issuesKpiLastMonth;
+    }
+
+    public void setIssuesKpiLastMonth(Double issuesKpiLastMonth) {
+        this.issuesKpiLastMonth = issuesKpiLastMonth;
+    }
 }

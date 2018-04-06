@@ -1,9 +1,10 @@
 package hubble.backend.business.services.tests;
 
-import hubble.backend.business.services.implementations.unitconverters.ApplicationAvgConverterImpl;
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
-import hubble.backend.business.services.implementations.operations.PerformanceOperationImpl;
+import hubble.backend.business.services.implementations.operations.averages.PerformanceOperationImpl;
+import hubble.backend.business.services.implementations.operations.rules.PerformanceRulesOperationsImpl;
 import hubble.backend.business.services.implementations.services.TransactionServiceImpl;
+import hubble.backend.business.services.implementations.unitconverters.ApplicationIndicatorsConverterImpl;
 import hubble.backend.business.services.tests.configurations.ServiceBaseConfigurationTest;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.ApplicationStorage;
@@ -40,9 +41,11 @@ public class PerformanceOperationUnitTests {
     @Spy
     private MapperConfiguration mapper;
     @Spy
-    ApplicationAvgConverterImpl unitConverter;
+    ApplicationIndicatorsConverterImpl unitConverter;
     @InjectMocks
     private PerformanceOperationImpl performanceOperation;
+    @InjectMocks
+    private PerformanceRulesOperationsImpl performanceRulesOperation;
     @Spy
     private TransactionServiceImpl transactinoService;
 
@@ -63,7 +66,7 @@ public class PerformanceOperationUnitTests {
     @Test
     public void performance_service_should_calculate_last_10minutes_application_performance_average() {
         //Assign
-        Float average;
+        Double average;
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
@@ -80,7 +83,7 @@ public class PerformanceOperationUnitTests {
     @Test
     public void performance_service_should_calculate_last_hour_application_performance_average() {
         //Assign
-        Float average;
+        Double average;
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
@@ -97,7 +100,7 @@ public class PerformanceOperationUnitTests {
     @Test
     public void performance_service_should_calculate_last_day_application_performance_average() {
         //Assign
-        Float average;
+        Double average;
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
@@ -114,7 +117,7 @@ public class PerformanceOperationUnitTests {
     @Test
     public void performance_service_should_calculate_last_month_application_performance_average() {
         //Assign
-        Float average;
+        Double average;
         availabilityStorageList = availabilityHelper.mockData();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
@@ -131,7 +134,7 @@ public class PerformanceOperationUnitTests {
     @Test
     public void performance_service_should_return_negative1_when_average_last_month_performance_calculation_encounters_no_data() {
         //Assign
-        Float average;
+        Double average;
         String applicationId = "b566958ec4ff28028672780d15edcf56";
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
 
@@ -144,4 +147,54 @@ public class PerformanceOperationUnitTests {
         assertEquals(null, average);
     }
 
+    @Test
+    public void performance_service_should_calculate_last_10_minutes_application_grouprule_performance() {
+        //Assign
+        Double average;
+        availabilityStorageList = availabilityHelper.mockData();
+        String applicationId = "b566958ec4ff28028672780d15edcf56";
+        ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, applicationId)).thenReturn(availabilityStorageList);
+        when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
+        average = performanceRulesOperation.calculateLast10MinutesGroupRuleByApplication(applicationId).get();
+
+        //Assert
+        assertEquals(1389d, average, 0.1d);
+    }
+
+    @Test
+    public void performance_service_should_calculate_last_10_minutes_application_rule_performance() {
+        //Assign
+        Double average;
+        availabilityStorageList = availabilityHelper.mockLowPerformanceData();
+        String applicationId = "b566958ec4ff28028672780d15edcf56";
+        ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_HOUR, applicationId)).thenReturn(availabilityStorageList);
+        when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
+        average = performanceRulesOperation.calculateLastHourGroupRuleByApplication(applicationId).get();
+
+        //Assert
+        assertEquals(43575.0d, average, 0.1d);
+    }
+
+    @Test
+    public void performance_service_should_calculate_last_day_application_rule_performance() {
+        //Assign
+        Double average;
+        availabilityStorageList = availabilityHelper.mockLowPerformanceData();
+        String applicationId = "b566958ec4ff28028672780d15edcf56";
+        ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
+
+        //Act
+        when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_DAY, applicationId)).thenReturn(availabilityStorageList);
+        when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
+        average = performanceRulesOperation.calculateLastDayGroupRuleByApplication(applicationId).get();
+
+        //Assert
+        assertEquals(43575.0d, average, 0.1d);
+    }
 }

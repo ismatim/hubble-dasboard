@@ -1,7 +1,7 @@
 package hubble.backend.api.configurations.mappers;
 
-import hubble.backend.api.models.Uptime;
-import hubble.backend.business.services.models.measures.UptimeDto;
+import hubble.backend.api.models.ApplicationUptime;
+import hubble.backend.business.services.models.measures.Uptime;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import org.modelmapper.ModelMapper;
@@ -26,7 +26,7 @@ public class UptimeMapper {
         this.mapper = mapper;
     }
 
-    public ArrayList<Uptime> mapToUptimeList(UptimeDto uptimeDto) {
+    public ArrayList<ApplicationUptime> mapToUptimeList(Uptime uptimeDto) {
         if (uptimeDto == null) {
             return null;
         }
