@@ -3,19 +3,19 @@ package hubble.backend.api.implementations;
 import hubble.backend.api.configurations.mappers.ApplicationMapper;
 import hubble.backend.api.configurations.mappers.UptimeMapper;
 import hubble.backend.api.interfaces.BusinessApplicationManager;
+import hubble.backend.api.models.ApplicationUptime;
 import hubble.backend.api.models.BusinessApplication;
-import hubble.backend.api.models.Uptime;
 import hubble.backend.api.models.BusinessApplicationProfile;
 import hubble.backend.business.services.interfaces.services.AvailabilityService;
 import hubble.backend.business.services.interfaces.services.IssueService;
 import hubble.backend.business.services.interfaces.services.PerformanceService;
 import hubble.backend.business.services.interfaces.services.UptimeDowntimeService;
 import hubble.backend.business.services.interfaces.services.WorkItemService;
-import hubble.backend.business.services.models.ApplicationAvgDto;
-import hubble.backend.business.services.models.ApplicationDto;
-import hubble.backend.business.services.models.AvailabilityDto;
+import hubble.backend.business.services.models.Application;
+import hubble.backend.business.services.models.Availability;
+import hubble.backend.business.services.models.business.ApplicationIndicators;
 import hubble.backend.business.services.models.measures.IssuesQuantity;
-import hubble.backend.business.services.models.measures.UptimeDto;
+import hubble.backend.business.services.models.measures.Uptime;
 import hubble.backend.business.services.models.measures.WorkItemQuantity;
 import hubble.backend.core.enums.MonitoringFields;
 import hubble.backend.core.utils.CalendarHelper;
@@ -51,8 +51,8 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         businessView.setId(id);
 
         //10 minuntes
-        ApplicationAvgDto availabilityAvg10min = availabilityService.calculateLast10MinutesAverageByApplication(id);
-        ApplicationAvgDto performanceAvg10min = performanceService.calculateLast10MinutesAverageByApplication(id);
+        ApplicationIndicators availabilityAvg10min = availabilityService.calculateLast10MinutesAverageByApplication(id);
+        ApplicationIndicators performanceAvg10min = performanceService.calculateLast10MinutesAverageByApplication(id);
 
         if (availabilityAvg10min == null || performanceAvg10min == null) {
             return businessView;
@@ -69,8 +69,8 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         businessView.setPerformanceCriticalValue10min(performanceAvg10min.getCriticalThreshold());
 
         //1 Hour
-        ApplicationAvgDto availabilityAvg1Hour = availabilityService.calculateLastHourAverageByApplication(id);
-        ApplicationAvgDto performanceAvg1Hour = performanceService.calculateLastHourAverageByApplication(id);
+        ApplicationIndicators availabilityAvg1Hour = availabilityService.calculateLastHourAverageByApplication(id);
+        ApplicationIndicators performanceAvg1Hour = performanceService.calculateLastHourAverageByApplication(id);
 
         businessView.setAvailabilityAverage1hour(availabilityAvg1Hour.getAvailabilityAverageValue());
         businessView.setPerformanceAverage1hour(performanceAvg1Hour.getPerformanceAverageValue());
@@ -83,8 +83,8 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         businessView.setPerformanceCriticalValue1hour(performanceAvg1Hour.getCriticalThreshold());
 
         //1 Day
-        ApplicationAvgDto availabilityAvg1Day = availabilityService.calculateLastDayAverageByApplication(id);
-        ApplicationAvgDto performanceAvg1Day = performanceService.calculateLastDayAverageByApplication(id);
+        ApplicationIndicators availabilityAvg1Day = availabilityService.calculateLastDayAverageByApplication(id);
+        ApplicationIndicators performanceAvg1Day = performanceService.calculateLastDayAverageByApplication(id);
 
         businessView.setAvailabilityAverage1day(availabilityAvg1Day.getAvailabilityAverageValue());
         businessView.setPerformanceAverage1day(performanceAvg1Day.getPerformanceAverageValue());
@@ -113,17 +113,34 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         businessView.setUptime1hour(uptimeService.calculateLastHourUptime(id).get());
         businessView.setUptime1day(uptimeService.calculateLastDayUptime(id).get());
 
+        //Availability Kpi
+        businessView.setAvailabilityLast10MinKpi(availabilityService.calculateLast10MinutesKpiByApplication(id).getAvailabilityIndicator().get());
+        businessView.setAvailabilityLastHourKpi(availabilityService.calculateLastHourKpiByApplication(id).getAvailabilityIndicator().get());
+        businessView.setAvailabilityLastDayKpi(availabilityService.calculateLastDayKpiByApplication(id).getAvailabilityIndicator().get());
+        businessView.setAvailabilityLastMonthKpi(availabilityService.calculateLastMonthKpiByApplication(id).getAvailabilityIndicator().get());
+
+        //Performance Kpi
+        businessView.setAvailabilityLast10MinKpi(performanceService.calculateLast10MinutesKpiByApplication(id).getPerformanceIndicator().get());
+        businessView.setAvailabilityLastHourKpi(performanceService.calculateLastHourKpiByApplication(id).getPerformanceIndicator().get());
+        businessView.setAvailabilityLastDayKpi(performanceService.calculateLastDayKpiByApplication(id).getPerformanceIndicator().get());
+        businessView.setAvailabilityLastMonthKpi(performanceService.calculateLastMonthKpiByApplication(id).getPerformanceIndicator().get());
+
+        //Incidentes Kpi
+        businessView.setIssuesKpiLastDay(issueService.calculateLastDayKpiByApplication(id).get());
+        businessView.setIssuesKpiLastMonth(issueService.calculateLastMonthKpiByApplication(id).get());
+
+        //TODO: Tareas Kpi, Eventos Kpi.
         return businessView;
     }
 
     @Override
     public List<BusinessApplication> getAllApplications() {
-        List<ApplicationDto> applicationDtoList = availabilityService.getAllApplications();
+        List<Application> applicationDtoList = availabilityService.getAllApplications();
         return applicationMapper.mapToBusinessApplicationList(applicationDtoList);
     }
 
     @Override
-    public List<Uptime> getUptimeLastMonth(String applicationId) {
+    public List<ApplicationUptime> getUptimeLastMonth(String applicationId) {
 
         Calendar startCalendar = CalendarHelper.getNow();
         startCalendar.add(Calendar.MONTH, -1);
@@ -133,23 +150,23 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         endCalendar.add(Calendar.HOUR, 24);
         Date endDate = endCalendar.getTime();
 
-        UptimeDto uptimeDto = uptimeService.getUptimeByApplication(applicationId, MonitoringFields.FRECUENCY.DAY, startDate, endDate);
+        Uptime uptimeDto = uptimeService.getUptimeByApplication(applicationId, MonitoringFields.FRECUENCY.DAY, startDate, endDate);
 
-        List<Uptime> uptimes = uptimeMapper.mapToUptimeList(uptimeDto);
+        List<ApplicationUptime> uptimes = uptimeMapper.mapToUptimeList(uptimeDto);
         return uptimes;
     }
 
     @Override
-    public List<AvailabilityDto> getAvailabilityLast10Minutes(String applicationId) {
-        List<AvailabilityDto> availabilityList = availabilityService.getLast10Minutes(applicationId);
-        availabilityList.sort(Comparator.comparing(AvailabilityDto::getTimeStamp));
+    public List<Availability> getAvailabilityLast10Minutes(String applicationId) {
+        List<Availability> availabilityList = availabilityService.getLast10Minutes(applicationId);
+        availabilityList.sort(Comparator.comparing(Availability::getTimeStamp));
         return availabilityList;
     }
 
     @Override
-    public List<AvailabilityDto> getAvailabilityLastHour(String applicationId) {
-        List<AvailabilityDto> availabilityList = availabilityService.getLastHour(applicationId);
-        availabilityList.sort(Comparator.comparing(AvailabilityDto::getTimeStamp));
+    public List<Availability> getAvailabilityLastHour(String applicationId) {
+        List<Availability> availabilityList = availabilityService.getLastHour(applicationId);
+        availabilityList.sort(Comparator.comparing(Availability::getTimeStamp));
         return availabilityList;
     }
 }

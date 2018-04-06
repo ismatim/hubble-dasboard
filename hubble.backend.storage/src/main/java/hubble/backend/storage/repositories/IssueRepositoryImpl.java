@@ -44,7 +44,7 @@ public class IssueRepositoryImpl implements IssueOperations {
     }
 
     @Override
-    public List<IssueStorage> findAvailabilitiesByApplicationIdAndDurationMinutes(int duration, String applicationId) {
+    public List<IssueStorage> findIssuesByApplicationIdAndDurationMinutes(int duration, String applicationId) {
 
         Calendar from = CalendarHelper.getNow();
         from.add(Calendar.MINUTE, -duration);
@@ -62,7 +62,7 @@ public class IssueRepositoryImpl implements IssueOperations {
     }
 
     @Override
-    public List<IssueStorage> findAvailabilitiesByApplicationIdAndDurationMonths(int duration, String applicationId) {
+    public List<IssueStorage> findIssuesByApplicationIdAndDurationMonths(int duration, String applicationId) {
         Calendar from = CalendarHelper.getNow();
         from.add(Calendar.MONTH, -duration);
 

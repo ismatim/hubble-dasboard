@@ -10,7 +10,7 @@ public interface IssueOperations {
 
     List<IssueStorage> findIssuesByApplicationIdBetweenDates(String applicationId, Date startDate, Date endDate);
 
-    List<IssueStorage> findAvailabilitiesByApplicationIdAndDurationMinutes(int duration, String applicationId);
+    List<IssueStorage> findIssuesByApplicationIdAndDurationMinutes(int duration, String applicationId);
 
-    List<IssueStorage> findAvailabilitiesByApplicationIdAndDurationMonths(int duration, String applicationId);
+    List<IssueStorage> findIssuesByApplicationIdAndDurationMonths(int duration, String applicationId);
 }

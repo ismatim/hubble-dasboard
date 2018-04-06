@@ -1,12 +1,12 @@
 package hubble.backend.business.services.tests;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
-import hubble.backend.business.services.implementations.operations.AvailabilityOperationImpl;
-import hubble.backend.business.services.implementations.operations.PerformanceOperationImpl;
+import hubble.backend.business.services.implementations.operations.averages.AvailabilityOperationImpl;
+import hubble.backend.business.services.implementations.operations.averages.PerformanceOperationImpl;
 import hubble.backend.business.services.implementations.services.TransactionServiceImpl;
-import hubble.backend.business.services.models.AvailabilityDto;
-import hubble.backend.business.services.models.PerformanceDto;
-import hubble.backend.business.services.models.TransactionDto;
+import hubble.backend.business.services.models.Availability;
+import hubble.backend.business.services.models.Performance;
+import hubble.backend.business.services.models.Transaction;
 import hubble.backend.business.services.tests.configurations.ServiceBaseConfigurationTest;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.ApplicationStorage;
@@ -102,7 +102,7 @@ public class TransactionServiceUnitTests {
         //Assign
         ApplicationStorage applicationStorage = new AvailabilityHelper().mockApplicationStorage();
         String applicationId = "b566958ec4ff28028672780d15edcf56";
-        List<TransactionDto> transactionDtoList = new ArrayList();
+        List<Transaction> transactionDtoList = new ArrayList();
 
         //Act
         when(applicationRepository.findApplicationById(applicationId)).thenReturn(applicationStorage);
@@ -116,7 +116,7 @@ public class TransactionServiceUnitTests {
     public void availability_service_should_return_availability_by_transaction_id_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionId("1")).thenReturn(availabilityStorageList);
@@ -130,7 +130,7 @@ public class TransactionServiceUnitTests {
     public void availability_service_should_return_last_10minutes_availabilities_by_transactionid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, "1")).thenReturn(availabilityStorageList);
@@ -144,7 +144,7 @@ public class TransactionServiceUnitTests {
     public void availability_service_should_return_last_hour_availabilities_by_transactionid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.ONE_HOUR, "1")).thenReturn(availabilityStorageList);
@@ -157,7 +157,7 @@ public class TransactionServiceUnitTests {
     @Test
     public void availability_service_should_calculate_last_10minutes_transaction_availability_average() {
         //Assign
-        Float average;
+        Double average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -176,7 +176,7 @@ public class TransactionServiceUnitTests {
     @Test
     public void availability_service_should_calculate_last_hour_transaction_availability_average() {
         //Assign
-        Float average;
+        Double average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -196,7 +196,7 @@ public class TransactionServiceUnitTests {
     public void availability_service_should_return_last_day_availabilities_by_transactionid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.ONE_DAY, "1")).thenReturn(availabilityStorageList);
@@ -210,7 +210,7 @@ public class TransactionServiceUnitTests {
     public void availability_service_should_return_last_Month_availabilities_by_transactionid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<AvailabilityDto> availabilityDtoList;
+        List<Availability> availabilityDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMonths(CalendarHelper.ONE_MONTH, "1")).thenReturn(availabilityStorageList);
@@ -223,7 +223,7 @@ public class TransactionServiceUnitTests {
     @Test
     public void availability_service_should_calculate_last_day_transaction_availability_average() {
         //Assign
-        Float average;
+        Double average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -242,7 +242,7 @@ public class TransactionServiceUnitTests {
     @Test
     public void availability_service_should_calculate_last_month_transaction_availability_average() {
         //Assign
-        Float average;
+        Double average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -262,7 +262,7 @@ public class TransactionServiceUnitTests {
     public void performance_service_should_return_last_10minutes_performances_by_transactionid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, "1")).thenReturn(availabilityStorageList);
@@ -276,7 +276,7 @@ public class TransactionServiceUnitTests {
     public void performance_service_should_return_last_hour_performance_by_transactionid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.ONE_HOUR, "1")).thenReturn(availabilityStorageList);
@@ -289,7 +289,7 @@ public class TransactionServiceUnitTests {
     @Test
     public void performance_service_should_calculate_last_10minutes_transaction_performance_average() {
         //Assign
-        Float average;
+        Double average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -308,7 +308,7 @@ public class TransactionServiceUnitTests {
     @Test
     public void performance_service_should_calculate_last_hour_transaction_performance_average() {
         //Assign
-        Float average;
+        Double average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -328,7 +328,7 @@ public class TransactionServiceUnitTests {
     public void performance_service_should_return_last_day_performances_by_transactionid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMinutes(CalendarHelper.ONE_DAY, "1")).thenReturn(availabilityStorageList);
@@ -342,7 +342,7 @@ public class TransactionServiceUnitTests {
     public void performance_service_should_return_last_month_performance_by_transactionid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionIdAndDurationMonths(1, "1")).thenReturn(availabilityStorageList);
@@ -355,7 +355,7 @@ public class TransactionServiceUnitTests {
     @Test
     public void performance_service_should_calculate_last_day_transaction_performance_average() {
         //Assign
-        Float average;
+        Double average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -374,7 +374,7 @@ public class TransactionServiceUnitTests {
     @Test
     public void performance_service_should_calculate_last_month_transaction_performance_average() {
         //Assign
-        Float average;
+        Double average;
         availabilityStorageList = availabilityHelper.mockData();
         String transactionId = "2eae220e082697be3a0646400e5b54fa";
         TransactionStorage transactionStorage = new AvailabilityHelper().mockTransactionStorage().get(0);
@@ -394,7 +394,7 @@ public class TransactionServiceUnitTests {
     public void performance_service_should_return_performance_by_transaction_id_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
-        List<PerformanceDto> performanceDtoList;
+        List<Performance> performanceDtoList;
 
         //Act
         when(availabilityRepository.findAvailabilitiesByTransactionId("1")).thenReturn(availabilityStorageList);

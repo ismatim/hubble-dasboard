@@ -1,21 +1,24 @@
 package hubble.backend.business.services.interfaces.services;
 
-import hubble.backend.business.services.models.ApplicationAvgDto;
-import hubble.backend.business.services.models.PerformanceDto;
+import hubble.backend.business.services.models.Performance;
+import hubble.backend.business.services.models.business.ApplicationIndicators;
 import java.util.List;
 
-public interface PerformanceService extends OperationsServiceBase<ApplicationAvgDto>, ApplicationServiceBase<PerformanceDto> {
+public interface PerformanceService extends
+        OperationsAverageCalculationServiceBase<ApplicationIndicators>,
+        OperationsKeyPerformanceIndicatorServiceBase<ApplicationIndicators>,
+        ApplicationServiceBase<Performance> {
 
-    public List<PerformanceDto> getAll();
+    public List<Performance> getAll();
 
-    public PerformanceDto getById(String id);
+    public Performance getById(String id);
 
-    public List<PerformanceDto> getLast10Minutes();
+    public List<Performance> getLast10Minutes();
 
-    public List<PerformanceDto> getLastHour();
+    public List<Performance> getLastHour();
 
-    public List<PerformanceDto> getLastDay();
+    public List<Performance> getLastDay();
 
-    public List<PerformanceDto> getLastMonth();
+    public List<Performance> getLastMonth();
 
 }

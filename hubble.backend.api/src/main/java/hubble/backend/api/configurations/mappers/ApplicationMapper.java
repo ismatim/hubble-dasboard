@@ -1,7 +1,7 @@
 package hubble.backend.api.configurations.mappers;
 
 import hubble.backend.api.models.BusinessApplication;
-import hubble.backend.business.services.models.ApplicationDto;
+import hubble.backend.business.services.models.Application;
 import java.lang.reflect.Type;
 import java.util.List;
 import org.modelmapper.ModelMapper;
@@ -26,11 +26,11 @@ public class ApplicationMapper {
         this.mapper = mapper;
     }
 
-    public BusinessApplication mapToBusinessApplication(ApplicationDto applicationDto) {
+    public BusinessApplication mapToBusinessApplication(Application applicationDto) {
         return mapper.map(applicationDto, BusinessApplication.class);
     }
 
-    public List<BusinessApplication> mapToBusinessApplicationList(List<ApplicationDto> applicationDtoList) {
+    public List<BusinessApplication> mapToBusinessApplicationList(List<Application> applicationDtoList) {
         if (applicationDtoList == null) {
             return null;
         }

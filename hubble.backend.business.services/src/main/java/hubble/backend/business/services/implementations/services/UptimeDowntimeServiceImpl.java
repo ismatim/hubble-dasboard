@@ -3,8 +3,8 @@ package hubble.backend.business.services.implementations.services;
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
 import hubble.backend.business.services.interfaces.operations.TimeStatusOperationsBase;
 import hubble.backend.business.services.interfaces.services.UptimeDowntimeService;
-import hubble.backend.business.services.models.measures.DowntimeDto;
-import hubble.backend.business.services.models.measures.UptimeDto;
+import hubble.backend.business.services.models.measures.Downtime;
+import hubble.backend.business.services.models.measures.Uptime;
 import hubble.backend.core.enums.MonitoringFields;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.core.utils.DateHelper;
@@ -41,7 +41,7 @@ public class UptimeDowntimeServiceImpl implements UptimeDowntimeService {
     private static final Logger logger = Logger.getLogger(UptimeDowntimeServiceImpl.class.getName());
 
     @Override
-    public UptimeDto getUptime(MonitoringFields.FRECUENCY frecuency, Date startDate, Date endDate) {
+    public Uptime getUptime(MonitoringFields.FRECUENCY frecuency, Date startDate, Date endDate) {
 
         if (!validateFrequency(frecuency) || !validateDate(frecuency, startDate, endDate)) {
             return null;
@@ -49,7 +49,7 @@ public class UptimeDowntimeServiceImpl implements UptimeDowntimeService {
 
         int diffCount = (int) DateHelper.getDateDiff(startDate, endDate, frecuency.getTimeUnit());
 
-        UptimeDto uptime = new UptimeDto();
+        Uptime uptime = new Uptime();
 
         TreeMap<Date, Integer> uptimeMap = new TreeMap<>();
 
@@ -64,7 +64,7 @@ public class UptimeDowntimeServiceImpl implements UptimeDowntimeService {
     }
 
     @Override
-    public DowntimeDto getDowntime(String transactionId, MonitoringFields.FRECUENCY frecuency, Date startDate, Date endDate) {
+    public Downtime getDowntime(String transactionId, MonitoringFields.FRECUENCY frecuency, Date startDate, Date endDate) {
 
         if (!validateFrequency(frecuency) || !validateDate(frecuency, startDate, endDate)) {
             return null;
@@ -73,7 +73,7 @@ public class UptimeDowntimeServiceImpl implements UptimeDowntimeService {
         int diffCount = (int) DateHelper.getDateDiff(startDate, endDate, frecuency.getTimeUnit());
 
         TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
-        DowntimeDto downtime = new DowntimeDto();
+        Downtime downtime = new Downtime();
 
         downtime.setTransactionMeasured(mapper.mapToTransactionDto(transactionStorage));
 
@@ -91,14 +91,14 @@ public class UptimeDowntimeServiceImpl implements UptimeDowntimeService {
     }
 
     @Override
-    public UptimeDto getUptime(String transactionId, MonitoringFields.FRECUENCY frecuency, Date startDate, Date endDate) {
+    public Uptime getUptime(String transactionId, MonitoringFields.FRECUENCY frecuency, Date startDate, Date endDate) {
 
         if (!validateFrequency(frecuency) || !validateDate(frecuency, startDate, endDate)) {
             return null;
         }
         int diffCount = (int) DateHelper.getDateDiff(startDate, endDate, frecuency.getTimeUnit());
         TransactionStorage transactionStorage = transactionRepository.findTransactionById(transactionId);
-        UptimeDto uptime = new UptimeDto();
+        Uptime uptime = new Uptime();
 
         uptime.setTransactionMeasured(mapper.mapToTransactionDto(transactionStorage));
         TreeMap<Date, Integer> uptimeMap = new TreeMap<>();
@@ -116,13 +116,13 @@ public class UptimeDowntimeServiceImpl implements UptimeDowntimeService {
     }
 
     @Override
-    public UptimeDto getUptimeByApplication(String applicationId, MonitoringFields.FRECUENCY frecuency, Date startDate, Date endDate) {
+    public Uptime getUptimeByApplication(String applicationId, MonitoringFields.FRECUENCY frecuency, Date startDate, Date endDate) {
         if (!validateFrequency(frecuency) || !validateDate(frecuency, startDate, endDate)) {
             return null;
         }
         int diffCount = (int) DateHelper.getDateDiff(startDate, endDate, frecuency.getTimeUnit());
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
-        UptimeDto uptime = new UptimeDto();
+        Uptime uptime = new Uptime();
 
         uptime.setApplicationMeasured(mapper.mapToApplicationDto(applicationStorage));
         TreeMap<Date, Integer> uptimeMap = new TreeMap<>();
@@ -148,28 +148,28 @@ public class UptimeDowntimeServiceImpl implements UptimeDowntimeService {
     }
 
     @Override
-    public UptimeDto calculateLast10MinutesUptime(String applicationId) {
-        UptimeDto uptime = new UptimeDto();
+    public Uptime calculateLast10MinutesUptime(String applicationId) {
+        Uptime uptime = new Uptime();
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, applicationId);
-        uptime.set(timeStatusOperation.calculateUptime(availabilityStorageList).floatValue());
+        uptime.set(timeStatusOperation.calculateUptime(availabilityStorageList).doubleValue());
         return uptime;
     }
 
     @Override
-    public UptimeDto calculateLastHourUptime(String applicationId) {
+    public Uptime calculateLastHourUptime(String applicationId) {
 
-        UptimeDto uptime = new UptimeDto();
+        Uptime uptime = new Uptime();
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_HOUR, applicationId);
-        uptime.set(timeStatusOperation.calculateUptime(availabilityStorageList).floatValue());
+        uptime.set(timeStatusOperation.calculateUptime(availabilityStorageList).doubleValue());
         return uptime;
     }
 
     @Override
-    public UptimeDto calculateLastDayUptime(String applicationId) {
+    public Uptime calculateLastDayUptime(String applicationId) {
 
-        UptimeDto uptime = new UptimeDto();
+        Uptime uptime = new Uptime();
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_DAY, applicationId);
-        uptime.set(timeStatusOperation.calculateUptime(availabilityStorageList).floatValue());
+        uptime.set(timeStatusOperation.calculateUptime(availabilityStorageList).doubleValue());
 
         return uptime;
     }
