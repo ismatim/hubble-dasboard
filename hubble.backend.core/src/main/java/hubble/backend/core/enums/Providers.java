@@ -27,6 +27,12 @@ public class Providers {
             public String toString() {
                 return "JIRA";
             }
+        },
+        PPM {
+            @Override
+            public String toString() {
+                return "PPM";
+            }
         }
     }
 }

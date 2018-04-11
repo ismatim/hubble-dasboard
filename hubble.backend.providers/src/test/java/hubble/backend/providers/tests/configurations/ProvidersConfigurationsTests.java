@@ -3,8 +3,8 @@ package hubble.backend.providers.tests.configurations;
 import hubble.backend.providers.configurations.AlmConfiguration;
 import hubble.backend.providers.configurations.PpmConfiguration;
 import hubble.backend.providers.configurations.ProvidersConfiguration;
-import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,23 +21,23 @@ public class ProvidersConfigurationsTests {
     private AlmConfiguration almConfiguration;
 
     @Test
-    public void ppmConfiguration_should_be_instantiated(){
+    public void ppmConfiguration_should_be_instantiated() {
         assertNotNull(ppmConfiguration);
     }
 
     @Test
-    public void almConfiguration_should_be_instantiated(){
+    public void almConfiguration_should_be_instantiated() {
         assertNotNull(almConfiguration);
     }
 
     @Test
-    public void ppmConfiguration_should_get_configurations_correctly(){
-        String applicationFieldName=ppmConfiguration.getApplicationFieldName();
-        String applicationValueToIdMap=ppmConfiguration.getApplicationValueToIdMap();
-        String providerName=ppmConfiguration.getProviderName();
-        String providerOrigin=ppmConfiguration.getProviderOrigin();
-        String requestTypeIds=ppmConfiguration.getRequestTypeIds();
-        String transactionFieldName=ppmConfiguration.getTransactionFieldName();
+    public void ppmConfiguration_should_get_configurations_correctly() {
+        String applicationFieldName = ppmConfiguration.getApplicationFieldName();
+        String applicationValueToIdMap = ppmConfiguration.getApplicationValueToIdMap();
+        String providerName = ppmConfiguration.getProviderName();
+        String providerOrigin = ppmConfiguration.getProviderOrigin();
+        String requestTypeIds = ppmConfiguration.getRequestTypeIds();
+        String transactionFieldName = ppmConfiguration.getTransactionFieldName();
 
         assertNotNull(applicationFieldName);
         assertNotNull(applicationValueToIdMap);
@@ -50,14 +50,14 @@ public class ProvidersConfigurationsTests {
     }
 
     @Test
-    public void almConfiguration_should_get_configurations_correctly(){
-        String applicationFieldName=almConfiguration.getApplicationFieldName();
-        String applicationValueToIdMap=almConfiguration.getApplicationValueToIdMap();
-        String providerName=almConfiguration.getProviderName();
-        String providerOrigin=almConfiguration.getProviderOrigin();
-        String transactionFieldName=almConfiguration.getTransactionFieldName();
-        String statusFieldName=almConfiguration.getStatusFieldName();
-        String statusOpenValues=almConfiguration.getStatusOpenValues();
+    public void almConfiguration_should_get_configurations_correctly() {
+        String applicationFieldName = almConfiguration.getApplicationFieldName();
+        String applicationValueToIdMap = almConfiguration.getApplicationValueToIdMap();
+        String providerName = almConfiguration.getProviderName();
+        String providerOrigin = almConfiguration.getProviderOrigin();
+        String transactionFieldName = almConfiguration.getTransactionFieldName();
+        String statusFieldName = almConfiguration.getStatusFieldName();
+        String statusOpenValues = almConfiguration.getStatusOpenValues();
 
         assertNotNull(applicationFieldName);
         assertNotNull(applicationValueToIdMap);

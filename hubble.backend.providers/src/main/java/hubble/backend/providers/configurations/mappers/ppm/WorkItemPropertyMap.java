@@ -4,7 +4,7 @@ import hubble.backend.providers.models.ppm.PpmProgramIssueProviderModel;
 import hubble.backend.storage.models.WorkItemStorage;
 import org.modelmapper.PropertyMap;
 
-public class WorkItemPropertyMap extends PropertyMap<PpmProgramIssueProviderModel, WorkItemStorage>{
+public class WorkItemPropertyMap extends PropertyMap<PpmProgramIssueProviderModel, WorkItemStorage> {
 
     @Override
     protected void configure() {
@@ -23,5 +23,5 @@ public class WorkItemPropertyMap extends PropertyMap<PpmProgramIssueProviderMode
         map().setPercentCompleted(source.getPercentComplete());
         map().setTransactionId(source.getTransactionId());
     }
-    
+
 }

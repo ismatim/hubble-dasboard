@@ -6,6 +6,7 @@ import hubble.backend.providers.models.ppm.PpmProgramIssueProviderModel;
 import hubble.backend.providers.parsers.interfaces.ppm.PpmDataParser;
 import hubble.backend.providers.transports.interfaces.PpmTransport;
 import hubble.backend.storage.models.WorkItemStorage;
+import hubble.backend.storage.repositories.WorkItemRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
@@ -14,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import hubble.backend.storage.repositories.WorkItemRepository;
 
 @Component
 public class PpmDataParserImpl implements PpmDataParser {
@@ -96,9 +96,9 @@ public class PpmDataParserImpl implements PpmDataParser {
         model.setRequestType(getValue(ppmIssue, "REQ.REQUEST_TYPE_NAME"));
         model.setApplicationId(resolveApplicationIdFromConfiguration(model.getBusinessApplication()));
         model.setPercentComplete(Integer.valueOf(getValue(ppmIssue, "REQ.PERCENT_COMPLETE")));
-        model.setTransaction(getValue(ppmIssue, configuration.getTransactionFieldName()));
-        model.setProviderName(configuration.getProviderName());
-        model.setProviderOrigin(configuration.getProviderOrigin());
+        model.setDueDate(getValue(ppmIssue, "REQD.P_DUE_DATE"));
+        model.setProviderName(hubble.backend.core.enums.Providers.PROVIDERS_NAME.PPM.toString());
+        model.setProviderOrigin(hubble.backend.core.enums.Providers.PROVIDERS_NAME.PPM.toString());
 
         return model;
     }

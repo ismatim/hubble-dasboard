@@ -5,6 +5,7 @@ import hubble.backend.providers.models.ppm.PpmProgramIssueProviderModel;
 import hubble.backend.providers.parsers.interfaces.ppm.PpmDataParser;
 import hubble.backend.providers.transports.interfaces.PpmTransport;
 import hubble.backend.storage.models.WorkItemStorage;
+import hubble.backend.storage.repositories.WorkItemRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONObject;
@@ -14,7 +15,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import hubble.backend.storage.repositories.WorkItemRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ProvidersConfiguration.class)
