@@ -12,6 +12,7 @@ public class WorkItemStorage {
     private String description;
     private Date registeredDate;
     private Date modifiedDate;
+    private Date dueDate;
     private int priority;
     private int severity;
     private String status;
@@ -177,4 +178,13 @@ public class WorkItemStorage {
     public void setPercentCompleted(int percentCompleted) {
         this.percentCompleted = percentCompleted;
     }
+
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
+
 }

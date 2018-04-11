@@ -1,7 +1,7 @@
 package hubble.backend.providers.models.ppm;
 
 public class PpmProgramIssueProviderModel {
-    
+
     private int id;
     private String contactEmail;
     private String lastUpdateDate;
@@ -26,6 +26,7 @@ public class PpmProgramIssueProviderModel {
     private String transactionId;
     private String providerName;
     private String providerOrigin;
+    private String dueDate;
 
     public PpmProgramIssueProviderModel() {
     }
@@ -220,5 +221,13 @@ public class PpmProgramIssueProviderModel {
 
     public void setProviderOrigin(String providerOrigin) {
         this.providerOrigin = providerOrigin;
+    }
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
     }
 }
