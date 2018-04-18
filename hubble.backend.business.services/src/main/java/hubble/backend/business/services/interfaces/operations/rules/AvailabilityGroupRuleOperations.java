@@ -5,5 +5,13 @@ import hubble.backend.business.services.models.measures.rules.AvailabilityGroupR
 import hubble.backend.storage.models.AvailabilityStorage;
 
 public interface AvailabilityGroupRuleOperations extends
-        GroupRuleOperations<AvailabilityGroupRule, AvailabilityStorage, ApplicationIndicators> {
+        GroupRuleOperations<AvailabilityStorage, ApplicationIndicators> {
+
+    public AvailabilityGroupRule calculateLast10MinutesGroupRuleByApplication(String applicationId);
+
+    public AvailabilityGroupRule calculateLastHourGroupRuleByApplication(String applicationId);
+
+    public AvailabilityGroupRule calculateLastDayGroupRuleByApplication(String applicationId);
+
+    public AvailabilityGroupRule calculateLastMonthGroupRuleByApplication(String applicationId);
 }

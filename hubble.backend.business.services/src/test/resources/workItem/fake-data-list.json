@@ -4,7 +4,7 @@
 	"title" : "fake title",
 	"description" : "fake description",
 	"registeredDate" : "2017-09-19T15:44:23.256Z",
-	"modifiedDate" : "2017-09-19T15:44:23.256Z",
+	"modifiedDate" : "2017-09-20T15:44:23.256Z",
 	"priority" : 1,
 	"severity" : 1,
 	"status" : "Open",
@@ -13,7 +13,8 @@
 	"providerName" : "Fake Alm",
 	"businessApplication" : "Home Banking",
 	"businessApplicationId" : "Benchmark Home Banking",
-	"percentCompleted" : 0
+	"percentCompleted" : 0,
+        "dueDate": "2017-09-21T15:44:23.256Z"
     },
     {
 	"externalId" : 2,
@@ -29,7 +30,8 @@
 	"providerName" : "Fake Alm",
 	"businessApplication" : "Home Banking",
 	"businessApplicationId" : "Benchmark Home Banking",
-	"percentCompleted" : 0
+	"percentCompleted" : 0,
+        "dueDate": "2017-09-21T15:44:23.256Z"
     },
     {
 	"externalId" : 3,
@@ -45,7 +47,8 @@
 	"providerName" : "Fake Alm",
 	"businessApplication" : "Home Banking",
 	"businessApplicationId" : "Benchmark Home Banking",
-	"percentCompleted" : 0
+	"percentCompleted" : 0,
+        "dueDate": "2017-09-21T15:44:23.256Z"
     },
     {
 	"externalId" : 4,
@@ -61,6 +64,7 @@
 	"providerName" : "Fake Alm",
 	"businessApplication" : "Home Banking",
 	"businessApplicationId" : "Benchmark Home Banking",
-	"percentCompleted" : 0
+	"percentCompleted" : 0,
+        "dueDate": "2017-09-21T15:44:23.256Z"
     }
 ]

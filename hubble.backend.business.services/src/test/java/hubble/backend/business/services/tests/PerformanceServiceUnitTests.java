@@ -4,10 +4,9 @@ import hubble.backend.business.services.configurations.mappers.MapperConfigurati
 import hubble.backend.business.services.implementations.operations.averages.PerformanceOperationImpl;
 import hubble.backend.business.services.implementations.services.PerformanceServiceImpl;
 import hubble.backend.business.services.implementations.services.TransactionServiceImpl;
-import hubble.backend.business.services.models.business.ApplicationIndicators;
 import hubble.backend.business.services.models.Application;
 import hubble.backend.business.services.models.Performance;
-import hubble.backend.business.services.models.measures.PerformanceAverage;
+import hubble.backend.business.services.models.business.ApplicationIndicators;
 import hubble.backend.business.services.tests.configurations.ServiceBaseConfigurationTest;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.ApplicationStorage;
@@ -95,20 +94,6 @@ public class PerformanceServiceUnitTests {
     }
 
     @Test
-    public void performance_service_should_return_lastDay_performances_with_correct_model() {
-        //Assign
-        availabilityStorageList = availabilityHelper.mockData();
-        List<Performance> performanceDtoList;
-
-        //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_DAY)).thenReturn(availabilityStorageList);
-        performanceDtoList = performanceService.getLastDay();
-
-        //Assert
-        assertEquals(12, performanceDtoList.size());
-    }
-
-    @Test
     public void performance_service_should_return_performance_by_application_id_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();
@@ -117,34 +102,6 @@ public class PerformanceServiceUnitTests {
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationId("1")).thenReturn(availabilityStorageList);
         performanceDtoList = performanceService.getAll("1");
-
-        //Assert
-        assertEquals(12, performanceDtoList.size());
-    }
-
-    @Test
-    public void performance_service_should_return_last_10minutes_performances_with_correct_model() {
-        //Assign
-        availabilityStorageList = availabilityHelper.mockData();
-        List<Performance> performanceDtoList;
-
-        //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.TEN_MINUTES)).thenReturn(availabilityStorageList);
-        performanceDtoList = performanceService.getLast10Minutes();
-
-        //Assert
-        assertEquals(12, performanceDtoList.size());
-    }
-
-    @Test
-    public void performance_service_should_return_last_hour_performances_with_correct_model() {
-        //Assign
-        availabilityStorageList = availabilityHelper.mockData();
-        List<Performance> performanceDtoList;
-
-        //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_HOUR)).thenReturn(availabilityStorageList);
-        performanceDtoList = performanceService.getLastHour();
 
         //Assert
         assertEquals(12, performanceDtoList.size());
@@ -173,34 +130,6 @@ public class PerformanceServiceUnitTests {
         //Act
         when(availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_HOUR, "1")).thenReturn(availabilityStorageList);
         performanceDtoList = performanceService.getLastHour("1");
-
-        //Assert
-        assertEquals(12, performanceDtoList.size());
-    }
-
-    @Test
-    public void performance_service_should_return_last_day_performances_with_correct_model() {
-        //Assign
-        availabilityStorageList = availabilityHelper.mockData();
-        List<Performance> performanceDtoList;
-
-        //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.TEN_MINUTES)).thenReturn(availabilityStorageList);
-        performanceDtoList = performanceService.getLast10Minutes();
-
-        //Assert
-        assertEquals(12, performanceDtoList.size());
-    }
-
-    @Test
-    public void performance_service_should_return_last_month_performances_with_correct_model() {
-        //Assign
-        availabilityStorageList = availabilityHelper.mockData();
-        List<Performance> performanceDtoList;
-
-        //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMonths(1)).thenReturn(availabilityStorageList);
-        performanceDtoList = performanceService.getLastMonth();
 
         //Assert
         assertEquals(12, performanceDtoList.size());

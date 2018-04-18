@@ -1,10 +1,10 @@
 package hubble.backend.business.services.implementations.operations.kpis;
 
 import hubble.backend.business.services.interfaces.operations.kpis.CalculateKpiLowNumberBestIndicator;
-import hubble.backend.business.services.interfaces.operations.kpis.IssuesKpiOperations;
-import hubble.backend.business.services.interfaces.operations.rules.IssuesGroupRuleOperations;
-import hubble.backend.business.services.models.measures.kpis.IssuesKpi;
-import hubble.backend.business.services.models.measures.rules.IssuesGroupRule;
+import hubble.backend.business.services.interfaces.operations.kpis.WorkItemKpiOperations;
+import hubble.backend.business.services.interfaces.operations.rules.WorkItemGroupRuleOperations;
+import hubble.backend.business.services.models.measures.kpis.WorkItemsKpi;
+import hubble.backend.business.services.models.measures.rules.WorkItemsGroupRule;
 import hubble.backend.core.enums.MonitoringFields;
 import hubble.backend.core.utils.KpiHelper;
 import hubble.backend.core.utils.Threshold;
@@ -12,12 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class IssuesKpiOperationsImpl implements IssuesKpiOperations {
+public class WorkItemKpiOperationsImpl implements WorkItemKpiOperations {
 
     @Autowired
     CalculateKpiLowNumberBestIndicator calculateIssuesKpi;
     @Autowired
-    IssuesGroupRuleOperations issuesRulesOperation;
+    WorkItemGroupRuleOperations issuesRulesOperation;
 
     private double warningKpiThreshold;
     private double criticalKpiThreshold;
@@ -25,7 +25,7 @@ public class IssuesKpiOperationsImpl implements IssuesKpiOperations {
     private double criticalIdxThreshold;
 
     @Override
-    public double calculateKeyPerformanceIndicator(IssuesGroupRule issuesGroupRule) {
+    public double calculateKeyPerformanceIndicator(WorkItemsGroupRule issuesGroupRule) {
 
         calculateIssuesKpi.setWarningKpiThreshold(this.warningKpiThreshold);
         calculateIssuesKpi.setCriticalKpiThreshold(this.criticalKpiThreshold);
@@ -37,48 +37,15 @@ public class IssuesKpiOperationsImpl implements IssuesKpiOperations {
     }
 
     @Override
-    public IssuesKpi calculateLast10MinutesKeyPerformanceIndicatorByApplication(String applicationId) {
+    public WorkItemsKpi calculateLastWeekKeyPerformanceIndicatorByApplication(String applicationId) {
 
-        IssuesGroupRule availabilityLastHourRuleGroup = issuesRulesOperation.calculateLast10MinutesGroupRuleByApplication(applicationId);
+        WorkItemsGroupRule availabilityLastDayRuleGroup = issuesRulesOperation.calculateLastWeekGroupRuleByApplication(applicationId);
 
-        setKpiThresholdFor10Minutes();
-
-        double kpi10Min = calculateKeyPerformanceIndicator(availabilityLastHourRuleGroup);
-
-        IssuesKpi issuesKpi = new IssuesKpi();
-        issuesKpi.set(kpi10Min);
-
-        issuesKpi.setStatus(calculateKpiStatus(kpi10Min));
-        return issuesKpi;
-    }
-
-    @Override
-    public IssuesKpi calculateLastHourKeyPerformanceIndicatorByApplication(String applicationId) {
-
-        IssuesGroupRule availabilityLastHourRuleGroup = issuesRulesOperation.calculateLastHourGroupRuleByApplication(applicationId);
-
-        setKpiThresholdForHour();
-
-        double kpiLastHour = calculateKeyPerformanceIndicator(availabilityLastHourRuleGroup);
-
-        IssuesKpi issuesKpi = new IssuesKpi();
-        issuesKpi.set(kpiLastHour);
-
-        issuesKpi.setStatus(calculateKpiStatus(kpiLastHour));
-        return issuesKpi;
-
-    }
-
-    @Override
-    public IssuesKpi calculateLastDayKeyPerformanceIndicatorByApplication(String applicationId) {
-
-        IssuesGroupRule availabilityLastDayRuleGroup = issuesRulesOperation.calculateLastDayGroupRuleByApplication(applicationId);
-
-        setKpiThresholdForDay();
+        setKpiThresholdForWeek();
 
         double kpiLastDay = calculateKeyPerformanceIndicator(availabilityLastDayRuleGroup);
 
-        IssuesKpi issuesKpi = new IssuesKpi();
+        WorkItemsKpi issuesKpi = new WorkItemsKpi();
         issuesKpi.set(kpiLastDay);
 
         issuesKpi.setStatus(calculateKpiStatus(kpiLastDay));
@@ -87,14 +54,14 @@ public class IssuesKpiOperationsImpl implements IssuesKpiOperations {
     }
 
     @Override
-    public IssuesKpi calculateLastMonthKeyPerformanceIndicatorByApplication(String applicationId) {
-        IssuesGroupRule availabilityLastMonthRuleGroup = issuesRulesOperation.calculateLastMonthGroupRuleByApplication(applicationId);
+    public WorkItemsKpi calculateLastMonthKeyPerformanceIndicatorByApplication(String applicationId) {
+        WorkItemsGroupRule availabilityLastMonthRuleGroup = issuesRulesOperation.calculateLastMonthGroupRuleByApplication(applicationId);
 
         setKpiThresholdForMonth();
 
         double kpiLastMonth = calculateKeyPerformanceIndicator(availabilityLastMonthRuleGroup);
 
-        IssuesKpi issuesKpi = new IssuesKpi();
+        WorkItemsKpi issuesKpi = new WorkItemsKpi();
         issuesKpi.set(kpiLastMonth);
 
         issuesKpi.setStatus(calculateKpiStatus(kpiLastMonth));
@@ -157,21 +124,7 @@ public class IssuesKpiOperationsImpl implements IssuesKpiOperations {
     }
 
     //Privates Methods
-    private void setKpiThresholdFor10Minutes() {
-        this.warningKpiThreshold = Threshold.Issues.WARNING_ISSUES_10_MIN_DEFAULT;
-        this.criticalKpiThreshold = Threshold.Issues.CRITICAL_ISSUES_10_MIN_DEFAULT;
-        this.warningIdxThreshold = KpiHelper.Issues.WARNING_ISSUES_KPI_DEFAULT;
-        this.criticalIdxThreshold = KpiHelper.Issues.CRITICAL_ISSUES_KPI_DEFAULT;
-    }
-
-    private void setKpiThresholdForHour() {
-        this.warningKpiThreshold = Threshold.Issues.WARNING_ISSUES_DAY_DEFAULT;
-        this.criticalKpiThreshold = Threshold.Issues.CRITICAL_ISSUES_DAY_DEFAULT;
-        this.warningIdxThreshold = KpiHelper.Issues.WARNING_ISSUES_KPI_DEFAULT;
-        this.criticalIdxThreshold = KpiHelper.Issues.CRITICAL_ISSUES_KPI_DEFAULT;
-    }
-
-    private void setKpiThresholdForDay() {
+    private void setKpiThresholdForWeek() {
         this.warningKpiThreshold = Threshold.Issues.WARNING_ISSUES_DAY_DEFAULT;
         this.criticalKpiThreshold = Threshold.Issues.CRITICAL_ISSUES_DAY_DEFAULT;
         this.warningIdxThreshold = KpiHelper.Issues.WARNING_ISSUES_KPI_DEFAULT;

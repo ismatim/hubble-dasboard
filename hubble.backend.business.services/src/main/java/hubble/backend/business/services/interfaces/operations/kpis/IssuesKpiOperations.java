@@ -4,6 +4,14 @@ import hubble.backend.business.services.models.measures.kpis.IssuesKpi;
 import hubble.backend.business.services.models.measures.rules.IssuesGroupRule;
 
 public interface IssuesKpiOperations extends
-        KeyPerformanceIndicatorOperationsBase<IssuesKpi, IssuesGroupRule>, KpiThresholdSetup {
+        KeyPerformanceIndicatorOperationsBase<IssuesGroupRule>, KpiThresholdSetup {
+
+    public IssuesKpi calculateLast10MinutesKeyPerformanceIndicatorByApplication(String applicationId);
+
+    public IssuesKpi calculateLastHourKeyPerformanceIndicatorByApplication(String applicationId);
+
+    public IssuesKpi calculateLastDayKeyPerformanceIndicatorByApplication(String applicationId);
+
+    public IssuesKpi calculateLastMonthKeyPerformanceIndicatorByApplication(String applicationId);
 
 }

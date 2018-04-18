@@ -43,30 +43,6 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     }
 
     @Override
-    public List<Availability> getLast10Minutes() {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.TEN_MINUTES);
-        return mapper.mapToAvailabilityDtoList(availabilityStorageList);
-    }
-
-    @Override
-    public List<Availability> getLastHour() {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_HOUR);
-        return mapper.mapToAvailabilityDtoList(availabilityStorageList);
-    }
-
-    @Override
-    public List<Availability> getLastDay() {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_DAY);
-        return mapper.mapToAvailabilityDtoList(availabilityStorageList);
-    }
-
-    @Override
-    public List<Availability> getLastMonth() {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMonths(CalendarHelper.ONE_MONTH);
-        return mapper.mapToAvailabilityDtoList(availabilityStorageList);
-    }
-
-    @Override
     public List<Availability> getLast10Minutes(String applicationId) {
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, applicationId);
         return mapper.mapToAvailabilityDtoList(availabilityStorageList);

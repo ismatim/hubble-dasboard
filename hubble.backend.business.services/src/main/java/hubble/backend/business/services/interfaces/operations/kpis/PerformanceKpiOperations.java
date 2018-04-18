@@ -4,6 +4,14 @@ import hubble.backend.business.services.models.measures.kpis.PerformanceKpi;
 import hubble.backend.business.services.models.measures.rules.PerformanceGroupRule;
 
 public interface PerformanceKpiOperations extends
-        KeyPerformanceIndicatorOperationsBase<PerformanceKpi, PerformanceGroupRule> {
+        KeyPerformanceIndicatorOperationsBase<PerformanceGroupRule> {
+
+    public PerformanceKpi calculateLast10MinutesKeyPerformanceIndicatorByApplication(String applicationId);
+
+    public PerformanceKpi calculateLastHourKeyPerformanceIndicatorByApplication(String applicationId);
+
+    public PerformanceKpi calculateLastDayKeyPerformanceIndicatorByApplication(String applicationId);
+
+    public PerformanceKpi calculateLastMonthKeyPerformanceIndicatorByApplication(String applicationId);
 
 }

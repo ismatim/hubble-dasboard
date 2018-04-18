@@ -1,4 +1,7 @@
-package hubble.backend.business.services.models.measures;
+package hubble.backend.business.services.models.measures.averages;
+
+import hubble.backend.business.services.models.measures.Status;
+import hubble.backend.business.services.models.measures.Unit;
 
 public abstract class Average extends Status {
 

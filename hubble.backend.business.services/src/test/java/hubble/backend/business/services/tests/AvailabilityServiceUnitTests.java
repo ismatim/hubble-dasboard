@@ -122,62 +122,6 @@ public class AvailabilityServiceUnitTests {
     }
 
     @Test
-    public void availability_service_should_return_last_10minutes_availabilities_with_correct_model() {
-        //Assign
-        availabilityStorageList = availabilityHelper.mockData();
-        List<Availability> availabilityDtoList;
-
-        //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.TEN_MINUTES)).thenReturn(availabilityStorageList);
-        availabilityDtoList = availabilityService.getLast10Minutes();
-
-        //Assert
-        assertEquals(12, availabilityDtoList.size());
-    }
-
-    @Test
-    public void availability_service_should_return_last_hour_availabilities_with_correct_model() {
-        //Assign
-        availabilityStorageList = availabilityHelper.mockData();
-        List<Availability> availabilityDtoList;
-
-        //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_HOUR)).thenReturn(availabilityStorageList);
-        availabilityDtoList = availabilityService.getLastHour();
-
-        //Assert
-        assertEquals(12, availabilityDtoList.size());
-    }
-
-    @Test
-    public void availability_service_should_return_last_day_availabilities_with_correct_model() {
-        //Assign
-        availabilityStorageList = availabilityHelper.mockData();
-        List<Availability> availabilityDtoList;
-
-        //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_DAY)).thenReturn(availabilityStorageList);
-        availabilityDtoList = availabilityService.getLastDay();
-
-        //Assert
-        assertEquals(12, availabilityDtoList.size());
-    }
-
-    @Test
-    public void availability_service_should_return_last_month_availabilities_with_correct_model() {
-        //Assign
-        availabilityStorageList = availabilityHelper.mockData();
-        List<Availability> availabilityDtoList;
-
-        //Act
-        when(availabilityRepository.findAvailabilitiesByDurationMonths(CalendarHelper.ONE_MONTH)).thenReturn(availabilityStorageList);
-        availabilityDtoList = availabilityService.getLastMonth();
-
-        //Assert
-        assertEquals(12, availabilityDtoList.size());
-    }
-
-    @Test
     public void availability_service_should_return_last_10minutes_availabilities_by_applicationid_with_correct_model() {
         //Assign
         availabilityStorageList = availabilityHelper.mockData();

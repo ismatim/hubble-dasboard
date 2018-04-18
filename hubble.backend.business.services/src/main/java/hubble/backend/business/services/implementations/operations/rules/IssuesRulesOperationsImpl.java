@@ -43,6 +43,21 @@ public class IssuesRulesOperationsImpl implements IssuesGroupRuleOperations {
     }
 
     @Override
+    public MonitoringFields.STATUS calculateGroupRuleStatus(ApplicationIndicators appIndicator, Double measure) {
+
+        if (measure <= this.warningKpiThreshold) {
+            return MonitoringFields.STATUS.SUCCESS;
+        } else if (measure > this.warningKpiThreshold
+                && measure < this.criticalKpiThreshold) {
+            return MonitoringFields.STATUS.WARNING;
+        } else if (measure > this.criticalKpiThreshold) {
+            return MonitoringFields.STATUS.CRITICAL;
+        }
+
+        return MonitoringFields.STATUS.NO_DATA;
+    }
+
+    @Override
     public IssuesGroupRule calculateLast10MinutesGroupRuleByApplication(String applicationId) {
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
 
@@ -116,21 +131,6 @@ public class IssuesRulesOperationsImpl implements IssuesGroupRuleOperations {
     }
 
     @Override
-    public MonitoringFields.STATUS calculateGroupRuleStatus(ApplicationIndicators appIndicator, Double measure) {
-
-        if (measure <= this.warningKpiThreshold) {
-            return MonitoringFields.STATUS.SUCCESS;
-        } else if (measure > this.warningKpiThreshold
-                && measure < this.criticalKpiThreshold) {
-            return MonitoringFields.STATUS.WARNING;
-        } else if (measure > this.criticalKpiThreshold) {
-            return MonitoringFields.STATUS.CRITICAL;
-        }
-
-        return MonitoringFields.STATUS.NO_DATA;
-    }
-
-    @Override
     public double getWarningKpiThreshold() {
         return this.warningKpiThreshold;
     }
@@ -193,4 +193,5 @@ public class IssuesRulesOperationsImpl implements IssuesGroupRuleOperations {
         this.warningKpiThreshold = Threshold.Issues.WARNING_ISSUES_MONTH_DEFAULT;
         this.criticalKpiThreshold = Threshold.Issues.CRITICAL_ISSUES_MONTH_DEFAULT;
     }
+
 }

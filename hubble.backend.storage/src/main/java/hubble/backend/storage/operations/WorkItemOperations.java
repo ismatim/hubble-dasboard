@@ -7,6 +7,11 @@ import java.util.List;
 public interface WorkItemOperations {
 
     boolean exist(WorkItemStorage workItem);
+
     List<WorkItemStorage> findWorkItemsByApplicationIdBetweenDates(String applicationId, Date startDate, Date endDate);
+
+    List<WorkItemStorage> findWorkItemsByApplicationIdAndDurationMinutes(int duration, String applicationId);
+
+    List<WorkItemStorage> findWorkItemsByApplicationIdAndDurationMonths(int duration, String applicationId);
 
 }

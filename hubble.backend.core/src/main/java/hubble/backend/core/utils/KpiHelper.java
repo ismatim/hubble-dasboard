@@ -24,4 +24,11 @@ public class KpiHelper {
         public static final int WARNING_ISSUES_KPI_DEFAULT = 8;
         public static final int CRITICAL_ISSUES_KPI_DEFAULT = 4;
     }
+
+    public static class WorkItems {
+
+        //Issues
+        public static final int WARNING_WORKITEMS_KPI_DEFAULT = 8;
+        public static final int CRITICAL_WORKITEMS_KPI_DEFAULT = 4;
+    }
 }

@@ -4,7 +4,8 @@ import hubble.backend.business.services.configurations.mappers.MapperConfigurati
 import hubble.backend.business.services.interfaces.operations.WorkItemOperations;
 import hubble.backend.business.services.interfaces.services.WorkItemService;
 import hubble.backend.business.services.models.WorkItem;
-import hubble.backend.business.services.models.measures.WorkItemQuantity;
+import hubble.backend.business.services.models.measures.quantities.WorkItemQuantity;
+import hubble.backend.business.services.models.measures.kpis.WorkItemsKpi;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.WorkItemStorage;
 import hubble.backend.storage.repositories.WorkItemRepository;
@@ -54,19 +55,24 @@ public class WorkItemServiceImpl implements WorkItemService {
         return mapper.mapToWorkItemDtoList(workitems);
     }
 
-    /**
-     *
-     * @param applicationId
-     * @return
-     */
     @Override
     public WorkItemQuantity calculateWorkItemQuantityLastMonth(String applicationId) {
         return workItemOperation.calculateWorkItemQuantityLastMonth(applicationId);
     }
 
     @Override
-    public WorkItemQuantity calculateWorkItemQuantityLastDay(String applicationId) {
-        return workItemOperation.calculateWorkItemQuantityLastDay(applicationId);
+    public WorkItemQuantity calculateWorkItemQuantityLastWeek(String applicationId) {
+        return workItemOperation.calculateWorkItemQuantityLastWeek(applicationId);
+    }
+
+    @Override
+    public WorkItemsKpi calculateLastDayKpiByApplication(String applicationId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public WorkItemsKpi calculateLastMonthKpiByApplication(String applicationId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

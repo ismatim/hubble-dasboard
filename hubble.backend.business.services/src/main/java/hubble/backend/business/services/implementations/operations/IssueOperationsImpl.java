@@ -1,9 +1,8 @@
 package hubble.backend.business.services.implementations.operations;
 
-import hubble.backend.business.services.interfaces.operations.averages.IssueOperations;
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
-import hubble.backend.business.services.interfaces.operations.*;
-import hubble.backend.business.services.models.measures.IssuesQuantity;
+import hubble.backend.business.services.interfaces.operations.averages.IssueOperations;
+import hubble.backend.business.services.models.measures.quantities.IssuesQuantity;
 import hubble.backend.core.enums.MonitoringFields;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.core.utils.Threshold;
@@ -122,7 +121,7 @@ public class IssueOperationsImpl implements IssueOperations {
     private void setRangeKpiLastDay() {
 
         this.warningKpiThreshold = (double) Threshold.Issues.WARNING_ISSUES_DAY_DEFAULT;
-        this.criticalKpiThreshold = (double) Threshold.Issues.WARNING_ISSUES_DAY_DEFAULT;
+        this.criticalKpiThreshold = (double) Threshold.Issues.CRITICAL_ISSUES_DAY_DEFAULT;
     }
 
     private void setRangeKpiLastMonth() {

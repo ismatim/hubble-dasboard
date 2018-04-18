@@ -131,12 +131,32 @@ public class StorageTestsHelper {
 
     public List<WorkItemStorage> getFakeListOfWorkItemStorage() {
 
-        System.out.println(System.getProperty("user.dir"));
         Path currentRelativePath = Paths.get("");
         String s = currentRelativePath.toAbsolutePath().toString();
         System.out.println("Current relative path is: " + s);
 
         String fakeFileName = "/workItem/fake-data-list.json";
+        InputStream fakedata = getClass().getResourceAsStream(fakeFileName);
+
+        ObjectMapper objMapper = new ObjectMapper();
+        List<WorkItemStorage> workItems = null;
+        try {
+            workItems = objMapper.readValue(fakedata, new TypeReference<List<WorkItemStorage>>() {
+            });
+        } catch (IOException ex) {
+            Assert.fail(ex.getMessage());
+        }
+
+        return workItems;
+    }
+
+    public List<WorkItemStorage> getFakeListOfWorkItemStorageWeek() {
+
+        Path currentRelativePath = Paths.get("");
+        String s = currentRelativePath.toAbsolutePath().toString();
+        System.out.println("Current relative path is: " + s);
+
+        String fakeFileName = "/workItem/fake-data-list-week.json";
         InputStream fakedata = getClass().getResourceAsStream(fakeFileName);
 
         ObjectMapper objMapper = new ObjectMapper();

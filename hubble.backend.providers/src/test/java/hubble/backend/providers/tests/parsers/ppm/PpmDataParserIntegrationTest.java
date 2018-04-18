@@ -66,7 +66,7 @@ public class PpmDataParserIntegrationTest {
     @Test
     public void ppm_data_parser_when_it_runs_should_connect_get_data_and_save_it() {
         //Assign
-        workItemRepository.deleteAll();
+//        workItemRepository.deleteAll();
 
         //Act
         ppmDataParser.run();
@@ -79,6 +79,6 @@ public class PpmDataParserIntegrationTest {
         }
 
         //Clean
-        workItemRepository.deleteAll();
+//        workItemRepository.deleteAll();
     }
 }

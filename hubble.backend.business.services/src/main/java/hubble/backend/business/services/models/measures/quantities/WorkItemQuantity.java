@@ -1,4 +1,4 @@
-package hubble.backend.business.services.models.measures;
+package hubble.backend.business.services.models.measures.quantities;
 
 /**
  * The measure of quantities of work items.

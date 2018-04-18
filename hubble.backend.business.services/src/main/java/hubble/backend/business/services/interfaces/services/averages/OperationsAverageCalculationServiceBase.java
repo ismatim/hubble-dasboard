@@ -1,4 +1,4 @@
-package hubble.backend.business.services.interfaces.services;
+package hubble.backend.business.services.interfaces.services.averages;
 
 /**
  * Offers the standard operation for a unit of measure.
