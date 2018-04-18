@@ -1,11 +1,19 @@
 package hubble.backend.business.services.interfaces.operations.rules;
 
+import hubble.backend.business.services.interfaces.operations.kpis.KpiThresholdSetup;
 import hubble.backend.business.services.models.business.ApplicationIndicators;
 import hubble.backend.business.services.models.measures.rules.IssuesGroupRule;
 import hubble.backend.storage.models.IssueStorage;
-import hubble.backend.business.services.interfaces.operations.kpis.KpiThresholdSetup;
 
 public interface IssuesGroupRuleOperations extends
-        GroupRuleOperations<IssuesGroupRule, IssueStorage, ApplicationIndicators>,
+        GroupRuleOperations<IssueStorage, ApplicationIndicators>,
         KpiThresholdSetup {
+
+    public IssuesGroupRule calculateLast10MinutesGroupRuleByApplication(String applicationId);
+
+    public IssuesGroupRule calculateLastHourGroupRuleByApplication(String applicationId);
+
+    public IssuesGroupRule calculateLastDayGroupRuleByApplication(String applicationId);
+
+    public IssuesGroupRule calculateLastMonthGroupRuleByApplication(String applicationId);
 }

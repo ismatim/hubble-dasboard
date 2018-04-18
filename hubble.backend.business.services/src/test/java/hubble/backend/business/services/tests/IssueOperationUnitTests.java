@@ -3,7 +3,7 @@ package hubble.backend.business.services.tests;
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
 import hubble.backend.business.services.implementations.operations.IssueOperationsImpl;
 import hubble.backend.business.services.implementations.operations.rules.IssuesRulesOperationsImpl;
-import hubble.backend.business.services.models.measures.IssuesQuantity;
+import hubble.backend.business.services.models.measures.quantities.IssuesQuantity;
 import hubble.backend.business.services.models.measures.rules.IssuesGroupRule;
 import hubble.backend.business.services.tests.configurations.ServiceBaseConfigurationTest;
 import hubble.backend.storage.models.ApplicationStorage;

@@ -11,8 +11,4 @@ public interface ApplicationServiceBase<T> extends ServiceBase<T> {
 
     public List<T> getAll(String applicationId);
 
-    public List<T> getLast10Minutes(String applicationId);
-
-    public List<T> getLastHour(String applicationId);
-
 }

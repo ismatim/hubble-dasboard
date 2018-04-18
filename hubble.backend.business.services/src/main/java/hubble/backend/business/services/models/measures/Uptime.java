@@ -1,5 +1,6 @@
 package hubble.backend.business.services.models.measures;
 
+import hubble.backend.business.services.models.measures.averages.Average;
 import hubble.backend.business.services.models.Application;
 import hubble.backend.business.services.models.Transaction;
 import hubble.backend.core.enums.MonitoringFields;

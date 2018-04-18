@@ -14,9 +14,9 @@ import hubble.backend.business.services.interfaces.services.WorkItemService;
 import hubble.backend.business.services.models.Application;
 import hubble.backend.business.services.models.Availability;
 import hubble.backend.business.services.models.business.ApplicationIndicators;
-import hubble.backend.business.services.models.measures.IssuesQuantity;
+import hubble.backend.business.services.models.measures.quantities.IssuesQuantity;
 import hubble.backend.business.services.models.measures.Uptime;
-import hubble.backend.business.services.models.measures.WorkItemQuantity;
+import hubble.backend.business.services.models.measures.quantities.WorkItemQuantity;
 import hubble.backend.core.enums.MonitoringFields;
 import hubble.backend.core.utils.CalendarHelper;
 import java.util.Calendar;
@@ -50,7 +50,7 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         BusinessApplicationProfile businessView = new BusinessApplicationProfile();
         businessView.setId(id);
 
-        //10 minuntes
+        //10 minuntes Availability and Performance
         ApplicationIndicators availabilityAvg10min = availabilityService.calculateLast10MinutesAverageByApplication(id);
         ApplicationIndicators performanceAvg10min = performanceService.calculateLast10MinutesAverageByApplication(id);
 
@@ -68,7 +68,7 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         businessView.setAvailabilityCriticalValue10min(availabilityAvg10min.getAvailabilityThreshold());
         businessView.setPerformanceCriticalValue10min(performanceAvg10min.getCriticalThreshold());
 
-        //1 Hour
+        //1 Hour Availability and Performance
         ApplicationIndicators availabilityAvg1Hour = availabilityService.calculateLastHourAverageByApplication(id);
         ApplicationIndicators performanceAvg1Hour = performanceService.calculateLastHourAverageByApplication(id);
 
@@ -82,7 +82,7 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         businessView.setAvailabilityCriticalValue1hour(availabilityAvg1Hour.getAvailabilityThreshold());
         businessView.setPerformanceCriticalValue1hour(performanceAvg1Hour.getCriticalThreshold());
 
-        //1 Day
+        //1 Day Availability and Performance
         ApplicationIndicators availabilityAvg1Day = availabilityService.calculateLastDayAverageByApplication(id);
         ApplicationIndicators performanceAvg1Day = performanceService.calculateLastDayAverageByApplication(id);
 
@@ -96,14 +96,14 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         businessView.setAvailabilityCriticalValue1day(availabilityAvg1Day.getAvailabilityThreshold());
         businessView.setPerformanceCriticalValue1day(performanceAvg1Day.getCriticalThreshold());
 
-        //Issues 1 Day
+        //Issues 1 Day - Total
         IssuesQuantity issues = issueService.calculateIssuesQuantityLastDay(id);
         businessView.setIssuesQtyLastDay(issues.getQuantity());
         businessView.setStatusIssuesQty(issues.getStatus().toString());
         businessView.setIssuesQtyCriticalThreshold(issues.getCriticalThreshold());
 
         //WorkItems
-        WorkItemQuantity workItems = workItemService.calculateWorkItemQuantityLastDay(id);
+        WorkItemQuantity workItems = workItemService.calculateWorkItemQuantityLastWeek(id);
         businessView.setWorkItems1day(workItems.getQuantity());
         businessView.setStatusWorkItemsQty(workItems.getStatus().toString());
         businessView.setWorkItemsQtyCriticalThreshold(workItems.getCriticalThreshold());
@@ -125,7 +125,7 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         businessView.setAvailabilityLastDayKpi(performanceService.calculateLastDayKpiByApplication(id).getPerformanceIndicator().get());
         businessView.setAvailabilityLastMonthKpi(performanceService.calculateLastMonthKpiByApplication(id).getPerformanceIndicator().get());
 
-        //Incidentes Kpi
+        //Issues Kpi
         businessView.setIssuesKpiLastDay(issueService.calculateLastDayKpiByApplication(id).get());
         businessView.setIssuesKpiLastMonth(issueService.calculateLastMonthKpiByApplication(id).get());
 

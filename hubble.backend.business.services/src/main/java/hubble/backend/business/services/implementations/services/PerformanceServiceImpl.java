@@ -2,6 +2,7 @@ package hubble.backend.business.services.implementations.services;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
 import hubble.backend.business.services.interfaces.operations.averages.PerformanceOperations;
+import hubble.backend.business.services.interfaces.operations.kpis.PerformanceKpiOperations;
 import hubble.backend.business.services.interfaces.services.PerformanceService;
 import hubble.backend.business.services.models.Application;
 import hubble.backend.business.services.models.Performance;
@@ -25,6 +26,8 @@ public class PerformanceServiceImpl implements PerformanceService {
     @Autowired
     PerformanceOperations performanceOperation;
     @Autowired
+    PerformanceKpiOperations performanceKpiOperations;
+    @Autowired
     MapperConfiguration mapper;
 
     @Override
@@ -36,30 +39,6 @@ public class PerformanceServiceImpl implements PerformanceService {
     @Override
     public Performance getById(String id) {
         return mapper.mapToPerformanceDto(availabilityRepository.findOne(id));
-    }
-
-    @Override
-    public List<Performance> getLast10Minutes() {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.TEN_MINUTES);
-        return mapper.mapToPerformanceDtoList(availabilityStorageList);
-    }
-
-    @Override
-    public List<Performance> getLastHour() {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_HOUR);
-        return mapper.mapToPerformanceDtoList(availabilityStorageList);
-    }
-
-    @Override
-    public List<Performance> getLastDay() {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMinutes(CalendarHelper.ONE_DAY);
-        return mapper.mapToPerformanceDtoList(availabilityStorageList);
-    }
-
-    @Override
-    public List<Performance> getLastMonth() {
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByDurationMonths(1);
-        return mapper.mapToPerformanceDtoList(availabilityStorageList);
     }
 
     @Override
@@ -125,16 +104,6 @@ public class PerformanceServiceImpl implements PerformanceService {
     }
 
     @Override
-    public ApplicationIndicators calculateLast10MinutesKpiByApplication(String applicationId) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public ApplicationIndicators calculateLastHourKpiByApplication(String applicationId) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public ApplicationIndicators calculateLastDayKpiByApplication(String applicationId) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -143,4 +112,19 @@ public class PerformanceServiceImpl implements PerformanceService {
     public ApplicationIndicators calculateLastMonthKpiByApplication(String applicationId) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public ApplicationIndicators calculateLast10MinutesKpiByApplication(String applicationId) {
+        ApplicationIndicators appDto = new ApplicationIndicators();
+        appDto.setPerformanceKpi(performanceKpiOperations.calculateLast10MinutesKeyPerformanceIndicatorByApplication(applicationId));
+        return appDto;
+    }
+
+    @Override
+    public ApplicationIndicators calculateLastHourKpiByApplication(String applicationId) {
+        ApplicationIndicators appDto = new ApplicationIndicators();
+        appDto.setPerformanceKpi(performanceKpiOperations.calculateLast10MinutesKeyPerformanceIndicatorByApplication(applicationId));
+        return appDto;
+    }
+
 }

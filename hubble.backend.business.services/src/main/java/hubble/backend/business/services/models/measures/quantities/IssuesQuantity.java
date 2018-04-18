@@ -1,4 +1,4 @@
-package hubble.backend.business.services.models.measures;
+package hubble.backend.business.services.models.measures.quantities;
 
 public class IssuesQuantity extends Quantity {
 

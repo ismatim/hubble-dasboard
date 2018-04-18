@@ -13,29 +13,32 @@ public class Threshold {
 
     public static class Issues {
 
-        //Issues
         public static final int WARNING_ISSUES_MONTH_DEFAULT = 100;
         public static final int CRITICAL_ISSUES_MONTH_DEFAULT = 150;
 
-        //Issues
         public static final int WARNING_ISSUES_DAY_DEFAULT = 5;
         public static final int CRITICAL_ISSUES_DAY_DEFAULT = 10;
 
-        //Issues
         public static final int WARNING_ISSUES_HOUR_DEFAULT = 3;
         public static final int CRITICAL_ISSUES_HOUR_DEFAULT = 5;
 
-        //Issues
         public static final int WARNING_ISSUES_10_MIN_DEFAULT = 3;
         public static final int CRITICAL_ISSUES_10_MIN_DEFAULT = 5;
 
-        //
         public static final int TOTAL_LEVELS_OF_SEVERITY = 3;
 
     }
 
-    //Tasks
-    public static final int WARNING_WORK_ITEMS_DEFAULT = 5;
-    public static final int CRITICAL_WORK_ITEMS_DEFAULT = 10;
+    //WorkItems
+    public static class WorkItems {
+
+        public static final int WARNING_WORKITEMS_MONTH_DEFAULT = 14;
+        public static final int CRITICAL_WORKITEMS_MONTH_DEFAULT = 21;
+
+        public static final int WARNING_WORKITEMS_WEEK_DEFAULT = 7;
+        public static final int CRITICAL_WORKITEMS_WEEK_DEFAULT = 14;
+
+        public static final int TOTAL_LEVELS_OF_SEVERITY = 3;
+    }
 
 }

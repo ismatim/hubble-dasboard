@@ -5,7 +5,7 @@ import hubble.backend.business.services.interfaces.operations.averages.IssueOper
 import hubble.backend.business.services.interfaces.operations.kpis.IssuesKpiOperations;
 import hubble.backend.business.services.interfaces.services.IssueService;
 import hubble.backend.business.services.models.Issue;
-import hubble.backend.business.services.models.measures.IssuesQuantity;
+import hubble.backend.business.services.models.measures.quantities.IssuesQuantity;
 import hubble.backend.business.services.models.measures.kpis.IssuesKpi;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.IssueStorage;

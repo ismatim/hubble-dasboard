@@ -1,12 +1,13 @@
 package hubble.backend.business.services.models.business;
 
 import hubble.backend.business.services.models.Application;
-import hubble.backend.business.services.models.measures.AvailabilityAverage;
-import hubble.backend.business.services.models.measures.AvailabilityQuantity;
-import hubble.backend.business.services.models.measures.PerformanceAverage;
-import hubble.backend.business.services.models.measures.PerformanceQuantity;
+import hubble.backend.business.services.models.measures.averages.AvailabilityAverage;
+import hubble.backend.business.services.models.measures.quantities.AvailabilityQuantity;
+import hubble.backend.business.services.models.measures.averages.PerformanceAverage;
+import hubble.backend.business.services.models.measures.quantities.PerformanceQuantity;
 import hubble.backend.business.services.models.measures.kpis.AvailabilityKpi;
 import hubble.backend.business.services.models.measures.kpis.IssuesKpi;
+import hubble.backend.business.services.models.measures.kpis.PerformanceKpi;
 import hubble.backend.business.services.models.measures.rules.AvailabilityGroupRule;
 import hubble.backend.business.services.models.measures.rules.IssuesGroupRule;
 import hubble.backend.business.services.models.measures.rules.PerformanceGroupRule;
@@ -14,11 +15,11 @@ import hubble.backend.business.services.models.measures.rules.PerformanceGroupRu
 /**
  * ApplicationAvg is an Application with its average value for Performance,
  * Availability, quantity of measures of Performance and Availability. The class
- holds differente business calculation on different periods for example: 10
- minutes, 1 hours, 24 hours, 1 month.
-
- TODO: This is an old version because ApplicationAvgDto should be composed and
- not inheritance by Application
+ * holds differente business calculation on different periods for example: 10
+ * minutes, 1 hours, 24 hours, 1 month.
+ *
+ * TODO: This is an old version because ApplicationAvgDto should be composed and
+ * not inheritance by Application
  *
  * @author Ismael J. Tisminetzky
  */
@@ -31,6 +32,7 @@ public class ApplicationIndicators extends Application {
     private AvailabilityGroupRule availabilityIndicator;
     private PerformanceGroupRule performanceIndicator;
     private AvailabilityKpi availabilityKpi;
+    private PerformanceKpi performanceKpi;
     private IssuesGroupRule issueIndicator;
     private IssuesKpi issuesKpi10Min;
     private IssuesKpi issuesKpiLastHour;
@@ -158,5 +160,13 @@ public class ApplicationIndicators extends Application {
 
     public void setIssuesKpiLastMonth(IssuesKpi issuesKpiLastMonth) {
         this.issuesKpiLastMonth = issuesKpiLastMonth;
+    }
+
+    public PerformanceKpi getPerformanceKpi() {
+        return performanceKpi;
+    }
+
+    public void setPerformanceKpi(PerformanceKpi performanceKpi) {
+        this.performanceKpi = performanceKpi;
     }
 }

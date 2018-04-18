@@ -1,4 +1,4 @@
-package hubble.backend.business.services.interfaces.services;
+package hubble.backend.business.services.interfaces.services.kpis;
 
 /**
  * Offers the standard operation for a unit of measure.
@@ -7,10 +7,6 @@ package hubble.backend.business.services.interfaces.services;
  * @param <T> Model to measure.
  */
 public interface OperationsKeyPerformanceIndicatorServiceBase<T> {
-
-    public T calculateLast10MinutesKpiByApplication(String applicationId);
-
-    public T calculateLastHourKpiByApplication(String applicationId);
 
     public T calculateLastDayKpiByApplication(String applicationId);
 
