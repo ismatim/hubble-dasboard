@@ -2,12 +2,12 @@ package hubble.backend.business.services.models.business;
 
 import hubble.backend.business.services.models.Application;
 import hubble.backend.business.services.models.measures.averages.AvailabilityAverage;
-import hubble.backend.business.services.models.measures.quantities.AvailabilityQuantity;
 import hubble.backend.business.services.models.measures.averages.PerformanceAverage;
-import hubble.backend.business.services.models.measures.quantities.PerformanceQuantity;
 import hubble.backend.business.services.models.measures.kpis.AvailabilityKpi;
 import hubble.backend.business.services.models.measures.kpis.IssuesKpi;
 import hubble.backend.business.services.models.measures.kpis.PerformanceKpi;
+import hubble.backend.business.services.models.measures.quantities.AvailabilityQuantity;
+import hubble.backend.business.services.models.measures.quantities.PerformanceQuantity;
 import hubble.backend.business.services.models.measures.rules.AvailabilityGroupRule;
 import hubble.backend.business.services.models.measures.rules.IssuesGroupRule;
 import hubble.backend.business.services.models.measures.rules.PerformanceGroupRule;
@@ -29,11 +29,11 @@ public class ApplicationIndicators extends Application {
     private PerformanceAverage performanceAverage;
     private PerformanceQuantity measuresQtyPerformance;
     private AvailabilityQuantity measuresQtyAvailability;
-    private AvailabilityGroupRule availabilityIndicator;
-    private PerformanceGroupRule performanceIndicator;
+    private AvailabilityGroupRule availabilityGroupRule;
+    private PerformanceGroupRule performanceGroupRule;
     private AvailabilityKpi availabilityKpi;
     private PerformanceKpi performanceKpi;
-    private IssuesGroupRule issueIndicator;
+    private IssuesGroupRule issueGroupRule;
     private IssuesKpi issuesKpi10Min;
     private IssuesKpi issuesKpiLastHour;
     private IssuesKpi issuesKpiLastDay;
@@ -98,28 +98,28 @@ public class ApplicationIndicators extends Application {
         return this.availabilityAverage.get();
     }
 
-    public AvailabilityGroupRule getAvailabilityIndicator() {
-        return availabilityIndicator;
+    public AvailabilityGroupRule getAvailabilityGroupRule() {
+        return availabilityGroupRule;
     }
 
     public void setAvailabilityIndicator(AvailabilityGroupRule availabilityIndicator) {
-        this.availabilityIndicator = availabilityIndicator;
+        this.availabilityGroupRule = availabilityIndicator;
     }
 
-    public PerformanceGroupRule getPerformanceIndicator() {
-        return performanceIndicator;
+    public PerformanceGroupRule getPerformanceGroupRule() {
+        return performanceGroupRule;
     }
 
     public void setPerformanceIndicator(PerformanceGroupRule performanceIndicator) {
-        this.performanceIndicator = performanceIndicator;
+        this.performanceGroupRule = performanceIndicator;
     }
 
-    public IssuesGroupRule getIssueIndicator() {
-        return issueIndicator;
+    public IssuesGroupRule getIssueGroupRule() {
+        return issueGroupRule;
     }
 
-    public void setIssueIndicator(IssuesGroupRule issueIndicator) {
-        this.issueIndicator = issueIndicator;
+    public void setIssueGroupRule(IssuesGroupRule issueIndicator) {
+        this.issueGroupRule = issueIndicator;
     }
 
     public AvailabilityKpi getAvailabilityKpi() {

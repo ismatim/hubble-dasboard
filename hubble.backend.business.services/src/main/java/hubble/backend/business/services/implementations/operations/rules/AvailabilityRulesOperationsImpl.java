@@ -30,7 +30,7 @@ public class AvailabilityRulesOperationsImpl
     public Double calculateGroupRule(List<AvailabilityStorage> availabilityStorageList) {
         int totalAvailabilities = availabilityStorageList.size();
         if (totalAvailabilities == 0) {
-            return null;
+            return Double.valueOf(0);
         }
         int okAvailabilites = 0;
         for (AvailabilityStorage availability : availabilityStorageList) {

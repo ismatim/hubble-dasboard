@@ -22,6 +22,10 @@ public class PerformanceKpiOperationsImpl implements PerformanceKpiOperations {
     @Override
     public double calculateKeyPerformanceIndicator(PerformanceGroupRule performanceGroupRule) {
 
+        if (performanceGroupRule.get().intValue() == 0) {
+            return 0;
+        }
+
         calculatePerformanceKpi.setWarningKpiThreshold(Threshold.WARNING_PERFORMANCE_DEFAULT);
         calculatePerformanceKpi.setCriticalKpiThreshold(Threshold.CRITICAL_PERFORMANCE_DEFAULT);
         calculatePerformanceKpi.setWarningIdxThreshold(KpiHelper.Performance.WARNING_PERFORMANCE_KPI_DEFAULT);
@@ -91,7 +95,10 @@ public class PerformanceKpiOperationsImpl implements PerformanceKpiOperations {
     @Override
     public MonitoringFields.STATUS calculateKpiStatus(Double measure) {
 
-        //TODO: Determinará el Status del KPI de Disponibilidad.
+        if (measure == 0) {
+            return MonitoringFields.STATUS.NO_DATA;
+        }
+
         if (measure <= Threshold.WARNING_PERFORMANCE_DEFAULT) {
             return MonitoringFields.STATUS.SUCCESS;
         } else if (measure > Threshold.WARNING_PERFORMANCE_DEFAULT

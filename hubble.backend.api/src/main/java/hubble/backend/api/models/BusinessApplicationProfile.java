@@ -46,6 +46,8 @@ public class BusinessApplicationProfile extends ApiResponseBase {
     private Double availabilityLastMonthKpi;
     private Double issuesKpiLastDay;
     private Double issuesKpiLastMonth;
+    private Double workItemsKpiLastDay;
+    private Double workItemsKpiLastMonth;
 
     public BusinessApplicationProfile() {
     }
@@ -400,5 +402,21 @@ public class BusinessApplicationProfile extends ApiResponseBase {
 
     public void setIssuesKpiLastMonth(Double issuesKpiLastMonth) {
         this.issuesKpiLastMonth = issuesKpiLastMonth;
+    }
+
+    public Double getWorkItemsKpiLastDay() {
+        return workItemsKpiLastDay;
+    }
+
+    public void setWorkItemsKpiLastDay(Double workItemspiLastDay) {
+        this.workItemsKpiLastDay = workItemspiLastDay;
+    }
+
+    public Double getWorkItemsKpiLastMonth() {
+        return workItemsKpiLastMonth;
+    }
+
+    public void setWorkItemsKpiLastMonth(Double workItemsKpiLastMonth) {
+        this.workItemsKpiLastMonth = workItemsKpiLastMonth;
     }
 }

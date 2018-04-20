@@ -2,10 +2,11 @@ package hubble.backend.business.services.implementations.services;
 
 import hubble.backend.business.services.configurations.mappers.MapperConfiguration;
 import hubble.backend.business.services.interfaces.operations.WorkItemOperations;
+import hubble.backend.business.services.interfaces.operations.kpis.WorkItemKpiOperations;
 import hubble.backend.business.services.interfaces.services.WorkItemService;
 import hubble.backend.business.services.models.WorkItem;
-import hubble.backend.business.services.models.measures.quantities.WorkItemQuantity;
 import hubble.backend.business.services.models.measures.kpis.WorkItemsKpi;
+import hubble.backend.business.services.models.measures.quantities.WorkItemQuantity;
 import hubble.backend.core.utils.CalendarHelper;
 import hubble.backend.storage.models.WorkItemStorage;
 import hubble.backend.storage.repositories.WorkItemRepository;
@@ -31,6 +32,8 @@ public class WorkItemServiceImpl implements WorkItemService {
     MapperConfiguration mapper;
     @Autowired
     WorkItemOperations workItemOperation;
+    @Autowired
+    WorkItemKpiOperations workItemKpiOperation;
 
     @Override
     public List<WorkItem> getLastDay(String applicationId) {
@@ -66,13 +69,18 @@ public class WorkItemServiceImpl implements WorkItemService {
     }
 
     @Override
-    public WorkItemsKpi calculateLastDayKpiByApplication(String applicationId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public WorkItemsKpi calculateLastWeekKpiByApplication(String applicationId) {
+        return workItemKpiOperation.calculateLastWeekKeyPerformanceIndicatorByApplication(applicationId);
     }
 
     @Override
     public WorkItemsKpi calculateLastMonthKpiByApplication(String applicationId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return workItemKpiOperation.calculateLastMonthKeyPerformanceIndicatorByApplication(applicationId);
+    }
+
+    @Override
+    public WorkItemsKpi calculateLastDayKpiByApplication(String applicationId) {
+        return workItemKpiOperation.calculateLastDayKeyPerformanceIndicatorByApplication(applicationId);
     }
 
 }

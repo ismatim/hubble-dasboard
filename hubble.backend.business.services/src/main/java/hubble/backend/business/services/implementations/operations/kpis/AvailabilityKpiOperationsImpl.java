@@ -22,6 +22,10 @@ public class AvailabilityKpiOperationsImpl implements AvailabilityKpiOperations 
     @Override
     public double calculateKeyPerformanceIndicator(AvailabilityGroupRule availabilityGroupRule) {
 
+        if (availabilityGroupRule.get().intValue() == 0) {
+            return 0;
+        }
+
         calculateAvailabilityKpi.setWarningKpiThreshold(Threshold.WARNING_AVAILABILITY_DEFAULT);
         calculateAvailabilityKpi.setCriticalKpiThreshold(Threshold.CRITICAL_AVAILABILITY_DEFAULT);
         calculateAvailabilityKpi.setWarningIdxThreshold(KpiHelper.Availability.WARNING_AVALABILITY_KPI_DEFAULT);
@@ -91,6 +95,10 @@ public class AvailabilityKpiOperationsImpl implements AvailabilityKpiOperations 
 
     @Override
     public MonitoringFields.STATUS calculateKpiStatus(Double measure) {
+
+        if (measure == 0) {
+            return MonitoringFields.STATUS.NO_DATA;
+        }
 
         //TODO: Determinará el Status del KPI de Disponibilidad.
         if (measure <= Threshold.WARNING_AVAILABILITY_DEFAULT) {

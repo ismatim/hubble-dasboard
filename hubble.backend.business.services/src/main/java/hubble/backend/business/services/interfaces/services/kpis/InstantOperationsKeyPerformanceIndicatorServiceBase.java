@@ -1,7 +1,7 @@
 package hubble.backend.business.services.interfaces.services.kpis;
 
 /**
- * Offers the standard operation for a unit of measure.
+ * Offers the standard operation for unit of measures.
  *
  * @author Ismael J. Tisminetzky
  * @param <T> Model to measure.

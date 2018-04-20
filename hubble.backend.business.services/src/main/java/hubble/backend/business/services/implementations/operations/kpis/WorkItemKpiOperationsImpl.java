@@ -17,7 +17,7 @@ public class WorkItemKpiOperationsImpl implements WorkItemKpiOperations {
     @Autowired
     CalculateKpiLowNumberBestIndicator calculateIssuesKpi;
     @Autowired
-    WorkItemGroupRuleOperations issuesRulesOperation;
+    WorkItemGroupRuleOperations workItemsRulesOperation;
 
     private double warningKpiThreshold;
     private double criticalKpiThreshold;
@@ -39,7 +39,7 @@ public class WorkItemKpiOperationsImpl implements WorkItemKpiOperations {
     @Override
     public WorkItemsKpi calculateLastWeekKeyPerformanceIndicatorByApplication(String applicationId) {
 
-        WorkItemsGroupRule availabilityLastDayRuleGroup = issuesRulesOperation.calculateLastWeekGroupRuleByApplication(applicationId);
+        WorkItemsGroupRule availabilityLastDayRuleGroup = workItemsRulesOperation.calculateLastWeekGroupRuleByApplication(applicationId);
 
         setKpiThresholdForWeek();
 
@@ -55,7 +55,22 @@ public class WorkItemKpiOperationsImpl implements WorkItemKpiOperations {
 
     @Override
     public WorkItemsKpi calculateLastMonthKeyPerformanceIndicatorByApplication(String applicationId) {
-        WorkItemsGroupRule availabilityLastMonthRuleGroup = issuesRulesOperation.calculateLastMonthGroupRuleByApplication(applicationId);
+        WorkItemsGroupRule availabilityLastMonthRuleGroup = workItemsRulesOperation.calculateLastMonthGroupRuleByApplication(applicationId);
+
+        setKpiThresholdForMonth();
+
+        double kpiLastMonth = calculateKeyPerformanceIndicator(availabilityLastMonthRuleGroup);
+
+        WorkItemsKpi issuesKpi = new WorkItemsKpi();
+        issuesKpi.set(kpiLastMonth);
+
+        issuesKpi.setStatus(calculateKpiStatus(kpiLastMonth));
+        return issuesKpi;
+    }
+
+    @Override
+    public WorkItemsKpi calculateLastDayKeyPerformanceIndicatorByApplication(String applicationId) {
+        WorkItemsGroupRule availabilityLastMonthRuleGroup = workItemsRulesOperation.calculateLastDayGroupRuleByApplication(applicationId);
 
         setKpiThresholdForMonth();
 
@@ -125,16 +140,17 @@ public class WorkItemKpiOperationsImpl implements WorkItemKpiOperations {
 
     //Privates Methods
     private void setKpiThresholdForWeek() {
-        this.warningKpiThreshold = Threshold.Issues.WARNING_ISSUES_DAY_DEFAULT;
-        this.criticalKpiThreshold = Threshold.Issues.CRITICAL_ISSUES_DAY_DEFAULT;
-        this.warningIdxThreshold = KpiHelper.Issues.WARNING_ISSUES_KPI_DEFAULT;
-        this.criticalIdxThreshold = KpiHelper.Issues.CRITICAL_ISSUES_KPI_DEFAULT;
+        this.warningKpiThreshold = Threshold.WorkItems.WARNING_WORKITEMS_WEEK_DEFAULT;
+        this.criticalKpiThreshold = Threshold.WorkItems.CRITICAL_WORKITEMS_WEEK_DEFAULT;
+        this.warningIdxThreshold = KpiHelper.WorkItems.WARNING_WORKITEMS_KPI_DEFAULT;
+        this.criticalIdxThreshold = KpiHelper.WorkItems.CRITICAL_WORKITEMS_KPI_DEFAULT;
     }
 
     private void setKpiThresholdForMonth() {
-        this.warningKpiThreshold = Threshold.Issues.WARNING_ISSUES_MONTH_DEFAULT;
-        this.criticalKpiThreshold = Threshold.Issues.CRITICAL_ISSUES_MONTH_DEFAULT;
-        this.warningIdxThreshold = KpiHelper.Issues.WARNING_ISSUES_KPI_DEFAULT;
-        this.criticalIdxThreshold = KpiHelper.Issues.CRITICAL_ISSUES_KPI_DEFAULT;
+        this.warningKpiThreshold = Threshold.WorkItems.WARNING_WORKITEMS_MONTH_DEFAULT;
+        this.criticalKpiThreshold = Threshold.WorkItems.CRITICAL_WORKITEMS_MONTH_DEFAULT;
+        this.warningIdxThreshold = KpiHelper.WorkItems.WARNING_WORKITEMS_KPI_DEFAULT;
+        this.criticalIdxThreshold = KpiHelper.WorkItems.CRITICAL_WORKITEMS_KPI_DEFAULT;
     }
+
 }
