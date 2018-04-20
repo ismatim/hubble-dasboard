@@ -50,6 +50,13 @@ public class BusinessApplicationProfile extends ApiResponseBase {
     private Double workItemsKpiLastMonth;
 
     public BusinessApplicationProfile() {
+        performanceLast10MinKpi = 0d;
+        performanceLast10MinKpi = 0d;
+        performanceLast10MinKpi = 0d;
+        performanceLast10MinKpi = 0d;
+        performanceLast10MinKpi = 0d;
+        performanceLast10MinKpi = 0d;
+
     }
 
     public String getId() {

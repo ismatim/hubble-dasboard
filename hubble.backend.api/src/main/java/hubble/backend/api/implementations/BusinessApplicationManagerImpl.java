@@ -121,10 +121,10 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         businessView.setAvailabilityLastMonthKpi(availabilityService.calculateLastMonthKpiByApplication(id).getAvailabilityKpi().get());
 
         //Performance Kpi
-        businessView.setAvailabilityLast10MinKpi(performanceService.calculateLast10MinutesKpiByApplication(id).getPerformanceKpi().get());
-        businessView.setAvailabilityLastHourKpi(performanceService.calculateLastHourKpiByApplication(id).getPerformanceKpi().get());
-        businessView.setAvailabilityLastDayKpi(performanceService.calculateLastDayKpiByApplication(id).getPerformanceKpi().get());
-        businessView.setAvailabilityLastMonthKpi(performanceService.calculateLastMonthKpiByApplication(id).getPerformanceKpi().get());
+        businessView.setPerformanceLast10MinKpi(performanceService.calculateLast10MinutesKpiByApplication(id).getPerformanceKpi().get());
+        businessView.setPerformanceLastHourKpi(performanceService.calculateLastHourKpiByApplication(id).getPerformanceKpi().get());
+        businessView.setPerformanceLastDayKpi(performanceService.calculateLastDayKpiByApplication(id).getPerformanceKpi().get());
+        businessView.setPerformanceLastMonthKpi(performanceService.calculateLastMonthKpiByApplication(id).getPerformanceKpi().get());
 
         //Issues Kpi
         businessView.setIssuesKpiLastDay(issueService.calculateLastDayKpiByApplication(id).get());

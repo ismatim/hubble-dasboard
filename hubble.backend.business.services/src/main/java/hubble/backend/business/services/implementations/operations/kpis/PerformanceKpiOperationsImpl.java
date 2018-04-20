@@ -23,7 +23,7 @@ public class PerformanceKpiOperationsImpl implements PerformanceKpiOperations {
     public double calculateKeyPerformanceIndicator(PerformanceGroupRule performanceGroupRule) {
 
         if (performanceGroupRule.get().intValue() == 0) {
-            return 0;
+            return 0d;
         }
 
         calculatePerformanceKpi.setWarningKpiThreshold(Threshold.WARNING_PERFORMANCE_DEFAULT);
