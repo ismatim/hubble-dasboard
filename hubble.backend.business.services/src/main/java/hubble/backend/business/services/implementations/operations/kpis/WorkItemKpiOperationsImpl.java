@@ -25,13 +25,13 @@ public class WorkItemKpiOperationsImpl implements WorkItemKpiOperations {
     private double criticalIdxThreshold;
 
     @Override
-    public double calculateKeyPerformanceIndicator(WorkItemsGroupRule issuesGroupRule) {
+    public double calculateKeyPerformanceIndicator(WorkItemsGroupRule workItemsGroupRule) {
 
         calculateIssuesKpi.setWarningKpiThreshold(this.warningKpiThreshold);
         calculateIssuesKpi.setCriticalKpiThreshold(this.criticalKpiThreshold);
         calculateIssuesKpi.setWarningIdxThreshold(this.warningIdxThreshold);
         calculateIssuesKpi.setCriticalIdxThreshold(this.criticalIdxThreshold);
-        calculateIssuesKpi.setValue(issuesGroupRule.get().intValue());
+        calculateIssuesKpi.setValue(workItemsGroupRule.get());
 
         return calculateIssuesKpi.calculateIndex();
     }
@@ -86,7 +86,6 @@ public class WorkItemKpiOperationsImpl implements WorkItemKpiOperations {
     @Override
     public MonitoringFields.STATUS calculateKpiStatus(Double measure) {
 
-        //TODO: Determinará el Status del KPI de Disponibilidad.
         if (measure <= this.warningKpiThreshold) {
             return MonitoringFields.STATUS.SUCCESS;
         } else if (measure > this.warningKpiThreshold

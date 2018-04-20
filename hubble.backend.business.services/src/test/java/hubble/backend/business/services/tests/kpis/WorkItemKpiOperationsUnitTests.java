@@ -44,7 +44,7 @@ public class WorkItemKpiOperationsUnitTests {
     }
 
     @Test
-    public void Spec_of_availabilityKpiOperations_when_calculate_index_per_max_value_for_a_month() {
+    public void Spec_of_workItemsKpiOperations_when_calculate_index_per_max_value_for_a_month() {
 
         //Assign
         WorkItemsGroupRule workItemsGroupRule = new WorkItemsGroupRule();
@@ -55,11 +55,11 @@ public class WorkItemKpiOperationsUnitTests {
 
         //Assert
         Mockito.verify(calculateKpi).calculateIndex();
-        assertEquals(9.4, workItemIndex, 0.1d);
+        assertEquals(9.6, workItemIndex, 0.1d);
     }
 
     @Test
-    public void Spec_of_availabilityKpiOperations_when_calculate_index_per_min_value_for_a_month() {
+    public void Spec_of_workItemsKpiOperations_when_calculate_index_per_min_value_for_a_month() {
 
         //Assign
         WorkItemsGroupRule workItemsGroupRule = new WorkItemsGroupRule();
@@ -69,7 +69,7 @@ public class WorkItemKpiOperationsUnitTests {
 
         //Assert
         Mockito.verify(calculateKpi).calculateIndex();
-        assertEquals(2.9, workItemIndex, 0.8);
+        assertEquals(3.88, workItemIndex, 0.8);
     }
 
     @Test
