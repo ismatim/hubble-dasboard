@@ -1,12 +1,11 @@
 package hubble.backend.business.services.interfaces.services;
 
-import hubble.backend.business.services.interfaces.services.kpis.OperationsKeyPerformanceIndicatorServiceBase;
+import hubble.backend.business.services.interfaces.services.kpis.WorkItemsOperationsKeyPerformanceIndicatorServiceBase;
 import hubble.backend.business.services.models.WorkItem;
 import hubble.backend.business.services.models.measures.quantities.WorkItemQuantity;
-import hubble.backend.business.services.models.measures.kpis.WorkItemsKpi;
 
 public interface WorkItemService extends ServiceBase<WorkItem>,
-        OperationsKeyPerformanceIndicatorServiceBase<WorkItemsKpi> {
+        WorkItemsOperationsKeyPerformanceIndicatorServiceBase {
 
     public WorkItemQuantity calculateWorkItemQuantityLastMonth(String applicationId);
 

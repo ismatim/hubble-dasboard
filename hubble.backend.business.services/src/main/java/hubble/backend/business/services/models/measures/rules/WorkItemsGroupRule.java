@@ -6,5 +6,6 @@ public class WorkItemsGroupRule extends Rule<Integer> {
 
     public WorkItemsGroupRule() {
         unitMeasure = Unit.MEASURES.QUANTITY;
+        this.set(0);
     }
 }

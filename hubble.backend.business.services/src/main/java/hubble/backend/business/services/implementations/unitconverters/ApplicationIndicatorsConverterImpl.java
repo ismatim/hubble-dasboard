@@ -44,14 +44,14 @@ public class ApplicationIndicatorsConverterImpl implements UnitConverter<Applica
             model.setPerformanceAverage(round((model.getPerformanceAverageValue() / 1000), 2));
         }
 
-        if (model.getPerformanceIndicator() != null && model.getPerformanceIndicator().get() != null
-                && model.getPerformanceIndicator().get() != 0) {
-            model.getPerformanceIndicator().set(round((model.getPerformanceIndicator().get() / 1000), 2));
+        if (model.getPerformanceGroupRule() != null && model.getPerformanceGroupRule().get() != null
+                && model.getPerformanceGroupRule().get() != 0) {
+            model.getPerformanceGroupRule().set(round((model.getPerformanceGroupRule().get() / 1000), 2));
         }
 
-        if (model.getAvailabilityIndicator() != null && model.getAvailabilityIndicator().get() != null
-                && model.getAvailabilityIndicator().get() != 0) {
-            model.getAvailabilityIndicator().set(round((model.getAvailabilityIndicator().get() / 1000), 2));
+        if (model.getAvailabilityGroupRule() != null && model.getAvailabilityGroupRule().get() != null
+                && model.getAvailabilityGroupRule().get() != 0) {
+            model.getAvailabilityGroupRule().set(round((model.getAvailabilityGroupRule().get() / 1000), 2));
         }
 
         return model;

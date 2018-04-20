@@ -105,12 +105,16 @@ public class PerformanceServiceImpl implements PerformanceService {
 
     @Override
     public ApplicationIndicators calculateLastDayKpiByApplication(String applicationId) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        ApplicationIndicators appDto = new ApplicationIndicators();
+        appDto.setPerformanceKpi(performanceKpiOperations.calculateLastDayKeyPerformanceIndicatorByApplication(applicationId));
+        return appDto;
     }
 
     @Override
     public ApplicationIndicators calculateLastMonthKpiByApplication(String applicationId) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        ApplicationIndicators appDto = new ApplicationIndicators();
+        appDto.setPerformanceKpi(performanceKpiOperations.calculateLastMonthKeyPerformanceIndicatorByApplication(applicationId));
+        return appDto;
     }
 
     @Override

@@ -14,11 +14,12 @@ import hubble.backend.business.services.interfaces.services.WorkItemService;
 import hubble.backend.business.services.models.Application;
 import hubble.backend.business.services.models.Availability;
 import hubble.backend.business.services.models.business.ApplicationIndicators;
-import hubble.backend.business.services.models.measures.quantities.IssuesQuantity;
 import hubble.backend.business.services.models.measures.Uptime;
+import hubble.backend.business.services.models.measures.quantities.IssuesQuantity;
 import hubble.backend.business.services.models.measures.quantities.WorkItemQuantity;
 import hubble.backend.core.enums.MonitoringFields;
 import hubble.backend.core.utils.CalendarHelper;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
@@ -114,22 +115,26 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         businessView.setUptime1day(uptimeService.calculateLastDayUptime(id).get());
 
         //Availability Kpi
-        businessView.setAvailabilityLast10MinKpi(availabilityService.calculateLast10MinutesKpiByApplication(id).getAvailabilityIndicator().get());
-        businessView.setAvailabilityLastHourKpi(availabilityService.calculateLastHourKpiByApplication(id).getAvailabilityIndicator().get());
-        businessView.setAvailabilityLastDayKpi(availabilityService.calculateLastDayKpiByApplication(id).getAvailabilityIndicator().get());
-        businessView.setAvailabilityLastMonthKpi(availabilityService.calculateLastMonthKpiByApplication(id).getAvailabilityIndicator().get());
+        businessView.setAvailabilityLast10MinKpi(availabilityService.calculateLast10MinutesKpiByApplication(id).getAvailabilityKpi().get());
+        businessView.setAvailabilityLastHourKpi(availabilityService.calculateLastHourKpiByApplication(id).getAvailabilityKpi().get());
+        businessView.setAvailabilityLastDayKpi(availabilityService.calculateLastDayKpiByApplication(id).getAvailabilityKpi().get());
+        businessView.setAvailabilityLastMonthKpi(availabilityService.calculateLastMonthKpiByApplication(id).getAvailabilityKpi().get());
 
         //Performance Kpi
-        businessView.setAvailabilityLast10MinKpi(performanceService.calculateLast10MinutesKpiByApplication(id).getPerformanceIndicator().get());
-        businessView.setAvailabilityLastHourKpi(performanceService.calculateLastHourKpiByApplication(id).getPerformanceIndicator().get());
-        businessView.setAvailabilityLastDayKpi(performanceService.calculateLastDayKpiByApplication(id).getPerformanceIndicator().get());
-        businessView.setAvailabilityLastMonthKpi(performanceService.calculateLastMonthKpiByApplication(id).getPerformanceIndicator().get());
+        businessView.setAvailabilityLast10MinKpi(performanceService.calculateLast10MinutesKpiByApplication(id).getPerformanceKpi().get());
+        businessView.setAvailabilityLastHourKpi(performanceService.calculateLastHourKpiByApplication(id).getPerformanceKpi().get());
+        businessView.setAvailabilityLastDayKpi(performanceService.calculateLastDayKpiByApplication(id).getPerformanceKpi().get());
+        businessView.setAvailabilityLastMonthKpi(performanceService.calculateLastMonthKpiByApplication(id).getPerformanceKpi().get());
 
         //Issues Kpi
         businessView.setIssuesKpiLastDay(issueService.calculateLastDayKpiByApplication(id).get());
         businessView.setIssuesKpiLastMonth(issueService.calculateLastMonthKpiByApplication(id).get());
 
-        //TODO: Tareas Kpi, Eventos Kpi.
+        //Tareas Kpi
+        businessView.setWorkItemsKpiLastDay(workItemService.calculateLastDayKpiByApplication(id).get());
+        businessView.setWorkItemsKpiLastMonth(workItemService.calculateLastMonthKpiByApplication(id).get());
+
+        //TODO: Eventos Kpi.
         return businessView;
     }
 
@@ -169,4 +174,22 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         availabilityList.sort(Comparator.comparing(Availability::getTimeStamp));
         return availabilityList;
     }
+
+    @Override
+    public List<BusinessApplicationProfile> getBusinessApplicationsPageLimit(int page, int limit) {
+
+        List<BusinessApplication> applications = getAllApplications();
+        List<BusinessApplicationProfile> applicationsProfiles = new ArrayList<>();
+
+        for (BusinessApplication businessApplication : applications) {
+
+            BusinessApplicationProfile currentBusinessApplicationProfile = getBusinessApplicationView(businessApplication.getId());
+
+            applicationsProfiles.add(currentBusinessApplicationProfile);
+
+        }
+
+        return applicationsProfiles;
+    }
+
 }

@@ -40,7 +40,7 @@ public class PerformanceRulesOperationsImpl implements PerformanceGroupRuleOpera
     public Double calculateGroupRule(List<AvailabilityStorage> availabilityStorageList) {
         int totalAvailabilities = availabilityStorageList.size();
         if (totalAvailabilities == 0) {
-            return null;
+            Double.valueOf(0);
         }
         int averagePerformance = 0;
         for (AvailabilityStorage availability : availabilityStorageList) {

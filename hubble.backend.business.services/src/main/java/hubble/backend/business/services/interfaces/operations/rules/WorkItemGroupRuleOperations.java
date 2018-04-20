@@ -9,6 +9,8 @@ public interface WorkItemGroupRuleOperations extends
         GroupRuleOperations< WorkItemStorage, ApplicationIndicators>,
         KpiThresholdSetup {
 
+    public WorkItemsGroupRule calculateLastDayGroupRuleByApplication(String applicationId);
+
     public WorkItemsGroupRule calculateLastWeekGroupRuleByApplication(String applicationId);
 
     public WorkItemsGroupRule calculateLastMonthGroupRuleByApplication(String applicationId);

@@ -42,6 +42,27 @@ public class WorkItemRulesOperationsImpl implements WorkItemGroupRuleOperations 
     }
 
     @Override
+    public WorkItemsGroupRule calculateLastDayGroupRuleByApplication(String applicationId) {
+
+        ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
+
+        ApplicationIndicators applicationAvailabilityIndicators = mapper.mapToApplicationIndicatorsDto(applicationStorage);
+
+        List<WorkItemStorage> workItems = workItemsRepository.findWorkItemsByApplicationIdAndDurationMinutes(CalendarHelper.ONE_DAY, applicationId);
+
+        Double workItemsKpi = calculateGroupRule(workItems);
+
+        WorkItemsGroupRule workItemsGroupRule = new WorkItemsGroupRule();
+
+        setRangeKpiLastDay();
+        workItemsGroupRule.setStatus(calculateGroupRuleStatus(applicationAvailabilityIndicators, workItemsKpi));
+        workItemsGroupRule.set(workItemsKpi.intValue());
+
+        return workItemsGroupRule;
+
+    }
+
+    @Override
     public WorkItemsGroupRule calculateLastWeekGroupRuleByApplication(String applicationId) {
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
 
@@ -53,7 +74,7 @@ public class WorkItemRulesOperationsImpl implements WorkItemGroupRuleOperations 
 
         WorkItemsGroupRule workItemsGroupRule = new WorkItemsGroupRule();
 
-        setRangeKpiLastDay();
+        setRangeKpiLastWeek();
         workItemsGroupRule.setStatus(calculateGroupRuleStatus(applicationAvailabilityIndicators, workItemsKpi));
         workItemsGroupRule.set(workItemsKpi.intValue());
 
@@ -137,9 +158,16 @@ public class WorkItemRulesOperationsImpl implements WorkItemGroupRuleOperations 
         this.criticalKpiThreshold = Threshold.WorkItems.CRITICAL_WORKITEMS_WEEK_DEFAULT;
     }
 
+    private void setRangeKpiLastWeek() {
+
+        this.warningKpiThreshold = Threshold.WorkItems.WARNING_WORKITEMS_WEEK_DEFAULT;
+        this.criticalKpiThreshold = Threshold.WorkItems.CRITICAL_WORKITEMS_WEEK_DEFAULT;
+    }
+
     private void setRangeKpiLastMonth() {
 
         this.warningKpiThreshold = Threshold.WorkItems.WARNING_WORKITEMS_MONTH_DEFAULT;
         this.criticalKpiThreshold = Threshold.WorkItems.CRITICAL_WORKITEMS_MONTH_DEFAULT;
     }
+
 }

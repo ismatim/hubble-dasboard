@@ -32,11 +32,11 @@ public class Threshold {
     //WorkItems
     public static class WorkItems {
 
-        public static final int WARNING_WORKITEMS_MONTH_DEFAULT = 14;
-        public static final int CRITICAL_WORKITEMS_MONTH_DEFAULT = 21;
+        public static final int WARNING_WORKITEMS_MONTH_DEFAULT = 21;
+        public static final int CRITICAL_WORKITEMS_MONTH_DEFAULT = 30;
 
-        public static final int WARNING_WORKITEMS_WEEK_DEFAULT = 7;
-        public static final int CRITICAL_WORKITEMS_WEEK_DEFAULT = 14;
+        public static final int WARNING_WORKITEMS_WEEK_DEFAULT = 4;
+        public static final int CRITICAL_WORKITEMS_WEEK_DEFAULT = 6;
 
         public static final int TOTAL_LEVELS_OF_SEVERITY = 3;
     }

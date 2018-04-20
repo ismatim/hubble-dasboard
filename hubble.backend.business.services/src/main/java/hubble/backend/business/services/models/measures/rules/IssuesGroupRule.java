@@ -6,5 +6,6 @@ public class IssuesGroupRule extends Rule<Integer> {
 
     public IssuesGroupRule() {
         unitMeasure = Unit.MEASURES.QUANTITY;
+        this.set(0);
     }
 }
