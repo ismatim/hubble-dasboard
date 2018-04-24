@@ -45,11 +45,15 @@ public class AvailabilityRulesOperationsImpl
     public AvailabilityGroupRule calculateLast10MinutesGroupRuleByApplication(String applicationId) {
 
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
+        AvailabilityGroupRule availabilityIndicator = new AvailabilityGroupRule();
+
+        if (applicationStorage == null) {
+            return availabilityIndicator;
+        }
+
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, applicationId);
 
         ApplicationIndicators applicationAvailabilityIndicators = mapper.mapToApplicationIndicatorsDto(applicationStorage);
-
-        AvailabilityGroupRule availabilityIndicator = new AvailabilityGroupRule();
 
         availabilityIndicator.set(calculateGroupRule(availabilityStorageList));
 
@@ -63,9 +67,13 @@ public class AvailabilityRulesOperationsImpl
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_HOUR, applicationId);
 
-        ApplicationIndicators applicationAvailabilityIndicators = mapper.mapToApplicationIndicatorsDto(applicationStorage);
-
         AvailabilityGroupRule availabilityIndicator = new AvailabilityGroupRule();
+
+        if (applicationStorage == null) {
+            return availabilityIndicator;
+        }
+
+        ApplicationIndicators applicationAvailabilityIndicators = mapper.mapToApplicationIndicatorsDto(applicationStorage);
 
         availabilityIndicator.set(calculateGroupRule(availabilityStorageList));
         availabilityIndicator.setStatus(calculateGroupRuleStatus(applicationAvailabilityIndicators, availabilityIndicator.get()));
@@ -77,9 +85,13 @@ public class AvailabilityRulesOperationsImpl
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_DAY, applicationId);
 
-        ApplicationIndicators applicationAvailabilityIndicators = mapper.mapToApplicationIndicatorsDto(applicationStorage);
-
         AvailabilityGroupRule availabilityIndicator = new AvailabilityGroupRule();
+
+        if (applicationStorage == null) {
+            return availabilityIndicator;
+        }
+
+        ApplicationIndicators applicationAvailabilityIndicators = mapper.mapToApplicationIndicatorsDto(applicationStorage);
 
         availabilityIndicator.set(calculateGroupRule(availabilityStorageList));
         availabilityIndicator.setStatus(calculateGroupRuleStatus(applicationAvailabilityIndicators, availabilityIndicator.get()));
@@ -91,9 +103,12 @@ public class AvailabilityRulesOperationsImpl
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMonths(CalendarHelper.ONE_MONTH, applicationId);
 
-        ApplicationIndicators applicationAvailabilityIndicators = mapper.mapToApplicationIndicatorsDto(applicationStorage);
-
         AvailabilityGroupRule availabilityIndicator = new AvailabilityGroupRule();
+
+        if (applicationStorage == null) {
+            return availabilityIndicator;
+        }
+        ApplicationIndicators applicationAvailabilityIndicators = mapper.mapToApplicationIndicatorsDto(applicationStorage);
 
         availabilityIndicator.set(calculateGroupRule(availabilityStorageList));
         availabilityIndicator.setStatus(calculateGroupRuleStatus(applicationAvailabilityIndicators, availabilityIndicator.get()));

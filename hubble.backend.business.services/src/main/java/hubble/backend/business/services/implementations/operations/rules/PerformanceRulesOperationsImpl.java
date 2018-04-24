@@ -53,15 +53,16 @@ public class PerformanceRulesOperationsImpl implements PerformanceGroupRuleOpera
     @Override
     public PerformanceGroupRule calculateLast10MinutesGroupRuleByApplication(String applicationId) {
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
+
+        PerformanceGroupRule performanceRule = new PerformanceGroupRule();
+
+        if (applicationStorage == null) {
+            return performanceRule;
+        }
+
         List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.TEN_MINUTES, applicationId);
 
         ApplicationIndicators applicationIndicators = mapper.mapToApplicationIndicatorsDto(applicationStorage);
-
-        if (applicationIndicators == null) {
-            return null;
-        }
-
-        PerformanceGroupRule performanceRule = new PerformanceGroupRule();
 
         if (!availabilityStorageList.isEmpty()) {
             performanceRule.set(this.calculateGroupRule(availabilityStorageList));
@@ -76,14 +77,15 @@ public class PerformanceRulesOperationsImpl implements PerformanceGroupRuleOpera
     @Override
     public PerformanceGroupRule calculateLastHourGroupRuleByApplication(String applicationId) {
         ApplicationStorage applicationStorage = applicationRepository.findApplicationById(applicationId);
-        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_HOUR, applicationId);
-        ApplicationIndicators applicationIndicators = mapper.mapToApplicationIndicatorsDto(applicationStorage);
+        PerformanceGroupRule performanceRule = new PerformanceGroupRule();
 
-        if (applicationIndicators == null) {
-            return null;
+        if (applicationStorage == null) {
+            return performanceRule;
         }
 
-        PerformanceGroupRule performanceRule = new PerformanceGroupRule();
+        List<AvailabilityStorage> availabilityStorageList = availabilityRepository.findAvailabilitiesByApplicationIdAndDurationMinutes(CalendarHelper.ONE_HOUR, applicationId);
+
+        ApplicationIndicators applicationIndicators = mapper.mapToApplicationIndicatorsDto(applicationStorage);
 
         if (!availabilityStorageList.isEmpty()) {
             performanceRule.set(this.calculateGroupRule(availabilityStorageList));

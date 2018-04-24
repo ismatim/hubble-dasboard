@@ -54,6 +54,18 @@ public class IssuesGroupRulesOperationUnitTests {
     }
 
     @Test
+    public void issue_operation_should_calculateKeyPerformanceIndicatorFor10_With_No_Results() {
+        String applicationId = "1";
+        issueStorageList = new ArrayList<>();
+
+        when(issueRepository.findIssuesByApplicationIdAndDurationMonths(1, applicationId)).thenReturn(issueStorageList);
+
+        int issuesKpi = issuesRuleOperation.calculateGroupRule(issueStorageList).intValue();
+
+        assertEquals(0, issuesKpi);
+    }
+
+    @Test
     public void issue_operation_should_calculateKeyPerformanceIndicatorForAMonth() {
         String applicationId = "1";
         issueStorageList = storageHelper.getFakeListOfIssueStorage();

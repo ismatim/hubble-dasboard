@@ -11,6 +11,7 @@ import hubble.backend.business.services.interfaces.services.IssueService;
 import hubble.backend.business.services.interfaces.services.PerformanceService;
 import hubble.backend.business.services.interfaces.services.UptimeDowntimeService;
 import hubble.backend.business.services.interfaces.services.WorkItemService;
+import hubble.backend.business.services.interfaces.services.kpis.KpiAveragesService;
 import hubble.backend.business.services.models.Application;
 import hubble.backend.business.services.models.Availability;
 import hubble.backend.business.services.models.business.ApplicationIndicators;
@@ -44,6 +45,8 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
     WorkItemService workItemService;
     @Autowired
     UptimeMapper uptimeMapper;
+    @Autowired
+    KpiAveragesService kpiAverageService;
 
     @Override
     public BusinessApplicationProfile getBusinessApplicationView(String id) {
@@ -134,6 +137,8 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
         businessView.setWorkItemsKpiLastDay(workItemService.calculateLastDayKpiByApplication(id).get());
         businessView.setWorkItemsKpiLastMonth(workItemService.calculateLastMonthKpiByApplication(id).get());
 
+        //Kpi Averages
+        businessView.setHealthIndex(kpiAverageService.getStandardHealthIndex(id));
         //TODO: Eventos Kpi.
         return businessView;
     }

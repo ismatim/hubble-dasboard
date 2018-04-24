@@ -27,6 +27,10 @@ public class WorkItemKpiOperationsImpl implements WorkItemKpiOperations {
     @Override
     public double calculateKeyPerformanceIndicator(WorkItemsGroupRule workItemsGroupRule) {
 
+        if (workItemsGroupRule == null) {
+            return 0d;
+        }
+
         calculateIssuesKpi.setWarningKpiThreshold(this.warningKpiThreshold);
         calculateIssuesKpi.setCriticalKpiThreshold(this.criticalKpiThreshold);
         calculateIssuesKpi.setWarningIdxThreshold(this.warningIdxThreshold);
@@ -85,6 +89,10 @@ public class WorkItemKpiOperationsImpl implements WorkItemKpiOperations {
 
     @Override
     public MonitoringFields.STATUS calculateKpiStatus(Double measure) {
+
+        if (measure == 0) {
+            return MonitoringFields.STATUS.NO_DATA;
+        }
 
         if (measure <= this.warningKpiThreshold) {
             return MonitoringFields.STATUS.SUCCESS;

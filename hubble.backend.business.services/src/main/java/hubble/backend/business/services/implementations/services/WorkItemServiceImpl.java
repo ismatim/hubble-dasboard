@@ -19,7 +19,8 @@ import org.springframework.stereotype.Component;
 
 /**
  * Serves all base information regarding Items To Do for a specific application.
- * Calculate the total remaining Items and brings them too.
+ * Calculate the total remaining Items and brings them too. TODO: The only class
+ * that doesn't return a ApplicationIndicators.
  *
  * @author Ismael J. Tisminetzky
  */

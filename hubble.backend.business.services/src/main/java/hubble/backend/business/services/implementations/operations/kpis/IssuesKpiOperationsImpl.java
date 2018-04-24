@@ -27,11 +27,15 @@ public class IssuesKpiOperationsImpl implements IssuesKpiOperations {
     @Override
     public double calculateKeyPerformanceIndicator(IssuesGroupRule issuesGroupRule) {
 
+        if (issuesGroupRule == null) {
+            return 0d;
+        }
+
         calculateIssuesKpi.setWarningKpiThreshold(this.warningKpiThreshold);
         calculateIssuesKpi.setCriticalKpiThreshold(this.criticalKpiThreshold);
         calculateIssuesKpi.setWarningIdxThreshold(this.warningIdxThreshold);
         calculateIssuesKpi.setCriticalIdxThreshold(this.criticalIdxThreshold);
-        calculateIssuesKpi.setValue(issuesGroupRule.get().intValue());
+        calculateIssuesKpi.setValue(issuesGroupRule.get());
 
         return calculateIssuesKpi.calculateIndex();
     }
@@ -103,6 +107,10 @@ public class IssuesKpiOperationsImpl implements IssuesKpiOperations {
 
     @Override
     public MonitoringFields.STATUS calculateKpiStatus(Double measure) {
+
+        if (measure == 0) {
+            return MonitoringFields.STATUS.NO_DATA;
+        }
 
         //TODO: Determinará el Status del KPI de Disponibilidad.
         if (measure <= this.warningKpiThreshold) {

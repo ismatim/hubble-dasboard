@@ -10,12 +10,11 @@ pipeline {
         HUBBLE_SERVER="http://10.10.20.175"
         devBranch = "dev"
         HUBBLE_TASKRUNNER="hubble.backend.trasksrunner-${BRANCH_NAME}"
-        HUBBLE_TASKRUNNER_NAME="localhost:5000/hubble/hubble.backend.trasksrunner-${BRANCH_NAME}"
-        HUBBLE_FRONTEND="hubble.frontend.web-${BRANCH_NAME}"
-        HUBBLE_FRONTEND_NAME="localhost:5000/hubble/hubble.frontend.web-${BRANCH_NAME}"
+        HUBBLE_TASKRUNNER_NAME="hubble/hubble.backend.trasksrunner-${BRANCH_NAME}"
+        HUBBLE_BACKEND_API="hubble.backend.api-${BRANCH_NAME}"
+        HUBBLE_BACKEND_API_NAME="hubble/hubble.backend.api-${BRANCH_NAME}"
         HUBBLE_MONGODB="mongodb-${BRANCH_NAME}"
         HUBBLE_MONGODB_VOL="/data/mongodb-${BRANCH_NAME}:/data/db/"
-        HUBBLE_APP_PORT=""
     }
     stages {
         stage('Build') {
@@ -40,10 +39,10 @@ pipeline {
         stage('Deploy'){
             steps{
                 script{
-                    env.HUBBLE_FRONTEND_PORT=8080
+                    env.HUBBLE_BACKEND_API_PORT=8080
                     echo "${BRANCH_NAME}==${devBranch}"
                     if (BRANCH_NAME==devBranch){
-                        env.HUBBLE_FRONTEND_PORT="80:8080"
+                        env.HUBBLE_BACKEND_API_PORT="80:8080"
                     }
                 }
                 sh  '''
@@ -55,16 +54,18 @@ pipeline {
                     slackSend channel: '#jenkins', color: 'good',
                               message: "El despliegue ${currentBuild.fullDisplayName} ha sido exitoso."
                                   script {
-                                      HUBBLE_APP_PORT=sh (
-                                              script: 'docker port hubble.frontend.web-"${BRANCH_NAME}"',
+                                      HUBBLE_BACKEND_API_PORT=sh (
+                                              script: 'docker port hubble.backend.api-"${BRANCH_NAME}"',
                                               returnStdout: true).trim().reverse()
-                                          HUBBLE_APP_PORT=HUBBLE_APP_PORT.substring(0, HUBBLE_APP_PORT.lastIndexOf(":")).reverse()
+                                          echo "HUBBLE APP PORT: ${HUBBLE_BACKEND_API_PORT}"
 
-                                          echo "HUBBLE APP PORT: ${HUBBLE_APP_PORT}"
+                                          HUBBLE_BACKEND_API_PORT=HUBBLE_BACKEND_API_PORT.substring(0, HUBBLE_BACKEND_API_PORT.lastIndexOf(":")).reverse()
+
+                                          echo "HUBBLE APP PORT: ${HUBBLE_BACKEND_API_PORT}"
 
                                           sleep 30
                                           slackSend channel: '#jenkins', color: 'good',
-                                      message: "El despliegue ${currentBuild.fullDisplayName} ha sido publicado en: ${HUBBLE_SERVER}:${HUBBLE_APP_PORT} - (<${env.BUILD_URL}|Abrir>)"
+                                      message: "El despliegue ${currentBuild.fullDisplayName} ha sido publicado en: ${HUBBLE_SERVER}:${HUBBLE_BACKEND_API_PORT} - (<${env.BUILD_URL}|Abrir>)"
                                   }
                 }
                 failure {
