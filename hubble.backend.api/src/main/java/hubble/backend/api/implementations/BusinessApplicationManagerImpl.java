@@ -188,6 +188,10 @@ public class BusinessApplicationManagerImpl implements BusinessApplicationManage
 
         for (BusinessApplication businessApplication : applications) {
 
+            if (businessApplication.getId() == null) {
+                continue;
+            }
+
             BusinessApplicationProfile currentBusinessApplicationProfile = getBusinessApplicationView(businessApplication.getId());
 
             applicationsProfiles.add(currentBusinessApplicationProfile);
