@@ -55,7 +55,7 @@ public class WorkItemKpiOperationsUnitTests {
 
         //Assert
         Mockito.verify(calculateKpi).calculateIndex();
-        assertEquals(9.6, workItemIndex, 0.1d);
+        assertEquals(9.6, workItemIndex, 0.9d);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class WorkItemKpiOperationsUnitTests {
 
         //Assert
         Mockito.verify(calculateKpi).calculateIndex();
-        assertEquals(3.88, workItemIndex, 0.8);
+        assertEquals(3.88, workItemIndex, 0.9d);
     }
 
     @Test

@@ -22,7 +22,7 @@ public class AvailabilityKpiOperationsImpl implements AvailabilityKpiOperations 
     @Override
     public double calculateKeyPerformanceIndicator(AvailabilityGroupRule availabilityGroupRule) {
 
-        if (availabilityGroupRule.get().intValue() == 0) {
+        if (availabilityGroupRule == null || availabilityGroupRule.get().intValue() == 0) {
             return 0;
         }
 
@@ -39,9 +39,9 @@ public class AvailabilityKpiOperationsImpl implements AvailabilityKpiOperations 
     @Override
     public AvailabilityKpi calculateLast10MinutesKeyPerformanceIndicatorByApplication(String applicationId) {
 
-        AvailabilityGroupRule availabilityLastHourRuleGroup = availabilityRulesOperation.calculateLast10MinutesGroupRuleByApplication(applicationId);
+        AvailabilityGroupRule availabilityLast10MinRuleGroup = availabilityRulesOperation.calculateLast10MinutesGroupRuleByApplication(applicationId);
 
-        double kpi10Min = calculateKeyPerformanceIndicator(availabilityLastHourRuleGroup);
+        double kpi10Min = calculateKeyPerformanceIndicator(availabilityLast10MinRuleGroup);
 
         AvailabilityKpi availabilityKpi = new AvailabilityKpi();
         availabilityKpi.set(kpi10Min);

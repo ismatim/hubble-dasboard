@@ -48,6 +48,7 @@ public class BusinessApplicationProfile extends ApiResponseBase {
     private Double issuesKpiLastMonth;
     private Double workItemsKpiLastDay;
     private Double workItemsKpiLastMonth;
+    private Double healthIndex;
 
     public BusinessApplicationProfile() {
         performanceLast10MinKpi = 0d;
@@ -425,5 +426,13 @@ public class BusinessApplicationProfile extends ApiResponseBase {
 
     public void setWorkItemsKpiLastMonth(Double workItemsKpiLastMonth) {
         this.workItemsKpiLastMonth = workItemsKpiLastMonth;
+    }
+
+    public Double getHealthIndex() {
+        return healthIndex;
+    }
+
+    public void setHealthIndex(Double healthIndex) {
+        this.healthIndex = healthIndex;
     }
 }

@@ -22,7 +22,7 @@ public class PerformanceKpiOperationsImpl implements PerformanceKpiOperations {
     @Override
     public double calculateKeyPerformanceIndicator(PerformanceGroupRule performanceGroupRule) {
 
-        if (performanceGroupRule.get().intValue() == 0) {
+        if (performanceGroupRule == null || performanceGroupRule.get().intValue() == 0) {
             return 0d;
         }
 

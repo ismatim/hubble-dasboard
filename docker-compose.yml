@@ -2,10 +2,10 @@ version: '3.0'
 
 services:
     hubble-app:
-        image: "${HUBBLE_FRONTEND_NAME}"
-        container_name: "${HUBBLE_FRONTEND}"
+        image: "${HUBBLE_BACKEND_API_NAME}"
+        container_name: "${HUBBLE_BACKEND_API}"
         ports:
-            - "${HUBBLE_FRONTEND_PORT}"
+            - "${HUBBLE_BACKEND_API_PORT}"
         hostname: hubble
         links:
             - mongodb:mongo

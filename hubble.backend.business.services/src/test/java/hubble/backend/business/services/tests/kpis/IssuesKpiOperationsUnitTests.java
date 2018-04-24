@@ -44,6 +44,19 @@ public class IssuesKpiOperationsUnitTests {
     }
 
     @Test
+    public void Spec_of_availabilityKpiOperations_when_calculate_index_per_cero() {
+
+        //Assign
+        IssuesGroupRule issuesGroupRule = new IssuesGroupRule();
+        issuesGroupRule.set(0);
+        // Act
+        double issuesIndex = issuesKpiOperations.calculateKeyPerformanceIndicator(issuesGroupRule);
+
+        //Assert
+        assertEquals(0, issuesIndex, 0.1d);
+    }
+
+    @Test
     public void Spec_of_availabilityKpiOperations_when_calculate_index_per_max_value() {
 
         //Assign
