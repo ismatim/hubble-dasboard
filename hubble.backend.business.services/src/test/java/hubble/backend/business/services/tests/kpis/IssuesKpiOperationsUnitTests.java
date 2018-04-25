@@ -53,7 +53,7 @@ public class IssuesKpiOperationsUnitTests {
         double issuesIndex = issuesKpiOperations.calculateKeyPerformanceIndicator(issuesGroupRule);
 
         //Assert
-        assertEquals(0, issuesIndex, 0.1d);
+        assertEquals(10, issuesIndex, 0.1d);
     }
 
     @Test
